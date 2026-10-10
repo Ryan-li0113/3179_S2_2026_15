@@ -60,6 +60,18 @@
     .viz-slot strong { font: 800 27px/1.05 "Barlow Condensed", Impact, sans-serif; text-transform: uppercase; }
     .viz-slot span { max-width: 440px; color: var(--muted); font-size: 14px; }
     .viz-label { margin: 13px 0 0; color: var(--muted); font-size: 12px; letter-spacing: .01em; }
+    .chart-card { padding: clamp(20px, 3.5vw, 42px); border: 1px solid var(--line); border-radius: 7px; background: #fff; }
+    .chart-kicker { margin: 0 0 4px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    .chart-card h3 { margin: 0 0 8px; font-size: clamp(25px, 3.4vw, 36px); line-height: 1.1; font-weight: 800; }
+    .chart-description { max-width: 710px; margin: 0 0 20px; color: var(--muted); font-size: 15px; }
+    .chart-frame { min-height: 245px; width: 100%; }
+    .chart-frame .vega-embed { width: 100%; }
+    .chart-frame .vega-embed > svg { width: 100%; }
+    .chart-insight { margin: 16px 0 0; padding: 14px 17px; background: #eff5f1; border-left: 4px solid var(--teal); font-size: 15px; }
+    .chart-footnote { margin: 13px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .chart-footnote a { color: #076e67; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .error-text { color: #a12d24; }
+    @media (max-width: 760px) { .chart-card { padding: 18px 14px; } .chart-frame { min-height: 225px; } }
     footer { background: var(--dark); color: white; }
     .footer-inner { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 28px; padding: 42px 0; }
     .footer-inner h2 { margin-bottom: 12px; font-size: 29px; font-weight: 800; line-height: 1; text-transform: uppercase; }
@@ -111,7 +123,7 @@
       </aside>
     </section>
 
-    <div class="status"><strong>Project in development.</strong> This first version establishes the page design and storyline. Charts will be added using Vega-Lite as datasets are prepared.</div>
+    <div class="status"><strong>Project in development.</strong> Figure 1 uses published Roy Morgan survey data. More Vega-Lite charts and maps are in progress.</div>
 
     <section class="story-intro" aria-labelledby="intro-title">
       <p class="eyebrow">Introduction</p>
@@ -124,11 +136,17 @@
         <div><span class="chapter-number">01 / AUDIENCES</span><h2 id="audiences-title">What are Australians watching?</h2></div>
         <p>Begin with AFL and NRL: compare the scale and composition of their television audiences.</p>
       </div>
-      <div class="viz-slot" role="group" aria-label="Placeholder for sports audience visualisation">
-        <strong>Audience comparison coming next</strong>
-        <span>Planned source: Roy Morgan Research · AFL and NRL television audiences</span>
+      <div class="chart-card">
+        <p class="chart-kicker">Figure 1 / Television audience reach</p>
+        <h3>AFL reaches more television viewers than NRL</h3>
+        <p class="chart-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover over a bar to see its reported estimate.</p>
+        <div class="chart-frame" id="chart-audience" role="img" aria-label="Bar chart showing approximately 9.31 million AFL television viewers and 7.6 million NRL television viewers in Australia from July 2025 to June 2026.">
+          <p class="chart-description">Loading audience chart…</p>
+        </div>
+        <p class="chart-insight"><strong>Key finding:</strong> AFL's estimated TV audience was around 1.7 million people larger than NRL's. These are people who watched at least occasionally, not average viewers of a single match.</p>
+        <p class="chart-footnote">Source: Roy Morgan Single Source, July 2025–June 2026 (n=59,959; Australians aged 14+). <a href="https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026" target="_blank" rel="noopener noreferrer">AFL report (15 Sep 2026)</a> · <a href="https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026" target="_blank" rel="noopener noreferrer">NRL report (18 Sep 2026)</a>. NRL viewers are rounded to one decimal million in the source.</p>
       </div>
-      <p class="viz-label">Figure 1 — To be added once the source data is confirmed.</p>
+      <p class="viz-label">Chart created in Vega-Lite · Viewable source specification: <a href="charts/afl_nrl_audience_2026.json">JSON</a> · <a href="data/afl_nrl_tv_2026.csv">CSV dataset</a>.</p>
     </section>
 
     <section class="chapter" id="streaming" aria-labelledby="streaming-title">
@@ -169,10 +187,24 @@
     <div class="footer-inner wrap">
       <div>
         <h2>Australian Sports Broadcasting</h2>
-        <p>Potential data sources: Roy Morgan Research, ACMA, AFL Tables, Foxtel Group and the Australian Bureau of Statistics. Exact datasets, years and links will be documented when each chart is published.</p>
+        <p>Sources: Figure 1 uses the Roy Morgan Single Source survey (July 2025–June 2026); detailed source links appear below its chart. Future sections will use ACMA, Foxtel Group, AFL Tables and other documented datasets.</p>
       </div>
       <div class="footer-meta"><strong>Ryan Mohan Li</strong><br>FIT3179 Data Visualisation 2<br>October 2026</div>
     </div>
   </footer>
+  <!-- Vega-Lite libraries; data and JSON specs are kept in separate repository files. -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <script>
+    vegaEmbed('#chart-audience', 'charts/afl_nrl_audience_2026.json', {
+      actions: false,
+      renderer: 'svg'
+    }).catch(function(error) {
+      console.error('Could not display audience chart:', error);
+      document.getElementById('chart-audience').innerHTML =
+        '<p class="error-text">Chart could not load. Check that the data and charts folders are uploaded to GitHub.</p>';
+    });
+  </script>
 </body>
 </html>
