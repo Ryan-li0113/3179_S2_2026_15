@@ -1,0 +1,203 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Proportional symbol map of total AFL match attendance by stadium across Australia for 2025, including finals. Circle AREA is proportional to attendance. All 18 AFL Tables venues included. Coordinates are approximate stadium locations. Choose a stadium from the dropdown for an accessible venue lookup. Melbourne MCG and Docklands are also shown separately in a zoomed detailed view.",
+  "width": "container",
+  "height": 490,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_states_simplified.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#edf2f0",
+        "stroke": "#a8c0bc",
+        "strokeWidth": 1.15
+      },
+      "encoding": {
+        "tooltip": {
+          "value": "Australian states and territories"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/afl_venue_attendance_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "total_attendance": "number",
+            "home_away_attendance": "number",
+            "finals_attendance": "number",
+            "home_away_games": "number",
+            "finals_games": "number",
+            "total_games": "number",
+            "average_attendance": "number",
+            "season": "number"
+          }
+        }
+      },
+      "mark": {
+        "type": "circle",
+        "color": "#d66b44",
+        "opacity": 0.75,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.15,
+        "tooltip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "total_attendance",
+          "type": "quantitative",
+          "title": "Total 2025 attendance",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              3200416
+            ],
+            "range": [
+              35,
+              2500
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "title": "Total crowd attendances (home & away + finals)",
+            "values": [
+              250000,
+              1000000,
+              3000000
+            ],
+            "format": ".2s",
+            "symbolFillColor": "#d66b44",
+            "symbolStrokeColor": "#ffffff",
+            "symbolOpacity": 0.75,
+            "titleColor": "#526873",
+            "labelColor": "#526873",
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "titlePadding": 10
+          }
+        },
+        "tooltip": [
+          {
+            "field": "venue",
+            "type": "nominal",
+            "title": "Stadium"
+          },
+          {
+            "field": "city",
+            "type": "nominal",
+            "title": "Host location"
+          },
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "total_attendance",
+            "type": "quantitative",
+            "title": "Total attendance",
+            "format": ",.0f"
+          },
+          {
+            "field": "total_games",
+            "type": "quantitative",
+            "title": "Matches",
+            "format": ",.0f"
+          },
+          {
+            "field": "average_attendance",
+            "type": "quantitative",
+            "title": "Average per game",
+            "format": ",.0f"
+          },
+          {
+            "field": "home_away_attendance",
+            "type": "quantitative",
+            "title": "Home & away attendance",
+            "format": ",.0f"
+          },
+          {
+            "field": "finals_attendance",
+            "type": "quantitative",
+            "title": "Finals attendance",
+            "format": ",.0f"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "venueFocus === 'All venues' || datum.venue === venueFocus",
+            "value": 0.86
+          },
+          "value": 0.07
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow"
+    }
+  },
+  "params": [
+    {
+      "name": "venueFocus",
+      "value": "All venues",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All venues",
+          "Adelaide Oval",
+          "Barossa Park",
+          "Bellerive Oval",
+          "Carrara (People First Stadium)",
+          "Docklands (Marvel Stadium)",
+          "Eureka Stadium (Mars Stadium)",
+          "Gabba",
+          "Hands Oval",
+          "Kardinia Park (GMHBA Stadium)",
+          "Manuka Oval",
+          "Marrara Oval (TIO Stadium)",
+          "Melbourne Cricket Ground (MCG)",
+          "Norwood Oval",
+          "Perth Stadium (Optus Stadium)",
+          "Sydney Cricket Ground (SCG)",
+          "Sydney Showground (ENGIE Stadium)",
+          "Traeger Park",
+          "York Park (UTAS Stadium)"
+        ],
+        "name": "Locate a stadium: "
+      }
+    }
+  ]
+}

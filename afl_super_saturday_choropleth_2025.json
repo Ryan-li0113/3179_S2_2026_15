@@ -1,0 +1,193 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Choropleth of the announced 2025 AFL Super Saturday exclusively live coverage windows by Australian state and territory. Not audience size or individual match counts. Foxtel Group, 18 November 2024.",
+  "width": "container",
+  "height": 490,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/afl_super_saturday_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "state_code": "string",
+            "exclusive_weeks": "number",
+            "label_lon": "number",
+            "label_lat": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "lookup": "state_code",
+          "from": {
+            "data": {
+              "url": "data/australia_states_simplified.geojson",
+              "format": {
+                "type": "json",
+                "property": "features"
+              }
+            },
+            "key": "id"
+          },
+          "as": "state_geometry"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.6
+      },
+      "encoding": {
+        "shape": {
+          "field": "state_geometry",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "exclusive_weeks",
+          "type": "quantitative",
+          "title": "Weeks",
+          "scale": {
+            "domain": [
+              9,
+              11,
+              25
+            ],
+            "range": [
+              "#d7e9e4",
+              "#78b9ac",
+              "#087b73"
+            ]
+          },
+          "legend": {
+            "title": "2025 exclusively live Saturday coverage (weeks)",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 260,
+            "values": [
+              9,
+              11,
+              25
+            ],
+            "labelFontSize": 12,
+            "titleFontSize": 12,
+            "titlePadding": 10
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state_name",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "exclusive_weeks",
+            "type": "quantitative",
+            "title": "Exclusive-live weeks",
+            "format": ".0f"
+          },
+          {
+            "field": "season",
+            "type": "nominal",
+            "title": "AFL season"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "stateFocus === 'All states' || datum.state_name === stateFocus",
+            "value": 1
+          },
+          "value": 0.13
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/afl_super_saturday_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "state_code": "string",
+            "exclusive_weeks": "number",
+            "label_lon": "number",
+            "label_lat": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.abbreviation !== 'ACT'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Barlow",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "#102c37",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.6,
+        "paintOrder": "stroke"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "abbreviation",
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "stateFocus === 'All states' || datum.state_name === stateFocus",
+            "value": 1
+          },
+          "value": 0.2
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow"
+    }
+  },
+  "params": [
+    {
+      "name": "stateFocus",
+      "value": "All states",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All states",
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "South Australia",
+          "Western Australia",
+          "Tasmania",
+          "Northern Territory",
+          "Australian Capital Territory"
+        ],
+        "name": "Highlight state: "
+      }
+    }
+  ]
+}

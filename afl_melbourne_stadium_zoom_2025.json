@@ -1,0 +1,135 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Enlarged detail of the two Melbourne CBD AFL grounds, MCG and Docklands (Marvel Stadium), plotted at their approximate geographic locations with individually hoverable proportional symbols. Inset to Figure 5, not an additional distinct map idiom.",
+  "data": {
+    "url": "data/afl_venue_attendance_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "longitude": "number",
+        "latitude": "number",
+        "total_attendance": "number",
+        "total_games": "number",
+        "average_attendance": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.city === 'Melbourne'"
+    },
+    {
+      "calculate": "datum.venue === 'Melbourne Cricket Ground (MCG)' ? 'MCG' : 'Marvel Stadium'",
+      "as": "short_name"
+    }
+  ],
+  "width": "container",
+  "height": 240,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [
+      144.965,
+      -37.818
+    ],
+    "scale": 155000
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "color": "#087b73",
+        "opacity": 0.82,
+        "stroke": "#ffffff",
+        "strokeWidth": 2,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "total_attendance",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              3200416
+            ],
+            "range": [
+              50,
+              1700
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "venue",
+            "type": "nominal",
+            "title": "Venue"
+          },
+          {
+            "field": "total_attendance",
+            "type": "quantitative",
+            "title": "2025 attendances",
+            "format": ",.0f"
+          },
+          {
+            "field": "total_games",
+            "type": "quantitative",
+            "title": "2025 matches",
+            "format": ",.0f"
+          },
+          {
+            "field": "average_attendance",
+            "type": "quantitative",
+            "title": "Mean attendance per match",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": 39,
+        "font": "Barlow",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "#102c37"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short_name",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow"
+    }
+  }
+}

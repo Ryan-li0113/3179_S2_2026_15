@@ -1,0 +1,192 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap of estimated change in TV audience reach by age group for AFL and NRL, calendar years 2023 to 2024. Growth percentages transcribed from Roy Morgan Finding 9842, March 2025.",
+  "data": {
+    "url": "data/afl_nrl_age_growth_2023_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "growth_pct": "number",
+        "viewers_2023": "number",
+        "viewers_2024": "number"
+      }
+    }
+  },
+  "width": "container",
+  "height": 185,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "encoding": {
+    "x": {
+      "field": "age_group",
+      "type": "ordinal",
+      "sort": [
+        "Under 35",
+        "35–49",
+        "50–64",
+        "65+"
+      ],
+      "axis": {
+        "title": "Viewer age group",
+        "labelAngle": 0,
+        "labelColor": "#102c37",
+        "labelFontSize": 13,
+        "labelPadding": 10,
+        "titleColor": "#526873",
+        "titleFontSize": 12,
+        "titlePadding": 12,
+        "ticks": false,
+        "domain": false
+      },
+      "scale": {
+        "paddingInner": 0.06,
+        "paddingOuter": 0.03
+      }
+    },
+    "y": {
+      "field": "sport",
+      "type": "nominal",
+      "sort": [
+        "AFL",
+        "NRL"
+      ],
+      "axis": {
+        "title": null,
+        "labelFontWeight": "bold",
+        "labelFontSize": 16,
+        "labelColor": "#102c37",
+        "labelPadding": 12,
+        "ticks": false,
+        "domain": false
+      },
+      "scale": {
+        "paddingInner": 0.1,
+        "paddingOuter": 0.05
+      }
+    },
+    "opacity": {
+      "condition": {
+        "test": "ageFocus === 'All ages' || datum.age_group === ageFocus",
+        "value": 1
+      },
+      "value": 0.17
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 4
+      },
+      "encoding": {
+        "color": {
+          "field": "growth_pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              7
+            ],
+            "range": [
+              "#eaf4ef",
+              "#087b73"
+            ]
+          },
+          "legend": {
+            "title": "Growth in viewers (%)",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 230,
+            "format": ".0f",
+            "titleColor": "#526873",
+            "labelColor": "#526873",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+        "tooltip": [
+          {
+            "field": "sport",
+            "type": "nominal",
+            "title": "Sport"
+          },
+          {
+            "field": "age_group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "viewers_2023",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "2023 TV viewers"
+          },
+          {
+            "field": "viewers_2024",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "2024 TV viewers"
+          },
+          {
+            "field": "growth_pct",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Growth (%)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "Barlow",
+        "fontWeight": "bold",
+        "fontSize": 20,
+        "baseline": "middle",
+        "align": "center"
+      },
+      "encoding": {
+        "text": {
+          "field": "growth_label",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.growth_pct >= 4.0",
+            "value": "#ffffff"
+          },
+          "value": "#102c37"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow"
+    }
+  },
+  "params": [
+    {
+      "name": "ageFocus",
+      "value": "All ages",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All ages",
+          "Under 35",
+          "35–49",
+          "50–64",
+          "65+"
+        ],
+        "name": "Focus on age: "
+      }
+    }
+  ]
+}

@@ -136,3 +136,16 @@ The measure refers to the **number of 2025 season weeks** for which live Saturda
 - `data/afl_venue_attendance_2025.csv`
 - `charts/afl_venue_proportional_symbols_2025.json`
 - `index.html` (updated Geography section; previous figures retained)
+
+
+---
+
+# Interactive visualisations and accessibility (Figures 1–5)
+
+- **Figure 1:** Sport-focus dropdown highlights either AFL or NRL while preserving both reference bars. Task: compare audience reach.
+- **Figure 2:** Age-group dropdown highlights the same demographic in AFL and NRL. Task: compare growth within a demographic.
+- **Figure 3:** Year dropdown shows 2023, 2024 or both. Task: compare the gender-based audience gap by year.
+- **Figure 4:** State dropdown highlights one state/territory on the 2025 exclusive-live broadcasting choropleth. Task: locate and compare broadcast arrangements geographically.
+- **Figure 5:** Venue dropdown highlights a stadium on the national proportional-symbol map. An additional geographic close-up makes the MCG and Marvel Stadium separately hoverable, fixing the overlap at national scale. This close-up is *the same map idiom* as Figure 5 and does not count as a new advanced idiom. Task: locate individual venues and compare total attendances.
+
+All controls are implemented as Vega-Lite bound parameters; they work without a backend. Tooltips provide exact values. The selectors support keyboard input and do not remove data from the underlying CSVs.
