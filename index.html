@@ -1,13 +1,178 @@
-<!DOCTYPE html>
-<html>
- <head>
-    <title>My Website</title>
- </head>  
- <body>
-    <h1> Hello World</h1>
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Australian Sports Broadcasting: a FIT3179 data visualisation exploring audiences, broadcasters, streaming, geography and attendance.">
+  <title>How Australia Watches Sport | FIT3179 DV2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #102c37;
+      --muted: #526873;
+      --dark: #102c37;
+      --paper: #f7f5f0;
+      --white: #ffffff;
+      --teal: #087b73;
+      --coral: #d66b44;
+      --line: #dce4e1;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font: 400 16px/1.55 "Barlow", Arial, sans-serif; }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .top-rule { height: 7px; background: linear-gradient(90deg, var(--teal) 0 62%, var(--coral) 62% 100%); }
+    .masthead { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 23px 0; border-bottom: 1px solid var(--line); }
+    .brand { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 23px; font-weight: 800; letter-spacing: .045em; line-height: 1; text-transform: uppercase; }
+    .brand span { color: var(--teal); }
+    .course { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-align: right; text-transform: uppercase; color: var(--muted); }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(270px, .75fr); gap: clamp(32px, 6vw, 85px); align-items: center; padding: 84px 0 88px; }
+    .eyebrow { display: flex; align-items: center; gap: 11px; margin: 0 0 20px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    .eyebrow:before { content: ""; width: 27px; height: 3px; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: "Barlow Condensed", Impact, sans-serif; }
+    h1 { max-width: 710px; margin-bottom: 24px; font-size: clamp(64px, 9vw, 118px); line-height: .88; font-weight: 800; letter-spacing: -.025em; text-transform: uppercase; }
+    h1 span { color: var(--teal); }
+    .lede { max-width: 600px; margin-bottom: 27px; color: #465e69; font-size: clamp(18px, 2.2vw, 21px); line-height: 1.55; }
+    .tags { display: flex; flex-wrap: wrap; gap: 9px; }
+    .tag { border: 1px solid #c5d3d0; border-radius: 30px; padding: 6px 13px; color: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: .055em; text-transform: uppercase; }
+    .overview { overflow: hidden; color: var(--white); background: var(--dark); border-radius: 6px; box-shadow: 14px 14px 0 #e5e9e4; }
+    .overview-top { padding: 22px 26px; background: #173e49; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .overview ol { margin: 0; padding: 13px 26px 24px; list-style: none; counter-reset: item; }
+    .overview li { display: flex; align-items: start; gap: 18px; padding: 16px 0; border-bottom: 1px solid #32515b; font-size: 16px; font-weight: 600; line-height: 1.3; }
+    .overview li:last-child { border-bottom: 0; }
+    .overview li:before { counter-increment: item; content: "0" counter(item); color: #6cc7bc; font: 800 23px/1 "Barlow Condensed", Impact, sans-serif; }
+    .status { margin: 0 0 72px; padding: 17px 24px; border-left: 5px solid var(--coral); background: #eaece7; color: var(--muted); font-size: 14px; }
+    .status strong { color: var(--ink); }
+    .story-intro { max-width: 730px; padding-bottom: 70px; }
+    .story-intro h2 { margin: 0 0 14px; font-size: 44px; line-height: 1; font-weight: 800; text-transform: uppercase; }
+    .story-intro p:last-child { margin-bottom: 0; color: var(--muted); font-size: 17px; }
+    .chapter { padding: 58px 0 83px; border-top: 1px solid var(--line); }
+    .chapter-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(240px, .75fr); gap: 30px; align-items: end; margin-bottom: 29px; }
+    .chapter-number { display: block; margin-bottom: 10px; color: var(--teal); font: 800 20px/1 "Barlow Condensed", Impact, sans-serif; letter-spacing: .09em; }
+    .chapter h2 { max-width: 760px; margin: 0; font-size: clamp(37px, 5.2vw, 59px); line-height: .98; text-transform: uppercase; font-weight: 800; }
+    .chapter-heading p { max-width: 430px; margin: 0 0 3px; color: var(--muted); font-size: 16px; }
+    .viz-slot { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; min-height: 270px; padding: 40px 28px; border: 1px dashed #a6b9b4; border-radius: 5px; background: #ffffff; text-align: center; }
+    .viz-slot::before { content: ""; width: 40px; height: 40px; border: 5px solid #d6e7e2; border-top-color: var(--teal); border-radius: 50%; transform: rotate(-38deg); }
+    .viz-slot strong { font: 800 27px/1.05 "Barlow Condensed", Impact, sans-serif; text-transform: uppercase; }
+    .viz-slot span { max-width: 440px; color: var(--muted); font-size: 14px; }
+    .viz-label { margin: 13px 0 0; color: var(--muted); font-size: 12px; letter-spacing: .01em; }
+    footer { background: var(--dark); color: white; }
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 28px; padding: 42px 0; }
+    .footer-inner h2 { margin-bottom: 12px; font-size: 29px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+    .footer-inner p { max-width: 560px; margin-bottom: 0; color: #b5c8cc; font-size: 13px; }
+    .footer-meta { color: #b5c8cc; font-size: 13px; text-align: right; }
+    .footer-meta strong { color: #fff; }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 32px, 1120px); }
+      .masthead { padding: 19px 0; }
+      .brand { font-size: 20px; }
+      .course { font-size: 10px; }
+      .hero { grid-template-columns: 1fr; gap: 44px; padding: 58px 0 65px; }
+      h1 { font-size: clamp(61px, 13vw, 87px); }
+      .overview { box-shadow: 8px 8px 0 #e5e9e4; }
+      .chapter-heading { grid-template-columns: 1fr; gap: 13px; }
+      .chapter { padding: 47px 0 65px; }
+      .story-intro { padding-bottom: 46px; }
+      .viz-slot { min-height: 225px; }
+      .footer-meta { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="top-rule" aria-hidden="true"></div>
+  <header class="masthead wrap">
+    <div class="brand">Australian <span>Sport / Data</span></div>
+    <div class="course">Monash University<br>FIT3179 · DV2 · 2026</div>
+  </header>
 
-    <div style="color: blue;">This is a blue paragraph.</div>
-    
+  <main class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">A data story about sport and screens</p>
+        <h1 id="page-title">How Australia <span>Watches</span> Sport.</h1>
+        <p class="lede">Exploring who watches Australia's major sporting codes, how broadcasts reach fans, and what happens when supporters head to the stadium.</p>
+        <div class="tags" aria-label="Topics covered">
+          <span class="tag">AFL</span><span class="tag">NRL</span><span class="tag">Streaming</span><span class="tag">Attendance</span>
+        </div>
+      </div>
+      <aside class="overview" aria-label="The four questions in this story">
+        <div class="overview-top">Four questions · one story</div>
+        <ol>
+          <li>Which sports draw the viewers?</li>
+          <li>How is watching changing?</li>
+          <li>Where are the fans?</li>
+          <li>Are people still going to games?</li>
+        </ol>
+      </aside>
+    </section>
 
- </body> 
+    <div class="status"><strong>Project in development.</strong> This first version establishes the page design and storyline. Charts will be added using Vega-Lite as datasets are prepared.</div>
+
+    <section class="story-intro" aria-labelledby="intro-title">
+      <p class="eyebrow">Introduction</p>
+      <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
+      <p>Sports broadcasting brings Australians together across different codes, channels and locations. This project will use published audience, media and attendance data to compare how Australians follow sport — without treating television viewing and attending a match as the same measure.</p>
+    </section>
+
+    <section class="chapter" id="audiences" aria-labelledby="audiences-title">
+      <div class="chapter-heading">
+        <div><span class="chapter-number">01 / AUDIENCES</span><h2 id="audiences-title">What are Australians watching?</h2></div>
+        <p>Begin with AFL and NRL: compare the scale and composition of their television audiences.</p>
+      </div>
+      <div class="viz-slot" role="group" aria-label="Placeholder for sports audience visualisation">
+        <strong>Audience comparison coming next</strong>
+        <span>Planned source: Roy Morgan Research · AFL and NRL television audiences</span>
+      </div>
+      <p class="viz-label">Figure 1 — To be added once the source data is confirmed.</p>
+    </section>
+
+    <section class="chapter" id="streaming" aria-labelledby="streaming-title">
+      <div class="chapter-heading">
+        <div><span class="chapter-number">02 / BROADCASTING</span><h2 id="streaming-title">From television to streaming.</h2></div>
+        <p>Explore viewing habits, changing platforms and the rise of subscription sports services such as Kayo.</p>
+      </div>
+      <div class="viz-slot" role="group" aria-label="Placeholder for streaming visualisation">
+        <strong>Broadcasting trends coming soon</strong>
+        <span>Planned sources: ACMA and published Foxtel Group reports</span>
+      </div>
+    </section>
+
+    <section class="chapter" id="geography" aria-labelledby="geography-title">
+      <div class="chapter-heading">
+        <div><span class="chapter-number">03 / GEOGRAPHY</span><h2 id="geography-title">Sport across the country.</h2></div>
+        <p>Use different Australian map idioms to investigate broadcasting access and the location of major sporting crowds.</p>
+      </div>
+      <div class="viz-slot" role="group" aria-label="Placeholder for geographic visualisations">
+        <strong>Three different maps to follow</strong>
+        <span>Planned views: state patterns, stadium attendance and the concentration of matches</span>
+      </div>
+    </section>
+
+    <section class="chapter" id="attendance" aria-labelledby="attendance-title">
+      <div class="chapter-heading">
+        <div><span class="chapter-number">04 / ATTENDANCE</span><h2 id="attendance-title">The stadium experience.</h2></div>
+        <p>See how live-match crowds have changed over time, alongside changes in the way people can watch sport at home.</p>
+      </div>
+      <div class="viz-slot" role="group" aria-label="Placeholder for attendance visualisation">
+        <strong>Attendance trends coming soon</strong>
+        <span>Planned sources: AFL Tables and official competition reports</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner wrap">
+      <div>
+        <h2>Australian Sports Broadcasting</h2>
+        <p>Potential data sources: Roy Morgan Research, ACMA, AFL Tables, Foxtel Group and the Australian Bureau of Statistics. Exact datasets, years and links will be documented when each chart is published.</p>
+      </div>
+      <div class="footer-meta"><strong>Ryan Mohan Li</strong><br>FIT3179 Data Visualisation 2<br>October 2026</div>
+    </div>
+  </footer>
+</body>
 </html>
