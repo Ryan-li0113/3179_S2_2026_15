@@ -123,7 +123,7 @@
       </aside>
     </section>
 
-    <div class="status"><strong>Project in development.</strong> Figure 1 uses published Roy Morgan survey data. More Vega-Lite charts and maps are in progress.</div>
+    <div class="status"><strong>Project in development.</strong> Figures 1 and 2 use published Roy Morgan survey data. Broadcasting trends and three geographic maps are in progress.</div>
 
     <section class="story-intro" aria-labelledby="intro-title">
       <p class="eyebrow">Introduction</p>
@@ -147,6 +147,17 @@
         <p class="chart-footnote">Source: Roy Morgan Single Source, July 2025–June 2026 (n=59,959; Australians aged 14+). <a href="https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026" target="_blank" rel="noopener noreferrer">AFL report (15 Sep 2026)</a> · <a href="https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026" target="_blank" rel="noopener noreferrer">NRL report (18 Sep 2026)</a>. NRL viewers are rounded to one decimal million in the source.</p>
       </div>
       <p class="viz-label">Chart created in Vega-Lite · Viewable source specification: <a href="charts/afl_nrl_audience_2026.json">JSON</a> · <a href="data/afl_nrl_tv_2026.csv">CSV dataset</a>.</p>
+      <div class="chart-card" style="margin-top:24px">
+        <p class="chart-kicker">Figure 2 / Audience growth by age</p>
+        <h3>Older age groups led TV audience growth in 2024</h3>
+        <p class="chart-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster audience growth. Hover to see both years' viewer estimates.</p>
+        <div class="chart-frame" id="chart-age-growth" role="img" aria-label="Heatmap of percentage growth in television audience reach from 2023 to 2024 for AFL and NRL across four age groups. AFL viewers aged 65+ grew 6.5%; NRL viewers aged 65+ grew 6.6%.">
+          <p class="chart-description">Loading audience growth heatmap…</p>
+        </div>
+        <p class="chart-insight"><strong>Key finding:</strong> The 65+ audience grew fastest for both codes (AFL +6.5%; NRL +6.6%). The slowest growth was among AFL viewers aged 50–64 (+1.0%) and NRL viewers under 35 (+1.9%).</p>
+        <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" target="_blank" rel="noopener noreferrer">Roy Morgan, AFL vs NRL television audiences, 2023–2024</a> (published 18 March 2025), age chart on page 2 of the <a href="https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf" target="_blank" rel="noopener noreferrer">original report</a>. Surveys: Jan–Dec 2023 (n=64,994) and Jan–Dec 2024 (n=64,823); Australians aged 14+. Growth rates are those reported by Roy Morgan. This is a <strong>different period</strong> from Figure 1 (July 2025–June 2026).</p>
+      </div>
+      <p class="viz-label">Figure 2 created in Vega-Lite · Source specification: <a href="charts/afl_nrl_age_growth_2024.json">JSON</a> · <a href="data/afl_nrl_age_growth_2023_2024.csv">CSV dataset</a>.</p>
     </section>
 
     <section class="chapter" id="streaming" aria-labelledby="streaming-title">
@@ -187,7 +198,7 @@
     <div class="footer-inner wrap">
       <div>
         <h2>Australian Sports Broadcasting</h2>
-        <p>Sources: Figure 1 uses the Roy Morgan Single Source survey (July 2025–June 2026); detailed source links appear below its chart. Future sections will use ACMA, Foxtel Group, AFL Tables and other documented datasets.</p>
+        <p>Sources: Figures 1 and 2 use Roy Morgan Single Source surveys (2023–2024 and 2025–2026). Detailed links appear below each chart. Planned additional sources include ACMA, Foxtel Group and AFL Tables.</p>
       </div>
       <div class="footer-meta"><strong>Ryan Mohan Li</strong><br>FIT3179 Data Visualisation 2<br>October 2026</div>
     </div>
@@ -204,6 +215,14 @@
       console.error('Could not display audience chart:', error);
       document.getElementById('chart-audience').innerHTML =
         '<p class="error-text">Chart could not load. Check that the data and charts folders are uploaded to GitHub.</p>';
+    });
+    vegaEmbed('#chart-age-growth', 'charts/afl_nrl_age_growth_2024.json', {
+      actions: false,
+      renderer: 'svg'
+    }).catch(function(error) {
+      console.error('Could not display audience growth chart:', error);
+      document.getElementById('chart-age-growth').innerHTML =
+        '<p class="error-text">Heatmap could not load. Check that charts/ and data/ are uploaded in the correct folders.</p>';
     });
   </script>
 </body>
