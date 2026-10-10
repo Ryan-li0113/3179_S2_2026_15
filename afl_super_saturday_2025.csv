@@ -1,0 +1,9 @@
+state_code,abbreviation,state_name,exclusive_weeks,label,label_lon,label_lat,season,source
+1,NSW,New South Wales,11,NSW  11w,146.7,-32.0,2025,"Foxtel Group, 18 Nov 2024"
+2,VIC,Victoria,25,VIC  25w,145.5,-37.0,2025,"Foxtel Group, 18 Nov 2024"
+3,QLD,Queensland,11,QLD  11w,144.8,-21.5,2025,"Foxtel Group, 18 Nov 2024"
+4,SA,South Australia,9,SA  9w,135.4,-30.6,2025,"Foxtel Group, 18 Nov 2024"
+5,WA,Western Australia,9,WA  9w,122,-25.1,2025,"Foxtel Group, 18 Nov 2024"
+6,TAS,Tasmania,25,TAS  25w,146.7,-41.8,2025,"Foxtel Group, 18 Nov 2024"
+7,NT,Northern Territory,25,NT  25w,133.3,-19.8,2025,"Foxtel Group, 18 Nov 2024"
+8,ACT,Australian Capital Territory,11,ACT  11w,149.1,-35.5,2025,"Foxtel Group, 18 Nov 2024"

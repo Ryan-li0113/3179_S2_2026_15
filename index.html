@@ -65,6 +65,13 @@
     .chart-card h3 { margin: 0 0 8px; font-size: clamp(25px, 3.4vw, 36px); line-height: 1.1; font-weight: 800; }
     .chart-description { max-width: 710px; margin: 0 0 20px; color: var(--muted); font-size: 15px; }
     .chart-frame { min-height: 245px; width: 100%; }
+    .chart-map { min-height: 520px; }
+    .map-summary { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 12px; }
+    .map-summary div { display: flex; flex-direction: column; gap: 5px; padding: 13px 15px; background: #eff5f1; border-top: 3px solid var(--teal); }
+    .map-summary strong { color: var(--ink); font: 800 24px/1.1 "Barlow Condensed", Impact, sans-serif; }
+    .map-summary span { font-size: 12px; color: var(--muted); }
+    @media (max-width:760px) { .chart-map { min-height: 350px; } .map-summary { grid-template-columns: 1fr; } }
+
     .chart-frame .vega-embed { width: 100%; }
     .chart-frame .vega-embed > svg { width: 100%; }
     .chart-insight { margin: 16px 0 0; padding: 14px 17px; background: #eff5f1; border-left: 4px solid var(--teal); font-size: 15px; }
@@ -128,7 +135,7 @@
       </aside>
     </section>
 
-    <div class="status"><strong>Project in development.</strong> Figures 1–3 use published Roy Morgan survey data. Broadcasting trends and three geographic maps are in progress.</div>
+    <div class="status"><strong>Project in development.</strong> Figures 1–3 use published Roy Morgan survey data. Broadcasting trends and two additional geographic maps are in progress.</div>
 
     <section class="story-intro" aria-labelledby="intro-title">
       <p class="eyebrow">Introduction</p>
@@ -162,7 +169,7 @@
         <p class="chart-insight"><strong>Key finding:</strong> The 65+ audience grew fastest for both codes (AFL +6.5%; NRL +6.6%). The slowest growth was among AFL viewers aged 50–64 (+1.0%) and NRL viewers under 35 (+1.9%).</p>
         <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" target="_blank" rel="noopener noreferrer">Roy Morgan, AFL vs NRL television audiences, 2023–2024</a> (published 18 March 2025), age chart on page 2 of the <a href="https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf" target="_blank" rel="noopener noreferrer">original report</a>. Surveys: Jan–Dec 2023 (n=64,994) and Jan–Dec 2024 (n=64,823); Australians aged 14+. Growth rates are those reported by Roy Morgan. This is a <strong>different period</strong> from Figure 1 (July 2025–June 2026).</p>
       </div>
-      <p class="viz-label">Figure 2 created in Vega-Lite · Source specification: <a href="afl_nrl_age_growth_2024.json">JSON</a> · <a href="afl_nrl_age_growth_2023_2024.csv">CSV dataset</a>.</p>
+      <p class="viz-label">Figure 2 created in Vega-Lite · Source specification: <a href="charts/afl_nrl_age_growth_2024.json">JSON</a> · <a href="data/afl_nrl_age_growth_2023_2024.csv">CSV dataset</a>.</p>
       <div class="chart-card" style="margin-top:24px">
         <p class="chart-kicker">Figure 3 / Gender and television audience reach</p>
         <h3>AFL has a larger audience advantage among women</h3>
@@ -174,7 +181,7 @@
         <p class="chart-insight"><strong>Key finding:</strong> In 2024, AFL reached about 1.02 million more women than NRL, compared with about 0.76 million more men. Both sports' estimates increased from 2023 to 2024.</p>
         <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" target="_blank" rel="noopener noreferrer">Roy Morgan Single Source, AFL vs NRL television viewers by gender, 2023–2024</a> (18 March 2025; chart on page 1). Base: Australians aged 14+. Each sport's estimates include people who watch either occasionally or regularly; some individuals may watch both sports. Distances are differences between overlapping audience populations, not exclusive supporters.</p>
       </div>
-      <p class="viz-label">Figure 3 created in Vega-Lite · Source specification: <a href="afl_nrl_gender_dumbbell_2024.json">JSON</a> · <a href="afl_nrl_gender_2023_2024.csv">CSV dataset</a>.</p>
+      <p class="viz-label">Figure 3 created in Vega-Lite · Source specification: <a href="charts/afl_nrl_gender_dumbbell_2024.json">JSON</a> · <a href="data/afl_nrl_gender_2023_2024.csv">CSV dataset</a>.</p>
     </section>
 
     <section class="chapter" id="streaming" aria-labelledby="streaming-title">
@@ -193,9 +200,25 @@
         <div><span class="chapter-number">03 / GEOGRAPHY</span><h2 id="geography-title">Sport across the country.</h2></div>
         <p>Use different Australian map idioms to investigate broadcasting access and the location of major sporting crowds.</p>
       </div>
-      <div class="viz-slot" role="group" aria-label="Placeholder for geographic visualisations">
-        <strong>Three different maps to follow</strong>
-        <span>Planned views: state patterns, stadium attendance and the concentration of matches</span>
+      <div class="chart-card">
+        <p class="chart-kicker">Figure 4 / Broadcasting access across Australia · Advanced map idiom</p>
+        <h3>Where did live Saturday AFL shift behind a subscription?</h3>
+        <p class="chart-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover over a state for its exact figure.</p>
+        <div class="chart-frame chart-map" id="chart-super-saturday" role="img" aria-label="Map of Australian states and territories showing 2025 exclusive live Saturday AFL coverage: Victoria, Tasmania and Northern Territory 25 weeks; New South Wales, Queensland and ACT 11 weeks; South Australia and Western Australia nine weeks.">
+          <p class="chart-description">Loading Australian broadcasting map…</p>
+        </div>
+        <div class="map-summary" aria-label="Coverage comparison">
+          <div><strong>25 weeks</strong><span>Victoria · Tasmania · Northern Territory</span></div>
+          <div><strong>11 weeks</strong><span>NSW · Queensland · ACT</span></div>
+          <div><strong>9 weeks</strong><span>South Australia · Western Australia</span></div>
+        </div>
+        <p class="chart-insight"><strong>Key finding:</strong> Victoria, Tasmania and the NT had nearly three times as many weeks of exclusively live Saturday coverage on Fox Footy as SA and WA (25 versus 9). Broadcasting restrictions varied substantially by location.</p>
+        <p class="chart-footnote"><strong>What this measures:</strong> weeks in the 2025 broadcast arrangement (including Opening Round), <em>not</em> audience size, matches watched, or the total number of games available on free-to-air. Some locally relevant Saturday matches aired later on Seven/7plus. Source: <a href="https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025" target="_blank" rel="noopener noreferrer">Foxtel Group, Super Saturday LIVE (18 Nov 2024)</a>. Boundaries: simplified GeoJSON adapted from <a href="https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson" target="_blank" rel="noopener noreferrer">Rowan Hogan's Australian states dataset</a> (cartographic representation, not official survey boundaries).</p>
+      </div>
+      <p class="viz-label">Figure 4 created with Vega-Lite · <a href="charts/afl_super_saturday_choropleth_2025.json">Readable JSON specification</a> · <a href="data/afl_super_saturday_2025.csv">2025 coverage CSV</a> · <a href="data/australia_states_simplified.geojson">State boundary GeoJSON</a>.</p>
+      <div class="viz-slot" role="group" aria-label="Placeholder for the remaining two geographic visualisations" style="margin-top:24px;min-height:165px;">
+        <strong>Two more map idioms coming</strong>
+        <span>Next: proportional symbol map of stadium attendance, then a third distinct map idiom.</span>
       </div>
     </section>
 
@@ -215,7 +238,7 @@
     <div class="footer-inner wrap">
       <div>
         <h2>Australian Sports Broadcasting</h2>
-        <p>Sources: Figures 1–3 use Roy Morgan Single Source surveys (2023–2024 and 2025–2026). Detailed links appear below each chart. Planned additional sources include ACMA, Foxtel Group and AFL Tables.</p>
+        <p>Sources: Figures 1–3 use Roy Morgan Single Source surveys (2023–2024 and 2025–2026). Figure 4 uses Foxtel Group 2025 broadcasting arrangements. Detailed links appear below each chart. Further sections will use ACMA and AFL Tables.</p>
       </div>
       <div class="footer-meta"><strong>Ryan Mohan Li</strong><br>FIT3179 Data Visualisation 2<br>October 2026</div>
     </div>
@@ -233,21 +256,29 @@
       document.getElementById('chart-audience').innerHTML =
         '<p class="error-text">Chart could not load. Check that the data and charts folders are uploaded to GitHub.</p>';
     });
-    vegaEmbed('#chart-age-growth', 'afl_nrl_age_growth_2024.json', {
+    vegaEmbed('#chart-age-growth', 'charts/afl_nrl_age_growth_2024.json', {
       actions: false,
       renderer: 'svg'
     }).catch(function(error) {
       console.error('Could not display audience growth chart:', error);
       document.getElementById('chart-age-growth').innerHTML =
-        '<p class="error-text">Heatmap could not load. Check that charts/ and data/ are uploaded in the correct folders.</p>';
+        '<p class="error-text">Heatmap could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
     });
-    vegaEmbed('#chart-gender-dumbbell', 'afl_nrl_gender_dumbbell_2024.json', {
+    vegaEmbed('#chart-gender-dumbbell', 'charts/afl_nrl_gender_dumbbell_2024.json', {
       actions: false,
       renderer: 'svg'
     }).catch(function(error) {
       console.error('Could not display gender dumbbell chart:', error);
       document.getElementById('chart-gender-dumbbell').innerHTML =
-        '<p class="error-text">Dumbbell chart could not load. Check that charts/ and data/ are uploaded in the correct folders.</p>';
+        '<p class="error-text">Dumbbell chart could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
+    });
+    vegaEmbed('#chart-super-saturday', 'charts/afl_super_saturday_choropleth_2025.json', {
+      actions: false,
+      renderer: 'svg'
+    }).catch(function(error) {
+      console.error('Could not display Australian broadcasting map:', error);
+      document.getElementById('chart-super-saturday').innerHTML =
+        '<p class="error-text">Map could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
     });
   </script>
 </body>

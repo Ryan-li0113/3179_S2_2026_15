@@ -44,8 +44,8 @@ The dataset was manually transcribed from publicly accessible Roy Morgan media r
 Both sports' estimated TV audiences grew in all four age groups in 2024. For AFL and NRL, the largest **percentage** growth was for people aged 65+. This does not show that older people make up the largest audience overall; that would require comparing absolute numbers instead.
 
 ## Files
-- `afl_nrl_age_growth_2023_2024.csv` – transcription of the published age chart.
-- `afl_nrl_age_growth_2024.json` – Vega-Lite heatmap specification.
+- `data/afl_nrl_age_growth_2023_2024.csv` – transcription of the published age chart.
+- `charts/afl_nrl_age_growth_2024.json` – Vega-Lite heatmap specification.
 
 ## Limits
 Figure 2 compares **2023 with 2024** and is separate from Figure 1's more recent **July 2025–June 2026** survey window. Do not imply those figures are identical datasets or that the heatmap measures broadcaster-specific audiences.
@@ -74,5 +74,38 @@ Values are millions of Australians aged 14+ estimated to have watched AFL or NRL
 - Do not interpret these numbers as mutually exclusive viewers or average single-match audiences.
 
 ## Files
-- `afl_nrl_gender_2023_2024.csv` – four data rows.
-- `afl_nrl_gender_dumbbell_2024.json` – human-readable Vega-Lite dumbbell specification.
+- `data/afl_nrl_gender_2023_2024.csv` – four data rows.
+- `charts/afl_nrl_gender_dumbbell_2024.json` – human-readable Vega-Lite dumbbell specification.
+
+
+---
+
+# Figure 4: 2025 Fox Footy Super Saturday exclusively live window by state
+
+## Data source and values
+Foxtel Group, *‘Super Saturday Live’ to change the game for Fox Footy on Kayo Sports in 2025*, published 18 November 2024:
+https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025
+
+| State or territory | Exclusive live Saturday window (weeks, including Opening Round) |
+|---|---:|
+| VIC | 25 |
+| TAS | 25 |
+| NT | 25 |
+| NSW | 11 |
+| QLD | 11 |
+| ACT | 11 |
+| SA | 9 |
+| WA | 9 |
+
+The measure refers to the **number of 2025 season weeks** for which live Saturday AFL coverage was exclusive to Fox Footy (available on Foxtel and Kayo). It is **not** the number of matches, individual viewer counts, subscription penetration or full-season free-to-air availability. Matches involving non-Victorian clubs could be shown locally on free-to-air on a delay during these windows.
+
+## Geographic boundaries
+- `data/australia_states_simplified.geojson` is a **simplified**, low-resolution reference map reconstructed from the main state/territory polygons of Rowan Hogan's `states.min.geojson`:
+  https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson
+- Polygon vertices were reduced for lightweight on-page mapping. Small islands are omitted to keep the total web download small; this is not a legal or engineering-quality boundary dataset.
+- The state identifiers follow the ABS convention (NSW=1, VIC=2, QLD=3, SA=4, WA=5, TAS=6, NT=7, ACT=8): https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files
+- Boundary provenance and reuse permissions should be reviewed if republishing beyond this educational assignment.
+
+## Vega-Lite implementation
+- `charts/afl_super_saturday_choropleth_2025.json` reads `data/afl_super_saturday_2025.csv`, looks up state polygons by code in the simplified GeoJSON, applies a geographic Mercator projection and colours states by the quantitative number of weeks.
+- A map is an advanced idiom under the FIT3179 DV2 rubric. The task is a spatial comparison of broadcast access **by state**, not a comparison of TV ratings.
