@@ -109,3 +109,30 @@ The measure refers to the **number of 2025 season weeks** for which live Saturda
 ## Vega-Lite implementation
 - `charts/afl_super_saturday_choropleth_2025.json` reads `data/afl_super_saturday_2025.csv`, looks up state polygons by code in the simplified GeoJSON, applies a geographic Mercator projection and colours states by the quantitative number of weeks.
 - A map is an advanced idiom under the FIT3179 DV2 rubric. The task is a spatial comparison of broadcast access **by state**, not a comparison of TV ratings.
+
+
+---
+
+# Figure 5: Proportional symbol map of AFL match attendance by stadium (2025)
+
+## Data source
+- AFL Tables, *Attendances 2025* → **By Venue**: https://afltables.com/afl/crowds/2025.html
+- Includes all 18 match venues listed in the 2025 table.
+- The 2025 home-and-away attendance total is **7,656,090** across 207 matches; finals recorded **600,937** attendances across 9 matches. The combined total is **8,257,027 attendances across 216 matches**.
+
+## Construction
+- Venue names, home-and-away attendance and match counts, and finals attendance and match counts are transcribed from AFL Tables. Empty finals cells were treated as zero.
+- `total_attendance = home_away_attendance + finals_attendance`; `total_games = home_away_games + finals_games`; `average_attendance = round(total_attendance / total_games)`.
+- The values in the CSV have been checked to reconcile to the original overall totals.
+- Longitudes and latitudes are approximate WGS84 stadium locations; they were added to enable point plotting (not for navigation or cadastral accuracy). Stadium city/state identities are consistent with the AFL venue directory: https://www.afl.com.au/venues
+- The backdrop uses the same lightweight `data/australia_states_simplified.geojson` file as Figure 4.
+
+## Chart choice and limitations
+- `charts/afl_venue_proportional_symbols_2025.json` draws a background geoshape layer plus circles positioned by longitude and latitude. **Circle area**, not diameter or colour, shows the number of recorded crowd attendances.
+- In the national projection, nearby Melbourne and Adelaide venues may overlap; hover access can be constrained. The summary callouts make the leading stadiums visible without falsely relocating their markers.
+- This is an aggregate of people attending matches, not unique individual fans, and does not represent broadcasting audiences. Venues differ in number of AFL matches and capacity, so total crowds are not a fair measure of average interest per game.
+
+## Files
+- `data/afl_venue_attendance_2025.csv`
+- `charts/afl_venue_proportional_symbols_2025.json`
+- `index.html` (updated Geography section; previous figures retained)

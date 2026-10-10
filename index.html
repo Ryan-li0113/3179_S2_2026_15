@@ -105,6 +105,11 @@
       .footer-meta { text-align: left; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    .venue-topline { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:18px 0 4px; }
+    .venue-topline > div { padding:17px 18px; border:1px solid #dce4e1; border-radius:5px; background:#f7faf8; }
+    .venue-topline strong { display:block; font:800 clamp(23px,3vw,32px)/1.05 "Barlow Condensed",Impact,sans-serif; color:#087b73; }
+    .venue-topline span { display:block; margin-top:5px; font-size:12px; color:#526873; }
+    @media(max-width:600px) { .venue-topline { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -135,7 +140,7 @@
       </aside>
     </section>
 
-    <div class="status"><strong>Project in development.</strong> Figures 1–3 use published Roy Morgan survey data. Broadcasting trends and two additional geographic maps are in progress.</div>
+    <div class="status"><strong>Project in development.</strong> Figures 1–3 use published Roy Morgan survey data. Broadcasting trends and the final geographic map are in progress.</div>
 
     <section class="story-intro" aria-labelledby="intro-title">
       <p class="eyebrow">Introduction</p>
@@ -216,9 +221,26 @@
         <p class="chart-footnote"><strong>What this measures:</strong> weeks in the 2025 broadcast arrangement (including Opening Round), <em>not</em> audience size, matches watched, or the total number of games available on free-to-air. Some locally relevant Saturday matches aired later on Seven/7plus. Source: <a href="https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025" target="_blank" rel="noopener noreferrer">Foxtel Group, Super Saturday LIVE (18 Nov 2024)</a>. Boundaries: simplified GeoJSON adapted from <a href="https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson" target="_blank" rel="noopener noreferrer">Rowan Hogan's Australian states dataset</a> (cartographic representation, not official survey boundaries).</p>
       </div>
       <p class="viz-label">Figure 4 created with Vega-Lite · <a href="charts/afl_super_saturday_choropleth_2025.json">Readable JSON specification</a> · <a href="data/afl_super_saturday_2025.csv">2025 coverage CSV</a> · <a href="data/australia_states_simplified.geojson">State boundary GeoJSON</a>.</p>
-      <div class="viz-slot" role="group" aria-label="Placeholder for the remaining two geographic visualisations" style="margin-top:24px;min-height:165px;">
-        <strong>Two more map idioms coming</strong>
-        <span>Next: proportional symbol map of stadium attendance, then a third distinct map idiom.</span>
+      <div class="chart-card" style="margin-top:24px">
+        <p class="chart-kicker">Figure 5 / AFL stadium crowds · Advanced map idiom</p>
+        <h3>Which AFL stadiums attracted the largest crowds in 2025?</h3>
+        <p class="chart-description">Each circle marks an AFL match venue. <strong>Circle area</strong> corresponds to total 2025 crowd attendance (home-and-away matches plus finals). Hover or tap a circle to inspect the venue, total attendance and number of games. All 18 venues are included.</p>
+        <div class="chart-frame chart-map" id="chart-stadium-crowds" role="img" aria-label="Proportional symbol map showing AFL total crowds across 18 Australian stadiums in 2025, led by the Melbourne Cricket Ground with 3,120,416 attendances.">
+          <p class="chart-description">Loading 2025 stadium attendance map…</p>
+        </div>
+        <p class="chart-footnote">Stadiums close together can overlap at this national scale (especially the MCG and Docklands in Melbourne). Hover over symbols for venue-level totals; nearby venues' symbols may partially cover each other.</p>
+        <div class="venue-topline" aria-label="Major 2025 stadium crowd totals">
+          <div><strong>3.12m</strong><span>Melbourne Cricket Ground · 51 matches</span></div>
+          <div><strong>1.34m</strong><span>Docklands (Marvel Stadium) · 43 matches</span></div>
+          <div><strong>1.22m</strong><span>Adelaide Oval · 29 matches</span></div>
+        </div>
+        <p class="chart-insight"><strong>Key finding:</strong> The MCG alone accounted for approximately <strong>37.8%</strong> of all recorded AFL crowd attendances across 2025. Total attendance across all 18 venues was 8.26 million; these are entries to matches, <em>not</em> unique individuals.</p>
+        <p class="chart-footnote">Data source: <a href="https://afltables.com/afl/crowds/2025.html" target="_blank" rel="noopener noreferrer">AFL Tables, Attendances 2025 → By Venue</a>. Stadium location points are approximate; the state boundary map is the simplified GeoJSON previously used in Figure 4. Venues are not adjusted for population or the number of scheduled matches.</p>
+      </div>
+      <p class="viz-label">Figure 5 created in Vega-Lite · <a href="charts/afl_venue_proportional_symbols_2025.json">Readable JSON specification</a> · <a href="data/afl_venue_attendance_2025.csv">CSV dataset</a>.</p>
+      <div class="viz-slot" role="group" aria-label="Placeholder for the third required map idiom" style="margin-top:24px;min-height:145px;">
+        <strong>One more map idiom coming</strong>
+        <span>Next: a third distinct geographic idiom to complete the mapping requirement.</span>
       </div>
     </section>
 
@@ -238,7 +260,7 @@
     <div class="footer-inner wrap">
       <div>
         <h2>Australian Sports Broadcasting</h2>
-        <p>Sources: Figures 1–3 use Roy Morgan Single Source surveys (2023–2024 and 2025–2026). Figure 4 uses Foxtel Group 2025 broadcasting arrangements. Detailed links appear below each chart. Further sections will use ACMA and AFL Tables.</p>
+        <p>Sources: Figures 1–3 use Roy Morgan Single Source surveys (2023–2024 and 2025–2026). Figure 4 uses Foxtel Group 2025 broadcasting arrangements; Figure 5 uses AFL Tables stadium crowds. Detailed source links appear below each figure. Further sections will use ACMA.</p>
       </div>
       <div class="footer-meta"><strong>Ryan Mohan Li</strong><br>FIT3179 Data Visualisation 2<br>October 2026</div>
     </div>
@@ -279,6 +301,14 @@
       console.error('Could not display Australian broadcasting map:', error);
       document.getElementById('chart-super-saturday').innerHTML =
         '<p class="error-text">Map could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
+    });
+    vegaEmbed('#chart-stadium-crowds', 'charts/afl_venue_proportional_symbols_2025.json', {
+      actions: false,
+      renderer: 'svg'
+    }).catch(function(error) {
+      console.error('Could not display AFL stadium attendance map:', error);
+      document.getElementById('chart-stadium-crowds').innerHTML =
+        '<p class="error-text">Venue map could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
     });
   </script>
 </body>

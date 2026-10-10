@@ -1,0 +1,19 @@
+venue,city,state,longitude,latitude,home_away_attendance,finals_attendance,total_attendance,home_away_games,finals_games,total_games,average_attendance,season,source_url
+Adelaide Oval,Adelaide,SA,138.596,-34.915,1119114,104192,1223306,27,2,29,42183,2025,https://afltables.com/afl/crowds/2025.html
+Barossa Park,Lyndoch,SA,138.888,-34.601,19345,0,19345,2,0,2,9672,2025,https://afltables.com/afl/crowds/2025.html
+Bellerive Oval,Hobart,TAS,147.374,-42.876,18571,0,18571,2,0,2,9286,2025,https://afltables.com/afl/crowds/2025.html
+Carrara (People First Stadium),Gold Coast,QLD,153.365,-28.006,150339,0,150339,9,0,9,16704,2025,https://afltables.com/afl/crowds/2025.html
+Docklands (Marvel Stadium),Melbourne,VIC,144.948,-37.816,1340134,0,1340134,43,0,43,31166,2025,https://afltables.com/afl/crowds/2025.html
+Eureka Stadium (Mars Stadium),Ballarat,VIC,143.818,-37.543,4814,0,4814,1,0,1,4814,2025,https://afltables.com/afl/crowds/2025.html
+Gabba,Brisbane,QLD,153.034,-27.486,336583,36628,373211,11,1,12,31101,2025,https://afltables.com/afl/crowds/2025.html
+Hands Oval,Bunbury,WA,115.634,-33.351,12715,0,12715,1,0,1,12715,2025,https://afltables.com/afl/crowds/2025.html
+Kardinia Park (GMHBA Stadium),Geelong,VIC,144.354,-38.158,301084,0,301084,10,0,10,30108,2025,https://afltables.com/afl/crowds/2025.html
+Melbourne Cricket Ground (MCG),Melbourne,VIC,144.983,-37.82,2738440,381976,3120416,47,4,51,61185,2025,https://afltables.com/afl/crowds/2025.html
+Manuka Oval,Canberra,ACT,149.135,-35.318,32992,0,32992,3,0,3,10997,2025,https://afltables.com/afl/crowds/2025.html
+Marrara Oval (TIO Stadium),Darwin,NT,130.888,-12.397,22130,0,22130,2,0,2,11065,2025,https://afltables.com/afl/crowds/2025.html
+Norwood Oval,Adelaide,SA,138.629,-34.92,18477,0,18477,2,0,2,9238,2025,https://afltables.com/afl/crowds/2025.html
+Perth Stadium (Optus Stadium),Perth,WA,115.89,-31.952,1003083,57507,1060590,23,1,24,44191,2025,https://afltables.com/afl/crowds/2025.html
+Sydney Cricket Ground (SCG),Sydney,NSW,151.225,-33.892,377046,0,377046,11,0,11,34277,2025,https://afltables.com/afl/crowds/2025.html
+Sydney Showground (ENGIE Stadium),Sydney,NSW,151.068,-33.847,99293,20634,119927,8,1,9,13325,2025,https://afltables.com/afl/crowds/2025.html
+Traeger Park,Alice Springs,NT,133.885,-23.709,6721,0,6721,1,0,1,6721,2025,https://afltables.com/afl/crowds/2025.html
+York Park (UTAS Stadium),Launceston,TAS,147.139,-41.425,55209,0,55209,4,0,4,13802,2025,https://afltables.com/afl/crowds/2025.html
