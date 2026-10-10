@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Heatmap of estimated change in TV audience reach by age group for AFL and NRL, calendar years 2023 to 2024. Growth percentages transcribed from Roy Morgan Finding 9842, March 2025.",
   "data": {
-    "url": "data/afl_nrl_age_growth_2023_2024.csv",
+    "url": "afl_nrl_age_growth_2023_2024.csv",
     "format": {
       "type": "csv",
       "parse": {

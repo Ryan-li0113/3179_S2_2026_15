@@ -44,8 +44,35 @@ The dataset was manually transcribed from publicly accessible Roy Morgan media r
 Both sports' estimated TV audiences grew in all four age groups in 2024. For AFL and NRL, the largest **percentage** growth was for people aged 65+. This does not show that older people make up the largest audience overall; that would require comparing absolute numbers instead.
 
 ## Files
-- `data/afl_nrl_age_growth_2023_2024.csv` – transcription of the published age chart.
-- `charts/afl_nrl_age_growth_2024.json` – Vega-Lite heatmap specification.
+- `afl_nrl_age_growth_2023_2024.csv` – transcription of the published age chart.
+- `afl_nrl_age_growth_2024.json` – Vega-Lite heatmap specification.
 
 ## Limits
 Figure 2 compares **2023 with 2024** and is separate from Figure 1's more recent **July 2025–June 2026** survey window. Do not imply those figures are identical datasets or that the heatmap measures broadcaster-specific audiences.
+
+
+---
+
+# Figure 3: Dumbbell comparison of TV viewership by gender, AFL vs NRL (2023–2024)
+
+## Original source
+- Roy Morgan, *AFL stretches lead over NRL in TV viewership despite NRL’s rise* (18 March 2025): https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24
+- The original PDF's **page 1** gender comparison chart (2023 vs. 2024): https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf
+
+## Data and units
+Values are millions of Australians aged 14+ estimated to have watched AFL or NRL TV coverage either occasionally or regularly. The 2023 and 2024 numbers are transcribed directly from the original gender comparison chart.
+
+| Gender | Year | AFL TV viewers | NRL TV viewers | AFL minus NRL |
+|---|---:|---:|---:|---:|
+| Women | 2023 | 3,880,000 | 2,843,000 | 1,037,000 |
+| Women | 2024 | 4,024,000 | 3,001,000 | 1,023,000 |
+| Men | 2023 | 4,881,000 | 4,144,000 | 737,000 |
+| Men | 2024 | 5,078,000 | 4,314,000 | 764,000 |
+
+- The dumbbell joins *NRL and AFL audience reach for the same gender in the same year.* It does not connect time points or imply that the same people watched both sports.
+- Its purpose is to **compare a difference between two measured values**, making it more meaningful than using an advanced idiom for its own sake.
+- Do not interpret these numbers as mutually exclusive viewers or average single-match audiences.
+
+## Files
+- `afl_nrl_gender_2023_2024.csv` – four data rows.
+- `afl_nrl_gender_dumbbell_2024.json` – human-readable Vega-Lite dumbbell specification.

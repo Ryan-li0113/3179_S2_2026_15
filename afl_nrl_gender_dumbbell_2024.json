@@ -1,0 +1,317 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dumbbell chart. Roy Morgan estimated AFL and NRL television viewers by gender in 2023 and 2024. Each connecting rule shows the within-gender, within-year difference between leagues, not a time trajectory.",
+  "data": {
+    "url": "afl_nrl_gender_2023_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "afl_million": "number",
+        "nrl_million": "number",
+        "gap_million": "number"
+      }
+    }
+  },
+  "width": "container",
+  "height": 272,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "ordinal",
+      "sort": [
+        "Women · 2023",
+        "Women · 2024",
+        "Men · 2023",
+        "Men · 2024"
+      ],
+      "axis": {
+        "title": null,
+        "labelFontSize": 13,
+        "labelFontWeight": "bold",
+        "labelColor": "#102c37",
+        "labelPadding": 12,
+        "domain": false,
+        "ticks": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#9db5b0",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "nrl_million",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2,
+              5.65
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "Australians aged 14+ watching TV (millions)",
+            "values": [
+              2,
+              2.5,
+              3,
+              3.5,
+              4,
+              4.5,
+              5,
+              5.5
+            ],
+            "grid": true,
+            "gridColor": "#e4ebe8",
+            "labelExpr": "format(datum.value, '.1f') + 'm'",
+            "titlePadding": 18,
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "labelColor": "#526873",
+            "titleColor": "#526873",
+            "domain": false,
+            "tickColor": "#bbc9c4"
+          }
+        },
+        "x2": {
+          "field": "afl_million"
+        },
+        "tooltip": [
+          {
+            "field": "gender",
+            "title": "Gender"
+          },
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "nrl_million",
+            "type": "quantitative",
+            "format": ".3f",
+            "title": "NRL audience (m)"
+          },
+          {
+            "field": "afl_million",
+            "type": "quantitative",
+            "format": ".3f",
+            "title": "AFL audience (m)"
+          },
+          {
+            "field": "gap_million",
+            "type": "quantitative",
+            "format": ".3f",
+            "title": "AFL advantage (m)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 240,
+        "color": "#d66b44",
+        "stroke": "#fff",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "nrl_million",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2,
+              5.65
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "Australians aged 14+ watching TV (millions)",
+            "values": [
+              2,
+              2.5,
+              3,
+              3.5,
+              4,
+              4.5,
+              5,
+              5.5
+            ],
+            "grid": true,
+            "gridColor": "#e4ebe8",
+            "labelExpr": "format(datum.value, '.1f') + 'm'",
+            "titlePadding": 18,
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "labelColor": "#526873",
+            "titleColor": "#526873",
+            "domain": false,
+            "tickColor": "#bbc9c4"
+          }
+        },
+        "tooltip": [
+          {
+            "value": "NRL",
+            "title": "Sport"
+          },
+          {
+            "field": "gender",
+            "title": "Gender"
+          },
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "nrl_million",
+            "type": "quantitative",
+            "format": ".3f",
+            "title": "TV audience (m)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 240,
+        "color": "#087b73",
+        "stroke": "#fff",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "afl_million",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2,
+              5.65
+            ],
+            "nice": false
+          }
+        },
+        "tooltip": [
+          {
+            "value": "AFL",
+            "title": "Sport"
+          },
+          {
+            "field": "gender",
+            "title": "Gender"
+          },
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "afl_million",
+            "type": "quantitative",
+            "format": ".3f",
+            "title": "TV audience (m)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -10,
+        "font": "Barlow",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#9d4c32"
+      },
+      "encoding": {
+        "x": {
+          "field": "nrl_million",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2,
+              5.65
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "Australians aged 14+ watching TV (millions)",
+            "values": [
+              2,
+              2.5,
+              3,
+              3.5,
+              4,
+              4.5,
+              5,
+              5.5
+            ],
+            "grid": true,
+            "gridColor": "#e4ebe8",
+            "labelExpr": "format(datum.value, '.1f') + 'm'",
+            "titlePadding": 18,
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "labelColor": "#526873",
+            "titleColor": "#526873",
+            "domain": false,
+            "tickColor": "#bbc9c4"
+          }
+        },
+        "text": {
+          "field": "nrl_label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "font": "Barlow",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#087b73"
+      },
+      "encoding": {
+        "x": {
+          "field": "afl_million",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              2,
+              5.65
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "afl_label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow"
+    }
+  }
+}
