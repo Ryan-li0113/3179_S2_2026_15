@@ -55,10 +55,6 @@
     .chapter-number { display: block; margin-bottom: 10px; color: var(--teal); font: 800 20px/1 "Barlow Condensed", Impact, sans-serif; letter-spacing: .09em; }
     .chapter h2 { max-width: 760px; margin: 0; font-size: clamp(37px, 5.2vw, 59px); line-height: .98; text-transform: uppercase; font-weight: 800; }
     .chapter-heading p { max-width: 430px; margin: 0 0 3px; color: var(--muted); font-size: 16px; }
-    .viz-slot { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 14px; min-height: 270px; padding: 40px 28px; border: 1px dashed #a6b9b4; border-radius: 5px; background: #ffffff; text-align: center; }
-    .viz-slot::before { content: ""; width: 40px; height: 40px; border: 5px solid #d6e7e2; border-top-color: var(--teal); border-radius: 50%; transform: rotate(-38deg); }
-    .viz-slot strong { font: 800 27px/1.05 "Barlow Condensed", Impact, sans-serif; text-transform: uppercase; }
-    .viz-slot span { max-width: 440px; color: var(--muted); font-size: 14px; }
     .viz-label { margin: 13px 0 0; color: var(--muted); font-size: 12px; letter-spacing: .01em; }
     .chart-card { padding: clamp(20px, 3.5vw, 42px); border: 1px solid var(--line); border-radius: 7px; background: #fff; }
     .chart-kicker { margin: 0 0 4px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
@@ -101,7 +97,6 @@
       .chapter-heading { grid-template-columns: 1fr; gap: 13px; }
       .chapter { padding: 47px 0 65px; }
       .story-intro { padding-bottom: 46px; }
-      .viz-slot { min-height: 225px; }
       .footer-meta { text-align: left; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -171,7 +166,6 @@
         <h3>AFL reaches more television viewers than NRL</h3>
         <p class="chart-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover for estimates, or use the sport selector below to emphasise AFL or NRL.</p>
         <div class="chart-frame" id="chart-audience" role="img" aria-label="Bar chart showing approximately 9.31 million AFL television viewers and 7.6 million NRL television viewers in Australia from July 2025 to June 2026.">
-          <p class="chart-description">Loading audience chart…</p>
         </div>
         <p class="chart-insight"><strong>Key finding:</strong> AFL's estimated TV audience was around 1.7 million people larger than NRL's. These are people who watched at least occasionally, not average viewers of a single match.</p>
         <p class="chart-footnote">Source: Roy Morgan Single Source, July 2025–June 2026 (n=59,959; Australians aged 14+). <a href="https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026" target="_blank" rel="noopener noreferrer">AFL report (15 Sep 2026)</a> · <a href="https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026" target="_blank" rel="noopener noreferrer">NRL report (18 Sep 2026)</a>. NRL viewers are rounded to one decimal million in the source.</p>
@@ -182,7 +176,6 @@
         <h3>Older age groups led TV audience growth in 2024</h3>
         <p class="chart-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster audience growth. Hover for both years' viewer estimates, or highlight an age group to compare both sports.</p>
         <div class="chart-frame" id="chart-age-growth" role="img" aria-label="Heatmap of percentage growth in television audience reach from 2023 to 2024 for AFL and NRL across four age groups. AFL viewers aged 65+ grew 6.5%; NRL viewers aged 65+ grew 6.6%.">
-          <p class="chart-description">Loading audience growth heatmap…</p>
         </div>
         <p class="chart-insight"><strong>Key finding:</strong> The 65+ audience grew fastest for both codes (AFL +6.5%; NRL +6.6%). The slowest growth was among AFL viewers aged 50–64 (+1.0%) and NRL viewers under 35 (+1.9%).</p>
         <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" target="_blank" rel="noopener noreferrer">Roy Morgan, AFL vs NRL television audiences, 2023–2024</a> (published 18 March 2025), age chart on page 2 of the <a href="https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf" target="_blank" rel="noopener noreferrer">original report</a>. Surveys: Jan–Dec 2023 (n=64,994) and Jan–Dec 2024 (n=64,823); Australians aged 14+. Growth rates are those reported by Roy Morgan. This is a <strong>different period</strong> from Figure 1 (July 2025–June 2026).</p>
@@ -194,7 +187,6 @@
         <p class="chart-description">Each horizontal connection compares AFL and NRL audience reach for one gender in one year (2023 or 2024). The distance between dots represents AFL's audience advantage. Figures are annual audience estimates, not average viewers per match.</p>
         <div class="chart-key" aria-label="Chart legend"><span><i class="swatch swatch-nrl"></i>NRL</span><span><i class="swatch swatch-afl"></i>AFL</span></div>
         <div class="chart-frame" id="chart-gender-dumbbell" role="img" aria-label="Dumbbell chart of AFL and NRL television audiences in 2023 and 2024 for Australian men and women aged 14+. AFL leads for both genders, with a larger gap among women.">
-          <p class="chart-description">Loading gender comparison chart…</p>
         </div>
         <p class="chart-insight"><strong>Key finding:</strong> In 2024, AFL reached about 1.02 million more women than NRL, compared with about 0.76 million more men. Both sports' estimates increased from 2023 to 2024.</p>
         <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" target="_blank" rel="noopener noreferrer">Roy Morgan Single Source, AFL vs NRL television viewers by gender, 2023–2024</a> (18 March 2025; chart on page 1). Base: Australians aged 14+. Each sport's estimates include people who watch either occasionally or regularly; some individuals may watch both sports. Distances are differences between overlapping audience populations, not exclusive supporters.</p>
@@ -206,10 +198,6 @@
       <div class="chapter-heading">
         <div><span class="chapter-number">02 / BROADCASTING</span><h2 id="streaming-title">From television to streaming.</h2></div>
         <p>Explore viewing habits, changing platforms and the rise of subscription sports services such as Kayo.</p>
-      </div>
-      <div class="viz-slot" role="group" aria-label="Placeholder for streaming visualisation">
-        <strong>Broadcasting trends coming soon</strong>
-        <span>Planned sources: ACMA and published Foxtel Group reports</span>
       </div>
     </section>
 
@@ -223,7 +211,6 @@
         <h3>Where did live Saturday AFL shift behind a subscription?</h3>
         <p class="chart-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover for its exact figure or use the state selector to highlight a location.</p>
         <div class="chart-frame chart-map" id="chart-super-saturday" role="img" aria-label="Map of Australian states and territories showing 2025 exclusive live Saturday AFL coverage: Victoria, Tasmania and Northern Territory 25 weeks; New South Wales, Queensland and ACT 11 weeks; South Australia and Western Australia nine weeks.">
-          <p class="chart-description">Loading Australian broadcasting map…</p>
         </div>
         <div class="map-summary" aria-label="Coverage comparison">
           <div><strong>25 weeks</strong><span>Victoria · Tasmania · Northern Territory</span></div>
@@ -239,7 +226,6 @@
         <h3>Which AFL stadiums attracted the largest crowds in 2025?</h3>
         <p class="chart-description">Each circle marks an AFL match venue. <strong>Circle area</strong> corresponds to total 2025 crowd attendance (home-and-away matches plus finals). Use the stadium dropdown to locate any of the 18 venues, then hover a circle for its attendance and match count. A Melbourne close-up below separates the overlapping CBD stadiums.</p>
         <div class="chart-frame chart-map" id="chart-stadium-crowds" role="img" aria-label="Proportional symbol map showing AFL total crowds across 18 Australian stadiums in 2025, led by the Melbourne Cricket Ground with 3,120,416 attendances.">
-          <p class="chart-description">Loading 2025 stadium attendance map…</p>
         </div>
         <div class="map-inset" aria-label="Melbourne stadium close-up">
           <div class="map-inset-heading">
@@ -247,7 +233,6 @@
             <span class="inset-tag">ZOOMED VIEW</span>
           </div>
           <div class="chart-frame" id="chart-melbourne-zoom" aria-label="Close-up proportional symbol map with separately hoverable MCG and Marvel Stadium attendance markers">
-            <p class="chart-description">Loading Melbourne detail…</p>
           </div>
           <p class="chart-footnote">Same attendance dataset, with a much closer geographic scale. This is a detail view of Figure 5, not a separate count toward the three required map idioms.</p>
         </div>
@@ -260,20 +245,12 @@
         <p class="chart-footnote">Data source: <a href="https://afltables.com/afl/crowds/2025.html" target="_blank" rel="noopener noreferrer">AFL Tables, Attendances 2025 → By Venue</a>. Stadium location points are approximate; the state boundary map is the simplified GeoJSON previously used in Figure 4. Venues are not adjusted for population or the number of scheduled matches.</p>
       </div>
       <p class="viz-label">Figure 5 created in Vega-Lite · <a href="charts/afl_venue_proportional_symbols_2025.json">National map JSON</a> · <a href="charts/afl_melbourne_stadium_zoom_2025.json">Melbourne inset JSON</a> · <a href="data/afl_venue_attendance_2025.csv">CSV dataset</a>.</p>
-      <div class="viz-slot" role="group" aria-label="Placeholder for the third required map idiom" style="margin-top:24px;min-height:145px;">
-        <strong>One more map idiom coming</strong>
-        <span>Next: a third distinct geographic idiom to complete the mapping requirement.</span>
-      </div>
     </section>
 
     <section class="chapter" id="attendance" aria-labelledby="attendance-title">
       <div class="chapter-heading">
         <div><span class="chapter-number">04 / ATTENDANCE</span><h2 id="attendance-title">The stadium experience.</h2></div>
         <p>See how live-match crowds have changed over time, alongside changes in the way people can watch sport at home.</p>
-      </div>
-      <div class="viz-slot" role="group" aria-label="Placeholder for attendance visualisation">
-        <strong>Attendance trends coming soon</strong>
-        <span>Planned sources: AFL Tables and official competition reports</span>
       </div>
     </section>
   </main>
