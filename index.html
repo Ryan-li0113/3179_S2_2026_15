@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en-AU">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Australian Sports Broadcasting: a FIT3179 data visualisation exploring audiences, broadcasters, streaming, geography and attendance.">
-  <title>How Australia Watches Sport | FIT3179 DV2</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Australian Sports Broadcasting: a FIT3179 data visualisation exploring audiences, broadcasters, streaming, geography and attendance." name="description"/>
+<title>How Australia Watches Sport | FIT3179 DV2</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Barlow:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       --ink: #102c37;
       --muted: #526873;
@@ -118,205 +119,181 @@
     .map-inset-heading p { max-width:650px; color:#526873; font-size:14px; line-height:1.5; margin:0 0 12px; }
     .inset-tag { flex:none; border:1px solid #b9d3cd; border-radius:18px; padding:6px 10px; font-size:10px; font-weight:800; letter-spacing:.09em; white-space:nowrap; color:#087b73; }
     @media(max-width:600px){.map-inset{padding:16px 12px}.map-inset-heading{flex-direction:column}.inset-tag{margin-bottom:12px}}
+
+    /* Feedback-driven hierarchy / space / accessibility */
+    .context-note { border-left:4px solid #d66b44; background:#fff9ef; padding:14px 18px; margin:10px 0 24px; font:400 14px/1.65 "Barlow",sans-serif; color:#334953; }
+    .context-note strong { font-weight:700; }
+    .conclusion { margin:28px 0 10px; padding:24px 26px; font-size:16px; }
+    .chart-card h3 { line-height:1.22; }
+    .chart-card .chart-frame { min-height:170px; }
+    #chart-acma-waffle { max-width:780px; margin-inline:auto; }
+    #chart-afl-hexbins { min-height:440px; }
+    .chart-footnote a, .viz-label a { text-underline-offset:3px; }
+    @media(max-width:650px) { .chart-card { padding-left:15px; padding-right:15px; } .context-note { padding:12px 14px; } .chart-card h3 { overflow-wrap:break-word; } }
   </style>
 </head>
 <body>
-  <div class="top-rule" aria-hidden="true"></div>
-  <header class="masthead wrap">
-    <div class="brand">Australian <span>Sport / Data</span></div>
-    <div class="course">Monash University<br>FIT3179 · DV2 · 2026</div>
-  </header>
+<div aria-hidden="true" class="top-rule"></div>
+<header class="masthead wrap">
+<div class="brand">Australian <span>Sport / Data</span></div>
+<div class="course">Monash University<br/>FIT3179 · DV2 · 2026</div>
+</header>
+<main class="wrap">
+<section aria-labelledby="page-title" class="hero">
+<div>
+<p class="eyebrow">A data story about sport and screens</p>
+<h1 id="page-title">How Australia <span>Watches</span> Sport.</h1>
+<p class="lede">Exploring who watches Australia's major sporting codes, how broadcasts reach fans, and what happens when supporters head to the stadium.</p>
+<div aria-label="Topics covered" class="tags">
+<span class="tag">AFL</span><span class="tag">NRL</span><span class="tag">Streaming</span><span class="tag">Attendance</span>
+</div>
+</div>
+<aside aria-label="The four questions in this story" class="overview">
+<div class="overview-top">Four questions · one story</div>
+<ol>
+<li>Which sports draw the viewers?</li>
+<li>Where do broadcasts and crowds concentrate?</li>
+<li>How are video-viewing habits changing?</li>
+<li>Are people still going to games?</li>
+</ol>
+</aside>
+</section>
+<div class="status"><strong>In development · Figures 1–6.</strong> 6 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
+<section aria-labelledby="intro-title" class="story-intro">
+<p class="eyebrow">Introduction</p>
+<h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
+<p>Australian sport has two audiences: people watching on screens and people entering stadiums. Start by comparing AFL and NRL television reach, then examine the wider streaming environment, geographic restrictions on live AFL broadcasting and the places where crowds gather. These different measures are labelled separately: an estimated TV viewer, an adult using a video service and a match attendance are not interchangeable.</p>
+</section>
+<section aria-labelledby="audiences-title" class="chapter" id="audiences">
+<div class="chapter-heading">
+<div><span class="chapter-number">01 / AUDIENCES</span><h2 id="audiences-title">What are Australians watching?</h2></div>
+<p>Begin with AFL and NRL: compare the scale and composition of their television audiences.</p>
+</div>
+<div class="chart-card">
+<p class="chart-kicker">Figure 1 / Television audience reach · Interactive sport focus</p>
+<h3>AFL reaches more television viewers than NRL</h3>
+<p class="chart-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover for estimates, or use the sport selector below to emphasise AFL or NRL.</p>
+<div aria-label="Bar chart showing approximately 9.31 million AFL television viewers and 7.6 million NRL television viewers in Australia from July 2025 to June 2026." class="chart-frame" id="chart-audience" role="img">
+</div>
+<p class="chart-insight"><strong>Key finding:</strong> AFL's estimated TV audience was around 1.7 million people larger than NRL's. These are people who watched at least occasionally, not average viewers of a single match.</p>
+<p class="chart-footnote">Source: Roy Morgan Single Source, July 2025–June 2026 (n=59,959; Australians aged 14+). <a href="https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026" rel="noopener noreferrer" target="_blank">AFL report (15 Sep 2026)</a> · <a href="https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026" rel="noopener noreferrer" target="_blank">NRL report (18 Sep 2026)</a>. NRL viewers are rounded to one decimal million in the source.</p>
+</div>
+<p class="viz-label">Figure 1 · Chart created in Vega-Lite · Viewable source specification: <a href="charts/afl_nrl_audience_2026.json">JSON</a> · <a href="data/afl_nrl_tv_2026.csv">CSV dataset</a>.</p>
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 2 / Audience growth by age · Interactive age focus</p>
+<h3>Older age groups led TV audience growth in 2024</h3>
+<p class="chart-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster audience growth. Hover for both years' viewer estimates, or highlight an age group to compare both sports.</p>
+<div aria-label="Heatmap of percentage growth in television audience reach from 2023 to 2024 for AFL and NRL across four age groups. AFL viewers aged 65+ grew 6.5%; NRL viewers aged 65+ grew 6.6%." class="chart-frame" id="chart-age-growth" role="img">
+</div>
+<p class="chart-insight"><strong>Key finding:</strong> The 65+ audience grew fastest for both codes (AFL +6.5%; NRL +6.6%). The slowest growth was among AFL viewers aged 50–64 (+1.0%) and NRL viewers under 35 (+1.9%).</p>
+<p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" rel="noopener noreferrer" target="_blank">Roy Morgan, AFL vs NRL television audiences, 2023–2024</a> (published 18 March 2025), age chart on page 2 of the <a href="https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf" rel="noopener noreferrer" target="_blank">original report</a>. Surveys: Jan–Dec 2023 (n=64,994) and Jan–Dec 2024 (n=64,823); Australians aged 14+. Growth rates are those reported by Roy Morgan. This is a <strong>different period</strong> from Figure 1 (July 2025–June 2026).</p>
+</div>
+<p class="viz-label">Figure 2 created in Vega-Lite · Source specification: <a href="charts/afl_nrl_age_growth_2024.json">JSON</a> · <a href="data/afl_nrl_age_growth_2023_2024.csv">CSV dataset</a>.</p>
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 3 / Gender and television audience reach · Interactive year filter</p>
+<h3>AFL has a larger audience advantage among women</h3>
+<p class="chart-description">Each horizontal connection compares AFL and NRL audience reach for one gender in one year (2023 or 2024). The distance between dots represents AFL's audience advantage. Figures are annual audience estimates, not average viewers per match.</p>
+<div aria-label="Chart legend" class="chart-key"><span><i class="swatch swatch-nrl"></i>NRL</span><span><i class="swatch swatch-afl"></i>AFL</span></div>
+<div aria-label="Dumbbell chart of AFL and NRL television audiences in 2023 and 2024 for Australian men and women aged 14+. AFL leads for both genders, with a larger gap among women." class="chart-frame" id="chart-gender-dumbbell" role="img">
+</div>
+<p class="chart-insight"><strong>Key finding:</strong> In 2024, AFL reached about 1.02 million more women than NRL, compared with about 0.76 million more men. Both sports' estimates increased from 2023 to 2024.</p>
+<p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" rel="noopener noreferrer" target="_blank">Roy Morgan Single Source, AFL vs NRL television viewers by gender, 2023–2024</a> (18 March 2025; chart on page 1). Base: Australians aged 14+. Each sport's estimates include people who watch either occasionally or regularly; some individuals may watch both sports. Distances are differences between overlapping audience populations, not exclusive supporters.</p>
+</div>
+<p class="viz-label">Figure 3 created in Vega-Lite · Source specification: <a href="charts/afl_nrl_gender_dumbbell_2024.json">JSON</a> · <a href="data/afl_nrl_gender_2023_2024.csv">CSV dataset</a>.</p>
+</section>
+<section aria-labelledby="geography-title" class="chapter" id="geography">
+<div class="chapter-heading">
+<div><span class="chapter-number">02 / GEOGRAPHY</span><h2 id="geography-title">Where sport moves across the country.</h2></div>
+<p>Map state-level AFL broadcast access and the physical locations where AFL crowds gather.</p>
+</div>
+<div class="chart-card">
+<p class="chart-kicker">Figure 4 / Broadcasting access · Interactive choropleth</p>
+<h3>Where did live Saturday AFL shift behind a subscription?</h3>
+<p class="chart-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover for its exact figure or use the state selector to highlight a location.</p>
+<div aria-label="Map of Australian states and territories showing 2025 exclusive live Saturday AFL coverage: Victoria, Tasmania and Northern Territory 25 weeks; New South Wales, Queensland and ACT 11 weeks; South Australia and Western Australia nine weeks." class="chart-frame chart-map" id="chart-super-saturday" role="img">
+</div>
+<div aria-label="Coverage comparison" class="map-summary">
+<div><strong>25 weeks</strong><span>Victoria · Tasmania · Northern Territory</span></div>
+<div><strong>11 weeks</strong><span>NSW · Queensland · ACT</span></div>
+<div><strong>9 weeks</strong><span>South Australia · Western Australia</span></div>
+</div>
+<p class="chart-insight"><strong>Key finding:</strong> Victoria, Tasmania and the NT had nearly three times as many weeks of exclusively live Saturday coverage on Fox Footy as SA and WA (25 versus 9). Broadcasting restrictions varied substantially by location.</p>
+<p class="chart-footnote"><strong>What this measures:</strong> weeks in the 2025 broadcast arrangement (including Opening Round), <em>not</em> audience size, matches watched, or the total number of games available on free-to-air. Some locally relevant Saturday matches aired later on Seven/7plus. Source: <a href="https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025" rel="noopener noreferrer" target="_blank">Foxtel Group, Super Saturday LIVE (18 Nov 2024)</a>. Boundaries: simplified GeoJSON adapted from <a href="https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson" rel="noopener noreferrer" target="_blank">Rowan Hogan's Australian states dataset</a> (cartographic representation, not official survey boundaries).</p>
+</div>
+<p class="viz-label">Figure 4 created with Vega-Lite · <a href="charts/afl_super_saturday_choropleth_2025.json">Readable JSON specification</a> · <a href="data/afl_super_saturday_2025.csv">2025 coverage CSV</a> · <a href="data/australia_states_simplified.geojson">State boundary GeoJSON</a>.</p>
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 5 / AFL stadium crowds · Interactive proportional symbols</p>
+<h3>Which AFL stadiums attracted the largest crowds in 2025?</h3>
+<p class="chart-description">Each circle marks an AFL match venue. <strong>Circle area</strong> corresponds to total 2025 crowd attendance (home-and-away matches plus finals). Use the stadium dropdown to locate any of the 18 venues, then hover a circle for its attendance and match count. A Melbourne close-up below separates the overlapping CBD stadiums.</p>
+<div aria-label="Proportional symbol map showing AFL total crowds across 18 Australian stadiums in 2025, led by the Melbourne Cricket Ground with 3,120,416 attendances." class="chart-frame chart-map" id="chart-stadium-crowds" role="img">
+</div>
+<div aria-label="Melbourne stadium close-up" class="map-inset">
+<div class="map-inset-heading">
+<div><h4>Melbourne CBD — closer look</h4><p>MCG and Marvel Stadium are only a few kilometres apart. This high-zoom detail keeps both circles separately hoverable at their mapped locations.</p></div>
+<span class="inset-tag">ZOOMED VIEW</span>
+</div>
+<div aria-label="Close-up proportional symbol map with separately hoverable MCG and Marvel Stadium attendance markers" class="chart-frame" id="chart-melbourne-zoom">
+</div>
+<p class="chart-footnote">Same attendance dataset, with a much closer geographic scale. This is a detail view of Figure 5, not a separate count toward the three required map idioms.</p>
+</div>
+<div aria-label="Major 2025 stadium crowd totals" class="venue-topline">
+<div><strong>3.12m</strong><span>Melbourne Cricket Ground · 51 matches</span></div>
+<div><strong>1.34m</strong><span>Docklands (Marvel Stadium) · 43 matches</span></div>
+<div><strong>1.22m</strong><span>Adelaide Oval · 29 matches</span></div>
+</div>
+<p class="chart-insight"><strong>Key finding:</strong> The MCG alone accounted for approximately <strong>37.8%</strong> of all recorded AFL crowd attendances across 2025. Total attendance across all 18 venues was 8.26 million; these are entries to matches, <em>not</em> unique individuals.</p>
+<p class="chart-footnote">Data source: <a href="https://afltables.com/afl/crowds/2025.html" rel="noopener noreferrer" target="_blank">AFL Tables, Attendances 2025 → By Venue</a>. Stadium location points are approximate; the state boundary map is the simplified GeoJSON previously used in Figure 4. Venues are not adjusted for population or the number of scheduled matches.</p>
+</div>
+<p class="viz-label">Figure 5 created in Vega-Lite · <a href="charts/afl_venue_proportional_symbols_2025.json">National map JSON</a> · <a href="charts/afl_melbourne_stadium_zoom_2025.json">Melbourne inset JSON</a> · <a href="data/afl_venue_attendance_2025.csv">CSV dataset</a>.</p>
+</section><section aria-labelledby="streaming-title" class="chapter" id="streaming">
+<div class="chapter-heading">
+<div><span class="chapter-number">03 / VIEWING HABITS</span><h2 id="streaming-title">The changing television landscape.</h2></div>
+<p>Australian video habits reveal the broader market in which sports broadcasters operate.</p>
+</div>
+<p class="context-note"><strong>Important distinction:</strong> The ACMA charts below describe <em>all video viewing by Australian adults</em>, not sport-specific television audiences. Different media categories can overlap: one person can use several services.</p>
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 6 / Streaming, broadcast and short-form video · Advanced slope chart</p>
+<h3>Broadcast TV recovered in 2025; paid streaming held steady</h3>
+<p class="chart-description">Choose a medium to focus its change between the ACMA 2024 and 2025 adult surveys. The y-axis shows the share of Australians who used each type of video service during the previous seven days, not time spent watching.</p>
+<div aria-label="Broadcast TV recovered in 2025; paid streaming held steady" class="chart-frame" id="chart-acma-slope" role="group"></div>
+<p class="chart-insight"><strong>Key finding:</strong> Traditional free-to-air television rose from 46% to 52% (+6 percentage points), while paid streaming remained at 68% and short-form video fell from 59% to 52% (−7 points).</p>
+<p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA, How we watch and listen to content (March 2026)</a>, executive summary. Base: Australian adults, past seven days. Media types overlap; percentage-point changes are not audience counts.</p>
+</div>
+<p class="viz-label">Figure 6 · Vega-Lite source specification: <a href="charts/acma_media_slope_2024_2025.json">JSON</a> · <a href="data/acma_media_2024_2025.csv">CSV / data</a>.</p>
 
-  <main class="wrap">
-    <section class="hero" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow">A data story about sport and screens</p>
-        <h1 id="page-title">How Australia <span>Watches</span> Sport.</h1>
-        <p class="lede">Exploring who watches Australia's major sporting codes, how broadcasts reach fans, and what happens when supporters head to the stadium.</p>
-        <div class="tags" aria-label="Topics covered">
-          <span class="tag">AFL</span><span class="tag">NRL</span><span class="tag">Streaming</span><span class="tag">Attendance</span>
-        </div>
-      </div>
-      <aside class="overview" aria-label="The four questions in this story">
-        <div class="overview-top">Four questions · one story</div>
-        <ol>
-          <li>Which sports draw the viewers?</li>
-          <li>How is watching changing?</li>
-          <li>Where are the fans?</li>
-          <li>Are people still going to games?</li>
-        </ol>
-      </aside>
-    </section>
 
-    <div class="status"><strong>Project in development.</strong> Figures 1–5 use published sports audience, broadcasting and stadium attendance data. Streaming charts and the third map are in progress.</div>
+</section>
 
-    <section class="story-intro" aria-labelledby="intro-title">
-      <p class="eyebrow">Introduction</p>
-      <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
-      <p>Sports broadcasting brings Australians together across different codes, channels and locations. This project will use published audience, media and attendance data to compare how Australians follow sport — without treating television viewing and attending a match as the same measure.</p>
-    </section>
-
-    <section class="chapter" id="audiences" aria-labelledby="audiences-title">
-      <div class="chapter-heading">
-        <div><span class="chapter-number">01 / AUDIENCES</span><h2 id="audiences-title">What are Australians watching?</h2></div>
-        <p>Begin with AFL and NRL: compare the scale and composition of their television audiences.</p>
-      </div>
-      <div class="chart-card">
-        <p class="chart-kicker">Figure 1 / Television audience reach · Interactive sport focus</p>
-        <h3>AFL reaches more television viewers than NRL</h3>
-        <p class="chart-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover for estimates, or use the sport selector below to emphasise AFL or NRL.</p>
-        <div class="chart-frame" id="chart-audience" role="img" aria-label="Bar chart showing approximately 9.31 million AFL television viewers and 7.6 million NRL television viewers in Australia from July 2025 to June 2026.">
-        </div>
-        <p class="chart-insight"><strong>Key finding:</strong> AFL's estimated TV audience was around 1.7 million people larger than NRL's. These are people who watched at least occasionally, not average viewers of a single match.</p>
-        <p class="chart-footnote">Source: Roy Morgan Single Source, July 2025–June 2026 (n=59,959; Australians aged 14+). <a href="https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026" target="_blank" rel="noopener noreferrer">AFL report (15 Sep 2026)</a> · <a href="https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026" target="_blank" rel="noopener noreferrer">NRL report (18 Sep 2026)</a>. NRL viewers are rounded to one decimal million in the source.</p>
-      </div>
-      <p class="viz-label">Chart created in Vega-Lite · Viewable source specification: <a href="charts/afl_nrl_audience_2026.json">JSON</a> · <a href="data/afl_nrl_tv_2026.csv">CSV dataset</a>.</p>
-      <div class="chart-card" style="margin-top:24px">
-        <p class="chart-kicker">Figure 2 / Audience growth by age · Interactive age focus</p>
-        <h3>Older age groups led TV audience growth in 2024</h3>
-        <p class="chart-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster audience growth. Hover for both years' viewer estimates, or highlight an age group to compare both sports.</p>
-        <div class="chart-frame" id="chart-age-growth" role="img" aria-label="Heatmap of percentage growth in television audience reach from 2023 to 2024 for AFL and NRL across four age groups. AFL viewers aged 65+ grew 6.5%; NRL viewers aged 65+ grew 6.6%.">
-        </div>
-        <p class="chart-insight"><strong>Key finding:</strong> The 65+ audience grew fastest for both codes (AFL +6.5%; NRL +6.6%). The slowest growth was among AFL viewers aged 50–64 (+1.0%) and NRL viewers under 35 (+1.9%).</p>
-        <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" target="_blank" rel="noopener noreferrer">Roy Morgan, AFL vs NRL television audiences, 2023–2024</a> (published 18 March 2025), age chart on page 2 of the <a href="https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf" target="_blank" rel="noopener noreferrer">original report</a>. Surveys: Jan–Dec 2023 (n=64,994) and Jan–Dec 2024 (n=64,823); Australians aged 14+. Growth rates are those reported by Roy Morgan. This is a <strong>different period</strong> from Figure 1 (July 2025–June 2026).</p>
-      </div>
-      <p class="viz-label">Figure 2 created in Vega-Lite · Source specification: <a href="charts/afl_nrl_age_growth_2024.json">JSON</a> · <a href="data/afl_nrl_age_growth_2023_2024.csv">CSV dataset</a>.</p>
-      <div class="chart-card" style="margin-top:24px">
-        <p class="chart-kicker">Figure 3 / Gender and television audience reach · Interactive year filter</p>
-        <h3>AFL has a larger audience advantage among women</h3>
-        <p class="chart-description">Each horizontal connection compares AFL and NRL audience reach for one gender in one year (2023 or 2024). The distance between dots represents AFL's audience advantage. Figures are annual audience estimates, not average viewers per match.</p>
-        <div class="chart-key" aria-label="Chart legend"><span><i class="swatch swatch-nrl"></i>NRL</span><span><i class="swatch swatch-afl"></i>AFL</span></div>
-        <div class="chart-frame" id="chart-gender-dumbbell" role="img" aria-label="Dumbbell chart of AFL and NRL television audiences in 2023 and 2024 for Australian men and women aged 14+. AFL leads for both genders, with a larger gap among women.">
-        </div>
-        <p class="chart-insight"><strong>Key finding:</strong> In 2024, AFL reached about 1.02 million more women than NRL, compared with about 0.76 million more men. Both sports' estimates increased from 2023 to 2024.</p>
-        <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" target="_blank" rel="noopener noreferrer">Roy Morgan Single Source, AFL vs NRL television viewers by gender, 2023–2024</a> (18 March 2025; chart on page 1). Base: Australians aged 14+. Each sport's estimates include people who watch either occasionally or regularly; some individuals may watch both sports. Distances are differences between overlapping audience populations, not exclusive supporters.</p>
-      </div>
-      <p class="viz-label">Figure 3 created in Vega-Lite · Source specification: <a href="charts/afl_nrl_gender_dumbbell_2024.json">JSON</a> · <a href="data/afl_nrl_gender_2023_2024.csv">CSV dataset</a>.</p>
-    </section>
-
-    <section class="chapter" id="streaming" aria-labelledby="streaming-title">
-      <div class="chapter-heading">
-        <div><span class="chapter-number">02 / BROADCASTING</span><h2 id="streaming-title">From television to streaming.</h2></div>
-        <p>Explore viewing habits, changing platforms and the rise of subscription sports services such as Kayo.</p>
-      </div>
-    </section>
-
-    <section class="chapter" id="geography" aria-labelledby="geography-title">
-      <div class="chapter-heading">
-        <div><span class="chapter-number">03 / GEOGRAPHY</span><h2 id="geography-title">Sport across the country.</h2></div>
-        <p>Use different Australian map idioms to investigate broadcasting access and the location of major sporting crowds.</p>
-      </div>
-      <div class="chart-card">
-        <p class="chart-kicker">Figure 4 / Broadcasting access · Interactive choropleth</p>
-        <h3>Where did live Saturday AFL shift behind a subscription?</h3>
-        <p class="chart-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover for its exact figure or use the state selector to highlight a location.</p>
-        <div class="chart-frame chart-map" id="chart-super-saturday" role="img" aria-label="Map of Australian states and territories showing 2025 exclusive live Saturday AFL coverage: Victoria, Tasmania and Northern Territory 25 weeks; New South Wales, Queensland and ACT 11 weeks; South Australia and Western Australia nine weeks.">
-        </div>
-        <div class="map-summary" aria-label="Coverage comparison">
-          <div><strong>25 weeks</strong><span>Victoria · Tasmania · Northern Territory</span></div>
-          <div><strong>11 weeks</strong><span>NSW · Queensland · ACT</span></div>
-          <div><strong>9 weeks</strong><span>South Australia · Western Australia</span></div>
-        </div>
-        <p class="chart-insight"><strong>Key finding:</strong> Victoria, Tasmania and the NT had nearly three times as many weeks of exclusively live Saturday coverage on Fox Footy as SA and WA (25 versus 9). Broadcasting restrictions varied substantially by location.</p>
-        <p class="chart-footnote"><strong>What this measures:</strong> weeks in the 2025 broadcast arrangement (including Opening Round), <em>not</em> audience size, matches watched, or the total number of games available on free-to-air. Some locally relevant Saturday matches aired later on Seven/7plus. Source: <a href="https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025" target="_blank" rel="noopener noreferrer">Foxtel Group, Super Saturday LIVE (18 Nov 2024)</a>. Boundaries: simplified GeoJSON adapted from <a href="https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson" target="_blank" rel="noopener noreferrer">Rowan Hogan's Australian states dataset</a> (cartographic representation, not official survey boundaries).</p>
-      </div>
-      <p class="viz-label">Figure 4 created with Vega-Lite · <a href="charts/afl_super_saturday_choropleth_2025.json">Readable JSON specification</a> · <a href="data/afl_super_saturday_2025.csv">2025 coverage CSV</a> · <a href="data/australia_states_simplified.geojson">State boundary GeoJSON</a>.</p>
-      <div class="chart-card" style="margin-top:24px">
-        <p class="chart-kicker">Figure 5 / AFL stadium crowds · Interactive proportional symbols</p>
-        <h3>Which AFL stadiums attracted the largest crowds in 2025?</h3>
-        <p class="chart-description">Each circle marks an AFL match venue. <strong>Circle area</strong> corresponds to total 2025 crowd attendance (home-and-away matches plus finals). Use the stadium dropdown to locate any of the 18 venues, then hover a circle for its attendance and match count. A Melbourne close-up below separates the overlapping CBD stadiums.</p>
-        <div class="chart-frame chart-map" id="chart-stadium-crowds" role="img" aria-label="Proportional symbol map showing AFL total crowds across 18 Australian stadiums in 2025, led by the Melbourne Cricket Ground with 3,120,416 attendances.">
-        </div>
-        <div class="map-inset" aria-label="Melbourne stadium close-up">
-          <div class="map-inset-heading">
-            <div><h4>Melbourne CBD — closer look</h4><p>MCG and Marvel Stadium are only a few kilometres apart. This high-zoom detail keeps both circles separately hoverable at their mapped locations.</p></div>
-            <span class="inset-tag">ZOOMED VIEW</span>
-          </div>
-          <div class="chart-frame" id="chart-melbourne-zoom" aria-label="Close-up proportional symbol map with separately hoverable MCG and Marvel Stadium attendance markers">
-          </div>
-          <p class="chart-footnote">Same attendance dataset, with a much closer geographic scale. This is a detail view of Figure 5, not a separate count toward the three required map idioms.</p>
-        </div>
-        <div class="venue-topline" aria-label="Major 2025 stadium crowd totals">
-          <div><strong>3.12m</strong><span>Melbourne Cricket Ground · 51 matches</span></div>
-          <div><strong>1.34m</strong><span>Docklands (Marvel Stadium) · 43 matches</span></div>
-          <div><strong>1.22m</strong><span>Adelaide Oval · 29 matches</span></div>
-        </div>
-        <p class="chart-insight"><strong>Key finding:</strong> The MCG alone accounted for approximately <strong>37.8%</strong> of all recorded AFL crowd attendances across 2025. Total attendance across all 18 venues was 8.26 million; these are entries to matches, <em>not</em> unique individuals.</p>
-        <p class="chart-footnote">Data source: <a href="https://afltables.com/afl/crowds/2025.html" target="_blank" rel="noopener noreferrer">AFL Tables, Attendances 2025 → By Venue</a>. Stadium location points are approximate; the state boundary map is the simplified GeoJSON previously used in Figure 4. Venues are not adjusted for population or the number of scheduled matches.</p>
-      </div>
-      <p class="viz-label">Figure 5 created in Vega-Lite · <a href="charts/afl_venue_proportional_symbols_2025.json">National map JSON</a> · <a href="charts/afl_melbourne_stadium_zoom_2025.json">Melbourne inset JSON</a> · <a href="data/afl_venue_attendance_2025.csv">CSV dataset</a>.</p>
-    </section>
-
-    <section class="chapter" id="attendance" aria-labelledby="attendance-title">
-      <div class="chapter-heading">
-        <div><span class="chapter-number">04 / ATTENDANCE</span><h2 id="attendance-title">The stadium experience.</h2></div>
-        <p>See how live-match crowds have changed over time, alongside changes in the way people can watch sport at home.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-inner wrap">
-      <div>
-        <h2>Australian Sports Broadcasting</h2>
-        <p>Sources: Figures 1–3 use Roy Morgan Single Source surveys (2023–2024 and 2025–2026). Figure 4 uses Foxtel Group 2025 broadcasting arrangements; Figure 5 uses AFL Tables stadium crowds. Detailed source links appear below each figure. Further sections will use ACMA.</p>
-      </div>
-      <div class="footer-meta"><strong>Ryan Mohan Li</strong><br>FIT3179 Data Visualisation 2<br>October 2026</div>
-    </div>
-  </footer>
-  <!-- Vega-Lite libraries; data and JSON specs are kept in separate repository files. -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-  <script>
-    vegaEmbed('#chart-audience', 'charts/afl_nrl_audience_2026.json', {
-      actions: false,
-      renderer: 'svg'
-    }).catch(function(error) {
-      console.error('Could not display audience chart:', error);
-      document.getElementById('chart-audience').innerHTML =
-        '<p class="error-text">Chart could not load. Check that the data and charts folders are uploaded to GitHub.</p>';
-    });
-    vegaEmbed('#chart-age-growth', 'charts/afl_nrl_age_growth_2024.json', {
-      actions: false,
-      renderer: 'svg'
-    }).catch(function(error) {
-      console.error('Could not display audience growth chart:', error);
-      document.getElementById('chart-age-growth').innerHTML =
-        '<p class="error-text">Heatmap could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
-    });
-    vegaEmbed('#chart-gender-dumbbell', 'charts/afl_nrl_gender_dumbbell_2024.json', {
-      actions: false,
-      renderer: 'svg'
-    }).catch(function(error) {
-      console.error('Could not display gender dumbbell chart:', error);
-      document.getElementById('chart-gender-dumbbell').innerHTML =
-        '<p class="error-text">Dumbbell chart could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
-    });
-    vegaEmbed('#chart-super-saturday', 'charts/afl_super_saturday_choropleth_2025.json', {
-      actions: false,
-      renderer: 'svg'
-    }).catch(function(error) {
-      console.error('Could not display Australian broadcasting map:', error);
-      document.getElementById('chart-super-saturday').innerHTML =
-        '<p class="error-text">Map could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
-    });
-    vegaEmbed('#chart-melbourne-zoom', 'charts/afl_melbourne_stadium_zoom_2025.json', {
-      actions: false,
-      renderer: 'svg'
-    }).catch(function(error) {
-      console.error('Could not display Melbourne close-up:', error);
-      document.getElementById('chart-melbourne-zoom').innerHTML =
-        '<p class="error-text">Melbourne close-up could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
-    });
-    vegaEmbed('#chart-stadium-crowds', 'charts/afl_venue_proportional_symbols_2025.json', {
-      actions: false,
-      renderer: 'svg'
-    }).catch(function(error) {
-      console.error('Could not display AFL stadium attendance map:', error);
-      document.getElementById('chart-stadium-crowds').innerHTML =
-        '<p class="error-text">Venue map could not load: ' + String(error.message || error).replace(/</g, '&lt;') + '</p>';
-    });
-  </script>
+</main>
+<footer>
+<div class="footer-inner wrap">
+<div>
+<h2>Australian Sports Broadcasting</h2>
+<p>Roy Morgan, Foxtel Group, ACMA and AFL Tables provide the published figures. Each chart includes its own source and definitions.</p>
+</div>
+<div class="footer-meta"><strong>Ryan Mohan Li</strong><br/>FIT3179 Data Visualisation 2<br/>October 2026</div>
+</div>
+</footer>
+<!-- Vega-Lite libraries; data and JSON specs are kept in separate repository files. -->
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script>
+  function showVegaChart(id, file) {
+    vegaEmbed('#' + id, 'charts/' + file, {actions:false, renderer:'svg'})
+      .catch(function(error) {
+        console.error('Chart failed: '+id, error);
+        var element = document.getElementById(id);
+        if (element) element.textContent = 'Could not load chart: ' + (error.message || String(error));
+      });
+  }
+  showVegaChart("chart-audience", "afl_nrl_audience_2026.json");
+  showVegaChart("chart-age-growth", "afl_nrl_age_growth_2024.json");
+  showVegaChart("chart-gender-dumbbell", "afl_nrl_gender_dumbbell_2024.json");
+  showVegaChart("chart-super-saturday", "afl_super_saturday_choropleth_2025.json");
+  showVegaChart("chart-stadium-crowds", "afl_venue_proportional_symbols_2025.json");
+  showVegaChart("chart-acma-slope", "acma_media_slope_2024_2025.json");
+  showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
+</script>
 </body>
 </html>
