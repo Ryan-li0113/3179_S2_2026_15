@@ -1,0 +1,98 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A third distinct map idiom: equal-area hexagonal bins, each containing the total crowd attendance from AFL venues in that area. Hexagons are 175-km radius in Australian Albers equal-area metres, mapped back to geographic coordinates. Attendance recorded by AFL Tables in 2025, not unique individuals.",
+  "width": "container",
+  "height": 500,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_states_simplified.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#edf2f0",
+        "stroke": "#a8c0bc",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "data/afl_hexbin_2025.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#fff",
+        "strokeWidth": 2,
+        "fillOpacity": 0.9
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.attendance",
+          "type": "quantitative",
+          "title": "Total attendance in hex",
+          "scale": {
+            "scheme": "tealblues",
+            "type": "sqrt"
+          },
+          "legend": {
+            "orient": "bottom",
+            "format": ".2s"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.venue_count",
+            "type": "quantitative",
+            "title": "Venues in bin"
+          },
+          {
+            "field": "properties.attendance",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "2025 crowd entries"
+          },
+          {
+            "field": "properties.venues",
+            "type": "nominal",
+            "title": "Stadium(s)"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#102c37",
+      "titleColor": "#526873",
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873"
+    }
+  }
+}
