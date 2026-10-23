@@ -6,5 +6,6 @@ Seven sequential, reviewable GitHub commits:
 - **Viz 8:** Hexagonal bin map of AFL stadium crowd concentration · `Add viz 8 AFL attendance hexbin map`
 - **Viz 9:** AFL 2015–26 season-phase attendance heatmap · `Add viz 9 AFL season crowd intensity heatmap`
 - **Viz 10:** AFL 2024–25 crowd change waterfall · `Add viz 10 AFL 2024-25 crowd change waterfall`
+- **Viz 11:** Complete 18-venue 2025 crowd treemap · `Add viz 11 complete AFL venue treemap`
 
-Current version: **10/12 figures**
+Current version: **11/12 figures**

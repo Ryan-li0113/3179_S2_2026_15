@@ -39,6 +39,10 @@ Author: Ryan Li · University assignment · October 2026.
 - AFL Tables annual totals: 2024 8,286,771; 2025 8,257,027 event entries.
 - Home-and-away change −97,161, finals change +67,417 = net −29,744 entries. The horizontal bars are DELTAS, not raw annual totals.
 
+## Figure 11 — Complete 2025 stadium treemap
+- AFL Tables 18 stadiums, attendance total 8,257,027 (100% of venue entries). No missing Other category.
+- Squarified rectangle areas are proportional to each venue total; MCG share is 37.8%. Entries are not unique spectators.
+
 ## Code and attribution
 - Chart specifications: Vega-Lite v5 JSON in charts/. Derived CSV/GeoJSON datasets in data/.
 - AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.

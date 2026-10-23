@@ -158,7 +158,7 @@
 </ol>
 </aside>
 </section>
-<div class="status"><strong>In development · Figures 1–10.</strong> 10 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
+<div class="status"><strong>In development · Figures 1–11.</strong> 11 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
@@ -301,8 +301,15 @@
 <p class="chart-footnote">Source: <a href="https://www.afltables.com/afl/crowds/summary.html">AFL Tables, season totals for 2024 and 2025</a>. All figures are event entries rather than unique people. The net difference uses identical scope and source for both seasons.</p>
 </div>
 <p class="viz-label">Figure 10 · Vega-Lite source specification: <a href="charts/afl_crowd_waterfall_2024_2025.json">JSON</a> · <a href="data/afl_crowd_change_waterfall_2024_2025.csv">CSV / data</a>.</p>
-
-
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 11 / A complete attendance whole · Advanced treemap</p>
+<h3>The MCG accounted for nearly 38% of 2025 AFL crowds</h3>
+<p class="chart-description">The treemap represents <strong>all 18 AFL venues</strong> in AFL Tables, so the areas form a complete whole. Each tile’s area is proportional to its total 2025 attendance; small venues remain represented even when they are too narrow to label.</p>
+<div aria-label="The MCG accounted for nearly 38% of 2025 AFL crowds" class="chart-frame" id="chart-venue-treemap" role="group"></div>
+<p class="chart-insight"><strong>Key finding:</strong> The MCG accounted for 3,120,416 of 8,257,027 crowd entries (37.8%). All remaining venues together form the other 62.2%, avoiding the misleading incomplete-whole problem identified in DV1.</p>
+<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, attendances by venue for 2025</a>. The same 18 venues and total are used in Figures 7, 8, 11 and 12. Hover a tile for venue and exact share.</p>
+</div>
+<p class="viz-label">Figure 11 · Vega-Lite source specification: <a href="charts/afl_venue_treemap_2025.json">JSON</a> · <a href="data/afl_venue_treemap_2025.csv">CSV / data</a>.</p>
 
 
 
@@ -340,6 +347,7 @@
   showVegaChart("chart-afl-hexbins", "afl_hexbin_crowds_2025.json");
   showVegaChart("chart-attendance-heatmap", "afl_attendance_heatmap_2015_2026.json");
   showVegaChart("chart-crowd-waterfall", "afl_crowd_waterfall_2024_2025.json");
+  showVegaChart("chart-venue-treemap", "afl_venue_treemap_2025.json");
   showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
 </script>
 </body>
