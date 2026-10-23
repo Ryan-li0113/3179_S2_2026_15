@@ -1,0 +1,19 @@
+venue,city,state,attendance,share_pct,x0,y0,x1,y1,is_mcg,show_label,games
+Melbourne Cricket Ground (MCG),Melbourne,VIC,3120416,37.79,0,0,377.91,800.0,1,1,51
+Docklands (Marvel Stadium),Melbourne,VIC,1340134,16.23,377.91,0,703.131,399.242,0,1,43
+Adelaide Oval,Adelaide,SA,1223306,14.82,703.131,0,1000.0,399.242,0,1,29
+Perth Stadium (Optus Stadium),Perth,WA,1060590,12.84,377.91,399.242,634.319,800.0,0,1,24
+Sydney Cricket Ground (SCG),Sydney,NSW,377046,4.57,634.319,399.242,818.094,598.023,0,1,11
+Gabba,Brisbane,QLD,373211,4.52,818.094,399.242,1000.0,598.023,0,1,12
+Kardinia Park (GMHBA Stadium),Geelong,VIC,301084,3.65,634.319,598.023,778.746,800.0,0,1,10
+Carrara (People First Stadium),Gold Coast,QLD,150339,1.82,778.746,598.023,908.391,710.375,0,1,9
+Sydney Showground (ENGIE Stadium),Sydney,NSW,119927,1.45,778.746,710.375,908.391,800.0,0,1,9
+York Park (UTAS Stadium),Launceston,TAS,55209,0.67,908.391,598.023,1000.0,656.413,0,0,4
+Manuka Oval,Canberra,ACT,32992,0.4,908.391,656.413,963.221,714.711,0,0,3
+Marrara Oval (TIO Stadium),Darwin,NT,22130,0.27,963.221,656.413,1000.0,714.711,0,0,2
+Barossa Park,Lyndoch,SA,19345,0.23,908.391,714.711,951.463,758.226,0,0,2
+Bellerive Oval,Hobart,TAS,18571,0.22,908.391,758.226,951.463,800.0,0,0,2
+Norwood Oval,Adelaide,SA,18477,0.22,951.463,714.711,1000.0,751.593,0,0,2
+Hands Oval,Bunbury,WA,12715,0.15,951.463,751.593,976.912,800.0,0,0,1
+Traeger Park,Alice Springs,NT,6721,0.08,976.912,751.593,1000.0,779.798,0,0,1
+Eureka Stadium (Mars Stadium),Ballarat,VIC,4814,0.06,976.912,779.798,1000.0,800.0,0,0,1
