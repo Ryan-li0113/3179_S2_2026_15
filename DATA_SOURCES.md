@@ -22,6 +22,10 @@ Author: Ryan Li · University assignment · October 2026.
 - 2024 → 2025, past-seven-day use among adults: paid streaming 68% → 68%; FTA broadcast 46% → 52%; short video 59% → 52%; FTA catch-up 44% → 44%.
 - This is ALL video, NOT AFL- or NRL-specific. Media users can overlap across categories. Changes measured in percentage points.
 
+## Figure 7 — Interactive 100-cell viewing waffle
+- Derived deterministically from published ACMA 2025 percentages above, each of 100 squares is one percentage point, not a survey respondent.
+- The selection shows one medium at a time. The complement is the population not using that medium; do not sum media categories.
+
 ## Code and attribution
 - Chart specifications: Vega-Lite v5 JSON in charts/. Derived CSV/GeoJSON datasets in data/.
 - AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.

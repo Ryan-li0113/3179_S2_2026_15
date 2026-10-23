@@ -158,7 +158,7 @@
 </ol>
 </aside>
 </section>
-<div class="status"><strong>In development · Figures 1–6.</strong> 6 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
+<div class="status"><strong>In development · Figures 1–7.</strong> 7 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
@@ -260,8 +260,15 @@
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA, How we watch and listen to content (March 2026)</a>, executive summary. Base: Australian adults, past seven days. Media types overlap; percentage-point changes are not audience counts.</p>
 </div>
 <p class="viz-label">Figure 6 · Vega-Lite source specification: <a href="charts/acma_media_slope_2024_2025.json">JSON</a> · <a href="data/acma_media_2024_2025.csv">CSV / data</a>.</p>
-
-
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 7 / Weekly video uptake · Advanced waffle chart</p>
+<h3>More than two-thirds used paid video streaming</h3>
+<p class="chart-description">Select one media category to display its 2025 reach as a 100-cell grid. Each cell equals <strong>one percentage point of adults</strong>, not an individual respondent. The pale squares represent adults outside the selected category.</p>
+<div aria-label="More than two-thirds used paid video streaming" class="chart-frame" id="chart-acma-waffle" role="group"></div>
+<p class="chart-insight"><strong>Key finding:</strong> 68% of Australian adults used a paid streaming service in the previous week. That does not mean 68% watched AFL or NRL, and percentages for different video services must not be added.</p>
+<p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA media consumption survey, 2025 results (published March 2026)</a>. All video viewing, not sports-specific; 100 squares are a visual encoding of the published percentage, not raw respondent records.</p>
+</div>
+<p class="viz-label">Figure 7 · Vega-Lite source specification: <a href="charts/acma_media_waffle_2025.json">JSON</a> · <a href="data/acma_waffle_2025.csv">CSV / data</a>.</p>
 </section>
 
 </main>
@@ -293,6 +300,7 @@
   showVegaChart("chart-super-saturday", "afl_super_saturday_choropleth_2025.json");
   showVegaChart("chart-stadium-crowds", "afl_venue_proportional_symbols_2025.json");
   showVegaChart("chart-acma-slope", "acma_media_slope_2024_2025.json");
+  showVegaChart("chart-acma-waffle", "acma_media_waffle_2025.json");
   showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
 </script>
 </body>
