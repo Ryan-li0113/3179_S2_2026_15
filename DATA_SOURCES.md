@@ -35,6 +35,10 @@ Author: Ryan Li · University assignment · October 2026.
 - AFL Tables season totals and match counts: https://www.afltables.com/afl/crowds/summary.html
 - The color scale encodes AVERAGE attendance per match for each season/phase; seasonal totals have differing number of games. 2020–21 COVID impacts matter.
 
+## Figure 10 — 2024 to 2025 crowd waterfall
+- AFL Tables annual totals: 2024 8,286,771; 2025 8,257,027 event entries.
+- Home-and-away change −97,161, finals change +67,417 = net −29,744 entries. The horizontal bars are DELTAS, not raw annual totals.
+
 ## Code and attribution
 - Chart specifications: Vega-Lite v5 JSON in charts/. Derived CSV/GeoJSON datasets in data/.
 - AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.

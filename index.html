@@ -158,7 +158,7 @@
 </ol>
 </aside>
 </section>
-<div class="status"><strong>In development · Figures 1–9.</strong> 9 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
+<div class="status"><strong>In development · Figures 1–10.</strong> 10 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
@@ -292,8 +292,15 @@
 <p class="chart-footnote">Source: <a href="https://www.afltables.com/afl/crowds/summary.html">AFL Tables, attendances by season (2015–2026)</a>. Figures are recorded match entries divided by the number of games with attendance data; finals and home-and-away values are separate.</p>
 </div>
 <p class="viz-label">Figure 9 · Vega-Lite source specification: <a href="charts/afl_attendance_heatmap_2015_2026.json">JSON</a> · <a href="data/afl_season_phase_attendance_2015_2026.csv">CSV / data</a>.</p>
-
-
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 10 / Explaining a year-on-year change · Advanced waterfall</p>
+<h3>How did 2025 finish 29,744 attendances below 2024?</h3>
+<p class="chart-description">Waterfall bars show the <strong>change</strong> in crowd entries from 2024 to 2025, not the total number of spectators. Home-and-away crowds declined while finals crowds partly offset that fall.</p>
+<div aria-label="How did 2025 finish 29,744 attendances below 2024?" class="chart-frame" id="chart-crowd-waterfall" role="group"></div>
+<p class="chart-insight"><strong>Key finding:</strong> Home-and-away attendances decreased by 97,161 while finals increased by 67,417, giving a net decrease of 29,744 entries from 8,286,771 in 2024 to 8,257,027 in 2025.</p>
+<p class="chart-footnote">Source: <a href="https://www.afltables.com/afl/crowds/summary.html">AFL Tables, season totals for 2024 and 2025</a>. All figures are event entries rather than unique people. The net difference uses identical scope and source for both seasons.</p>
+</div>
+<p class="viz-label">Figure 10 · Vega-Lite source specification: <a href="charts/afl_crowd_waterfall_2024_2025.json">JSON</a> · <a href="data/afl_crowd_change_waterfall_2024_2025.csv">CSV / data</a>.</p>
 
 
 
@@ -332,6 +339,7 @@
   showVegaChart("chart-acma-waffle", "acma_media_waffle_2025.json");
   showVegaChart("chart-afl-hexbins", "afl_hexbin_crowds_2025.json");
   showVegaChart("chart-attendance-heatmap", "afl_attendance_heatmap_2015_2026.json");
+  showVegaChart("chart-crowd-waterfall", "afl_crowd_waterfall_2024_2025.json");
   showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
 </script>
 </body>
