@@ -158,7 +158,7 @@
 </ol>
 </aside>
 </section>
-<div class="status"><strong>In development · Figures 1–7.</strong> 7 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
+<div class="status"><strong>In development · Figures 1–8.</strong> 8 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
@@ -270,7 +270,29 @@
 </div>
 <p class="viz-label">Figure 7 · Vega-Lite source specification: <a href="charts/acma_media_waffle_2025.json">JSON</a> · <a href="data/acma_waffle_2025.csv">CSV / data</a>.</p>
 </section>
+<section aria-labelledby="attendance-title" class="chapter" id="attendance">
+<div class="chapter-heading">
+<div><span class="chapter-number">04 / ATTENDANCE</span><h2 id="attendance-title">What changes when fans go to games?</h2></div>
+<p>From the national concentration of stadium visits to annual changes in crowd sizes and venue rankings.</p>
+</div><div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 8 / Crowd concentration · Advanced hexagonal bin map</p>
+<h3>Nearby venues combine into nine attendance clusters</h3>
+<p class="chart-description">Instead of drawing one circle per stadium, this map groups all 18 venues into equal-sized, approximately 175-km-radius hexagonal bins. Colour represents combined 2025 attendance for venues in the same bin; hover a hexagon to see its venues and total entries. This is a distinct <strong>bin map</strong>, not another proportional symbol map.</p>
+<div aria-label="Nearby venues combine into nine attendance clusters" class="chart-frame" id="chart-afl-hexbins" role="group"></div>
+<p class="chart-insight"><strong>Key finding:</strong> A Melbourne-area hexagon containing the MCG, Marvel Stadium and another nearby venue has approximately 4.76 million entries. This aggregation removes marker overlap and reveals the combined concentration, but deliberately hides differences within each hexagon.</p>
+<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 attendances by venue</a>. Calculated from the same 18 stadium records as Figure 5; all bins together total 8,257,027 crowd entries. Equal-area binning in Australian Albers projection; converted back to geographic coordinates for display. Bin boundaries are analytical, not administrative.</p>
+</div><p class="viz-label">Figure 8 · Vega-Lite source specification: <a href="charts/afl_hexbin_crowds_2025.json">JSON</a> · <a href="data/afl_hexbin_2025.geojson">CSV / data</a>.</p>
+<p class="context-note"><strong>Counting rule:</strong> Each attendance is one entry to a match. A person attending twice is counted twice. We use AFL Tables for all the venue and season figures so totals are internally consistent.</p>
 
+
+
+
+
+
+
+
+
+</section>
 </main>
 <footer>
 <div class="footer-inner wrap">
@@ -301,6 +323,7 @@
   showVegaChart("chart-stadium-crowds", "afl_venue_proportional_symbols_2025.json");
   showVegaChart("chart-acma-slope", "acma_media_slope_2024_2025.json");
   showVegaChart("chart-acma-waffle", "acma_media_waffle_2025.json");
+  showVegaChart("chart-afl-hexbins", "afl_hexbin_crowds_2025.json");
   showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
 </script>
 </body>

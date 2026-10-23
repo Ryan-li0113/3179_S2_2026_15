@@ -26,6 +26,11 @@ Author: Ryan Li · University assignment · October 2026.
 - Derived deterministically from published ACMA 2025 percentages above, each of 100 squares is one percentage point, not a survey respondent.
 - The selection shows one medium at a time. The complement is the population not using that medium; do not sum media categories.
 
+## Figure 8 — AFL venue attendance hexagonal bin map
+- AFL Tables 2025 18 venues, same source as Figure 5.
+- Venue longitude/latitude projected to Australian Albers EPSG:3577, binned at radius 175 km, attendance summed per bin, and geometries reprojected to EPSG:4326.
+- Nine equal-area spatial bins total 8,257,027 entries; each venue assigned to one bin. Boundaries are analytical, not state boundaries.
+
 ## Code and attribution
 - Chart specifications: Vega-Lite v5 JSON in charts/. Derived CSV/GeoJSON datasets in data/.
 - AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.
