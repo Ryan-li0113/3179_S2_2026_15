@@ -1,0 +1,163 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Waterfall decomposition of the difference between 2024 and 2025 AFL Tables league-wide crowds: total 2024 8,286,771, total 2025 8,257,027. Bars show CHANGES in attendances, not total crowd level. Home-and-away decrease 97,161, finals increase 67,417, net decrease 29,744.",
+  "width": "container",
+  "height": 310,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": {
+    "url": "data/afl_crowd_change_waterfall_2024_2025.csv"
+  },
+  "transform": [
+    {
+      "calculate": "min(datum.start,datum.end)",
+      "as": "lo"
+    },
+    {
+      "calculate": "max(datum.start,datum.end)",
+      "as": "hi"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          3
+        ],
+        "color": "#a8b9b5"
+      },
+      "encoding": {
+        "y": {
+          "datum": 0
+        },
+        "x": {
+          "datum": "Home and away"
+        },
+        "x2": {
+          "datum": "Net change"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "size": 105,
+        "cornerRadius": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "component",
+          "type": "nominal",
+          "sort": [
+            "Home and away",
+            "Finals",
+            "Net change"
+          ],
+          "axis": {
+            "title": null,
+            "labelAngle": 0,
+            "labelFontSize": 12,
+            "labelLimit": 180
+          }
+        },
+        "y": {
+          "field": "lo",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -115000,
+              75000
+            ]
+          },
+          "axis": {
+            "title": "Change in crowd entries vs 2024",
+            "labelExpr": "format(datum.value/1000, ',.0f') + 'k'"
+          }
+        },
+        "y2": {
+          "field": "hi"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.change < 0",
+            "value": "#d66b44"
+          },
+          "value": "#087b73"
+        },
+        "tooltip": [
+          {
+            "field": "component",
+            "title": "Component",
+            "type": "nominal"
+          },
+          {
+            "field": "change",
+            "title": "Attendance change",
+            "type": "quantitative",
+            "format": "+,.0f"
+          },
+          {
+            "field": "note",
+            "title": "Interpretation",
+            "type": "nominal"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "dy": -13
+      },
+      "encoding": {
+        "x": {
+          "field": "component",
+          "type": "nominal",
+          "sort": [
+            "Home and away",
+            "Finals",
+            "Net change"
+          ],
+          "axis": null
+        },
+        "y": {
+          "field": "hi",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        },
+        "color": {
+          "value": "#102c37"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#102c37",
+      "titleColor": "#526873",
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873"
+    }
+  }
+}
