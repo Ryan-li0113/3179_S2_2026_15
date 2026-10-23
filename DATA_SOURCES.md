@@ -31,6 +31,10 @@ Author: Ryan Li · University assignment · October 2026.
 - Venue longitude/latitude projected to Australian Albers EPSG:3577, binned at radius 175 km, attendance summed per bin, and geometries reprojected to EPSG:4326.
 - Nine equal-area spatial bins total 8,257,027 entries; each venue assigned to one bin. Boundaries are analytical, not state boundaries.
 
+## Figure 9 — Home-and-away versus finals intensity (2015–26)
+- AFL Tables season totals and match counts: https://www.afltables.com/afl/crowds/summary.html
+- The color scale encodes AVERAGE attendance per match for each season/phase; seasonal totals have differing number of games. 2020–21 COVID impacts matter.
+
 ## Code and attribution
 - Chart specifications: Vega-Lite v5 JSON in charts/. Derived CSV/GeoJSON datasets in data/.
 - AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.

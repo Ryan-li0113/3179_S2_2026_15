@@ -158,7 +158,7 @@
 </ol>
 </aside>
 </section>
-<div class="status"><strong>In development · Figures 1–8.</strong> 8 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
+<div class="status"><strong>In development · Figures 1–9.</strong> 9 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
@@ -283,8 +283,15 @@
 <p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 attendances by venue</a>. Calculated from the same 18 stadium records as Figure 5; all bins together total 8,257,027 crowd entries. Equal-area binning in Australian Albers projection; converted back to geographic coordinates for display. Bin boundaries are analytical, not administrative.</p>
 </div><p class="viz-label">Figure 8 · Vega-Lite source specification: <a href="charts/afl_hexbin_crowds_2025.json">JSON</a> · <a href="data/afl_hexbin_2025.geojson">CSV / data</a>.</p>
 <p class="context-note"><strong>Counting rule:</strong> Each attendance is one entry to a match. A person attending twice is counted twice. We use AFL Tables for all the venue and season figures so totals are internally consistent.</p>
-
-
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 9 / Match-day intensity · Advanced season heatmap</p>
+<h3>Finals typically draw larger crowds per match</h3>
+<p class="chart-description">Each cell shows <strong>average crowd per game</strong>, not season total. Comparing per-match averages makes the 9–11 finals games more comparable with the much larger home-and-away schedule. The 2020–21 pandemic affected attendance.</p>
+<div aria-label="Finals typically draw larger crowds per match" class="chart-frame" id="chart-attendance-heatmap" role="group"></div>
+<p class="chart-insight"><strong>Key finding:</strong> In 2026, finals averaged approximately 68,751 spectators per game versus 37,551 for home-and-away games. COVID-related disruption in 2020–21 is visible in both phases.</p>
+<p class="chart-footnote">Source: <a href="https://www.afltables.com/afl/crowds/summary.html">AFL Tables, attendances by season (2015–2026)</a>. Figures are recorded match entries divided by the number of games with attendance data; finals and home-and-away values are separate.</p>
+</div>
+<p class="viz-label">Figure 9 · Vega-Lite source specification: <a href="charts/afl_attendance_heatmap_2015_2026.json">JSON</a> · <a href="data/afl_season_phase_attendance_2015_2026.csv">CSV / data</a>.</p>
 
 
 
@@ -324,6 +331,7 @@
   showVegaChart("chart-acma-slope", "acma_media_slope_2024_2025.json");
   showVegaChart("chart-acma-waffle", "acma_media_waffle_2025.json");
   showVegaChart("chart-afl-hexbins", "afl_hexbin_crowds_2025.json");
+  showVegaChart("chart-attendance-heatmap", "afl_attendance_heatmap_2015_2026.json");
   showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
 </script>
 </body>
