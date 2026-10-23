@@ -1,0 +1,178 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "ACMA 2024 to 2025 change in weekly share of Australian adults using each media type. Lines represent percentage change for each overlapping media category. Viewers can use multiple services. Selector focuses one line.",
+  "width": "container",
+  "height": 350,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": {
+    "url": "data/acma_media_2024_2025.csv"
+  },
+  "params": [
+    {
+      "name": "focusMedia",
+      "value": "All categories",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All categories",
+          "Paid streaming",
+          "Broadcast FTA TV",
+          "Short-form online video",
+          "Catch-up FTA TV"
+        ],
+        "name": "Highlight category: "
+      }
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "sort": [
+        2024,
+        2025
+      ],
+      "axis": {
+        "title": "ACMA survey year",
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "share_pct",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          40,
+          75
+        ]
+      },
+      "axis": {
+        "title": "Adults watching in the previous week (%)",
+        "values": [
+          40,
+          45,
+          50,
+          55,
+          60,
+          65,
+          70,
+          75
+        ],
+        "labelExpr": "datum.value+'%'"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3.5,
+        "point": {
+          "filled": true,
+          "size": 125
+        }
+      },
+      "encoding": {
+        "detail": {
+          "field": "media"
+        },
+        "color": {
+          "field": "media",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Paid streaming",
+              "Broadcast FTA TV",
+              "Short-form online video",
+              "Catch-up FTA TV"
+            ],
+            "range": [
+              "#087b73",
+              "#d66b44",
+              "#526873",
+              "#b69d78"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "title": null
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "focusMedia == 'All categories' || datum.media == focusMedia",
+            "value": 1
+          },
+          "value": 0.14
+        },
+        "tooltip": [
+          {
+            "field": "media",
+            "type": "nominal",
+            "title": "Medium"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "share_pct",
+            "type": "quantitative",
+            "title": "Weekly reach (%)",
+            "format": ".0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "dx": 0,
+        "dy": -12
+      },
+      "encoding": {
+        "text": {
+          "field": "share_pct",
+          "type": "quantitative",
+          "format": ".0f"
+        },
+        "color": {
+          "value": "#102c37"
+        },
+        "opacity": {
+          "condition": {
+            "test": "focusMedia == 'All categories' || datum.media == focusMedia",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#102c37",
+      "titleColor": "#526873",
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873"
+    }
+  }
+}
