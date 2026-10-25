@@ -13,18 +13,7 @@
   "params": [
     {
       "name": "focusMedia",
-      "value": "All categories",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All categories",
-          "Paid streaming",
-          "Broadcast FTA TV",
-          "Short-form online video",
-          "Catch-up FTA TV"
-        ],
-        "name": "Highlight category: "
-      }
+      "value": "All categories"
     }
   ],
   "encoding": {

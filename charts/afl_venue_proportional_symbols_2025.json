@@ -151,10 +151,10 @@
         ],
         "opacity": {
           "condition": {
-            "test": "venueFocus === 'All venues' || datum.venue === venueFocus",
-            "value": 0.86
+            "test": "(stateFocus === 'ALL' || datum.state === stateFocus) && (venueFocus === 'All venues' || datum.venue === venueFocus)",
+            "value": 0.85
           },
-          "value": 0.07
+          "value": 0.09
         }
       }
     }
@@ -172,32 +172,11 @@
   "params": [
     {
       "name": "venueFocus",
-      "value": "All venues",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All venues",
-          "Adelaide Oval",
-          "Barossa Park",
-          "Bellerive Oval",
-          "Carrara (People First Stadium)",
-          "Docklands (Marvel Stadium)",
-          "Eureka Stadium (Mars Stadium)",
-          "Gabba",
-          "Hands Oval",
-          "Kardinia Park (GMHBA Stadium)",
-          "Manuka Oval",
-          "Marrara Oval (TIO Stadium)",
-          "Melbourne Cricket Ground (MCG)",
-          "Norwood Oval",
-          "Perth Stadium (Optus Stadium)",
-          "Sydney Cricket Ground (SCG)",
-          "Sydney Showground (ENGIE Stadium)",
-          "Traeger Park",
-          "York Park (UTAS Stadium)"
-        ],
-        "name": "Locate a stadium: "
-      }
+      "value": "All venues"
+    },
+    {
+      "name": "stateFocus",
+      "value": "ALL"
     }
   ]
 }

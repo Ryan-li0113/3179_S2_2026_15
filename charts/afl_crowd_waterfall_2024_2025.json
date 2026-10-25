@@ -105,7 +105,14 @@
             "title": "Interpretation",
             "type": "nominal"
           }
-        ]
+        ],
+        "opacity": {
+          "condition": {
+            "test": "phaseFocus === 'All phases' || datum.component === phaseFocus || datum.component === 'Net change'",
+            "value": 1
+          },
+          "value": 0.12
+        }
       }
     },
     {
@@ -136,6 +143,13 @@
         },
         "color": {
           "value": "#102c37"
+        },
+        "opacity": {
+          "condition": {
+            "test": "phaseFocus === 'All phases' || datum.component === phaseFocus || datum.component === 'Net change'",
+            "value": 1
+          },
+          "value": 0.12
         }
       }
     }
@@ -159,5 +173,11 @@
       "labelColor": "#526873",
       "titleColor": "#526873"
     }
-  }
+  },
+  "params": [
+    {
+      "name": "phaseFocus",
+      "value": "All phases"
+    }
+  ]
 }

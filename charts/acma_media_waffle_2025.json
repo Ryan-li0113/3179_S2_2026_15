@@ -1,0 +1,93 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Waffle grid of percentage of Australian adults watching the selected video medium in the previous seven days (ACMA 2025). 100 squares represent 100 percentage points, not 100 sampled people. Different media types overlap: selection is one-at-a-time, not a mutually exclusive mix.",
+  "width": 450,
+  "height": 450,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": {
+    "url": "data/acma_waffle_2025.csv"
+  },
+  "params": [
+    {
+      "name": "selectedMedia",
+      "value": "Paid streaming"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.media == selectedMedia"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 2,
+    "stroke": "#fff",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null,
+      "scale": {
+        "paddingInner": 0.06
+      }
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null,
+      "scale": {
+        "paddingInner": 0.06
+      }
+    },
+    "color": {
+      "condition": {
+        "test": "datum.in_group == 1",
+        "value": "#087b73"
+      },
+      "value": "#e5ece9"
+    },
+    "tooltip": [
+      {
+        "field": "media",
+        "type": "nominal",
+        "title": "Media category"
+      },
+      {
+        "field": "share_pct",
+        "type": "quantitative",
+        "title": "Adults using (%)",
+        "format": ".0f"
+      },
+      {
+        "field": "year",
+        "type": "nominal",
+        "title": "Survey year"
+      }
+    ]
+  },
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#102c37",
+      "titleColor": "#526873",
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873"
+    }
+  }
+}

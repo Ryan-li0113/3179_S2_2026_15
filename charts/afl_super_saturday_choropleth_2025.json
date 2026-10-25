@@ -101,10 +101,10 @@
         ],
         "opacity": {
           "condition": {
-            "test": "stateFocus === 'All states' || datum.state_name === stateFocus",
+            "test": "stateFocus === 'ALL' || datum.abbreviation === stateFocus",
             "value": 1
           },
-          "value": 0.13
+          "value": 0.16
         }
       }
     },
@@ -151,10 +151,10 @@
         },
         "opacity": {
           "condition": {
-            "test": "stateFocus === 'All states' || datum.state_name === stateFocus",
+            "test": "stateFocus === 'ALL' || datum.abbreviation === stateFocus",
             "value": 1
           },
-          "value": 0.2
+          "value": 0.16
         }
       }
     }
@@ -172,22 +172,7 @@
   "params": [
     {
       "name": "stateFocus",
-      "value": "All states",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All states",
-          "New South Wales",
-          "Victoria",
-          "Queensland",
-          "South Australia",
-          "Western Australia",
-          "Tasmania",
-          "Northern Territory",
-          "Australian Capital Territory"
-        ],
-        "name": "Highlight state: "
-      }
+      "value": "ALL"
     }
   ]
 }

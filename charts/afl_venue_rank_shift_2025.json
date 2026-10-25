@@ -13,22 +13,7 @@
   "params": [
     {
       "name": "focusVenue",
-      "value": "All eight venues",
-      "bind": {
-        "input": "select",
-        "name": "Highlight stadium: ",
-        "options": [
-          "All eight venues",
-          "Melbourne Cricket Ground (MCG)",
-          "Docklands (Marvel Stadium)",
-          "Adelaide Oval",
-          "Perth Stadium (Optus Stadium)",
-          "Sydney Cricket Ground (SCG)",
-          "Gabba",
-          "Kardinia Park (GMHBA Stadium)",
-          "Carrara (People First Stadium)"
-        ]
-      }
+      "value": "All eight venues"
     }
   ],
   "encoding": {

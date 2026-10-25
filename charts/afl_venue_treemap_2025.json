@@ -1,0 +1,193 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Treemap of all 18 AFL venues, 2025 attendance including finals, covering 100% of the full 8,257,027 crowd entries, without omitting Other. Area proportional to total attendance and one highlight for MCG. Layout coordinates were computed using a squarified treemap.",
+  "width": "container",
+  "height": 400,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": {
+    "url": "data/afl_venue_treemap_2025.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fff",
+        "strokeWidth": 2,
+        "cornerRadius": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1000
+            ]
+          },
+          "axis": null
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              800
+            ],
+            "reverse": true
+          },
+          "axis": null
+        },
+        "y2": {
+          "field": "y1"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.is_mcg == 1",
+            "value": "#087b73"
+          },
+          "value": "#8faea8"
+        },
+        "tooltip": [
+          {
+            "field": "venue",
+            "type": "nominal",
+            "title": "Venue"
+          },
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "attendance",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "2025 crowd entries"
+          },
+          {
+            "field": "share_pct",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Share of all venue crowds (%)"
+          },
+          {
+            "field": "games",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Games hosted"
+          }
+        ],
+        "opacity": {
+          "condition": {
+            "test": "(stateFocus === 'ALL' || datum.state === stateFocus) && (venueFocus === 'All venues' || datum.venue === venueFocus)",
+            "value": 1
+          },
+          "value": 0.12
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.show_label == 1"
+        },
+        {
+          "calculate": "(datum.x0+datum.x1)/2",
+          "as": "cx"
+        },
+        {
+          "calculate": "(datum.y0+datum.y1)/2",
+          "as": "cy"
+        },
+        {
+          "calculate": "datum.is_mcg == 1 ? 'MCG · 37.8%' : replace(replace(datum.venue, 'Docklands (Marvel Stadium)', 'Marvel Stadium'), 'Perth Stadium (Optus Stadium)', 'Optus Stadium')",
+          "as": "short_name"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "font": "Barlow",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#fff",
+        "limit": 220
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1000
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "cy",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              800
+            ],
+            "reverse": true
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "short_name",
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "(stateFocus === 'ALL' || datum.state === stateFocus) && (venueFocus === 'All venues' || datum.venue === venueFocus)",
+            "value": 1
+          },
+          "value": 0.12
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#102c37",
+      "titleColor": "#526873",
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873"
+    }
+  },
+  "params": [
+    {
+      "name": "venueFocus",
+      "value": "All venues"
+    },
+    {
+      "name": "stateFocus",
+      "value": "ALL"
+    }
+  ]
+}

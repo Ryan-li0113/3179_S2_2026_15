@@ -68,10 +68,10 @@
     },
     "opacity": {
       "condition": {
-        "test": "ageFocus === 'All ages' || datum.age_group === ageFocus",
+        "test": "(ageFocus === 'All ages' || datum.age_group === ageFocus) && (sportFocus === 'Both sports' || datum.sport === sportFocus)",
         "value": 1
       },
-      "value": 0.17
+      "value": 0.12
     }
   },
   "layer": [
@@ -187,6 +187,10 @@
         ],
         "name": "Focus on age: "
       }
+    },
+    {
+      "name": "sportFocus",
+      "value": "Both sports"
     }
   ]
 }

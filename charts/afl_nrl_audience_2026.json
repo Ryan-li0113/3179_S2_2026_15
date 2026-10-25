@@ -146,16 +146,7 @@
   "params": [
     {
       "name": "sportFocus",
-      "value": "Both sports",
-      "bind": {
-        "input": "select",
-        "options": [
-          "Both sports",
-          "AFL",
-          "NRL"
-        ],
-        "name": "Highlight sport: "
-      }
+      "value": "Both sports"
     }
   ]
 }

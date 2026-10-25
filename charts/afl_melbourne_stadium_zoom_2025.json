@@ -95,7 +95,14 @@
             "title": "Mean attendance per match",
             "format": ",.0f"
           }
-        ]
+        ],
+        "opacity": {
+          "condition": {
+            "test": "venueFocus === 'All venues' || datum.venue === venueFocus",
+            "value": 1
+          },
+          "value": 0.12
+        }
       }
     },
     {
@@ -119,6 +126,13 @@
         "text": {
           "field": "short_name",
           "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "venueFocus === 'All venues' || datum.venue === venueFocus",
+            "value": 1
+          },
+          "value": 0.12
         }
       }
     }
@@ -131,5 +145,11 @@
     "axis": {
       "labelFont": "Barlow"
     }
-  }
+  },
+  "params": [
+    {
+      "name": "venueFocus",
+      "value": "All venues"
+    }
+  ]
 }
