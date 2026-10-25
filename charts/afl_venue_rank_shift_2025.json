@@ -1,0 +1,190 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Rank-shift diagram compares the top eight venues by 2025 total attendance with their rank by average attendance per match. Both rankings computed over ALL 18 venues before filtering to top eight by total, to avoid re-ranking a subset.",
+  "width": "container",
+  "height": 365,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": {
+    "url": "data/afl_venue_rank_shift_2025.csv"
+  },
+  "params": [
+    {
+      "name": "focusVenue",
+      "value": "All eight venues",
+      "bind": {
+        "input": "select",
+        "name": "Highlight stadium: ",
+        "options": [
+          "All eight venues",
+          "Melbourne Cricket Ground (MCG)",
+          "Docklands (Marvel Stadium)",
+          "Adelaide Oval",
+          "Perth Stadium (Optus Stadium)",
+          "Sydney Cricket Ground (SCG)",
+          "Gabba",
+          "Kardinia Park (GMHBA Stadium)",
+          "Carrara (People First Stadium)"
+        ]
+      }
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "metric",
+      "type": "ordinal",
+      "sort": [
+        "Total season attendance",
+        "Average per match"
+      ],
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "labelFontSize": 12
+      }
+    },
+    "y": {
+      "field": "rank",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          18.5,
+          0.5
+        ]
+      },
+      "axis": {
+        "title": "Rank among all 18 venues (1 = highest)",
+        "values": [
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          13,
+          15,
+          17
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5,
+        "point": {
+          "filled": true,
+          "size": 90
+        }
+      },
+      "encoding": {
+        "detail": {
+          "field": "venue",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.venue == focusVenue",
+            "value": "#d66b44"
+          },
+          "value": "#8baaa4"
+        },
+        "opacity": {
+          "condition": {
+            "test": "focusVenue == 'All eight venues' || datum.venue == focusVenue",
+            "value": 0.85
+          },
+          "value": 0.14
+        },
+        "tooltip": [
+          {
+            "field": "venue",
+            "title": "Venue",
+            "type": "nominal"
+          },
+          {
+            "field": "metric",
+            "title": "Measure",
+            "type": "nominal"
+          },
+          {
+            "field": "rank",
+            "title": "Rank among 18",
+            "type": "quantitative"
+          },
+          {
+            "field": "total_attendance",
+            "title": "Total attendance",
+            "type": "quantitative",
+            "format": ",.0f"
+          },
+          {
+            "field": "average_attendance",
+            "title": "Average / game",
+            "type": "quantitative",
+            "format": ",.0f"
+          },
+          {
+            "field": "games",
+            "title": "Games",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.metric == \"Total season attendance\""
+        },
+        {
+          "calculate": "replace(replace(datum.venue, 'Melbourne Cricket Ground (MCG)', 'MCG'), 'Docklands (Marvel Stadium)', 'Marvel Stadium')",
+          "as": "short_venue"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "dx": 8,
+        "align": "left"
+      },
+      "encoding": {
+        "text": {
+          "field": "short_venue",
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "focusVenue == 'All eight venues' || datum.venue == focusVenue",
+            "value": 1
+          },
+          "value": 0.12
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#102c37",
+      "titleColor": "#526873",
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873"
+    }
+  }
+}
