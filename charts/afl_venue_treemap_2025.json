@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Treemap of all 18 AFL venues, 2025 attendance including finals, covering 100% of the full 8,257,027 crowd entries, without omitting Other. Area proportional to total attendance and one highlight for MCG. Layout coordinates were computed using a squarified treemap.",
   "width": "container",
-  "height": 400,
+  "height": 402,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -49,11 +49,20 @@
           "field": "y1"
         },
         "color": {
-          "condition": {
-            "test": "datum.is_mcg == 1",
-            "value": "#087B73"
+          "field": "share_pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              38
+            ],
+            "range": [
+              "#E5F1ED",
+              "#278F84",
+              "#075F5D"
+            ]
           },
-          "value": "#A9C0BB"
+          "legend": null
         },
         "tooltip": [
           {
@@ -101,7 +110,7 @@
           "as": "cy"
         },
         {
-          "calculate": "datum.is_mcg == 1 ? 'MCG · 37.8%' : replace(replace(datum.venue, 'Docklands (Marvel Stadium)', 'Marvel Stadium'), 'Perth Stadium (Optus Stadium)', 'Optus Stadium')",
+          "calculate": "datum.venue === 'Melbourne Cricket Ground (MCG)' ? 'MCG' : datum.venue === 'Docklands (Marvel Stadium)' ? 'Marvel Stadium' : datum.venue === 'Perth Stadium (Optus Stadium)' ? 'Optus Stadium' : datum.venue === 'Sydney Cricket Ground (SCG)' ? 'SCG' : datum.venue === 'Kardinia Park (GMHBA Stadium)' ? 'GMHBA Stadium' : datum.venue === 'Carrara (People First Stadium)' ? 'People First Stadium' : datum.venue === 'Sydney Showground (ENGIE Stadium)' ? 'ENGIE Stadium' : datum.venue",
           "as": "short_name"
         }
       ],
@@ -110,10 +119,10 @@
         "align": "center",
         "baseline": "middle",
         "font": "Barlow",
-        "fontSize": 13,
+        "fontSize": 14,
         "fontWeight": "bold",
-        "color": "#fff",
-        "limit": 220
+        "dy": -10,
+        "limit": 170
       },
       "encoding": {
         "x": {
@@ -142,6 +151,82 @@
         "text": {
           "field": "short_name",
           "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.share_pct >= 30",
+            "value": "#FFFFFF"
+          },
+          "value": "#15313D"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.show_label == 1"
+        },
+        {
+          "calculate": "(datum.x0+datum.x1)/2",
+          "as": "cx"
+        },
+        {
+          "calculate": "(datum.y0+datum.y1)/2",
+          "as": "cy"
+        },
+        {
+          "calculate": "datum.venue === 'Melbourne Cricket Ground (MCG)' ? 'MCG' : datum.venue === 'Docklands (Marvel Stadium)' ? 'Marvel Stadium' : datum.venue === 'Perth Stadium (Optus Stadium)' ? 'Optus Stadium' : datum.venue === 'Sydney Cricket Ground (SCG)' ? 'SCG' : datum.venue === 'Kardinia Park (GMHBA Stadium)' ? 'GMHBA Stadium' : datum.venue === 'Carrara (People First Stadium)' ? 'People First Stadium' : datum.venue === 'Sydney Showground (ENGIE Stadium)' ? 'ENGIE Stadium' : datum.venue",
+          "as": "short_name"
+        },
+        {
+          "calculate": "format(datum.share_pct, '.1f')+'%'",
+          "as": "share_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "font": "Barlow",
+        "fontSize": 12,
+        "fontWeight": "normal",
+        "dy": 12,
+        "limit": 170
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1000
+            ]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "cy",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              800
+            ],
+            "reverse": true
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "share_label",
+          "type": "nominal"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.share_pct >= 30",
+            "value": "#FFFFFF"
+          },
+          "value": "#15313D"
         }
       }
     }

@@ -1,100 +1,240 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A third distinct map idiom: equal-area hexagonal bins, each containing the total crowd attendance from AFL venues in that area. Hexagons are 175-km radius in Australian Albers equal-area metres, mapped back to geographic coordinates. Attendance recorded by AFL Tables in 2025, not unique individuals.",
-  "width": "container",
-  "height": 500,
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "True nine-bin hexagon map in equal-area Australian Albers projection; each bin aggregates the exact 2025 attendance of venues within the cell. Shapes are preprojected to pixel coordinates for reliable display. Click a hexagon to identify its cluster.",
+  "width": 930,
+  "height": 438,
+  "padding": 0,
+  "background": null,
   "autosize": {
     "type": "fit",
     "contains": "padding"
   },
-  "projection": {
-    "type": "mercator"
-  },
-  "layer": [
+  "signals": [
     {
-      "data": {
-        "url": "data/australia_states_simplified.geojson",
-        "format": {
-          "type": "json",
-          "property": "features"
+      "name": "selectedBin",
+      "value": "",
+      "on": [
+        {
+          "events": "@hex:click",
+          "update": "selectedBin === datum.bin_id ? \"\" : datum.bin_id"
         }
-      },
-      "mark": {
-        "type": "geoshape",
-        "fill": "#EFF4F1",
-        "stroke": "#A9C0BB",
-        "strokeWidth": 1
-      }
-    },
-    {
-      "data": {
-        "url": "data/afl_hexbin_2025.geojson",
-        "format": {
-          "type": "json",
-          "property": "features"
-        }
-      },
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#fff",
-        "strokeWidth": 2,
-        "fillOpacity": 0.9
-      },
-      "encoding": {
-        "color": {
-          "field": "properties.attendance",
-          "type": "quantitative",
-          "title": "Total attendance in hex",
-          "scale": {
-            "scheme": "tealblues",
-            "type": "sqrt"
-          },
-          "legend": {
-            "orient": "bottom",
-            "format": ".2s"
-          }
-        },
-        "tooltip": [
-          {
-            "field": "properties.venue_count",
-            "type": "quantitative",
-            "title": "Venues in bin"
-          },
-          {
-            "field": "properties.attendance",
-            "type": "quantitative",
-            "format": ",.0f",
-            "title": "2025 crowd entries"
-          },
-          {
-            "field": "properties.venues",
-            "type": "nominal",
-            "title": "Stadium(s)"
-          }
-        ]
-      }
+      ]
     }
   ],
-  "config": {
-    "background": null,
-    "view": {
-      "stroke": null
+  "data": [
+    {
+      "name": "all",
+      "url": "data/afl_hexbin_map_paths_2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "attendance": "number",
+          "venue_count": "number",
+          "px": "number",
+          "py": "number"
+        }
+      }
     },
-    "axis": {
-      "labelFont": "Barlow",
-      "titleFont": "Barlow",
-      "labelColor": "#526873",
-      "titleColor": "#526873",
-      "labelFontSize": 12,
-      "titleFontSize": 12,
-      "gridColor": "#E7EEEB"
+    {
+      "name": "outline",
+      "source": "all",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.kind === 'state'"
+        }
+      ]
     },
-    "legend": {
-      "labelFont": "Barlow",
-      "titleFont": "Barlow",
-      "labelColor": "#526873",
-      "titleColor": "#15313D"
+    {
+      "name": "bins",
+      "source": "all",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.kind === 'hex'"
+        }
+      ]
     }
-  },
-  "background": null
+  ],
+  "scales": [
+    {
+      "name": "shade",
+      "type": "sqrt",
+      "domain": [
+        0,
+        4761634
+      ],
+      "range": [
+        "#E0F2EC",
+        "#087B73"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "name": "state",
+      "from": {
+        "data": "outline"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "field": "path"
+          },
+          "fill": {
+            "value": "#EFF4F1"
+          },
+          "stroke": {
+            "value": "#A7BDB7"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "path",
+      "name": "hex",
+      "from": {
+        "data": "bins"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "field": "path"
+          },
+          "fill": {
+            "scale": "shade",
+            "field": "attendance"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 2.5
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "datum.venue_count + ' venues · ' + format(datum.attendance,',') + ' attendances · '+ datum.venues"
+          }
+        },
+        "update": {
+          "stroke": {
+            "signal": "selectedBin === datum.bin_id ? '#15313D' : '#ffffff'"
+          },
+          "strokeWidth": {
+            "signal": "selectedBin === datum.bin_id ? 4 : 2.5"
+          },
+          "fillOpacity": {
+            "value": 0.93
+          }
+        },
+        "hover": {
+          "stroke": {
+            "value": "#D66B44"
+          },
+          "strokeWidth": {
+            "value": 4
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "bins"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "px"
+          },
+          "y": {
+            "field": "py"
+          },
+          "text": {
+            "field": "label"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "signal": "datum.attendance>1000000 ? 14 : 12"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "signal": "datum.attendance > 1300000 ? '#ffffff' : '#15313D'"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "tooltip": {
+            "signal": "datum.venues + ': ' + format(datum.attendance,',') + ' attendances'"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 17
+          },
+          "y": {
+            "value": 25
+          },
+          "text": {
+            "value": "2025 AFL VENUE CLUSTERS"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#526873"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 17
+          },
+          "y": {
+            "value": 428
+          },
+          "text": {
+            "value": "Each coloured hex represents venues within an equal-area geographic bin"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#526873"
+          }
+        }
+      }
+    }
+  ]
 }

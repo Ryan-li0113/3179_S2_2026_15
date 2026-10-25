@@ -1,165 +1,307 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Waterfall decomposition of the difference between 2024 and 2025 AFL Tables league-wide crowds: total 2024 8,286,771, total 2025 8,257,027. Bars show CHANGES in attendances, not total crowd level. Home-and-away decrease 97,161, finals increase 67,417, net decrease 29,744.",
-  "width": "container",
-  "height": 310,
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Bridge waterfall: home-and-away \u221297,161; finals +67,417; net \u221229,744 attendances from 2024 to 2025. Bars encode cumulative steps and connectors expose change decomposition.",
+  "width": 910,
+  "height": 294,
+  "padding": {
+    "top": 18,
+    "right": 18,
+    "bottom": 40,
+    "left": 78
+  },
+  "background": null,
   "autosize": {
     "type": "fit",
     "contains": "padding"
   },
-  "data": {
-    "url": "data/afl_crowd_change_waterfall_2024_2025.csv"
-  },
-  "transform": [
+  "data": [
     {
-      "calculate": "min(datum.start,datum.end)",
-      "as": "lo"
-    },
-    {
-      "calculate": "max(datum.start,datum.end)",
-      "as": "hi"
+      "name": "steps",
+      "url": "data/afl_waterfall_bridge_2024_2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "left": "number",
+          "right": "number",
+          "delta": "number",
+          "index": "number"
+        }
+      }
     }
   ],
-  "layer": [
+  "scales": [
     {
-      "mark": {
-        "type": "rule",
-        "strokeDash": [
-          4,
-          3
-        ],
-        "color": "#A9C0BB"
-      },
-      "encoding": {
-        "y": {
-          "datum": 0
-        },
-        "x": {
-          "datum": "Home and away"
-        },
-        "x2": {
-          "datum": "Net change"
+      "name": "ys",
+      "type": "linear",
+      "domain": [
+        -115000,
+        13000
+      ],
+      "range": [
+        258,
+        28
+      ],
+      "nice": false
+    },
+    {
+      "name": "xs",
+      "type": "band",
+      "domain": [
+        "Home & away",
+        "Finals",
+        "Net change"
+      ],
+      "range": [
+        64,
+        852
+      ],
+      "paddingInner": 0.54,
+      "paddingOuter": 0.1
+    }
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "scale": "ys",
+      "values": [
+        -100000,
+        -75000,
+        -50000,
+        -25000,
+        0
+      ],
+      "tickSize": 0,
+      "domain": false,
+      "grid": true,
+      "gridColor": "#DCE7E2",
+      "labelFont": "Barlow",
+      "labelFontSize": 12,
+      "labelColor": "#526873",
+      "title": "Change from 2024 (entries)",
+      "titleFont": "Barlow",
+      "titleColor": "#526873",
+      "titlePadding": 12,
+      "format": "~s"
+    },
+    {
+      "orient": "bottom",
+      "scale": "xs",
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 14,
+      "labelFont": "Barlow",
+      "labelFontSize": 14,
+      "labelFontWeight": "bold",
+      "labelColor": "#15313D"
+    }
+  ],
+  "marks": [
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 64
+          },
+          "x2": {
+            "value": 853
+          },
+          "y": {
+            "scale": "ys",
+            "value": 0
+          },
+          "stroke": {
+            "value": "#15313D"
+          },
+          "strokeWidth": {
+            "value": 1.5
+          }
         }
       }
     },
     {
-      "mark": {
-        "type": "bar",
-        "size": 105,
-        "cornerRadius": 3
+      "type": "rect",
+      "from": {
+        "data": "steps"
       },
-      "encoding": {
-        "x": {
-          "field": "component",
-          "type": "nominal",
-          "sort": [
-            "Home and away",
-            "Finals",
-            "Net change"
-          ],
-          "axis": {
-            "title": null,
-            "labelAngle": 0,
-            "labelFontSize": 12,
-            "labelLimit": 180
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xs",
+            "field": "name"
+          },
+          "width": {
+            "scale": "xs",
+            "band": 1
+          },
+          "y": {
+            "signal": "scale('ys',max(datum.left,datum.right))"
+          },
+          "y2": {
+            "signal": "scale('ys',min(datum.left,datum.right))"
+          },
+          "cornerRadius": {
+            "value": 3
+          },
+          "fill": {
+            "signal": "datum.type==='recovery' ? '#087B73' : (datum.type==='net' ? '#15313D' : '#D66B44')"
+          },
+          "tooltip": {
+            "signal": "datum.name+': '+format(datum.delta,'+,.0f')+' entries'"
           }
-        },
-        "y": {
-          "field": "lo",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              -115000,
-              75000
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "scale('xs','Home & away')+bandwidth('xs')"
+          },
+          "x2": {
+            "signal": "scale('xs','Finals')"
+          },
+          "y": {
+            "scale": "ys",
+            "value": -97161
+          },
+          "stroke": {
+            "value": "#97B5AD"
+          },
+          "strokeDash": {
+            "value": [
+              5,
+              4
             ]
           },
-          "axis": {
-            "title": "Change in crowd entries vs 2024",
-            "labelExpr": "format(datum.value/1000, ',.0f') + 'k'"
+          "strokeWidth": {
+            "value": 2
           }
-        },
-        "y2": {
-          "field": "hi"
-        },
-        "color": {
-          "condition": {
-            "test": "datum.change < 0",
-            "value": "#AA764E"
-          },
-          "value": "#087B73"
-        },
-        "tooltip": [
-          {
-            "field": "component",
-            "title": "Component",
-            "type": "nominal"
-          },
-          {
-            "field": "change",
-            "title": "Attendance change",
-            "type": "quantitative",
-            "format": "+,.0f"
-          },
-          {
-            "field": "note",
-            "title": "Interpretation",
-            "type": "nominal"
-          }
-        ]
+        }
       }
     },
     {
-      "mark": {
-        "type": "text",
-        "fontSize": 14,
-        "fontWeight": "bold",
-        "dy": -13
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "scale('xs','Finals')+bandwidth('xs')"
+          },
+          "x2": {
+            "signal": "scale('xs','Net change')"
+          },
+          "y": {
+            "scale": "ys",
+            "value": -29744
+          },
+          "stroke": {
+            "value": "#97B5AD"
+          },
+          "strokeDash": {
+            "value": [
+              5,
+              4
+            ]
+          },
+          "strokeWidth": {
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "steps"
       },
-      "encoding": {
-        "x": {
-          "field": "component",
-          "type": "nominal",
-          "sort": [
-            "Home and away",
-            "Finals",
-            "Net change"
-          ],
-          "axis": null
-        },
-        "y": {
-          "field": "hi",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "label",
-          "type": "nominal"
-        },
-        "color": {
-          "value": "#15313D"
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "scale('xs',datum.name)+bandwidth('xs')/2"
+          },
+          "y": {
+            "signal": "datum.type==='recovery' ? scale('ys',datum.right)-12 : scale('ys',datum.right)+20"
+          },
+          "text": {
+            "field": "label"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "center"
+          },
+          "fill": {
+            "value": "#15313D"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 64
+          },
+          "y": {
+            "value": 7
+          },
+          "text": {
+            "value": "2024: 8,286,771 attendance entries"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#15313D"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 848
+          },
+          "y": {
+            "value": 7
+          },
+          "align": {
+            "value": "right"
+          },
+          "text": {
+            "value": "2025: 8,257,027"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#087B73"
+          }
         }
       }
     }
-  ],
-  "config": {
-    "background": null,
-    "view": {
-      "stroke": null
-    },
-    "axis": {
-      "labelFont": "Barlow",
-      "titleFont": "Barlow",
-      "labelColor": "#526873",
-      "titleColor": "#526873",
-      "labelFontSize": 12,
-      "titleFontSize": 12,
-      "gridColor": "#E7EEEB"
-    },
-    "legend": {
-      "labelFont": "Barlow",
-      "titleFont": "Barlow",
-      "labelColor": "#526873",
-      "titleColor": "#15313D"
-    }
-  },
-  "background": null
+  ]
 }

@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Interactive proportional symbol map with a single venue locator, necessary for overlapping stadium locations; otherwise hover-only.",
   "width": "container",
-  "height": 420,
+  "height": 400,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -53,7 +53,7 @@
       "mark": {
         "type": "circle",
         "color": "#087B73",
-        "opacity": 0.75,
+        "opacity": 0.78,
         "stroke": "#ffffff",
         "strokeWidth": 1.15,
         "tooltip": true
@@ -78,14 +78,14 @@
               3200416
             ],
             "range": [
-              35,
-              2500
+              22,
+              1680
             ]
           },
           "legend": {
             "orient": "bottom",
             "direction": "horizontal",
-            "title": "Total crowd attendances (home & away + finals)",
+            "title": "2025 crowd entries",
             "values": [
               250000,
               1000000,
