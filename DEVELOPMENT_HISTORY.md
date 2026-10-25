@@ -14,3 +14,11 @@ Previously completed version: **12 figures**.
 **Design revision proposed for a new GitHub commit:** Preserve Figures 1–12, replace Figure 7 with comparative faceted unit charts, unify AFL/NRL/media colours, tighten section and chart spacing, remove redundant dropdowns (retain only stadium locator), add Figure 13 Sankey and Figure 14 Lorenz concentration curve. New version: **14 figures**.
 
 Suggested commit message: `Refine visual design and add Sankey and Lorenz analysis`.
+
+## Editorial rebuild — 26 October 2026
+- Figure 5: venue inspector replaces repeated national KPI boxes and redundant Melbourne inset; selected ground updates linked map + profile.
+- Figure 8: geographic hexbin rebuilt in native Vega with preprojected equal-area paths, avoiding malformed full-panel polygon.
+- Figure 10: bridge waterfall with cumulative connectors and clearly signed changes.
+- Figure 11: consistent sequential fill and high-contrast venue labels on all major tiles.
+- Figure 12: compact native Vega eight-row slopegraph with direct endpoint labels.
+- Sticky section navigation, reading progress and accessible reduced-motion scroll reveal; source definitions and all 14 figures retained.

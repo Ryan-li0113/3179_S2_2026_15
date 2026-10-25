@@ -159,7 +159,7 @@ body { background:#F8FAF7; color:var(--ink); }
 .chart-frame, .chart-card .chart-frame { min-height:0; overflow:hidden; }
 .chart-frame .vega-embed > svg, .chart-frame .vega-embed > canvas { max-width:100%; height:auto; }
 .chart-map, .chart-card .chart-map { min-height:365px; }
-#chart-melbourne-zoom { min-height:210px; }
+/* Melbourne remains selectable in the national map; no duplicate inset. */
 #chart-acma-waffle { max-width:850px; margin:0 auto; }
 #chart-state-sankey { min-height:450px; }
 #chart-venue-lorenz { min-height:340px; }
@@ -189,14 +189,54 @@ footer .footer-inner { padding:30px 0; }
  .chart-frame { overflow-x:auto; }
  #chart-state-sankey { min-height:0; }
 }
-</style>
+
+/* 2026 editorial polish: larger useful graphics, controlled rhythm, legible 12–14-inch viewports. */
+html { scroll-padding-top:66px; }
+.wrap {width:min(1240px,calc(100% - 36px));}
+.story-nav { position:sticky;top:0;z-index:30;background:rgba(248,250,247,.96);backdrop-filter:blur(11px);border-bottom:1px solid #DCE7E2; }
+.nav-inner {min-height:48px;display:flex;align-items:center;gap:clamp(10px,2vw,32px);}
+.nav-key{font-size:10px;letter-spacing:.14em;font-weight:800;color:#779089;white-space:nowrap;}
+.story-nav a{padding:13px 2px 11px;border-bottom:2px solid transparent;text-decoration:none;font-weight:700;font-size:12px;color:#526873;white-space:nowrap;}
+.story-nav a[aria-current="location"]{color:#087B73;border-bottom-color:#087B73;}
+.story-nav a:hover{color:#087B73;}
+.nav-track{margin-left:auto;min-width:44px;flex:1;max-width:110px;height:3px;border-radius:4px;background:#DCE7E2;overflow:hidden;}
+.nav-track span{display:block;width:0;height:100%;background:#087B73;transition:width .14s linear;}
+.chapter {padding:32px 0 39px;scroll-margin-top:65px;}
+.chart-card{padding:clamp(20px,2.4vw,31px);margin-top:15px;}
+.chart-description {max-width:1080px;line-height:1.5;}
+.chart-frame .vega-embed{max-width:100%;}
+.venue-explorer{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(250px,.86fr);gap:18px;align-items:stretch;}
+.venue-explorer > .chart-frame {min-width:0;min-height:350px;}
+.stadium-inspector{border:1px solid #DCE7E2;border-radius:8px;background:linear-gradient(165deg,#F0F7F4,#F9FBF9);padding:22px 19px;display:flex;flex-direction:column;min-width:0;}
+.spotlight-overline{font-size:11px;letter-spacing:.12em;font-weight:800;color:#087B73;}
+.stadium-inspector h4{font:800 clamp(24px,2.8vw,34px)/1.07 'Barlow Condensed',sans-serif;margin:12px 0 6px;}
+.spotlight-sub{font-size:13px;color:#526873;line-height:1.45;min-height:42px;}
+.spotlight-primary{font:800 clamp(36px,4vw,48px)/1 'Barlow Condensed',sans-serif;color:#087B73;margin:15px 0;}
+.spotlight-primary span{font:600 12px/1.3 'Barlow',sans-serif;color:#526873;display:block;max-width:180px;margin-top:6px;}
+.spotlight-metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0;}
+.spotlight-metrics > div{padding:10px 8px;border-top:1px solid #c9dcd3;}
+.spotlight-metrics strong{display:block;color:#15313D;font:800 clamp(20px,2.4vw,27px)/1 'Barlow Condensed',sans-serif;}
+.spotlight-metrics span{font-size:11px;color:#526873;}
+.spotlight-track{height:8px;background:#DCE7E2;border-radius:99px;overflow:hidden;margin-top:auto;}
+.spotlight-track > div{height:100%;width:0;background:#087B73;transition:width .25s ease;}
+.spotlight-share{font-size:11px;color:#526873;margin:5px 0 10px;}
+.spotlight-takeaway{font-size:12px;line-height:1.45;color:#15313D;margin:0;}
+#chart-afl-hexbins{min-height:0;}
+#chart-crowd-waterfall,#chart-venue-rank{min-height:0;}
+.chart-card h3{max-width:1040px;}
+.card-reveal{opacity:0;transform:translateY(13px);transition:opacity .48s ease,transform .48s ease;}
+.card-reveal.is-visible{opacity:1;transform:none;}
+@media(max-width:900px){.nav-key{display:none}.nav-inner{gap:12px}.story-nav a{font-size:11px}.venue-explorer{grid-template-columns:1fr}.stadium-inspector{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}.stadium-inspector .spotlight-overline,.stadium-inspector h4,.stadium-inspector .spotlight-sub,.stadium-inspector .spotlight-takeaway{grid-column:1/-1}.spotlight-primary{margin:4px 0}.spotlight-metrics{margin:4px 0}.spotlight-track,.spotlight-share{grid-column:1/-1}.spotlight-track{margin-top:4px;}}
+@media(max-width:630px){.wrap{width:calc(100% - 22px)}.nav-inner{gap:8px}.story-nav a{font-size:10px;padding-inline:0}.nav-track{display:none}.chart-card{padding:15px 11px}.stadium-inspector{display:block;padding:15px}.chapter h2{font-size:36px}.chart-card h3{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.card-reveal{opacity:1;transform:none;transition:none}.spotlight-track>div,.nav-track span{transition:none}}
+.chapter-bridge{margin:15px 0 0;padding:10px 0 0;border-top:1px dashed #CDDDD6;color:#526873;font-size:13px}.chapter-bridge span{font-size:10px;letter-spacing:.12em;font-weight:800;color:#087B73;margin-right:8px}</style>
 </head>
 <body>
 <div aria-hidden="true" class="top-rule"></div>
 <header class="masthead wrap">
 <div class="brand">Australian <span>Sport / Data</span></div>
 <div class="course">Monash University<br/>FIT3179 · DV2 · 2026</div>
-</header>
+</header><nav aria-label="Jump between chapters" class="story-nav"><div class="nav-inner wrap"><span class="nav-key">THE STORY</span><a data-section="audiences" href="#audiences">01 Audience</a><a data-section="geography" href="#geography">02 Access &amp; place</a><a data-section="streaming" href="#streaming">03 How we watch</a><a data-section="attendance" href="#attendance">04 Match day</a><span aria-hidden="true" class="nav-track"><span id="read-progress"></span></span></div></nav>
 <main class="wrap">
 <section aria-labelledby="page-title" class="hero">
 <div>
@@ -209,7 +249,7 @@ footer .footer-inner { padding:30px 0; }
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
-<p>Australian sport has two audiences: people watching on screens and people entering stadiums. Start by comparing AFL and NRL television reach, then examine the wider streaming environment, geographic restrictions on live AFL broadcasting and the places where crowds gather. These different measures are labelled separately: an estimated TV viewer, an adult using a video service and a match attendance are not interchangeable.</p>
+<p>Start with who watches sport. See why broadcasting access varies by state; then explore changing viewing habits. Finally, follow crowds from individual stadiums to geographic clusters and across seasons. Each chart answers a new question.</p>
 </section>
 <section aria-labelledby="audiences-title" class="chapter" id="audiences">
 <div class="chapter-heading">
@@ -248,7 +288,7 @@ footer .footer-inner { padding:30px 0; }
 <section aria-labelledby="geography-title" class="chapter" id="geography">
 <div class="chapter-heading">
 <div><span class="chapter-number">02 / GEOGRAPHY</span><h2 id="geography-title">Where sport moves across the country.</h2></div>
-<p>Map state-level AFL broadcast access and the physical locations where AFL crowds gather.</p>
+<p>From TV access to physical venues: compare location-specific broadcast rights with where fans enter stadium gates.</p>
 </div>
 <div class="chart-card">
 <p class="chart-kicker">Figure 4 / Broadcasting access · Advanced choropleth</p>
@@ -266,31 +306,24 @@ footer .footer-inner { padding:30px 0; }
 </div>
 <div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 5 / AFL stadium crowds · Interactive proportional symbols</p>
-<h3>Which AFL stadiums attracted the largest crowds in 2025?</h3>
-<p class="chart-description">Each circle marks an AFL match venue. <strong>Circle area</strong> corresponds to total 2025 crowd attendance (home-and-away matches plus finals). Use the stadium dropdown to locate any of the 18 venues, then hover a circle for its attendance and match count. A Melbourne close-up below separates the overlapping CBD stadiums.</p>
-<div aria-label="Proportional symbol map showing AFL total crowds across 18 Australian stadiums in 2025, led by the Melbourne Cricket Ground with 3,120,416 attendances." class="chart-frame chart-map" id="chart-stadium-crowds" role="img">
-</div>
-<div aria-label="Melbourne stadium close-up" class="map-inset">
-<div class="map-inset-heading">
-<div><h4>Melbourne CBD — closer look</h4><p>MCG and Marvel Stadium are only a few kilometres apart. This high-zoom detail keeps both circles separately hoverable at their mapped locations.</p></div>
-<span class="inset-tag">ZOOMED VIEW</span>
-</div>
-<div aria-label="Close-up proportional symbol map with separately hoverable MCG and Marvel Stadium attendance markers" class="chart-frame" id="chart-melbourne-zoom">
-</div>
-<p class="chart-footnote">Same attendance dataset, with a much closer geographic scale. This is a detail view of Figure 5, not a separate count toward the three required map idioms.</p>
-</div>
-<div aria-label="Major 2025 stadium crowd totals" class="venue-topline">
-<div><strong>3.12m</strong><span>Melbourne Cricket Ground · 51 matches</span></div>
-<div><strong>1.34m</strong><span>Docklands (Marvel Stadium) · 43 matches</span></div>
-<div><strong>1.22m</strong><span>Adelaide Oval · 29 matches</span></div>
-</div>
-<p class="chart-insight"><strong>Key finding:</strong> The MCG alone accounted for approximately <strong>37.8%</strong> of all recorded AFL crowd attendances across 2025. Total attendance across all 18 venues was 8.26 million; these are entries to matches, <em>not</em> unique individuals.</p>
+<h3>Crowd size tells only half the stadium story</h3>
+<p class="chart-description">Explore where AFL matches were attended in 2025. <strong>Circle area = annual entries, not average match crowd.</strong> Choose any of the 18 venues to reveal its season profile; this also makes overlapping Melbourne stadiums accessible.</p>
+<div class="venue-explorer"><div aria-label="Proportional symbol map showing AFL total crowds across 18 Australian stadiums in 2025, led by the Melbourne Cricket Ground with 3,120,416 attendances." class="chart-frame chart-map" id="chart-stadium-crowds" role="img">
+</div><aside aria-label="Selected venue facts" aria-live="polite" class="stadium-inspector">
+<div class="spotlight-overline">01 / INVESTIGATE A VENUE</div><h4 id="spotlight-name">All AFL venues</h4>
+<p class="spotlight-sub" id="spotlight-location">Select a ground in the map’s dropdown to inspect it.</p>
+<div class="spotlight-primary" id="spotlight-crowd">8.26<span>million entries nationally</span></div>
+<div class="spotlight-metrics"><div><strong id="spotlight-matches">—</strong><span>Matches hosted</span></div><div><strong id="spotlight-average">—</strong><span>Average per game</span></div></div>
+<div class="spotlight-track"><div id="spotlight-bar"></div></div><p class="spotlight-share" id="spotlight-share">Entries include repeat visits across matches.</p>
+<p class="spotlight-takeaway" id="spotlight-takeaway">Large national circles can reflect more fixtures. The ranking comparison in Figure 12 separates match volume from per-game crowd strength.</p>
+</aside></div>
+<p class="chart-insight"><strong>Look closer:</strong> Annual attendance combines how often a stadium hosts matches and how many people attend each one. Use the venue locator to investigate a ground, then compare the competing rankings in Figure 12.</p>
 <p class="chart-footnote">Data source: <a href="https://afltables.com/afl/crowds/2025.html" rel="noopener noreferrer" target="_blank">AFL Tables, Attendances 2025 → By Venue</a>. Stadium location points are approximate; the state boundary map is the simplified GeoJSON previously used in Figure 4. Venues are not adjusted for population or the number of scheduled matches.</p>
 </div>
-</section><section aria-labelledby="streaming-title" class="chapter" id="streaming">
+<p class="chapter-bridge"><span>UP NEXT</span> Now shift from where broadcasts and fixtures are available to how Australians use different video platforms.</p></section><section aria-labelledby="streaming-title" class="chapter" id="streaming">
 <div class="chapter-heading">
 <div><span class="chapter-number">03 / VIEWING HABITS</span><h2 id="streaming-title">The changing television landscape.</h2></div>
-<p>Australian video habits reveal the broader market in which sports broadcasters operate.</p>
+<p>A second lens on sport broadcasting: how Australians use paid streaming, catch-up TV and short-form video generally. These measures are not sports-only.</p>
 </div>
 <p class="context-note"><strong>Important distinction:</strong> The ACMA charts below describe <em>all video viewing by Australian adults</em>, not sport-specific television audiences. Different media categories can overlap: one person can use several services.</p>
 <div class="chart-card" style="margin-top:24px">
@@ -309,17 +342,17 @@ footer .footer-inner { padding:30px 0; }
 <p class="chart-insight"><strong>Key finding: </strong>Paid streaming reached 68% of adults, compared with 52% for broadcast TV and short-form video and 44% for catch-up TV. These are separate measures, not shares of one total.</p>
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA media consumption survey, 2025 results (published March 2026)</a>. All video viewing, not sports-specific; 100 squares are a visual encoding of the published percentage, not raw respondent records.</p>
 </div>
-</section>
+<p class="chapter-bridge"><span>UP NEXT</span> Viewing figures describe screens. The final chapter follows what happens when audiences turn into match-day crowd entries.</p></section>
 <section aria-labelledby="attendance-title" class="chapter" id="attendance">
 <div class="chapter-heading">
 <div><span class="chapter-number">04 / ATTENDANCE</span><h2 id="attendance-title">What changes when fans go to games?</h2></div>
-<p>From the national concentration of stadium visits to annual changes in crowd sizes and venue rankings.</p>
+<p>Individual grounds become geographic clusters, then match-day totals. Follow the path from where crowds gather to why annual figures change.</p>
 </div><div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 8 / Crowd concentration · Advanced hexagonal bin map</p>
-<h3>Nearby venues combine into nine attendance clusters</h3>
-<p class="chart-description">Instead of drawing one circle per stadium, this map groups all 18 venues into equal-sized, approximately 175-km-radius hexagonal bins. Colour represents combined 2025 attendance for venues in the same bin; hover a hexagon to see its venues and total entries. This is a distinct <strong>bin map</strong>, not another proportional symbol map.</p>
+<h3>Where do match-day crowds form geographic clusters?</h3>
+<p class="chart-description">The national symbol map showed individual grounds. This <strong>different map idiom</strong> combines nearby venues into nine equal-area 175 km-radius hexagons. Colour and short labels show total 2025 entries per geographic bin. <strong>Hover or select</strong> a hexagon to investigate the group.</p>
 <div aria-label="Nearby venues combine into nine attendance clusters" class="chart-frame" id="chart-afl-hexbins" role="group"></div>
-<p class="chart-insight"><strong>Key finding:</strong> A Melbourne-area hexagon containing the MCG, Marvel Stadium and another nearby venue has approximately 4.76 million entries. This aggregation removes marker overlap and reveals the combined concentration, but deliberately hides differences within each hexagon.</p>
+<p class="chart-insight"><strong>Insight:</strong> A Melbourne-area cell groups three nearby stadiums with 4.76 million recorded entries; the Perth cell combines 1.07 million. Clusters reveal where the calendar concentrates match-day visits, without suggesting the attendees live in those places.</p>
 <p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 attendances by venue</a>. Calculated from the same 18 stadium records as Figure 5; all bins together total 8,257,027 crowd entries. Equal-area binning in Australian Albers projection; converted back to geographic coordinates for display. Bin boundaries are analytical, not administrative.</p>
 </div>
 <p class="context-note"><strong>Counting rule:</strong> Each attendance is one entry to a match. A person attending twice is counted twice. We use AFL Tables for all the venue and season figures so totals are internally consistent.</p>
@@ -333,29 +366,29 @@ footer .footer-inner { padding:30px 0; }
 </div>
 <div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 10 / Explaining a year-on-year change · Advanced waterfall</p>
-<h3>How did 2025 finish 29,744 attendances below 2024?</h3>
-<p class="chart-description">Waterfall bars show the <strong>change</strong> in crowd entries from 2024 to 2025, not the total number of spectators. Home-and-away crowds declined while finals crowds partly offset that fall.</p>
+<h3>Finals softened—but did not erase—the 2025 crowd decline</h3>
+<p class="chart-description">Follow the two-step bridge from 2024 to 2025. Orange shows the home-and-away shortfall; teal shows additional finals entries; the final dark bar is the net difference. The dashed connectors preserve the running change.</p>
 <div aria-label="How did 2025 finish 29,744 attendances below 2024?" class="chart-frame" id="chart-crowd-waterfall" role="group"></div>
-<p class="chart-insight"><strong>Key finding:</strong> Home-and-away attendances decreased by 97,161 while finals increased by 67,417, giving a net decrease of 29,744 entries from 8,286,771 in 2024 to 8,257,027 in 2025.</p>
+<p class="chart-insight"><strong>Insight:</strong> The 67,417-entry finals increase offset <strong>69%</strong> of the 97,161-entry home-and-away decline. The season still finished 29,744 attendances below 2024.</p>
 <p class="chart-footnote">Source: <a href="https://www.afltables.com/afl/crowds/summary.html">AFL Tables, season totals for 2024 and 2025</a>. All figures are event entries rather than unique people. The net difference uses identical scope and source for both seasons.</p>
 </div>
 <div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 11 / A complete attendance whole · Advanced treemap</p>
-<h3>The MCG accounted for nearly 38% of 2025 AFL crowds</h3>
-<p class="chart-description">The treemap represents <strong>all 18 AFL venues</strong> in AFL Tables, so the areas form a complete whole. Each tile’s area is proportional to its total 2025 attendance; small venues remain represented even when they are too narrow to label.</p>
+<h3>Four grounds account for most AFL crowd entries</h3>
+<p class="chart-description">Every one of the 18 AFL venues is included: the tile areas sum to <strong>100% of 2025 entries</strong>. Large venues carry names and percentages; smaller tiles retain a hover tooltip. This is a complete whole, not a selective top-venues chart.</p>
 <div aria-label="The MCG accounted for nearly 38% of 2025 AFL crowds" class="chart-frame" id="chart-venue-treemap" role="group"></div>
-<p class="chart-insight"><strong>Key finding:</strong> The MCG accounted for 3,120,416 of 8,257,027 crowd entries (37.8%). All remaining venues together form the other 62.2%, avoiding the misleading incomplete-whole problem identified in DV1.</p>
-<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, attendances by venue for 2025</a>. The same 18 venues and total are used in Figures 7, 8, 11 and 12. Hover a tile for venue and exact share.</p>
+<p class="chart-insight"><strong>Insight:</strong> The four busiest venues—the MCG, Marvel Stadium, Adelaide Oval and Optus Stadium—account for <strong>81.7%</strong> of AFL match entries, leaving 18.3% spread across 14 other grounds. This concentration sets up the inequality curve in Figure 14.</p>
+<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html" rel="noopener noreferrer" target="_blank">AFL Tables, 2025 attendance by venue</a>. Full 18-venue total = 8,257,027 (including finals). Hover for exact values; very small tiles are intentionally too small to label.</p>
 </div>
 <div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 12 / The role of match volume · Advanced rank-shift diagram</p>
-<h3>Marvel ranks second for total crowds but fifth per game</h3>
-<p class="chart-description">This diagram compares the top eight stadiums <em>by annual attendance</em> with their position when ranked by attendance <em>per game</em>. Both rankings are calculated across all 18 venues before the top eight are selected. Trace the highlighted Marvel Stadium line; hover any line for the underlying ranks.</p>
+<h3>More fixtures can change the stadium leaderboard</h3>
+<p class="chart-description">Trace each of the eight most-attended venues from <strong>total crowd entries</strong> (left) to its rank for <strong>average crowd per game</strong> (right). Rankings are calculated across all 18 venues, and only the same eight venues are compared here. Marvel and Optus are highlighted because their order changes most.</p>
 <div aria-label="Marvel ranks second for total crowds but fifth per game" class="chart-frame" id="chart-venue-rank" role="group"></div>
 <p class="chart-insight"><strong>Key finding:</strong> Marvel Stadium drops from 2nd in total entries to 5th by average attendance per game. Optus Stadium rises from 4th to 2nd. A stadium hosting many matches can rank highly for total crowds without having the highest average crowd.</p>
-<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 venue crowd totals and games</a>. The two measures answer different questions; neither is a ranking of stadium quality.</p>
+<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html" rel="noopener noreferrer" target="_blank">AFL Tables, 2025 crowds by venue</a>. Average crowd = total entries divided by games hosted. Lines show ranking changes rather than trends over time.</p>
 </div>
-<div class="chart-card chart-card-added"><p class="chart-kicker">Figure 13 / State-to-match-phase flows · Advanced Sankey diagram</p><h3>Where do AFL crowd entries flow from?</h3><p class="chart-description">Hover over a flow to trace match attendances from the state hosting a game to its competition phase. Ribbon thickness represents crowd entries, not stadium capacity or unique individuals.</p><div aria-label="Sankey showing 2025 AFL attendances flowing from eight Australian states and territories to the home-and-away and finals match phases." class="chart-frame" id="chart-state-sankey" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>Victoria accounts for 57.7% of recorded 2025 crowd entries. Most entries were from home-and-away matches (92.7% nationally); finals made up the remainder.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendances by venue, including home-and-away and finals. Every one of the 8,257,027 entries is allocated exactly once. State refers to stadium location, not supporter residence.</p></div><div class="chart-card chart-card-added"><p class="chart-kicker">Figure 14 / Crowd inequality · Advanced Lorenz concentration curve</p><h3>How concentrated is AFL attendance in a few stadiums?</h3><p class="chart-description">The teal curve accumulates stadium crowds from the smallest to the largest of 18 venues. The dashed diagonal is the equal-distribution reference. The farther the curve bends below it, the more crowded the leading venues become.</p><div aria-label="Lorenz curve of the cumulative share of 2025 AFL attendances among all 18 venues ordered from smallest to largest." class="chart-frame" id="chart-venue-lorenz" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>The three busiest grounds alone captured 68.8% of recorded 2025 crowd entries. The venue-concentration Gini coefficient is 0.72; the zero-to-one measure is descriptive, not a ranking of stadium quality.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendance by venue, all 18 venues included. Each venue appears once. Curve and Gini calculated from exact season totals, including finals.</p></div><div class="chart-insight conclusion"><strong>Conclusion: </strong>Television reach, use of streaming services and stadium crowd entries measure different behaviours. AFL draws a larger national television audience than NRL in the Roy Morgan estimates, while stadium crowds are heavily concentrated in a small number of large venues. Geography, broadcast rights and the number of fixtures all influence these patterns.</div>
+<div class="chart-card chart-card-added"><p class="chart-kicker">Figure 13 / State-to-match-phase flows · Advanced Sankey diagram</p><h3>Match-day visits are concentrated in Victoria—and the regular season</h3><p class="chart-description">Hover over a flow to trace match attendances from the state hosting a game to its competition phase. Ribbon thickness represents crowd entries, not stadium capacity or unique individuals.</p><div aria-label="Sankey showing 2025 AFL attendances flowing from eight Australian states and territories to the home-and-away and finals match phases." class="chart-frame" id="chart-state-sankey" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>Victoria accounts for 57.7% of recorded 2025 crowd entries. Most entries were from home-and-away matches (92.7% nationally); finals made up the remainder.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendances by venue, including home-and-away and finals. Every one of the 8,257,027 entries is allocated exactly once. State refers to stadium location, not supporter residence.</p></div><div class="chart-card chart-card-added"><p class="chart-kicker">Figure 14 / Crowd inequality · Advanced Lorenz concentration curve</p><h3>How unequal are AFL stadium crowds, really?</h3><p class="chart-description">The teal curve accumulates stadium crowds from the smallest to the largest of 18 venues. The dashed diagonal is the equal-distribution reference. The farther the curve bends below it, the more crowded the leading venues become.</p><div aria-label="Lorenz curve of the cumulative share of 2025 AFL attendances among all 18 venues ordered from smallest to largest." class="chart-frame" id="chart-venue-lorenz" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>The three busiest grounds alone captured 68.8% of recorded 2025 crowd entries. The venue-concentration Gini coefficient is 0.72; the zero-to-one measure is descriptive, not a ranking of stadium quality.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendance by venue, all 18 venues included. Each venue appears once. Curve and Gini calculated from exact season totals, including finals.</p></div><div class="chart-insight conclusion"><strong>What the story shows:</strong> Reach measures potential viewers; geography shapes both live broadcast access and the location of fixtures; streaming and free TV attract overlapping populations; stadium entries depend on crowd size <em>and</em> how many games are scheduled. The resulting concentration and year-on-year changes are more informative than simply naming the largest venue.</div>
 </section>
 </main>
 <footer>
@@ -384,7 +417,6 @@ footer .footer-inner { padding:30px 0; }
   showVegaChart("chart-age-growth", "afl_nrl_age_growth_2024.json");
   showVegaChart("chart-gender-dumbbell", "afl_nrl_gender_dumbbell_2024.json");
   showVegaChart("chart-super-saturday", "afl_super_saturday_choropleth_2025.json");
-  showVegaChart("chart-stadium-crowds", "afl_venue_proportional_symbols_2025.json");
   showVegaChart("chart-acma-slope", "acma_media_slope_2024_2025.json");
   showVegaChart("chart-acma-waffle", "acma_media_waffle_2025.json");
   showVegaChart("chart-afl-hexbins", "afl_hexbin_crowds_2025.json");
@@ -392,10 +424,47 @@ footer .footer-inner { padding:30px 0; }
   showVegaChart("chart-crowd-waterfall", "afl_crowd_waterfall_2024_2025.json");
   showVegaChart("chart-venue-treemap", "afl_venue_treemap_2025.json");
   showVegaChart("chart-venue-rank", "afl_venue_rank_shift_2025.json");
-  showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
   showVegaChart("chart-state-sankey", "afl_state_phase_sankey_2025.json");
   showVegaChart("chart-venue-lorenz", "afl_venue_concentration_lorenz_2025.json");
 
+</script><script>
+(function(){
+  const panel={name:document.getElementById('spotlight-name'),location:document.getElementById('spotlight-location'),crowd:document.getElementById('spotlight-crowd'),matches:document.getElementById('spotlight-matches'),average:document.getElementById('spotlight-average'),bar:document.getElementById('spotlight-bar'),share:document.getElementById('spotlight-share'),takeaway:document.getElementById('spotlight-takeaway')};
+  const pretty=n=>new Intl.NumberFormat('en-AU').format(n);
+  fetch('data/afl_venue_attendance_2025.csv').then(r=>{if(!r.ok)throw new Error('Venue data unavailable');return r.text()}).then(csv=>{
+    // Dataset has no embedded commas outside the quoted URL-less venue names; fields are simple CSV.
+    const lines=csv.trim().split(/\r?\n/).map(line=>line.replace(/\r/g,''));
+    const headings=lines[0].split(',');const rows=lines.slice(1).map(line=>Object.fromEntries(line.split(',').map((v,i)=>[headings[i],v])));
+    const byName=new Map(rows.map(x=>[x.venue,x]));
+    const fullTotal=rows.reduce((sum,r)=>sum+Number(r.total_attendance),0);
+    function update(name){
+      const v=byName.get(name);
+      if(!v){panel.name.textContent='All AFL venues';panel.location.textContent='National stadium map · 2025 season';panel.crowd.innerHTML='8.26<span>million crowd entries nationally</span>';panel.matches.textContent=pretty(rows.reduce((a,r)=>a+Number(r.total_games),0));panel.average.textContent='—';panel.bar.style.width='100%';panel.share.textContent='All 18 venues · full attendance total';panel.takeaway.textContent='Choose a venue to compare its crowd total with how frequently it hosted matches.';return;}
+      const n=Number(v.total_attendance),share=n/fullTotal;
+      panel.name.textContent=v.venue;panel.location.textContent=v.city+' · '+v.state;
+      panel.crowd.innerHTML=(n/1000000).toFixed(2)+'m<span>2025 match entries</span>';
+      panel.matches.textContent=pretty(Number(v.total_games));panel.average.textContent=pretty(Number(v.average_attendance));
+      panel.bar.style.width=(share*100).toFixed(2)+'%';panel.share.textContent=(share*100).toFixed(1)+'% of all 2025 crowd entries';
+      panel.takeaway.textContent=Number(v.total_games)>=20?'This venue hosted many fixtures; compare average attendance per game in Figure 12.':'Fewer hosted matches help explain why the annual circle is smaller. Compare per-game crowd size as well as total entries.';
+    }
+    update('All venues');
+    vegaEmbed('#chart-stadium-crowds','charts/afl_venue_proportional_symbols_2025.json',{actions:false,renderer:'svg'}).then(result=>{
+      result.view.addSignalListener('venueFocus',(_,value)=>update(value));
+      update(result.view.signal('venueFocus'));
+    }).catch(err=>{const el=document.getElementById('chart-stadium-crowds');el.textContent='Unable to display map: '+(err.message||err);});
+  }).catch(err=>{document.getElementById('spotlight-name').textContent='Data could not be loaded';console.error(err)});
+  const chapters=[...document.querySelectorAll('section.chapter')];const links=[...document.querySelectorAll('.story-nav a[data-section]')];
+  const updateProgress=()=>{const root=document.documentElement;const range=Math.max(1,root.scrollHeight-innerHeight);const p=Math.min(100,Math.max(0,100*scrollY/range));document.getElementById('read-progress').style.width=p+'%';};
+  window.addEventListener('scroll',updateProgress,{passive:true});window.addEventListener('resize',updateProgress,{passive:true});updateProgress();
+  if('IntersectionObserver' in window){
+    const secObserver=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting){links.forEach(a=>{if(a.dataset.section===e.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});}}},{rootMargin:'-15% 0px -68% 0px'});
+    chapters.forEach(c=>secObserver.observe(c));
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');reveal.unobserve(e.target)}}),{rootMargin:'0px 0px -36px 0px',threshold:0.06});
+      document.querySelectorAll('.chart-card').forEach(el=>{el.classList.add('card-reveal');reveal.observe(el)});
+    }
+  }
+})();
 </script>
 </body>
 </html>

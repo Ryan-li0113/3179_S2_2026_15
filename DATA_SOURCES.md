@@ -66,3 +66,9 @@ Author: Ryan Li · University assignment · October 2026.
 - Positive/negative waterfall uses teal and muted ochre; rank-shift highlights Marvel in ochre. The two Sankey match phases are coloured teal and steel blue. These section-local semantic roles are distinct from AFL versus NRL sport identification.
 - The only selector retained is the venue locator on Figure 5, because nearby map symbols overlap and it is needed for identification. All other charts use direct hover inspection without redundant filters.
 - The on-screen grey JSON/CSV source panels are removed, while dated data sources and measurement caveats stay directly under the figures.
+
+### Editorial design corrections (October 2026)
+- Figure 8 uses the original nine 2025 equal-area AFL attendance bins from `data/afl_hexbin_2025.geojson`, with path coordinates preprojected into `data/afl_hexbin_map_paths_2025.csv` in Australian Albers (EPSG:3577). Map labels are approximate. No new audience or venue claims were introduced.
+- Figure 10 uses the unchanged 2024→2025 AFL Tables changes; `data/afl_waterfall_bridge_2024_2025.csv` explicitly stores cumulative start and end values.
+- Figure 12 uses the unchanged top-eight comparison, reshaped into `data/afl_rank_slope_compact_2025.csv`; ranks are computed among all 18 venues.
+- Figure 5 inspector derives match count, mean crowd and national share directly from existing `data/afl_venue_attendance_2025.csv`; no separate second map or extra figure count.
