@@ -1,0 +1,156 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Lorenz concentration curve of full 2025 AFL attendance among all 18 venues. Every stadium appears once; the x-axis ranks smallest to largest. The diagonal is equality. A larger gap indicates concentration.",
+  "width": "container",
+  "height": 340,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "data": {
+    "url": "data/afl_venue_concentration_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "venue_pct": "number",
+        "cumulative_pct": "number",
+        "equality_pct": "number",
+        "venues_included": "number",
+        "cumulative_attendance": "number"
+      }
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "venue_pct",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      },
+      "axis": {
+        "title": "Cumulative share of venues (smallest → largest)",
+        "format": ".0f",
+        "labelExpr": "datum.value + '%'",
+        "grid": true,
+        "values": [
+          0,
+          20,
+          40,
+          60,
+          80,
+          100
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "venues_included",
+        "type": "quantitative",
+        "title": "Venues included"
+      },
+      {
+        "field": "venue",
+        "type": "nominal",
+        "title": "Latest included stadium"
+      },
+      {
+        "field": "cumulative_pct",
+        "type": "quantitative",
+        "title": "Share of 2025 attendances (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "cumulative_attendance",
+        "type": "quantitative",
+        "title": "Cumulative crowd entries",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "color": "#DCEEE9",
+        "opacity": 0.6
+      },
+      "encoding": {
+        "y": {
+          "field": "cumulative_pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ]
+          },
+          "axis": {
+            "title": "Cumulative share of crowd entries",
+            "labelExpr": "datum.value + '%'",
+            "grid": true
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeDash": [
+          5,
+          5
+        ],
+        "color": "#A9C0BB",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "y": {
+          "field": "equality_pct",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "#087B73",
+        "strokeWidth": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "cumulative_pct",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 75,
+        "color": "#087B73",
+        "opacity": 0.87
+      },
+      "encoding": {
+        "y": {
+          "field": "cumulative_pct",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#15313D",
+      "gridColor": "#E6EDEA"
+    }
+  }
+}

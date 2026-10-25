@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Estimated Australians aged 14+ watching AFL and NRL on television, Roy Morgan Single Source survey, July 2025-June 2026. NRL count is rounded by source. Choose AFL or NRL to emphasise one series while keeping the comparison visible.",
+  "description": "TV audience reach for AFL and NRL from Roy Morgan, with a consistent colour identity: teal for AFL and orange for NRL. Hover for exact counts.",
   "data": {
     "url": "data/afl_nrl_tv_2026.csv",
     "format": {
@@ -25,7 +25,7 @@
         "title": null,
         "domain": false,
         "ticks": false,
-        "labelColor": "#102c37",
+        "labelColor": "#15313D",
         "labelFontSize": 16,
         "labelFontWeight": "bold",
         "labelPadding": 14
@@ -60,13 +60,6 @@
         "titleFontSize": 13,
         "titlePadding": 18
       }
-    },
-    "opacity": {
-      "condition": {
-        "test": "sportFocus === 'Both sports' || datum.sport === sportFocus",
-        "value": 1
-      },
-      "value": 0.18
     }
   },
   "layer": [
@@ -86,8 +79,8 @@
               "NRL"
             ],
             "range": [
-              "#087b73",
-              "#d66b44"
+              "#087B73",
+              "#D66B44"
             ]
           },
           "legend": null
@@ -120,7 +113,7 @@
         "font": "Barlow",
         "fontWeight": "bold",
         "fontSize": 16,
-        "color": "#102c37"
+        "color": "#15313D"
       },
       "encoding": {
         "text": {
@@ -137,16 +130,20 @@
     },
     "axis": {
       "labelFont": "Barlow",
-      "titleFont": "Barlow"
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873",
+      "gridColor": "#E7EEEB"
     },
     "bar": {
       "tooltip": true
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#15313D"
     }
   },
-  "params": [
-    {
-      "name": "sportFocus",
-      "value": "Both sports"
-    }
-  ]
+  "background": null
 }

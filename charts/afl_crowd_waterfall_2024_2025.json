@@ -28,7 +28,7 @@
           4,
           3
         ],
-        "color": "#a8b9b5"
+        "color": "#A9C0BB"
       },
       "encoding": {
         "y": {
@@ -84,9 +84,9 @@
         "color": {
           "condition": {
             "test": "datum.change < 0",
-            "value": "#d66b44"
+            "value": "#AA764E"
           },
-          "value": "#087b73"
+          "value": "#087B73"
         },
         "tooltip": [
           {
@@ -105,14 +105,7 @@
             "title": "Interpretation",
             "type": "nominal"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "phaseFocus === 'All phases' || datum.component === phaseFocus || datum.component === 'Net change'",
-            "value": 1
-          },
-          "value": 0.12
-        }
+        ]
       }
     },
     {
@@ -142,14 +135,7 @@
           "type": "nominal"
         },
         "color": {
-          "value": "#102c37"
-        },
-        "opacity": {
-          "condition": {
-            "test": "phaseFocus === 'All phases' || datum.component === phaseFocus || datum.component === 'Net change'",
-            "value": 1
-          },
-          "value": 0.12
+          "value": "#15313D"
         }
       }
     }
@@ -162,22 +148,18 @@
     "axis": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
-      "labelColor": "#102c37",
+      "labelColor": "#526873",
       "titleColor": "#526873",
       "labelFontSize": 12,
-      "titleFontSize": 12
+      "titleFontSize": 12,
+      "gridColor": "#E7EEEB"
     },
     "legend": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
       "labelColor": "#526873",
-      "titleColor": "#526873"
+      "titleColor": "#15313D"
     }
   },
-  "params": [
-    {
-      "name": "phaseFocus",
-      "value": "All phases"
-    }
-  ]
+  "background": null
 }

@@ -51,8 +51,8 @@
               80000
             ],
             "range": [
-              "#ecf3f0",
-              "#087b73"
+              "#E7EEEB",
+              "#087B73"
             ]
           },
           "legend": {
@@ -88,14 +88,7 @@
             "title": "Games",
             "type": "quantitative"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "phaseFocus === 'All phases' || datum.phase === phaseFocus",
-            "value": 1
-          },
-          "value": 0.12
-        }
+        ]
       }
     },
     {
@@ -129,14 +122,7 @@
             "test": "datum.average_per_game >= 48000",
             "value": "#fff"
           },
-          "value": "#102c37"
-        },
-        "opacity": {
-          "condition": {
-            "test": "phaseFocus === 'All phases' || datum.phase === phaseFocus",
-            "value": 1
-          },
-          "value": 0.12
+          "value": "#15313D"
         }
       }
     }
@@ -149,22 +135,18 @@
     "axis": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
-      "labelColor": "#102c37",
+      "labelColor": "#526873",
       "titleColor": "#526873",
       "labelFontSize": 12,
-      "titleFontSize": 12
+      "titleFontSize": 12,
+      "gridColor": "#E7EEEB"
     },
     "legend": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
       "labelColor": "#526873",
-      "titleColor": "#526873"
+      "titleColor": "#15313D"
     }
   },
-  "params": [
-    {
-      "name": "phaseFocus",
-      "value": "All phases"
-    }
-  ]
+  "background": null
 }

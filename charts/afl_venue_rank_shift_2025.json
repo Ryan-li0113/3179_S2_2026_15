@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Rank-shift diagram compares the top eight venues by 2025 total attendance with their rank by average attendance per match. Both rankings computed over ALL 18 venues before filtering to top eight by total, to avoid re-ranking a subset.",
+  "description": "Rank-shift diagram: accent Marvel Stadium to connect the second-highest season crowd with fifth-highest per-game crowd, without redundant dropdown.",
   "width": "container",
   "height": 365,
   "autosize": {
@@ -10,12 +10,6 @@
   "data": {
     "url": "data/afl_venue_rank_shift_2025.csv"
   },
-  "params": [
-    {
-      "name": "focusVenue",
-      "value": "All eight venues"
-    }
-  ],
   "encoding": {
     "x": {
       "field": "metric",
@@ -72,17 +66,10 @@
         },
         "color": {
           "condition": {
-            "test": "datum.venue == focusVenue",
-            "value": "#d66b44"
+            "test": "datum.venue === 'Docklands (Marvel Stadium)'",
+            "value": "#B08344"
           },
-          "value": "#8baaa4"
-        },
-        "opacity": {
-          "condition": {
-            "test": "focusVenue == 'All eight venues' || datum.venue == focusVenue",
-            "value": 0.85
-          },
-          "value": 0.14
+          "value": "#A9C0BB"
         },
         "tooltip": [
           {
@@ -141,13 +128,6 @@
         "text": {
           "field": "short_venue",
           "type": "nominal"
-        },
-        "opacity": {
-          "condition": {
-            "test": "focusVenue == 'All eight venues' || datum.venue == focusVenue",
-            "value": 1
-          },
-          "value": 0.12
         }
       }
     }
@@ -160,16 +140,18 @@
     "axis": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
-      "labelColor": "#102c37",
+      "labelColor": "#526873",
       "titleColor": "#526873",
       "labelFontSize": 12,
-      "titleFontSize": 12
+      "titleFontSize": 12,
+      "gridColor": "#E7EEEB"
     },
     "legend": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
       "labelColor": "#526873",
-      "titleColor": "#526873"
+      "titleColor": "#15313D"
     }
-  }
+  },
+  "background": null
 }

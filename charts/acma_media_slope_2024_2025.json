@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "ACMA 2024 to 2025 change in weekly share of Australian adults using each media type. Lines represent percentage change for each overlapping media category. Viewers can use multiple services. Selector focuses one line.",
+  "description": "Slope chart contrasting 2024 and 2025 weekly adult use of four video formats. Consistent medium colours are shared with Figure 7.",
   "width": "container",
   "height": 350,
   "autosize": {
@@ -10,12 +10,6 @@
   "data": {
     "url": "data/acma_media_2024_2025.csv"
   },
-  "params": [
-    {
-      "name": "focusMedia",
-      "value": "All categories"
-    }
-  ],
   "encoding": {
     "x": {
       "field": "year",
@@ -79,23 +73,17 @@
               "Catch-up FTA TV"
             ],
             "range": [
-              "#087b73",
-              "#d66b44",
-              "#526873",
-              "#b69d78"
+              "#2B5E86",
+              "#A27B3D",
+              "#7B6A9A",
+              "#6B9588"
             ]
           },
           "legend": {
+            "title": "Video format",
             "orient": "bottom",
-            "title": null
+            "direction": "horizontal"
           }
-        },
-        "opacity": {
-          "condition": {
-            "test": "focusMedia == 'All categories' || datum.media == focusMedia",
-            "value": 1
-          },
-          "value": 0.14
         },
         "tooltip": [
           {
@@ -132,14 +120,27 @@
           "format": ".0f"
         },
         "color": {
-          "value": "#102c37"
-        },
-        "opacity": {
-          "condition": {
-            "test": "focusMedia == 'All categories' || datum.media == focusMedia",
-            "value": 1
+          "field": "media",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Paid streaming",
+              "Broadcast FTA TV",
+              "Short-form online video",
+              "Catch-up FTA TV"
+            ],
+            "range": [
+              "#2B5E86",
+              "#A27B3D",
+              "#7B6A9A",
+              "#6B9588"
+            ]
           },
-          "value": 0
+          "legend": {
+            "title": "Video format",
+            "orient": "bottom",
+            "direction": "horizontal"
+          }
         }
       }
     }
@@ -152,16 +153,18 @@
     "axis": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
-      "labelColor": "#102c37",
+      "labelColor": "#526873",
       "titleColor": "#526873",
       "labelFontSize": 12,
-      "titleFontSize": 12
+      "titleFontSize": 12,
+      "gridColor": "#E7EEEB"
     },
     "legend": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
       "labelColor": "#526873",
-      "titleColor": "#526873"
+      "titleColor": "#15313D"
     }
-  }
+  },
+  "background": null
 }

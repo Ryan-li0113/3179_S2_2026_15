@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Dumbbell chart. Roy Morgan estimated AFL and NRL television viewers by gender in 2023 and 2024. Each connecting rule shows the within-gender, within-year difference between leagues, not a time trajectory.",
+  "description": "Dumbbell chart comparing men and women in 2023 and 2024. Orange NRL, teal AFL; connecting rules represent audience gap.",
   "data": {
     "url": "data/afl_nrl_gender_2023_2024.csv",
     "format": {
@@ -33,7 +33,7 @@
         "title": null,
         "labelFontSize": 13,
         "labelFontWeight": "bold",
-        "labelColor": "#102c37",
+        "labelColor": "#15313D",
         "labelPadding": 12,
         "domain": false,
         "ticks": false
@@ -44,7 +44,7 @@
     {
       "mark": {
         "type": "rule",
-        "stroke": "#9db5b0",
+        "stroke": "#A9C0BB",
         "strokeWidth": 3
       },
       "encoding": {
@@ -112,17 +112,14 @@
             "format": ".3f",
             "title": "AFL advantage (m)"
           }
-        ],
-        "opacity": {
-          "value": 0.65
-        }
+        ]
       }
     },
     {
       "mark": {
         "type": "circle",
         "size": 240,
-        "color": "#d66b44",
+        "color": "#D66B44",
         "stroke": "#fff",
         "strokeWidth": 2
       },
@@ -180,21 +177,14 @@
             "format": ".3f",
             "title": "TV audience (m)"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "sportFocus === 'Both sports' || sportFocus === 'NRL'",
-            "value": 1
-          },
-          "value": 0.13
-        }
+        ]
       }
     },
     {
       "mark": {
         "type": "circle",
         "size": 240,
-        "color": "#087b73",
+        "color": "#087B73",
         "stroke": "#fff",
         "strokeWidth": 2
       },
@@ -229,14 +219,7 @@
             "format": ".3f",
             "title": "TV audience (m)"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "sportFocus === 'Both sports' || sportFocus === 'AFL'",
-            "value": 1
-          },
-          "value": 0.13
-        }
+        ]
       }
     },
     {
@@ -248,7 +231,7 @@
         "font": "Barlow",
         "fontSize": 12,
         "fontWeight": "bold",
-        "color": "#9d4c32"
+        "color": "#D66B44"
       },
       "encoding": {
         "x": {
@@ -288,13 +271,6 @@
         "text": {
           "field": "nrl_label",
           "type": "nominal"
-        },
-        "opacity": {
-          "condition": {
-            "test": "sportFocus === 'Both sports' || sportFocus === 'NRL'",
-            "value": 1
-          },
-          "value": 0.13
         }
       }
     },
@@ -307,7 +283,7 @@
         "font": "Barlow",
         "fontSize": 12,
         "fontWeight": "bold",
-        "color": "#087b73"
+        "color": "#087B73"
       },
       "encoding": {
         "x": {
@@ -324,13 +300,6 @@
         "text": {
           "field": "afl_label",
           "type": "nominal"
-        },
-        "opacity": {
-          "condition": {
-            "test": "sportFocus === 'Both sports' || sportFocus === 'AFL'",
-            "value": 1
-          },
-          "value": 0.13
         }
       }
     }
@@ -342,31 +311,18 @@
     },
     "axis": {
       "labelFont": "Barlow",
-      "titleFont": "Barlow"
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873",
+      "gridColor": "#E7EEEB"
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#15313D"
     }
   },
-  "params": [
-    {
-      "name": "yearFocus",
-      "value": "Both years",
-      "bind": {
-        "input": "select",
-        "options": [
-          "Both years",
-          "2023",
-          "2024"
-        ],
-        "name": "Compare years: "
-      }
-    },
-    {
-      "name": "sportFocus",
-      "value": "Both sports"
-    }
-  ],
-  "transform": [
-    {
-      "filter": "yearFocus === 'Both years' || datum.year == +yearFocus"
-    }
-  ]
+  "transform": [],
+  "background": null
 }

@@ -1,74 +1,114 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Waffle grid of percentage of Australian adults watching the selected video medium in the previous seven days (ACMA 2025). 100 squares represent 100 percentage points, not 100 sampled people. Different media types overlap: selection is one-at-a-time, not a mutually exclusive mix.",
-  "width": 450,
-  "height": 450,
-  "autosize": {
-    "type": "fit",
-    "contains": "padding"
-  },
+  "description": "Four comparable 100-cell unit grids of ACMA 2025 weekly reach. Each category is an independent yes/no measure; respondents may use several formats and four panels do not constitute one whole.",
   "data": {
-    "url": "data/acma_waffle_2025.csv"
-  },
-  "params": [
-    {
-      "name": "selectedMedia",
-      "value": "Paid streaming"
+    "url": "data/acma_waffle_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "in_group": "number",
+        "share_pct": "number",
+        "row": "number",
+        "col": "number"
+      }
     }
-  ],
-  "transform": [
-    {
-      "filter": "datum.media == selectedMedia"
-    }
-  ],
-  "mark": {
-    "type": "rect",
-    "cornerRadius": 2,
-    "stroke": "#fff",
-    "strokeWidth": 2
   },
-  "encoding": {
-    "x": {
-      "field": "col",
-      "type": "ordinal",
-      "axis": null,
-      "scale": {
-        "paddingInner": 0.06
-      }
+  "facet": {
+    "field": "media",
+    "type": "nominal",
+    "sort": [
+      "Paid streaming",
+      "Broadcast FTA TV",
+      "Short-form online video",
+      "Catch-up FTA TV"
+    ],
+    "header": {
+      "title": null,
+      "labelFont": "Barlow",
+      "labelFontSize": 15,
+      "labelFontWeight": "bold",
+      "labelColor": "#15313D",
+      "labelPadding": 10,
+      "labelLimit": 280
+    }
+  },
+  "columns": 2,
+  "spacing": {
+    "column": 34,
+    "row": 28
+  },
+  "spec": {
+    "width": 280,
+    "height": 210,
+    "mark": {
+      "type": "rect",
+      "cornerRadius": 1,
+      "stroke": "#FFFFFF",
+      "strokeWidth": 1
     },
-    "y": {
-      "field": "row",
-      "type": "ordinal",
-      "axis": null,
-      "scale": {
-        "paddingInner": 0.06
-      }
-    },
-    "color": {
-      "condition": {
-        "test": "datum.in_group == 1",
-        "value": "#087b73"
+    "encoding": {
+      "x": {
+        "field": "col",
+        "type": "ordinal",
+        "sort": "ascending",
+        "axis": null,
+        "scale": {
+          "paddingInner": 0.07,
+          "paddingOuter": 0.01
+        }
       },
-      "value": "#e5ece9"
-    },
-    "tooltip": [
-      {
-        "field": "media",
-        "type": "nominal",
-        "title": "Media category"
+      "y": {
+        "field": "row",
+        "type": "ordinal",
+        "sort": "ascending",
+        "axis": null,
+        "scale": {
+          "paddingInner": 0.07,
+          "paddingOuter": 0.01
+        }
       },
-      {
-        "field": "share_pct",
-        "type": "quantitative",
-        "title": "Adults using (%)",
-        "format": ".0f"
+      "color": {
+        "condition": [
+          {
+            "test": "datum.media === 'Paid streaming' && datum.in_group == 1",
+            "value": "#2B5E86"
+          },
+          {
+            "test": "datum.media === 'Broadcast FTA TV' && datum.in_group == 1",
+            "value": "#A27B3D"
+          },
+          {
+            "test": "datum.media === 'Short-form online video' && datum.in_group == 1",
+            "value": "#7B6A9A"
+          },
+          {
+            "test": "datum.media === 'Catch-up FTA TV' && datum.in_group == 1",
+            "value": "#6B9588"
+          }
+        ],
+        "value": "#E7EEEB"
       },
-      {
-        "field": "year",
-        "type": "nominal",
-        "title": "Survey year"
-      }
-    ]
+      "tooltip": [
+        {
+          "field": "media",
+          "type": "nominal",
+          "title": "Video format"
+        },
+        {
+          "field": "share_pct",
+          "type": "quantitative",
+          "format": ".0f",
+          "title": "Used in past 7 days (%)"
+        },
+        {
+          "field": "year",
+          "type": "quantitative",
+          "format": ".0f",
+          "title": "Survey year"
+        }
+      ]
+    }
   },
   "config": {
     "background": null,
@@ -76,18 +116,10 @@
       "stroke": null
     },
     "axis": {
-      "labelFont": "Barlow",
-      "titleFont": "Barlow",
-      "labelColor": "#102c37",
-      "titleColor": "#526873",
-      "labelFontSize": 12,
-      "titleFontSize": 12
+      "labelFont": "Barlow"
     },
-    "legend": {
-      "labelFont": "Barlow",
-      "titleFont": "Barlow",
-      "labelColor": "#526873",
-      "titleColor": "#526873"
+    "header": {
+      "labelFont": "Barlow"
     }
   }
 }
