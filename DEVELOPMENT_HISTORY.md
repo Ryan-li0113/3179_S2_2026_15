@@ -9,4 +9,8 @@ Seven sequential, reviewable GitHub commits:
 - **Viz 11:** Complete 18-venue 2025 crowd treemap · `Add viz 11 complete AFL venue treemap`
 - **Viz 12:** 2025 stadium rankings versus average crowds per game · `Add viz 12 venue rank shift and final narrative`
 
-Current version: **12/12 figures**
+Previously completed version: **12 figures**.
+
+**Design revision proposed for a new GitHub commit:** Preserve Figures 1–12, replace Figure 7 with comparative faceted unit charts, unify AFL/NRL/media colours, tighten section and chart spacing, remove redundant dropdowns (retain only stadium locator), add Figure 13 Sankey and Figure 14 Lorenz concentration curve. New version: **14 figures**.
+
+Suggested commit message: `Refine visual design and add Sankey and Lorenz analysis`.

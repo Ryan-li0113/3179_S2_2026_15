@@ -56,6 +56,7 @@
     .chapter-number { display: block; margin-bottom: 10px; color: var(--teal); font: 800 20px/1 "Barlow Condensed", Impact, sans-serif; letter-spacing: .09em; }
     .chapter h2 { max-width: 760px; margin: 0; font-size: clamp(37px, 5.2vw, 59px); line-height: .98; text-transform: uppercase; font-weight: 800; }
     .chapter-heading p { max-width: 430px; margin: 0 0 3px; color: var(--muted); font-size: 16px; }
+    .viz-label { margin: 13px 0 0; color: var(--muted); font-size: 12px; letter-spacing: .01em; }
     .chart-card { padding: clamp(20px, 3.5vw, 42px); border: 1px solid var(--line); border-radius: 7px; background: #fff; }
     .chart-kicker { margin: 0 0 4px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
     .chart-card h3 { margin: 0 0 8px; font-size: clamp(25px, 3.4vw, 36px); line-height: 1.1; font-weight: 800; }
@@ -127,30 +128,68 @@
     .chart-card .chart-frame { min-height:170px; }
     #chart-acma-waffle { max-width:780px; margin-inline:auto; }
     #chart-afl-hexbins { min-height:440px; }
-    .chart-footnote a { text-underline-offset:3px; }
+    .chart-footnote a, .viz-label a { text-underline-offset:3px; }
     @media(max-width:650px) { .chart-card { padding-left:15px; padding-right:15px; } .context-note { padding:12px 14px; } .chart-card h3 { overflow-wrap:break-word; } }
-
-    /* Shared linked filters: consistent with the existing cream/teal visual language */
-    .linked-panel { background: #fff; border: 1px solid #dce4e1; border-left: 5px solid #087b73;
-      border-radius: 7px; padding: 19px 21px; margin: 0 0 24px; }
-    .linked-panel .linked-heading { font: 800 20px/1.2 "Barlow Condensed", Impact, sans-serif;
-      color:#102c37; margin:0 0 6px; letter-spacing:.01em; }
-    .linked-panel .linked-description {font-size:13px; color:#526873; margin:0 0 15px; max-width:850px;}
-    .linked-grid {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;}
-    .linked-control {display:flex; flex-direction:column; gap:6px; min-width:0;}
-    .linked-control label {font:700 13px/1.3 "Barlow", Arial,sans-serif; color:#102c37;}
-    .linked-control select {width:100%; max-width:100%; border:1px solid #9cb7b0; background:#fff;
-      color:#102c37; padding:10px 11px; border-radius:5px; font:500 14px/1.4 "Barlow",Arial,sans-serif; cursor:pointer;}
-    .linked-control select:focus-visible, .linked-reset:focus-visible {outline:3px solid #d66b44;outline-offset:3px;}
-    .linked-bottom {display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
-      gap:10px; margin-top:13px;}
-    .linked-feedback {margin:0; color:#526873; font-size:13px; line-height:1.4;}
-    .linked-reset {background:#f0f5f2; border:1px solid #bed0ca; color:#102c37; border-radius:4px;
-      padding:7px 11px; cursor:pointer; font:700 12px "Barlow",Arial,sans-serif;}
-    .linked-reset:hover {background:#dcebe6;}
-    .linked-note {margin:10px 0 0; font-size:12px; color:#526873;}
-    @media(max-width:650px){.linked-panel{padding:15px}.linked-grid{grid-template-columns:1fr;}}
-  </style>
+  
+/* DV2 design system 2.0: compact editorial rhythm, no metadata bars or redundant controls. */
+:root { --ink:#15313D; --muted:#526873; --dark:#15313D; --teal:#087B73; --coral:#D66B44; --line:#DCE7E2; }
+body { background:#F8FAF7; color:var(--ink); }
+.wrap { width:min(1160px,calc(100% - 44px)); }
+.masthead { padding:13px 0; }
+.hero { display:block; padding:38px 0 22px; }
+.hero h1 { max-width:1050px; margin:0 0 14px; font-size:clamp(56px,8.2vw,100px); line-height:.95; }
+.hero .lede { max-width:950px; margin:0 0 15px; line-height:1.45; font-size:18px; }
+.hero .eyebrow { margin-bottom:14px; }
+.tags { gap:7px; margin-top:14px; }
+.tag { text-decoration:none; color:#15313D; border-color:#CCDCD6; padding:5px 11px; transition:background .15s; }
+.tag:hover { background:#E8F4EF; }
+.story-intro { max-width:1040px; padding:16px 0 20px; }
+.story-intro h2 { font-size:clamp(25px,3vw,36px); margin-bottom:8px; }
+.story-intro p:last-child { max-width:1000px; font-size:15px; line-height:1.5; }
+.chapter { padding:28px 0 34px; }
+.chapter-heading { margin-bottom:17px; gap:24px; align-items:center; }
+.chapter-number { font-size:15px; margin-bottom:7px; }
+.chapter h2 { font-size:clamp(32px,4.8vw,52px); }
+.chapter-heading p { font-size:14px; }
+.chart-card { padding:clamp(17px,2.5vw,28px); border-radius:7px; box-shadow:0 4px 22px rgba(21,49,61,.025); }
+.chart-card h3 { font-size:clamp(24px,3vw,33px); margin-bottom:6px; }
+.chart-kicker { font-size:11px; letter-spacing:.12em; margin-bottom:5px; }
+.chart-description { max-width:900px; margin-bottom:8px; font-size:14px; line-height:1.5; }
+.chart-card + .chart-card { margin-top:13px !important; }
+.chart-frame, .chart-card .chart-frame { min-height:0; overflow:hidden; }
+.chart-frame .vega-embed > svg, .chart-frame .vega-embed > canvas { max-width:100%; height:auto; }
+.chart-map, .chart-card .chart-map { min-height:365px; }
+#chart-melbourne-zoom { min-height:210px; }
+#chart-acma-waffle { max-width:850px; margin:0 auto; }
+#chart-state-sankey { min-height:450px; }
+#chart-venue-lorenz { min-height:340px; }
+.chart-insight { padding:10px 14px; margin-top:10px; background:#EDF5F1; font-size:14px; line-height:1.5; }
+.chart-footnote { margin-top:8px; font-size:12px; line-height:1.45; }
+.map-summary { gap:8px; margin-top:6px; }
+.map-summary div { padding:9px 12px; }
+.map-inset { margin-top:13px; padding:15px 18px; }
+.venue-topline { gap:8px; margin:10px 0 0; }
+.venue-topline > div { padding:10px 14px; }
+.context-note { margin:12px 0 16px; padding:10px 14px; }
+.conclusion { margin:16px 0 5px; padding:14px 18px; }
+footer .footer-inner { padding:30px 0; }
+.vega-bindings { background:#F1F7F4; padding:9px 12px; border-color:#DEE9E4; margin:10px 0 0; }
+/* Suppress only the old redundant source-file captions, never cited methodology notes. */
+.viz-label,.linked-panel { display:none !important; }
+@media(max-width:760px) {
+ .wrap { width:calc(100% - 28px); }
+ .hero { padding:26px 0 18px; }
+ .hero h1 { font-size:clamp(52px,12vw,78px); }
+ .hero .lede { font-size:16px; }
+ .chapter { padding:24px 0 28px; }
+ .chapter-heading { gap:8px; }
+ .chart-map,.chart-card .chart-map { min-height:280px; }
+ .chart-card { padding:16px 12px; }
+ .map-summary { grid-template-columns:1fr; }
+ .chart-frame { overflow-x:auto; }
+ #chart-state-sankey { min-height:0; }
+}
+</style>
 </head>
 <body>
 <div aria-hidden="true" class="top-rule"></div>
@@ -164,21 +203,9 @@
 <p class="eyebrow">A data story about sport and screens</p>
 <h1 id="page-title">How Australia <span>Watches</span> Sport.</h1>
 <p class="lede">Exploring who watches Australia's major sporting codes, how broadcasts reach fans, and what happens when supporters head to the stadium.</p>
-<div aria-label="Topics covered" class="tags">
-<span class="tag">AFL</span><span class="tag">NRL</span><span class="tag">Streaming</span><span class="tag">Attendance</span>
+<div aria-label="Topics covered" class="tags"><a class="tag" href="#audiences">Audiences</a><a class="tag" href="#geography">Geography</a><a class="tag" href="#streaming">Viewing habits</a><a class="tag" href="#attendance">Attendance</a></div>
 </div>
-</div>
-<aside aria-label="The four questions in this story" class="overview">
-<div class="overview-top">Four questions · one story</div>
-<ol>
-<li>Which sports draw the viewers?</li>
-<li>Where do broadcasts and crowds concentrate?</li>
-<li>How are video-viewing habits changing?</li>
-<li>Are people still going to games?</li>
-</ol>
-</aside>
 </section>
-<div class="status"><strong>12 data visualisations · 3 distinct map idioms.</strong> Explore the charts and choose a filter to investigate patterns. All figures have linked source specifications.</div>
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
@@ -189,34 +216,26 @@
 <div><span class="chapter-number">01 / AUDIENCES</span><h2 id="audiences-title">What are Australians watching?</h2></div>
 <p>Begin with AFL and NRL: compare the scale and composition of their television audiences.</p>
 </div>
-
-<div class="linked-panel" aria-label="Linked audience exploration controls">
-  <h3 class="linked-heading">Explore the audience data</h3>
-  <p class="linked-description">This selection simultaneously highlights the same sport in Figures 1, 2 and 3. Age and year choices inside the figures remain independent.</p>
-  <div class="linked-grid"><div class="linked-control"><label for="filter-sport">Highlight sport across three figures</label>
-  <select id="filter-sport"><option value="Both sports">Both sports</option><option>AFL</option><option>NRL</option></select></div></div>
-  <div class="linked-bottom"><p class="linked-feedback" id="sport-feedback" aria-live="polite">Showing both AFL and NRL.</p><button type="button" class="linked-reset" data-reset="audience">Reset audience</button></div>
-</div>
 <div class="chart-card">
-<p class="chart-kicker">Figure 1 / Television audience reach · Interactive sport focus</p>
+<p class="chart-kicker">Figure 1 / Television audience reach · AFL vs NRL</p>
 <h3>AFL reaches more television viewers than NRL</h3>
-<p class="chart-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover for estimates, or use the sport selector below to emphasise AFL or NRL.</p>
+<p class="chart-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover for the estimates; the colours remain consistent across the audience charts.</p>
 <div aria-label="Bar chart showing approximately 9.31 million AFL television viewers and 7.6 million NRL television viewers in Australia from July 2025 to June 2026." class="chart-frame" id="chart-audience" role="img">
 </div>
 <p class="chart-insight"><strong>Key finding:</strong> AFL's estimated TV audience was around 1.7 million people larger than NRL's. These are people who watched at least occasionally, not average viewers of a single match.</p>
 <p class="chart-footnote">Source: Roy Morgan Single Source, July 2025–June 2026 (n=59,959; Australians aged 14+). <a href="https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026" rel="noopener noreferrer" target="_blank">AFL report (15 Sep 2026)</a> · <a href="https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026" rel="noopener noreferrer" target="_blank">NRL report (18 Sep 2026)</a>. NRL viewers are rounded to one decimal million in the source.</p>
 </div>
 <div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 2 / Audience growth by age · Interactive age focus</p>
+<p class="chart-kicker">Figure 2 / Audience growth by age · Advanced heatmap</p>
 <h3>Older age groups led TV audience growth in 2024</h3>
-<p class="chart-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster audience growth. Hover for both years' viewer estimates, or highlight an age group to compare both sports.</p>
+<p class="chart-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster growth. Hover to compare both years’ estimated viewer counts.</p>
 <div aria-label="Heatmap of percentage growth in television audience reach from 2023 to 2024 for AFL and NRL across four age groups. AFL viewers aged 65+ grew 6.5%; NRL viewers aged 65+ grew 6.6%." class="chart-frame" id="chart-age-growth" role="img">
 </div>
 <p class="chart-insight"><strong>Key finding:</strong> The 65+ audience grew fastest for both codes (AFL +6.5%; NRL +6.6%). The slowest growth was among AFL viewers aged 50–64 (+1.0%) and NRL viewers under 35 (+1.9%).</p>
 <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" rel="noopener noreferrer" target="_blank">Roy Morgan, AFL vs NRL television audiences, 2023–2024</a> (published 18 March 2025), age chart on page 2 of the <a href="https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf" rel="noopener noreferrer" target="_blank">original report</a>. Surveys: Jan–Dec 2023 (n=64,994) and Jan–Dec 2024 (n=64,823); Australians aged 14+. Growth rates are those reported by Roy Morgan. This is a <strong>different period</strong> from Figure 1 (July 2025–June 2026).</p>
 </div>
 <div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 3 / Gender and television audience reach · Interactive year filter</p>
+<p class="chart-kicker">Figure 3 / Gender and television audience reach · Advanced dumbbell</p>
 <h3>AFL has a larger audience advantage among women</h3>
 <p class="chart-description">Each horizontal connection compares AFL and NRL audience reach for one gender in one year (2023 or 2024). The distance between dots represents AFL's audience advantage. Figures are annual audience estimates, not average viewers per match.</p>
 <div aria-label="Chart legend" class="chart-key"><span><i class="swatch swatch-nrl"></i>NRL</span><span><i class="swatch swatch-afl"></i>AFL</span></div>
@@ -231,21 +250,10 @@
 <div><span class="chapter-number">02 / GEOGRAPHY</span><h2 id="geography-title">Where sport moves across the country.</h2></div>
 <p>Map state-level AFL broadcast access and the physical locations where AFL crowds gather.</p>
 </div>
-
-<div class="linked-panel" aria-label="Linked geography and stadium controls">
-  <h3 class="linked-heading">Explore geographic patterns</h3>
-  <p class="linked-description">The state selector highlights the broadcast map (Figure 4), stadium map (Figure 5) and venue treemap (Figure 11). Choosing a stadium also highlights it in the national map, Melbourne close-up where relevant, treemap and ranking diagram (Figure 12).</p>
-  <div class="linked-grid">
-  <div class="linked-control"><label for="filter-state">State or territory</label><select id="filter-state"><option value="ALL">All states and territories</option><option value="VIC">Victoria</option><option value="NSW">New South Wales</option><option value="QLD">Queensland</option><option value="SA">South Australia</option><option value="WA">Western Australia</option><option value="TAS">Tasmania</option><option value="NT">Northern Territory</option><option value="ACT">Australian Capital Territory</option></select></div>
-  <div class="linked-control"><label for="filter-venue">Stadium</label><select id="filter-venue"><option value="All venues">All 18 stadiums</option><option value="Adelaide Oval">Adelaide Oval</option><option value="Barossa Park">Barossa Park</option><option value="Bellerive Oval">Bellerive Oval</option><option value="Carrara (People First Stadium)">Carrara (People First Stadium)</option><option value="Docklands (Marvel Stadium)">Docklands (Marvel Stadium)</option><option value="Eureka Stadium (Mars Stadium)">Eureka Stadium (Mars Stadium)</option><option value="Gabba">Gabba</option><option value="Hands Oval">Hands Oval</option><option value="Kardinia Park (GMHBA Stadium)">Kardinia Park (GMHBA Stadium)</option><option value="Manuka Oval">Manuka Oval</option><option value="Marrara Oval (TIO Stadium)">Marrara Oval (TIO Stadium)</option><option value="Melbourne Cricket Ground (MCG)">Melbourne Cricket Ground (MCG)</option><option value="Norwood Oval">Norwood Oval</option><option value="Perth Stadium (Optus Stadium)">Perth Stadium (Optus Stadium)</option><option value="Sydney Cricket Ground (SCG)">Sydney Cricket Ground (SCG)</option><option value="Sydney Showground (ENGIE Stadium)">Sydney Showground (ENGIE Stadium)</option><option value="Traeger Park">Traeger Park</option><option value="York Park (UTAS Stadium)">York Park (UTAS Stadium)</option></select></div>
-  </div>
-  <div class="linked-bottom"><p class="linked-feedback" id="geography-feedback" aria-live="polite">Showing all locations and venues.</p><button type="button" class="linked-reset" data-reset="geography">Reset geography</button></div>
-  <p class="linked-note">Selecting a stadium automatically focuses its state. The rank comparison includes only the top eight venues; other selected venues still appear on the map and treemap. The hexbin map aggregates venues across geographic boundaries and is deliberately not state-filtered.</p>
-</div>
 <div class="chart-card">
-<p class="chart-kicker">Figure 4 / Broadcasting access · Interactive choropleth</p>
+<p class="chart-kicker">Figure 4 / Broadcasting access · Advanced choropleth</p>
 <h3>Where did live Saturday AFL shift behind a subscription?</h3>
-<p class="chart-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover for its exact figure or use the state selector to highlight a location.</p>
+<p class="chart-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover over a state to inspect its coverage window.</p>
 <div aria-label="Map of Australian states and territories showing 2025 exclusive live Saturday AFL coverage: Victoria, Tasmania and Northern Territory 25 weeks; New South Wales, Queensland and ACT 11 weeks; South Australia and Western Australia nine weeks." class="chart-frame chart-map" id="chart-super-saturday" role="img">
 </div>
 <div aria-label="Coverage comparison" class="map-summary">
@@ -285,28 +293,20 @@
 <p>Australian video habits reveal the broader market in which sports broadcasters operate.</p>
 </div>
 <p class="context-note"><strong>Important distinction:</strong> The ACMA charts below describe <em>all video viewing by Australian adults</em>, not sport-specific television audiences. Different media categories can overlap: one person can use several services.</p>
-
-<div class="linked-panel" aria-label="Linked media viewing controls">
-  <h3 class="linked-heading">Compare viewing platforms</h3>
-  <p class="linked-description">Changing the category highlights the corresponding trend in Figure 6 and redraws the 100-cell share in Figure 7.</p>
-  <div class="linked-grid"><div class="linked-control"><label for="filter-media">Media viewing category</label>
-  <select id="filter-media"><option value="All categories">All categories (waffle shows paid streaming)</option><option>Paid streaming</option><option>Broadcast FTA TV</option><option>Short-form online video</option><option>Catch-up FTA TV</option></select></div></div>
-  <div class="linked-bottom"><p class="linked-feedback" id="media-feedback" aria-live="polite">Figure 6 compares all four categories; Figure 7 shows paid streaming.</p><button type="button" class="linked-reset" data-reset="media">Reset viewing</button></div>
-</div>
 <div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 6 / Streaming, broadcast and short-form video · Advanced slope chart</p>
 <h3>Broadcast TV recovered in 2025; paid streaming held steady</h3>
-<p class="chart-description">Choose a medium to focus its change between the ACMA 2024 and 2025 adult surveys. The y-axis shows the share of Australians who used each type of video service during the previous seven days, not time spent watching.</p>
+<p class="chart-description">Compare all four media types in the ACMA 2024 and 2025 adult surveys. The y-axis shows the share of Australians who used each type of video service during the previous seven days, not time spent watching.</p>
 <div aria-label="Broadcast TV recovered in 2025; paid streaming held steady" class="chart-frame" id="chart-acma-slope" role="group"></div>
 <p class="chart-insight"><strong>Key finding:</strong> Traditional free-to-air television rose from 46% to 52% (+6 percentage points), while paid streaming remained at 68% and short-form video fell from 59% to 52% (−7 points).</p>
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA, How we watch and listen to content (March 2026)</a>, executive summary. Base: Australian adults, past seven days. Media types overlap; percentage-point changes are not audience counts.</p>
 </div>
 <div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 7 / Weekly video uptake · Advanced waffle chart</p>
-<h3>More than two-thirds used paid video streaming</h3>
-<p class="chart-description">Select one media category to display its 2025 reach as a 100-cell grid. Each cell equals <strong>one percentage point of adults</strong>, not an individual respondent. The pale squares represent adults outside the selected category.</p>
+<p class="chart-kicker">Figure 7 / Four-panel comparative unit chart · Advanced small multiples</p>
+<h3>Four different ways Australians watched video in 2025</h3>
+<p class="chart-description">Four aligned 100-cell grids share the same scale. Each filled square represents one percentage point of Australian adults who used that video type in the previous seven days. Categories overlap; do not add them together.</p>
 <div aria-label="More than two-thirds used paid video streaming" class="chart-frame" id="chart-acma-waffle" role="group"></div>
-<p class="chart-insight" id="waffle-dynamic-insight"><strong>Key finding:</strong> 68% of Australian adults used paid streaming in the previous week. This is general video consumption, not sports-specific; percentages across categories must not be added.</p>
+<p class="chart-insight"><strong>Key finding: </strong>Paid streaming reached 68% of adults, compared with 52% for broadcast TV and short-form video and 44% for catch-up TV. These are separate measures, not shares of one total.</p>
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA media consumption survey, 2025 results (published March 2026)</a>. All video viewing, not sports-specific; 100 squares are a visual encoding of the published percentage, not raw respondent records.</p>
 </div>
 </section>
@@ -314,15 +314,7 @@
 <div class="chapter-heading">
 <div><span class="chapter-number">04 / ATTENDANCE</span><h2 id="attendance-title">What changes when fans go to games?</h2></div>
 <p>From the national concentration of stadium visits to annual changes in crowd sizes and venue rankings.</p>
-</div>
-<div class="linked-panel" aria-label="Linked match attendance controls">
-  <h3 class="linked-heading">Compare match phases</h3>
-  <p class="linked-description">Highlight home-and-away or finals across the historical attendance heatmap (Figure 9) and the 2024–25 waterfall (Figure 10). The net-change bar remains visible as context.</p>
-  <div class="linked-grid"><div class="linked-control"><label for="filter-phase">Season phase</label>
-  <select id="filter-phase"><option value="All phases">Both phases</option><option value="Home and away">Home and away</option><option>Finals</option></select></div></div>
-  <div class="linked-bottom"><p class="linked-feedback" id="phase-feedback" aria-live="polite">Showing both phases and the total change.</p><button type="button" class="linked-reset" data-reset="attendance">Reset attendance</button></div>
-</div>
-<div class="chart-card" style="margin-top:24px">
+</div><div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 8 / Crowd concentration · Advanced hexagonal bin map</p>
 <h3>Nearby venues combine into nine attendance clusters</h3>
 <p class="chart-description">Instead of drawing one circle per stadium, this map groups all 18 venues into equal-sized, approximately 175-km-radius hexagonal bins. Colour represents combined 2025 attendance for venues in the same bin; hover a hexagon to see its venues and total entries. This is a distinct <strong>bin map</strong>, not another proportional symbol map.</p>
@@ -358,19 +350,19 @@
 <div class="chart-card" style="margin-top:24px">
 <p class="chart-kicker">Figure 12 / The role of match volume · Advanced rank-shift diagram</p>
 <h3>Marvel ranks second for total crowds but fifth per game</h3>
-<p class="chart-description">This diagram compares the top eight stadiums <em>by annual attendance</em> with their position when ranked by attendance <em>per game</em>. Both rankings are calculated across all 18 venues before the top eight are selected. Choose one stadium to trace it.</p>
+<p class="chart-description">This diagram compares the top eight stadiums <em>by annual attendance</em> with their position when ranked by attendance <em>per game</em>. Both rankings are calculated across all 18 venues before the top eight are selected. Trace the highlighted Marvel Stadium line; hover any line for the underlying ranks.</p>
 <div aria-label="Marvel ranks second for total crowds but fifth per game" class="chart-frame" id="chart-venue-rank" role="group"></div>
 <p class="chart-insight"><strong>Key finding:</strong> Marvel Stadium drops from 2nd in total entries to 5th by average attendance per game. Optus Stadium rises from 4th to 2nd. A stadium hosting many matches can rank highly for total crowds without having the highest average crowd.</p>
 <p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 venue crowd totals and games</a>. The two measures answer different questions; neither is a ranking of stadium quality.</p>
 </div>
-<div class="chart-insight conclusion"><strong>Conclusion:</strong> AFL has greater nationwide TV reach than NRL in the latest Roy Morgan estimates, but reach, streaming habits and match attendances describe different behaviours. Broadcasting rights vary by state; match crowds concentrate in a few major venues, and attendance comparisons change substantially when the number of games is taken into account. Explore the controls to test these differences yourself.</div>
+<div class="chart-card chart-card-added"><p class="chart-kicker">Figure 13 / State-to-match-phase flows · Advanced Sankey diagram</p><h3>Where do AFL crowd entries flow from?</h3><p class="chart-description">Hover over a flow to trace match attendances from the state hosting a game to its competition phase. Ribbon thickness represents crowd entries, not stadium capacity or unique individuals.</p><div aria-label="Sankey showing 2025 AFL attendances flowing from eight Australian states and territories to the home-and-away and finals match phases." class="chart-frame" id="chart-state-sankey" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>Victoria accounts for 57.7% of recorded 2025 crowd entries. Most entries were from home-and-away matches (92.7% nationally); finals made up the remainder.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendances by venue, including home-and-away and finals. Every one of the 8,257,027 entries is allocated exactly once. State refers to stadium location, not supporter residence.</p></div><div class="chart-card chart-card-added"><p class="chart-kicker">Figure 14 / Crowd inequality · Advanced Lorenz concentration curve</p><h3>How concentrated is AFL attendance in a few stadiums?</h3><p class="chart-description">The teal curve accumulates stadium crowds from the smallest to the largest of 18 venues. The dashed diagonal is the equal-distribution reference. The farther the curve bends below it, the more crowded the leading venues become.</p><div aria-label="Lorenz curve of the cumulative share of 2025 AFL attendances among all 18 venues ordered from smallest to largest." class="chart-frame" id="chart-venue-lorenz" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>The three busiest grounds alone captured 68.8% of recorded 2025 crowd entries. The venue-concentration Gini coefficient is 0.72; the zero-to-one measure is descriptive, not a ranking of stadium quality.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendance by venue, all 18 venues included. Each venue appears once. Curve and Gini calculated from exact season totals, including finals.</p></div><div class="chart-insight conclusion"><strong>Conclusion: </strong>Television reach, use of streaming services and stadium crowd entries measure different behaviours. AFL draws a larger national television audience than NRL in the Roy Morgan estimates, while stadium crowds are heavily concentrated in a small number of large venues. Geography, broadcast rights and the number of fixtures all influence these patterns.</div>
 </section>
 </main>
 <footer>
 <div class="footer-inner wrap">
 <div>
 <h2>Australian Sports Broadcasting</h2>
-<p>Roy Morgan, Foxtel Group, ACMA and AFL Tables provide the published figures. Each chart includes its own source and definitions.</p>
+<p>Sources: Roy Morgan (television reach), Foxtel Group (broadcast rights), ACMA (general video viewing) and AFL Tables (match attendance). Methodology and source links accompany each figure.</p>
 </div>
 <div class="footer-meta"><strong>Ryan Mohan Li</strong><br/>FIT3179 Data Visualisation 2<br/>October 2026</div>
 </div>
@@ -380,142 +372,30 @@
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 <script>
-(function () {
-  'use strict';
-  // Keep Vega-Lite JSON separate and editable. The local controls synchronize the
-  // named Vega-Lite parameters across different embedded views (no data rewriting).
-  const figureFiles = {
-    'chart-audience': 'afl_nrl_audience_2026.json',
-    'chart-age-growth': 'afl_nrl_age_growth_2024.json',
-    'chart-gender-dumbbell': 'afl_nrl_gender_dumbbell_2024.json',
-    'chart-super-saturday': 'afl_super_saturday_choropleth_2025.json',
-    'chart-stadium-crowds': 'afl_venue_proportional_symbols_2025.json',
-    'chart-melbourne-zoom': 'afl_melbourne_stadium_zoom_2025.json',
-    'chart-acma-slope': 'acma_media_slope_2024_2025.json',
-    'chart-acma-waffle': 'acma_media_waffle_2025.json',
-    'chart-afl-hexbins': 'afl_hexbin_crowds_2025.json',
-    'chart-attendance-heatmap': 'afl_attendance_heatmap_2015_2026.json',
-    'chart-crowd-waterfall': 'afl_crowd_waterfall_2024_2025.json',
-    'chart-venue-treemap': 'afl_venue_treemap_2025.json',
-    'chart-venue-rank': 'afl_venue_rank_shift_2025.json'
-  };
-  const views = Object.create(null);
-  const venueStates = {"Adelaide Oval": "SA", "Barossa Park": "SA", "Bellerive Oval": "TAS", "Carrara (People First Stadium)": "QLD", "Docklands (Marvel Stadium)": "VIC", "Eureka Stadium (Mars Stadium)": "VIC", "Gabba": "QLD", "Hands Oval": "WA", "Kardinia Park (GMHBA Stadium)": "VIC", "Melbourne Cricket Ground (MCG)": "VIC", "Manuka Oval": "ACT", "Marrara Oval (TIO Stadium)": "NT", "Norwood Oval": "SA", "Perth Stadium (Optus Stadium)": "WA", "Sydney Cricket Ground (SCG)": "NSW", "Sydney Showground (ENGIE Stadium)": "NSW", "Traeger Park": "NT", "York Park (UTAS Stadium)": "TAS"};
-  const topEight = ["Melbourne Cricket Ground (MCG)", "Docklands (Marvel Stadium)", "Adelaide Oval", "Perth Stadium (Optus Stadium)", "Sydney Cricket Ground (SCG)", "Gabba", "Kardinia Park (GMHBA Stadium)", "Carrara (People First Stadium)"];
-  const stateNames = {"NSW": "New South Wales", "VIC": "Victoria", "QLD": "Queensland", "SA": "South Australia", "WA": "Western Australia", "TAS": "Tasmania", "NT": "Northern Territory", "ACT": "Australian Capital Territory"};
-  const mediaShares = {"Paid streaming": 68, "Broadcast FTA TV": 52, "Short-form online video": 52, "Catch-up FTA TV": 44};
-  const filters = {sport:'Both sports', state:'ALL', venue:'All venues', media:'All categories', phase:'All phases'};
-  const select = (id) => document.getElementById(id);
-  const status = (id, message) => {const el=select(id); if(el) el.textContent=message;};
+  function showVegaChart(id, file) {
+    vegaEmbed('#' + id, 'charts/' + file, {actions:false, renderer:'svg'})
+      .catch(function(error) {
+        console.error('Chart failed: '+id, error);
+        var element = document.getElementById(id);
+        if (element) element.textContent = 'Could not load chart: ' + (error.message || String(error));
+      });
+  }
+  showVegaChart("chart-audience", "afl_nrl_audience_2026.json");
+  showVegaChart("chart-age-growth", "afl_nrl_age_growth_2024.json");
+  showVegaChart("chart-gender-dumbbell", "afl_nrl_gender_dumbbell_2024.json");
+  showVegaChart("chart-super-saturday", "afl_super_saturday_choropleth_2025.json");
+  showVegaChart("chart-stadium-crowds", "afl_venue_proportional_symbols_2025.json");
+  showVegaChart("chart-acma-slope", "acma_media_slope_2024_2025.json");
+  showVegaChart("chart-acma-waffle", "acma_media_waffle_2025.json");
+  showVegaChart("chart-afl-hexbins", "afl_hexbin_crowds_2025.json");
+  showVegaChart("chart-attendance-heatmap", "afl_attendance_heatmap_2015_2026.json");
+  showVegaChart("chart-crowd-waterfall", "afl_crowd_waterfall_2024_2025.json");
+  showVegaChart("chart-venue-treemap", "afl_venue_treemap_2025.json");
+  showVegaChart("chart-venue-rank", "afl_venue_rank_shift_2025.json");
+  showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
+  showVegaChart("chart-state-sankey", "afl_state_phase_sankey_2025.json");
+  showVegaChart("chart-venue-lorenz", "afl_venue_concentration_lorenz_2025.json");
 
-  const audienceLinks = [
-    ['chart-audience','sportFocus',() => filters.sport],
-    ['chart-age-growth','sportFocus',() => filters.sport],
-    ['chart-gender-dumbbell','sportFocus',() => filters.sport]
-  ];
-  const geoLinks = [
-    ['chart-super-saturday','stateFocus',() => filters.state],
-    ['chart-stadium-crowds','stateFocus',() => filters.state],
-    ['chart-stadium-crowds','venueFocus',() => filters.venue],
-    ['chart-melbourne-zoom','venueFocus',() => filters.venue],
-    ['chart-venue-treemap','stateFocus',() => filters.state],
-    ['chart-venue-treemap','venueFocus',() => filters.venue],
-    ['chart-venue-rank','focusVenue',() => topEight.includes(filters.venue) ? filters.venue : 'All eight venues']
-  ];
-  const mediaLinks = [
-    ['chart-acma-slope','focusMedia',() => filters.media],
-    ['chart-acma-waffle','selectedMedia',() => filters.media === 'All categories' ? 'Paid streaming' : filters.media]
-  ];
-  const phaseLinks = [
-    ['chart-attendance-heatmap','phaseFocus',() => filters.phase],
-    ['chart-crowd-waterfall','phaseFocus',() => filters.phase]
-  ];
-
-  // Each view may contain more than one shared parameter. Update them together,
-  // followed by one runAsync per view, so controls stay responsive.
-  async function syncLinks(links) {
-    const grouped = new Map();
-    for (const [id, signalName, getter] of links) {
-      if (!views[id]) continue;
-      if (!grouped.has(id)) grouped.set(id, []);
-      grouped.get(id).push([signalName, getter()]);
-    }
-    const tasks = [];
-    grouped.forEach((changes,id) => {
-      try {
-        const view=views[id];
-        changes.forEach(([name,value]) => view.signal(name,value));
-        tasks.push(view.runAsync());
-      } catch (error) {console.error('Filter update failed:',id,error);}
-    });
-    await Promise.allSettled(tasks);
-  }
-  function updateFeedback() {
-    status('sport-feedback',filters.sport === 'Both sports' ? 'Showing both AFL and NRL in Figures 1–3.' : 'Highlighting '+filters.sport+' in Figures 1–3.');
-    let where=filters.state==='ALL'?'all states':stateNames[filters.state];
-    let venue=filters.venue==='All venues'?'all venues':filters.venue;
-    status('geography-feedback','Focused on '+where+' · '+venue+'.');
-    const shown=filters.media==='All categories'?'Paid streaming':filters.media;
-    status('media-feedback',(filters.media==='All categories'?'All categories in Figure 6':'Highlighting '+filters.media+' in Figure 6')+' · '+shown+' in Figure 7.');
-    status('phase-feedback',filters.phase==='All phases'?'Showing home-and-away, finals and overall change.':'Highlighting '+filters.phase+'; net change remains visible.');
-    const waffle=select('waffle-dynamic-insight');
-    if(waffle) waffle.innerHTML='<strong>Key finding:</strong> '+mediaShares[shown]+'% of Australian adults used '+shown.toLowerCase()+' in the previous seven days (2025). This is general video consumption, not sports-specific; categories can overlap and should not be added.';
-  }
-  function setDropdowns() {
-    select('filter-sport').value=filters.sport;
-    select('filter-state').value=filters.state;
-    select('filter-venue').value=filters.venue;
-    select('filter-media').value=filters.media;
-    select('filter-phase').value=filters.phase;
-  }
-  function resync(group) {
-    updateFeedback();
-    const groups={audience:audienceLinks, geography:geoLinks, media:mediaLinks, attendance:phaseLinks};
-    syncLinks(groups[group]);
-  }
-  select('filter-sport').addEventListener('change',e => {filters.sport=e.target.value;resync('audience');});
-  select('filter-state').addEventListener('change',e => {
-    filters.state=e.target.value;
-    if(filters.venue!=='All venues' && filters.state!=='ALL' && venueStates[filters.venue]!==filters.state) filters.venue='All venues';
-    setDropdowns();resync('geography');
-  });
-  select('filter-venue').addEventListener('change',e => {
-    filters.venue=e.target.value;
-    if(filters.venue!=='All venues') filters.state=venueStates[filters.venue];
-    setDropdowns();resync('geography');
-  });
-  select('filter-media').addEventListener('change',e => {filters.media=e.target.value;resync('media');});
-  select('filter-phase').addEventListener('change',e => {filters.phase=e.target.value;resync('attendance');});
-  document.querySelectorAll('[data-reset]').forEach(button => button.addEventListener('click',() => {
-    const group=button.getAttribute('data-reset');
-    if(group==='audience')filters.sport='Both sports';
-    else if(group==='geography'){filters.state='ALL';filters.venue='All venues';}
-    else if(group==='media')filters.media='All categories';
-    else if(group==='attendance')filters.phase='All phases';
-    setDropdowns();resync(group);
-  }));
-
-  async function embed(id,file) {
-    const el=select(id);
-    try {
-      const response=await fetch('charts/'+file,{cache:'no-cache'});
-      if(!response.ok)throw new Error('HTTP '+response.status+' for charts/'+file);
-      const spec=await response.json();
-      const result=await vegaEmbed(el,spec,{actions:false,renderer:'svg'});
-      views[id]=result.view;
-      await Promise.all([syncLinks(audienceLinks),syncLinks(geoLinks),syncLinks(mediaLinks),syncLinks(phaseLinks)]);
-    } catch (error) {
-      console.error('Could not load '+id,error);
-      if(el)el.textContent='Could not load this visualisation: '+String(error.message||error);
-    }
-  }
-  updateFeedback();
-  if(typeof vegaEmbed!=='function') {
-    Object.keys(figureFiles).forEach(id => status(id,'Chart libraries could not load. Check the internet connection.'));
-  } else {
-    Object.entries(figureFiles).forEach(([id,file]) => embed(id,file));
-  }
-})();
 </script>
 </body>
 </html>
