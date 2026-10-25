@@ -1,0 +1,9 @@
+venue,avg_crowd,total,games,left_rank,right_rank,short,shift,label_left,label_right,col
+Melbourne Cricket Ground (MCG),61185,3120416,51,1,1,MCG,0,1. MCG,"1 · 61,185 per game",#9BB7B0
+Docklands (Marvel Stadium),31166,1340134,43,2,5,Marvel Stadium,-3,2. Marvel Stadium,"5 · 31,166 per game",#D66B44
+Adelaide Oval,42183,1223306,29,3,3,Adelaide Oval,0,3. Adelaide Oval,"3 · 42,183 per game",#9BB7B0
+Perth Stadium (Optus Stadium),44191,1060590,24,4,2,Optus Stadium,2,4. Optus Stadium,"2 · 44,191 per game",#087B73
+Sydney Cricket Ground (SCG),34277,377046,11,5,4,SCG,1,5. SCG,"4 · 34,277 per game",#9BB7B0
+Gabba,31101,373211,12,6,6,Gabba,0,6. Gabba,"6 · 31,101 per game",#9BB7B0
+Kardinia Park (GMHBA Stadium),30108,301084,10,7,7,GMHBA Stadium,0,7. GMHBA Stadium,"7 · 30,108 per game",#9BB7B0
+Carrara (People First Stadium),16704,150339,9,8,8,People First Stadium,0,8. People First Stadium,"8 · 16,704 per game",#9BB7B0
