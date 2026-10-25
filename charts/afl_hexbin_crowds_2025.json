@@ -21,8 +21,8 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#edf2f0",
-        "stroke": "#a8c0bc",
+        "fill": "#EFF4F1",
+        "stroke": "#A9C0BB",
         "strokeWidth": 1
       }
     },
@@ -83,16 +83,18 @@
     "axis": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
-      "labelColor": "#102c37",
+      "labelColor": "#526873",
       "titleColor": "#526873",
       "labelFontSize": 12,
-      "titleFontSize": 12
+      "titleFontSize": 12,
+      "gridColor": "#E7EEEB"
     },
     "legend": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
       "labelColor": "#526873",
-      "titleColor": "#526873"
+      "titleColor": "#15313D"
     }
-  }
+  },
+  "background": null
 }

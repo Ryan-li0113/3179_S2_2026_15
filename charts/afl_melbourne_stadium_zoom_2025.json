@@ -41,7 +41,7 @@
     {
       "mark": {
         "type": "circle",
-        "color": "#087b73",
+        "color": "#087B73",
         "opacity": 0.82,
         "stroke": "#ffffff",
         "strokeWidth": 2,
@@ -95,14 +95,7 @@
             "title": "Mean attendance per match",
             "format": ",.0f"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "venueFocus === 'All venues' || datum.venue === venueFocus",
-            "value": 1
-          },
-          "value": 0.12
-        }
+        ]
       }
     },
     {
@@ -112,7 +105,7 @@
         "font": "Barlow",
         "fontSize": 14,
         "fontWeight": "bold",
-        "color": "#102c37"
+        "color": "#15313D"
       },
       "encoding": {
         "longitude": {
@@ -126,13 +119,6 @@
         "text": {
           "field": "short_name",
           "type": "nominal"
-        },
-        "opacity": {
-          "condition": {
-            "test": "venueFocus === 'All venues' || datum.venue === venueFocus",
-            "value": 1
-          },
-          "value": 0.12
         }
       }
     }
@@ -143,13 +129,18 @@
       "stroke": null
     },
     "axis": {
-      "labelFont": "Barlow"
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873",
+      "gridColor": "#E7EEEB"
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#15313D"
     }
   },
-  "params": [
-    {
-      "name": "venueFocus",
-      "value": "All venues"
-    }
-  ]
+  "background": null
 }

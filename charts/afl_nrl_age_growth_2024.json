@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Heatmap of estimated change in TV audience reach by age group for AFL and NRL, calendar years 2023 to 2024. Growth percentages transcribed from Roy Morgan Finding 9842, March 2025.",
+  "description": "TV reach percentage growth by age; a single light-to-dark teal ramp encodes quantitative growth. Tooltip shows actual survey estimates.",
   "data": {
     "url": "data/afl_nrl_age_growth_2023_2024.csv",
     "format": {
@@ -31,7 +31,7 @@
       "axis": {
         "title": "Viewer age group",
         "labelAngle": 0,
-        "labelColor": "#102c37",
+        "labelColor": "#15313D",
         "labelFontSize": 13,
         "labelPadding": 10,
         "titleColor": "#526873",
@@ -56,7 +56,7 @@
         "title": null,
         "labelFontWeight": "bold",
         "labelFontSize": 16,
-        "labelColor": "#102c37",
+        "labelColor": "#15313D",
         "labelPadding": 12,
         "ticks": false,
         "domain": false
@@ -65,13 +65,6 @@
         "paddingInner": 0.1,
         "paddingOuter": 0.05
       }
-    },
-    "opacity": {
-      "condition": {
-        "test": "(ageFocus === 'All ages' || datum.age_group === ageFocus) && (sportFocus === 'Both sports' || datum.sport === sportFocus)",
-        "value": 1
-      },
-      "value": 0.12
     }
   },
   "layer": [
@@ -90,8 +83,8 @@
               7
             ],
             "range": [
-              "#eaf4ef",
-              "#087b73"
+              "#E2F1EC",
+              "#087B73"
             ]
           },
           "legend": {
@@ -157,7 +150,7 @@
             "test": "datum.growth_pct >= 4.0",
             "value": "#ffffff"
           },
-          "value": "#102c37"
+          "value": "#15313D"
         }
       }
     }
@@ -169,28 +162,17 @@
     },
     "axis": {
       "labelFont": "Barlow",
-      "titleFont": "Barlow"
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873",
+      "gridColor": "#E7EEEB"
+    },
+    "legend": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#15313D"
     }
   },
-  "params": [
-    {
-      "name": "ageFocus",
-      "value": "All ages",
-      "bind": {
-        "input": "select",
-        "options": [
-          "All ages",
-          "Under 35",
-          "35–49",
-          "50–64",
-          "65+"
-        ],
-        "name": "Focus on age: "
-      }
-    },
-    {
-      "name": "sportFocus",
-      "value": "Both sports"
-    }
-  ]
+  "background": null
 }

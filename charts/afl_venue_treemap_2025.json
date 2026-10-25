@@ -51,9 +51,9 @@
         "color": {
           "condition": {
             "test": "datum.is_mcg == 1",
-            "value": "#087b73"
+            "value": "#087B73"
           },
-          "value": "#8faea8"
+          "value": "#A9C0BB"
         },
         "tooltip": [
           {
@@ -84,14 +84,7 @@
             "format": ",.0f",
             "title": "Games hosted"
           }
-        ],
-        "opacity": {
-          "condition": {
-            "test": "(stateFocus === 'ALL' || datum.state === stateFocus) && (venueFocus === 'All venues' || datum.venue === venueFocus)",
-            "value": 1
-          },
-          "value": 0.12
-        }
+        ]
       }
     },
     {
@@ -149,13 +142,6 @@
         "text": {
           "field": "short_name",
           "type": "nominal"
-        },
-        "opacity": {
-          "condition": {
-            "test": "(stateFocus === 'ALL' || datum.state === stateFocus) && (venueFocus === 'All venues' || datum.venue === venueFocus)",
-            "value": 1
-          },
-          "value": 0.12
         }
       }
     }
@@ -168,26 +154,18 @@
     "axis": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
-      "labelColor": "#102c37",
+      "labelColor": "#526873",
       "titleColor": "#526873",
       "labelFontSize": 12,
-      "titleFontSize": 12
+      "titleFontSize": 12,
+      "gridColor": "#E7EEEB"
     },
     "legend": {
       "labelFont": "Barlow",
       "titleFont": "Barlow",
       "labelColor": "#526873",
-      "titleColor": "#526873"
+      "titleColor": "#15313D"
     }
   },
-  "params": [
-    {
-      "name": "venueFocus",
-      "value": "All venues"
-    },
-    {
-      "name": "stateFocus",
-      "value": "ALL"
-    }
-  ]
+  "background": null
 }

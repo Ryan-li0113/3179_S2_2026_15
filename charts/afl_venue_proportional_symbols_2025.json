@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Proportional symbol map of total AFL match attendance by stadium across Australia for 2025, including finals. Circle AREA is proportional to attendance. All 18 AFL Tables venues included. Coordinates are approximate stadium locations. Choose a stadium from the dropdown for an accessible venue lookup. Melbourne MCG and Docklands are also shown separately in a zoomed detailed view.",
+  "description": "Interactive proportional symbol map with a single venue locator, necessary for overlapping stadium locations; otherwise hover-only.",
   "width": "container",
-  "height": 490,
+  "height": 420,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -21,8 +21,8 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#edf2f0",
-        "stroke": "#a8c0bc",
+        "fill": "#EFF4F1",
+        "stroke": "#A9C0BB",
         "strokeWidth": 1.15
       },
       "encoding": {
@@ -52,7 +52,7 @@
       },
       "mark": {
         "type": "circle",
-        "color": "#d66b44",
+        "color": "#087B73",
         "opacity": 0.75,
         "stroke": "#ffffff",
         "strokeWidth": 1.15,
@@ -92,7 +92,7 @@
               3000000
             ],
             "format": ".2s",
-            "symbolFillColor": "#d66b44",
+            "symbolFillColor": "#087B73",
             "symbolStrokeColor": "#ffffff",
             "symbolOpacity": 0.75,
             "titleColor": "#526873",
@@ -151,10 +151,10 @@
         ],
         "opacity": {
           "condition": {
-            "test": "(stateFocus === 'ALL' || datum.state === stateFocus) && (venueFocus === 'All venues' || datum.venue === venueFocus)",
-            "value": 0.85
+            "test": "venueFocus === 'All venues' || datum.venue === venueFocus",
+            "value": 0.86
           },
-          "value": 0.09
+          "value": 0.07
         }
       }
     }
@@ -166,17 +166,48 @@
     },
     "legend": {
       "labelFont": "Barlow",
-      "titleFont": "Barlow"
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#15313D"
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow",
+      "labelColor": "#526873",
+      "titleColor": "#526873",
+      "gridColor": "#E7EEEB"
     }
   },
   "params": [
     {
       "name": "venueFocus",
-      "value": "All venues"
-    },
-    {
-      "name": "stateFocus",
-      "value": "ALL"
+      "value": "All venues",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All venues",
+          "Adelaide Oval",
+          "Barossa Park",
+          "Bellerive Oval",
+          "Carrara (People First Stadium)",
+          "Docklands (Marvel Stadium)",
+          "Eureka Stadium (Mars Stadium)",
+          "Gabba",
+          "Hands Oval",
+          "Kardinia Park (GMHBA Stadium)",
+          "Manuka Oval",
+          "Marrara Oval (TIO Stadium)",
+          "Melbourne Cricket Ground (MCG)",
+          "Norwood Oval",
+          "Perth Stadium (Optus Stadium)",
+          "Sydney Cricket Ground (SCG)",
+          "Sydney Showground (ENGIE Stadium)",
+          "Traeger Park",
+          "York Park (UTAS Stadium)"
+        ],
+        "name": "Locate a stadium: "
+      }
     }
-  ]
+  ],
+  "background": null
 }

@@ -1,0 +1,241 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Vega Sankey/alluvial flow: every 2025 AFL stadium attendance allocated to its state of venue and either home-and-away or finals. Flow width is linearly proportional to actual crowd entries (8,257,027 total).",
+  "width": 1010,
+  "height": 485,
+  "padding": {
+    "top": 9,
+    "left": 0,
+    "right": 0,
+    "bottom": 9
+  },
+  "background": null,
+  "data": [
+    {
+      "name": "links",
+      "url": "data/afl_state_phase_sankey_links_2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "attendance": "number",
+          "share_pct": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "as": "colour",
+          "expr": "datum.phase === 'Finals' ? '#527B93' : '#087B73'"
+        }
+      ]
+    },
+    {
+      "name": "nodes",
+      "url": "data/afl_state_phase_sankey_nodes_2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "x": "number",
+          "y": "number",
+          "height": "number",
+          "attendance": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "as": "colour",
+          "expr": "datum.kind === 'phase' ? (datum.node === 'Finals' ? '#527B93' : '#087B73') : '#15313D'"
+        }
+      ]
+    },
+    {
+      "name": "phase_nodes",
+      "source": "nodes",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.kind === 'phase'"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 14
+          },
+          "y": {
+            "value": 16
+          },
+          "text": {
+            "value": "VENUE STATE"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#526873"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 810
+          },
+          "y": {
+            "value": 16
+          },
+          "text": {
+            "value": "MATCH PHASE"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#526873"
+          }
+        }
+      }
+    },
+    {
+      "type": "path",
+      "from": {
+        "data": "links"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "field": "path"
+          },
+          "fill": {
+            "field": "colour"
+          },
+          "fillOpacity": {
+            "value": 0.43
+          },
+          "tooltip": {
+            "signal": "datum.state + ' → ' + datum.phase + ': ' + format(datum.attendance, ',') + ' attendances (' + format(datum.share_pct, '.1f') + '% of all)'"
+          }
+        },
+        "hover": {
+          "fillOpacity": {
+            "value": 0.9
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "nodes"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "width": {
+            "value": 19
+          },
+          "height": {
+            "field": "height"
+          },
+          "fill": {
+            "field": "colour"
+          },
+          "tooltip": {
+            "signal": "datum.node + ': ' + format(datum.attendance, ',') + ' attendances'"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "nodes"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.kind === 'state' ? datum.x - 10 : datum.x + 30"
+          },
+          "y": {
+            "signal": "datum.y + datum.height / 2"
+          },
+          "align": {
+            "signal": "datum.kind === 'state' ? 'right' : 'left'"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "field": "node"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#15313D"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "phase_nodes"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x + 30"
+          },
+          "y": {
+            "signal": "datum.y + datum.height / 2 + 17"
+          },
+          "text": {
+            "signal": "format(datum.attendance / 1000000, '.2f') + 'm entries'"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#526873"
+          }
+        }
+      }
+    }
+  ]
+}
