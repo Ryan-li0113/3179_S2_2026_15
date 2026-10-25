@@ -43,6 +43,10 @@ Author: Ryan Li · University assignment · October 2026.
 - AFL Tables 18 stadiums, attendance total 8,257,027 (100% of venue entries). No missing Other category.
 - Squarified rectangle areas are proportional to each venue total; MCG share is 37.8%. Entries are not unique spectators.
 
+## Figure 12 — Rank by total versus average per match
+- AFL Tables 2025 venue data. Ranks are computed among ALL 18 venues separately by total crowd entries and average game crowd.
+- The display includes the top eight venues by total, but the ranks still refer to all 18 venues. Marvel is 2nd by total, 5th by average.
+
 ## Code and attribution
 - Chart specifications: Vega-Lite v5 JSON in charts/. Derived CSV/GeoJSON datasets in data/.
 - AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.

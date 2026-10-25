@@ -7,5 +7,6 @@ Seven sequential, reviewable GitHub commits:
 - **Viz 9:** AFL 2015–26 season-phase attendance heatmap · `Add viz 9 AFL season crowd intensity heatmap`
 - **Viz 10:** AFL 2024–25 crowd change waterfall · `Add viz 10 AFL 2024-25 crowd change waterfall`
 - **Viz 11:** Complete 18-venue 2025 crowd treemap · `Add viz 11 complete AFL venue treemap`
+- **Viz 12:** 2025 stadium rankings versus average crowds per game · `Add viz 12 venue rank shift and final narrative`
 
-Current version: **11/12 figures**
+Current version: **12/12 figures**

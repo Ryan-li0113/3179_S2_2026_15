@@ -158,7 +158,7 @@
 </ol>
 </aside>
 </section>
-<div class="status"><strong>In development · Figures 1–11.</strong> 11 of 12 planned figures implemented. Data and visualisations are cited within each chart.</div>
+<div class="status"><strong>12 data visualisations · 3 distinct map idioms.</strong> Explore the charts and choose a filter to investigate patterns. All figures have linked source specifications.</div>
 <section aria-labelledby="intro-title" class="story-intro">
 <p class="eyebrow">Introduction</p>
 <h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
@@ -310,9 +310,16 @@
 <p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, attendances by venue for 2025</a>. The same 18 venues and total are used in Figures 7, 8, 11 and 12. Hover a tile for venue and exact share.</p>
 </div>
 <p class="viz-label">Figure 11 · Vega-Lite source specification: <a href="charts/afl_venue_treemap_2025.json">JSON</a> · <a href="data/afl_venue_treemap_2025.csv">CSV / data</a>.</p>
-
-
-
+<div class="chart-card" style="margin-top:24px">
+<p class="chart-kicker">Figure 12 / The role of match volume · Advanced rank-shift diagram</p>
+<h3>Marvel ranks second for total crowds but fifth per game</h3>
+<p class="chart-description">This diagram compares the top eight stadiums <em>by annual attendance</em> with their position when ranked by attendance <em>per game</em>. Both rankings are calculated across all 18 venues before the top eight are selected. Choose one stadium to trace it.</p>
+<div aria-label="Marvel ranks second for total crowds but fifth per game" class="chart-frame" id="chart-venue-rank" role="group"></div>
+<p class="chart-insight"><strong>Key finding:</strong> Marvel Stadium drops from 2nd in total entries to 5th by average attendance per game. Optus Stadium rises from 4th to 2nd. A stadium hosting many matches can rank highly for total crowds without having the highest average crowd.</p>
+<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 venue crowd totals and games</a>. The two measures answer different questions; neither is a ranking of stadium quality.</p>
+</div>
+<p class="viz-label">Figure 12 · Vega-Lite source specification: <a href="charts/afl_venue_rank_shift_2025.json">JSON</a> · <a href="data/afl_venue_rank_shift_2025.csv">CSV / data</a>.</p>
+<div class="chart-insight conclusion"><strong>Conclusion:</strong> AFL has greater nationwide TV reach than NRL in the latest Roy Morgan estimates, but reach, streaming habits and match attendances describe different behaviours. Broadcasting rights vary by state; match crowds concentrate in a few major venues, and attendance comparisons change substantially when the number of games is taken into account. Explore the controls to test these differences yourself.</div>
 </section>
 </main>
 <footer>
@@ -348,6 +355,7 @@
   showVegaChart("chart-attendance-heatmap", "afl_attendance_heatmap_2015_2026.json");
   showVegaChart("chart-crowd-waterfall", "afl_crowd_waterfall_2024_2025.json");
   showVegaChart("chart-venue-treemap", "afl_venue_treemap_2025.json");
+  showVegaChart("chart-venue-rank", "afl_venue_rank_shift_2025.json");
   showVegaChart("chart-melbourne-zoom", "afl_melbourne_stadium_zoom_2025.json");
 </script>
 </body>
