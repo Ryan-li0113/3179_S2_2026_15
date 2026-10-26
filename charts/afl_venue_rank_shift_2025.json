@@ -182,6 +182,17 @@
           "tooltip": {
             "signal": "datum.short+': rank '+datum.left_rank+' for total entries; rank '+datum.right_rank+' for crowd per match ('+ format(datum.avg_crowd,',')+')"
           }
+        },
+        "update": {
+          "opacity": {
+            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
+          },
+          "stroke": {
+            "signal": "datum.venue === chosenVenue ? '#087B73' : datum.col"
+          },
+          "strokeWidth": {
+            "signal": "datum.venue === chosenVenue ? 5 : (datum.shift==0 ? 2.2 : 3.7)"
+          }
         }
       }
     },
@@ -211,6 +222,14 @@
           "strokeWidth": {
             "value": 1.5
           }
+        },
+        "update": {
+          "opacity": {
+            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
+          },
+          "fill": {
+            "signal": "datum.venue === chosenVenue ? '#087B73' : datum.col"
+          }
         }
       }
     },
@@ -239,6 +258,14 @@
           },
           "strokeWidth": {
             "value": 1.5
+          }
+        },
+        "update": {
+          "opacity": {
+            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
+          },
+          "fill": {
+            "signal": "datum.venue === chosenVenue ? '#087B73' : datum.col"
           }
         }
       }
@@ -278,6 +305,11 @@
           "fill": {
             "value": "#15313D"
           }
+        },
+        "update": {
+          "opacity": {
+            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
+          }
         }
       }
     },
@@ -316,8 +348,19 @@
           "fill": {
             "value": "#15313D"
           }
+        },
+        "update": {
+          "opacity": {
+            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
+          }
         }
       }
+    }
+  ],
+  "signals": [
+    {
+      "name": "chosenVenue",
+      "value": "All venues"
     }
   ]
 }

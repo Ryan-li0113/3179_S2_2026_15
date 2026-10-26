@@ -1,0 +1,230 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Schematic equal-area hexagonal state tile map of 2025 AFL match attendance by stadium location, with 8 geographic units. Tiles are equal size, colour encodes total crowd entries. It is a tile map (not actual state area).",
+  "width": 900,
+  "height": 595,
+  "padding": 0,
+  "background": null,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "signals": [
+    {
+      "name": "stateFocus",
+      "value": "",
+      "on": [
+        {
+          "events": "@stateTile:click",
+          "update": "stateFocus===datum.state ? \"\" : datum.state"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "tiles",
+      "url": "data/afl_state_hex_tiles_2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "total_attendance": "number",
+          "share_pct": "number",
+          "matches": "number",
+          "venues": "number",
+          "cx": "number",
+          "cy": "number"
+        }
+      }
+    }
+  ],
+  "scales": [
+    {
+      "name": "tealShade",
+      "type": "sqrt",
+      "domain": [
+        0,
+        4766448
+      ],
+      "range": [
+        "#E2F0EC",
+        "#087B73"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "name": "stateTile",
+      "from": {
+        "data": "tiles"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "field": "path"
+          },
+          "fill": {
+            "scale": "tealShade",
+            "field": "total_attendance"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 4
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "datum.state_name + ': ' + format(datum.total_attendance,',') + ' entries \u00b7 ' + format(datum.share_pct,'.1f') + '% of Australia \u00b7 ' + datum.matches + ' matches'"
+          }
+        },
+        "update": {
+          "stroke": {
+            "signal": "stateFocus===datum.state ? '#15313D' : '#ffffff'"
+          },
+          "strokeWidth": {
+            "signal": "stateFocus===datum.state ? 5 : 4"
+          }
+        },
+        "hover": {
+          "stroke": {
+            "value": "#D66B44"
+          },
+          "strokeWidth": {
+            "value": 5
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "tiles"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "cx"
+          },
+          "y": {
+            "signal": "datum.cy-19"
+          },
+          "text": {
+            "field": "state"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fontSize": {
+            "value": 22
+          },
+          "fill": {
+            "signal": "datum.share_pct > 35 ? '#ffffff' : '#15313D'"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "tiles"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "cx"
+          },
+          "y": {
+            "signal": "datum.cy+13"
+          },
+          "text": {
+            "field": "label"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 20
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "signal": "datum.share_pct > 35 ? '#ffffff' : '#15313D'"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 42
+          },
+          "y": {
+            "value": 40
+          },
+          "text": {
+            "value": "EQUAL-AREA STATE TILES"
+          },
+          "fill": {
+            "value": "#526873"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "font": {
+            "value": "Barlow"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 42
+          },
+          "y": {
+            "value": 568
+          },
+          "text": {
+            "value": "Schematic regional layout \u00b7 not to geographic scale \u00b7 venues grouped by stadium state"
+          },
+          "fill": {
+            "value": "#526873"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "font": {
+            "value": "Barlow"
+          }
+        }
+      }
+    }
+  ]
+}
