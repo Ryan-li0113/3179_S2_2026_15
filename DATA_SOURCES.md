@@ -13,9 +13,11 @@ Author: Ryan Li · University assignment · October 2026.
 - VIC / TAS / NT: 25 weeks; NSW / QLD / ACT: 11; SA / WA: 9. These are specific broadcast arrangement windows, NOT viewership.
 - Simplified cartographic state outlines: https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson
 
-## Figure 5 — AFL stadium crowd proportional symbols and Melbourne detail
+## Figure 5 — Schematic tile-glyph map of crowd intensity by host state (NEW)
 - AFL Tables, attendance by venue, 2025: https://www.afltables.com/afl/crowds/2025.html
-- All 18 AFL Tables venues: 8,257,027 event entries, not unique fans. MCG: 3,120,416. The Melbourne close-up shares the same records.
+- `data/afl_state_matchday_tiles_2025.csv`: grouped all 18 venue records by the state/territory **hosting the match**, not fan residence. State average per game is SUM(entries) / SUM(matches); 8 state totals sum to 8,257,027 entries. Bars share a fixed 0–65,000 average-per-game scale.
+- `charts/afl_state_matchday_tile_glyph_map_2025.json` is a **schematic rectangular tile-grid map with embedded bar glyphs**, not a land-area choropleth or proportional stadium symbol map. Equal tile area prevents Victoria's larger total distorting state geography. Clicking a state crossfilters Figures 8, 11, 12, and 14 and highlights Figure 13.
+- Figure 5's previous stadium point map and Melbourne inset are no longer displayed; their old files may remain archived in `charts/`.
 
 ## Figure 6 — Australian viewing category changes (slope)
 - ACMA, How we watch and listen to content, executive summary (March 2026): https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf
@@ -29,7 +31,7 @@ Author: Ryan Li · University assignment · October 2026.
 ## Figure 8 — AFL venue attendance hexagonal bin map
 - AFL Tables 2025 18 venues, same source as Figure 5.
 - Venue longitude/latitude projected to Australian Albers EPSG:3577, binned at radius 175 km, attendance summed per bin, and geometries reprojected to EPSG:4326.
-- Nine equal-area spatial bins total 8,257,027 entries; each venue assigned to one bin. Boundaries are analytical, not state boundaries.
+- Nine equal-area spatial bins total 8,257,027 entries in the national view; each venue assigned to one bin. Selecting a state in Figure 5 recalculates each bin from only that state’s venues. For bins crossing ACT/NSW, only the relevant stadiums are counted. Boundaries are analytical, not state boundaries.
 
 ## Figure 9 — Home-and-away versus finals intensity (2015–26)
 - AFL Tables season totals and match counts: https://www.afltables.com/afl/crowds/summary.html
@@ -40,15 +42,15 @@ Author: Ryan Li · University assignment · October 2026.
 - Home-and-away change −97,161, finals change +67,417 = net −29,744 entries. The horizontal bars are DELTAS, not raw annual totals.
 
 ## Figure 11 — Complete 2025 stadium treemap
-- AFL Tables 18 stadiums, attendance total 8,257,027 (100% of venue entries). No missing Other category.
-- Squarified rectangle areas are proportional to each venue total; MCG share is 37.8%. Entries are not unique spectators.
+- In the national view, AFL Tables all 18 stadiums total 8,257,027 entries (100%; no missing Other category).
+- Selecting a host state filters the venues and recomputes all rectangles and percentages to total 100% **within the selected state**, not nationally. MCG national share is 37.8%, while the Victorian share is 65.5%. Entries are not unique spectators.
 
 ## Figure 12 — Rank by total versus average per match
-- AFL Tables 2025 venue data. Ranks are computed among ALL 18 venues separately by total crowd entries and average game crowd.
-- The display includes the top eight venues by total, but the ranks still refer to all 18 venues. Marvel is 2nd by total, 5th by average.
+- AFL Tables 2025 venue data. In the national view, the eight busiest venues are compared by total crowd entries and average game crowd. Marvel is second by total and fifth by average among those eight.
+- In a selected state, ranks are **recomputed among only the stadiums in that state**; the scope label and text update automatically. The national statistic should never be quoted as a state-only statistic.
 
 ## Code and attribution
-- Chart specifications: Vega-Lite v5 (Figures 1–12 and 14) plus Vega v5 (Figure 13) JSON in charts/. Derived CSV/GeoJSON datasets in data/.
+- Chart specifications: Vega-Lite and Vega v5 in `charts/`; the tile-glyph map, spatial hexbin, Sankey and rank slopegraph use Vega, while other charts use Vega-Lite. Derived CSV/GeoJSON datasets are in `data/`. Dynamic linked interactions are implemented in `interaction.js` and preserve the on-disk JSON specifications.
 - AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.
 
 
@@ -64,15 +66,19 @@ Author: Ryan Li · University assignment · October 2026.
 - Quantitative geographic and attendance patterns use a consistent sequential teal scheme, with light-to-dark for small-to-large.
 - Four ACMA video categories use a separate categorical palette that is exactly matched between Figures 6 and 7: paid streaming blue `#2B5E86`, broadcast FTA amber `#A27B3D`, short-form violet `#7B6A9A`, catch-up green-grey `#6B9588`. These categories overlap and are not portions of a single whole.
 - Positive/negative waterfall uses teal and muted ochre; rank-shift highlights Marvel in ochre. The two Sankey match phases are coloured teal and steel blue. These section-local semantic roles are distinct from AFL versus NRL sport identification.
-- The only selector retained is the venue locator on Figure 5, because nearby map symbols overlap and it is needed for identification. All other charts use direct hover inspection without redundant filters.
+- The only persistent filter is an analytical **host-state selection** made by directly clicking the Figure 5 tile map (or Figure 4). This is shared across Figures 8, 11, 12, 13 and 14; the effect is a real data recalc for Figures 8, 11, 12 and 14, not simply opacity changes. Figure 13 dims nonselected state ribbons without changing absolute national flow widths.
 - The on-screen grey JSON/CSV source panels are removed, while dated data sources and measurement caveats stay directly under the figures.
 
 ### Editorial design corrections (October 2026)
 - Figure 8 uses the original nine 2025 equal-area AFL attendance bins from `data/afl_hexbin_2025.geojson`, with path coordinates preprojected into `data/afl_hexbin_map_paths_2025.csv` in Australian Albers (EPSG:3577). Map labels are approximate. No new audience or venue claims were introduced.
 - Figure 10 uses the unchanged 2024→2025 AFL Tables changes; `data/afl_waterfall_bridge_2024_2025.csv` explicitly stores cumulative start and end values.
 - Figure 12 uses the unchanged top-eight comparison, reshaped into `data/afl_rank_slope_compact_2025.csv`; ranks are computed among all 18 venues.
-- Figure 5 inspector derives match count, mean crowd and national share directly from existing `data/afl_venue_attendance_2025.csv`; no separate second map or extra figure count.
+- The retired Figure 5 stadium finder was replaced with a state-level tile-glyph map; average-per-match values are calculated from `data/afl_venue_attendance_2025.csv`.
 
 
-### Figure 8 alternative state tile map (editorial redesign)
-This is a schematic, equal-size hexagonal state/territory tile map derived entirely from the same AFL Tables 2025 By Venue 18-stadium data used in Figure 5. It is an alternative geographic aggregation, not an additional counted figure. State totals sum to 8,257,027 entries. The schematic map is explicitly NOT to geographic scale. Visualisation: charts/afl_state_hex_tiles_2025.json; computed dataset: data/afl_state_hex_tiles_2025.csv.
+### October 2026 linked geographic analysis revision
+- Figure 5 is a **different map idiom** from Figures 4 and 8: a rectangular state tile-grid with quantitative bar glyphs for average crowd per match. It takes the place of the proportional symbol stadium map, which is no longer called by `index.html`.
+- Figure 8 now shows only the nine venue clusters (hexbin map); the earlier hexagonal state-tile toggle is retired. The retired JSON/CSV may remain in the repository but are not displayed.
+- Selecting a host state via a Figure 5 tile (or clicking a state on Figure 4) runs a true connected filter: Figure 8 totals, Figure 11 treemap shares, Figure 12 ranks and Figure 14 concentration curve are recalculated from matching venue rows. Figure 13 highlights the matching ribbons but keeps nationally scaled widths so comparisons remain valid. Every connected text insight and Figure 11 venue reference list is also state-aware.
+- `interaction.js` implements client-side linking. There is exactly one geographic filter state; no redundant figure-specific dropdowns.
+- The site still has **three distinct mapping idioms**: choropleth (4), schematic state tile/glyph map (5), and equal-area spatial hexagonal bin map (8).

@@ -24,3 +24,11 @@ Suggested commit message: `Refine visual design and add Sankey and Lorenz analys
 - Sticky section navigation, reading progress and accessible reduced-motion scroll reveal; source definitions and all 14 figures retained.
 
 - 2026-10-26: Rebuilt the 14-figure dashboard into an editorial scrollytelling layout. Added a genuinely different aggregation switch to Figure 8 (equal-area venue-cluster hexbin vs equal-size state tile map), meaningful region details, accessible venue directory under Figure 11, unified the visual hierarchy and colours, and polished viewport-aware chart scaling and source readability. Preserved all original published statistical data.
+
+
+## Linked map and cross-visual filtering revision — 26 October 2026
+- Replaced retired Figure 5 overlapping proportional symbols with a schematic state tile-glyph map showing *average crowd per match*, fixtures hosted and annual entries by match location. Source: the existing 18 verified AFL venue records, no fabricated crowds.
+- Removed the duplicate alternative state tile view from Figure 8; retained the true nine-cell geographic venue hexbin.
+- Added one shared state selection to `interaction.js`. Clicking the state map (or choropleth) recomputes Figure 8 hex totals, Figure 11 treemap percentages, Figure 12 within-state rankings, and Figure 14 Lorenz curve; Figure 13 Sankey flow highlights the corresponding state. A reset restores the original national scope.
+- Replaced static national-only chart takeaways with state-aware text where chart populations change. Updated Figure 11 reference list to match the selected venues.
+- Verified crossfilter numerics in a simulated-browser test: VIC 4,766,448 / four venues, NSW 496,973 / two venues, and reset 8,257,027 / 18 venues. Full external Vega browser-rendering verification remains for GitHub Pages after deployment.
