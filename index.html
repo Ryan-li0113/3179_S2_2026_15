@@ -10,290 +10,83 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Barlow:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
-    :root {
-      --ink: #102c37;
-      --muted: #526873;
-      --dark: #102c37;
-      --paper: #f7f5f0;
-      --white: #ffffff;
-      --teal: #087b73;
-      --coral: #d66b44;
-      --line: #dce4e1;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; color: var(--ink); background: var(--paper); font: 400 16px/1.55 "Barlow", Arial, sans-serif; }
-    a { color: inherit; }
-    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
-    .top-rule { height: 7px; background: linear-gradient(90deg, var(--teal) 0 62%, var(--coral) 62% 100%); }
-    .masthead { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 23px 0; border-bottom: 1px solid var(--line); }
-    .brand { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 23px; font-weight: 800; letter-spacing: .045em; line-height: 1; text-transform: uppercase; }
-    .brand span { color: var(--teal); }
-    .course { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-align: right; text-transform: uppercase; color: var(--muted); }
-    .hero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(270px, .75fr); gap: clamp(32px, 6vw, 85px); align-items: center; padding: 84px 0 88px; }
-    .eyebrow { display: flex; align-items: center; gap: 11px; margin: 0 0 20px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
-    .eyebrow:before { content: ""; width: 27px; height: 3px; background: currentColor; }
-    h1, h2, h3, p { margin-top: 0; }
-    h1, h2, h3 { font-family: "Barlow Condensed", Impact, sans-serif; }
-    h1 { max-width: 710px; margin-bottom: 24px; font-size: clamp(64px, 9vw, 118px); line-height: .88; font-weight: 800; letter-spacing: -.025em; text-transform: uppercase; }
-    h1 span { color: var(--teal); }
-    .lede { max-width: 600px; margin-bottom: 27px; color: #465e69; font-size: clamp(18px, 2.2vw, 21px); line-height: 1.55; }
-    .tags { display: flex; flex-wrap: wrap; gap: 9px; }
-    .tag { border: 1px solid #c5d3d0; border-radius: 30px; padding: 6px 13px; color: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: .055em; text-transform: uppercase; }
-    .overview { overflow: hidden; color: var(--white); background: var(--dark); border-radius: 6px; box-shadow: 14px 14px 0 #e5e9e4; }
-    .overview-top { padding: 22px 26px; background: #173e49; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-    .overview ol { margin: 0; padding: 13px 26px 24px; list-style: none; counter-reset: item; }
-    .overview li { display: flex; align-items: start; gap: 18px; padding: 16px 0; border-bottom: 1px solid #32515b; font-size: 16px; font-weight: 600; line-height: 1.3; }
-    .overview li:last-child { border-bottom: 0; }
-    .overview li:before { counter-increment: item; content: "0" counter(item); color: #6cc7bc; font: 800 23px/1 "Barlow Condensed", Impact, sans-serif; }
-    .status { margin: 0 0 72px; padding: 17px 24px; border-left: 5px solid var(--coral); background: #eaece7; color: var(--muted); font-size: 14px; }
-    .status strong { color: var(--ink); }
-    .story-intro { max-width: 730px; padding-bottom: 70px; }
-    .story-intro h2 { margin: 0 0 14px; font-size: 44px; line-height: 1; font-weight: 800; text-transform: uppercase; }
-    .story-intro p:last-child { margin-bottom: 0; color: var(--muted); font-size: 17px; }
-    .chapter { padding: 58px 0 83px; border-top: 1px solid var(--line); }
-    .chapter-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(240px, .75fr); gap: 30px; align-items: end; margin-bottom: 29px; }
-    .chapter-number { display: block; margin-bottom: 10px; color: var(--teal); font: 800 20px/1 "Barlow Condensed", Impact, sans-serif; letter-spacing: .09em; }
-    .chapter h2 { max-width: 760px; margin: 0; font-size: clamp(37px, 5.2vw, 59px); line-height: .98; text-transform: uppercase; font-weight: 800; }
-    .chapter-heading p { max-width: 430px; margin: 0 0 3px; color: var(--muted); font-size: 16px; }
-    .viz-label { margin: 13px 0 0; color: var(--muted); font-size: 12px; letter-spacing: .01em; }
-    .chart-card { padding: clamp(20px, 3.5vw, 42px); border: 1px solid var(--line); border-radius: 7px; background: #fff; }
-    .chart-kicker { margin: 0 0 4px; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-    .chart-card h3 { margin: 0 0 8px; font-size: clamp(25px, 3.4vw, 36px); line-height: 1.1; font-weight: 800; }
-    .chart-description { max-width: 710px; margin: 0 0 20px; color: var(--muted); font-size: 15px; }
-    .chart-frame { min-height: 245px; width: 100%; }
-    .chart-map { min-height: 520px; }
-    .map-summary { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin-top: 12px; }
-    .map-summary div { display: flex; flex-direction: column; gap: 5px; padding: 13px 15px; background: #eff5f1; border-top: 3px solid var(--teal); }
-    .map-summary strong { color: var(--ink); font: 800 24px/1.1 "Barlow Condensed", Impact, sans-serif; }
-    .map-summary span { font-size: 12px; color: var(--muted); }
-    @media (max-width:760px) { .chart-map { min-height: 350px; } .map-summary { grid-template-columns: 1fr; } }
-
-    .chart-frame .vega-embed { width: 100%; }
-    .chart-frame .vega-embed > svg { width: 100%; }
-    .chart-insight { margin: 16px 0 0; padding: 14px 17px; background: #eff5f1; border-left: 4px solid var(--teal); font-size: 15px; }
-    .chart-footnote { margin: 13px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
-    .chart-footnote a { color: #076e67; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .error-text { color: #a12d24; }
-    .chart-key { display:flex; justify-content:flex-end; flex-wrap:wrap; gap: 18px; margin: 4px 0 10px; color:var(--muted); font-size:13px; font-weight:700; }
-    .chart-key span { display:inline-flex; align-items:center; gap:7px; }
-    .swatch { width:12px; height:12px; display:inline-block; border-radius:50%; }
-    .swatch-nrl { background:var(--coral); }
-    .swatch-afl { background:var(--teal); }
-    @media (max-width: 760px) { .chart-card { padding: 18px 14px; } .chart-frame { min-height: 225px; } }
-    footer { background: var(--dark); color: white; }
-    .footer-inner { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 28px; padding: 42px 0; }
-    .footer-inner h2 { margin-bottom: 12px; font-size: 29px; font-weight: 800; line-height: 1; text-transform: uppercase; }
-    .footer-inner p { max-width: 560px; margin-bottom: 0; color: #b5c8cc; font-size: 13px; }
-    .footer-meta { color: #b5c8cc; font-size: 13px; text-align: right; }
-    .footer-meta strong { color: #fff; }
-    @media (max-width: 760px) {
-      .wrap { width: min(100% - 32px, 1120px); }
-      .masthead { padding: 19px 0; }
-      .brand { font-size: 20px; }
-      .course { font-size: 10px; }
-      .hero { grid-template-columns: 1fr; gap: 44px; padding: 58px 0 65px; }
-      h1 { font-size: clamp(61px, 13vw, 87px); }
-      .overview { box-shadow: 8px 8px 0 #e5e9e4; }
-      .chapter-heading { grid-template-columns: 1fr; gap: 13px; }
-      .chapter { padding: 47px 0 65px; }
-      .story-intro { padding-bottom: 46px; }
-      .footer-meta { text-align: left; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-    .venue-topline { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:18px 0 4px; }
-    .venue-topline > div { padding:17px 18px; border:1px solid #dce4e1; border-radius:5px; background:#f7faf8; }
-    .venue-topline strong { display:block; font:800 clamp(23px,3vw,32px)/1.05 "Barlow Condensed",Impact,sans-serif; color:#087b73; }
-    .venue-topline span { display:block; margin-top:5px; font-size:12px; color:#526873; }
-    @media(max-width:600px) { .venue-topline { grid-template-columns:1fr; } }
-
-    /* Accessible controls generated by Vega-Lite bound parameters. */
-    .vega-bindings { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:14px 0 4px; padding:14px 16px; background:#f4f8f6; border:1px solid #dae6e1; border-radius:6px; color:#102c37; font:600 14px/1.5 "Barlow",Arial,sans-serif; }
-    .vega-bind { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
-    .vega-bind label { font-weight:700; }
-    .vega-bind select { max-width:100%; padding:9px 35px 9px 12px; border:1px solid #a5bdb5; border-radius:5px; background:white; color:#102c37; font:500 14px/1.4 "Barlow",Arial,sans-serif; cursor:pointer; }
-    .vega-bind select:focus-visible { outline:3px solid #d66b44; outline-offset:3px; }
-    .map-inset { margin-top:24px; padding:22px 24px; border:1px solid #dce4e1; border-radius:7px; background:linear-gradient(160deg,#f5f8f5,#e8f0ee); }
-    .map-inset-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; }
-    .map-inset h4 { font:800 26px/1.15 "Barlow Condensed",Impact,sans-serif; text-transform:uppercase; margin:0 0 6px; }
-    .map-inset-heading p { max-width:650px; color:#526873; font-size:14px; line-height:1.5; margin:0 0 12px; }
-    .inset-tag { flex:none; border:1px solid #b9d3cd; border-radius:18px; padding:6px 10px; font-size:10px; font-weight:800; letter-spacing:.09em; white-space:nowrap; color:#087b73; }
-    @media(max-width:600px){.map-inset{padding:16px 12px}.map-inset-heading{flex-direction:column}.inset-tag{margin-bottom:12px}}
-
-    /* Feedback-driven hierarchy / space / accessibility */
-    .context-note { border-left:4px solid #d66b44; background:#fff9ef; padding:14px 18px; margin:10px 0 24px; font:400 14px/1.65 "Barlow",sans-serif; color:#334953; }
-    .context-note strong { font-weight:700; }
-    .conclusion { margin:28px 0 10px; padding:24px 26px; font-size:16px; }
-    .chart-card h3 { line-height:1.22; }
-    .chart-card .chart-frame { min-height:170px; }
-    #chart-acma-waffle { max-width:780px; margin-inline:auto; }
-    #chart-afl-hexbins { min-height:440px; }
-    .chart-footnote a, .viz-label a { text-underline-offset:3px; }
-    @media(max-width:650px) { .chart-card { padding-left:15px; padding-right:15px; } .context-note { padding:12px 14px; } .chart-card h3 { overflow-wrap:break-word; } }
-  
-/* DV2 design system 2.0: compact editorial rhythm, no metadata bars or redundant controls. */
-:root { --ink:#15313D; --muted:#526873; --dark:#15313D; --teal:#087B73; --coral:#D66B44; --line:#DCE7E2; }
-body { background:#F8FAF7; color:var(--ink); }
-.wrap { width:min(1160px,calc(100% - 44px)); }
-.masthead { padding:13px 0; }
-.hero { display:block; padding:38px 0 22px; }
-.hero h1 { max-width:1050px; margin:0 0 14px; font-size:clamp(56px,8.2vw,100px); line-height:.95; }
-.hero .lede { max-width:950px; margin:0 0 15px; line-height:1.45; font-size:18px; }
-.hero .eyebrow { margin-bottom:14px; }
-.tags { gap:7px; margin-top:14px; }
-.tag { text-decoration:none; color:#15313D; border-color:#CCDCD6; padding:5px 11px; transition:background .15s; }
-.tag:hover { background:#E8F4EF; }
-.story-intro { max-width:1040px; padding:16px 0 20px; }
-.story-intro h2 { font-size:clamp(25px,3vw,36px); margin-bottom:8px; }
-.story-intro p:last-child { max-width:1000px; font-size:15px; line-height:1.5; }
-.chapter { padding:28px 0 34px; }
-.chapter-heading { margin-bottom:17px; gap:24px; align-items:center; }
-.chapter-number { font-size:15px; margin-bottom:7px; }
-.chapter h2 { font-size:clamp(32px,4.8vw,52px); }
-.chapter-heading p { font-size:14px; }
-.chart-card { padding:clamp(17px,2.5vw,28px); border-radius:7px; box-shadow:0 4px 22px rgba(21,49,61,.025); }
-.chart-card h3 { font-size:clamp(24px,3vw,33px); margin-bottom:6px; }
-.chart-kicker { font-size:11px; letter-spacing:.12em; margin-bottom:5px; }
-.chart-description { max-width:900px; margin-bottom:8px; font-size:14px; line-height:1.5; }
-.chart-card + .chart-card { margin-top:13px !important; }
-.chart-frame, .chart-card .chart-frame { min-height:0; overflow:hidden; }
-.chart-frame .vega-embed > svg, .chart-frame .vega-embed > canvas { max-width:100%; height:auto; }
-.chart-map, .chart-card .chart-map { min-height:365px; }
-/* Melbourne remains selectable in the national map; no duplicate inset. */
-#chart-acma-waffle { max-width:850px; margin:0 auto; }
-#chart-state-sankey { min-height:450px; }
-#chart-venue-lorenz { min-height:340px; }
-.chart-insight { padding:10px 14px; margin-top:10px; background:#EDF5F1; font-size:14px; line-height:1.5; }
-.chart-footnote { margin-top:8px; font-size:12px; line-height:1.45; }
-.map-summary { gap:8px; margin-top:6px; }
-.map-summary div { padding:9px 12px; }
-.map-inset { margin-top:13px; padding:15px 18px; }
-.venue-topline { gap:8px; margin:10px 0 0; }
-.venue-topline > div { padding:10px 14px; }
-.context-note { margin:12px 0 16px; padding:10px 14px; }
-.conclusion { margin:16px 0 5px; padding:14px 18px; }
-footer .footer-inner { padding:30px 0; }
-.vega-bindings { background:#F1F7F4; padding:9px 12px; border-color:#DEE9E4; margin:10px 0 0; }
-/* Suppress only the old redundant source-file captions, never cited methodology notes. */
-.viz-label,.linked-panel { display:none !important; }
-@media(max-width:760px) {
- .wrap { width:calc(100% - 28px); }
- .hero { padding:26px 0 18px; }
- .hero h1 { font-size:clamp(52px,12vw,78px); }
- .hero .lede { font-size:16px; }
- .chapter { padding:24px 0 28px; }
- .chapter-heading { gap:8px; }
- .chart-map,.chart-card .chart-map { min-height:280px; }
- .chart-card { padding:16px 12px; }
- .map-summary { grid-template-columns:1fr; }
- .chart-frame { overflow-x:auto; }
- #chart-state-sankey { min-height:0; }
-}
-
-/* 2026 editorial polish: larger useful graphics, controlled rhythm, legible 12–14-inch viewports. */
-html { scroll-padding-top:66px; }
-.wrap {width:min(1240px,calc(100% - 36px));}
-.story-nav { position:sticky;top:0;z-index:30;background:rgba(248,250,247,.96);backdrop-filter:blur(11px);border-bottom:1px solid #DCE7E2; }
-.nav-inner {min-height:48px;display:flex;align-items:center;gap:clamp(10px,2vw,32px);}
-.nav-key{font-size:10px;letter-spacing:.14em;font-weight:800;color:#779089;white-space:nowrap;}
-.story-nav a{padding:13px 2px 11px;border-bottom:2px solid transparent;text-decoration:none;font-weight:700;font-size:12px;color:#526873;white-space:nowrap;}
-.story-nav a[aria-current="location"]{color:#087B73;border-bottom-color:#087B73;}
-.story-nav a:hover{color:#087B73;}
-.nav-track{margin-left:auto;min-width:44px;flex:1;max-width:110px;height:3px;border-radius:4px;background:#DCE7E2;overflow:hidden;}
-.nav-track span{display:block;width:0;height:100%;background:#087B73;transition:width .14s linear;}
-.chapter {padding:32px 0 39px;scroll-margin-top:65px;}
-.chart-card{padding:clamp(20px,2.4vw,31px);margin-top:15px;}
-.chart-description {max-width:1080px;line-height:1.5;}
-.chart-frame .vega-embed{max-width:100%;}
-.venue-explorer{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(250px,.86fr);gap:18px;align-items:stretch;}
-.venue-explorer > .chart-frame {min-width:0;min-height:350px;}
-.stadium-inspector{border:1px solid #DCE7E2;border-radius:8px;background:linear-gradient(165deg,#F0F7F4,#F9FBF9);padding:22px 19px;display:flex;flex-direction:column;min-width:0;}
-.spotlight-overline{font-size:11px;letter-spacing:.12em;font-weight:800;color:#087B73;}
-.stadium-inspector h4{font:800 clamp(24px,2.8vw,34px)/1.07 'Barlow Condensed',sans-serif;margin:12px 0 6px;}
-.spotlight-sub{font-size:13px;color:#526873;line-height:1.45;min-height:42px;}
-.spotlight-primary{font:800 clamp(36px,4vw,48px)/1 'Barlow Condensed',sans-serif;color:#087B73;margin:15px 0;}
-.spotlight-primary span{font:600 12px/1.3 'Barlow',sans-serif;color:#526873;display:block;max-width:180px;margin-top:6px;}
-.spotlight-metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0;}
-.spotlight-metrics > div{padding:10px 8px;border-top:1px solid #c9dcd3;}
-.spotlight-metrics strong{display:block;color:#15313D;font:800 clamp(20px,2.4vw,27px)/1 'Barlow Condensed',sans-serif;}
-.spotlight-metrics span{font-size:11px;color:#526873;}
-.spotlight-track{height:8px;background:#DCE7E2;border-radius:99px;overflow:hidden;margin-top:auto;}
-.spotlight-track > div{height:100%;width:0;background:#087B73;transition:width .25s ease;}
-.spotlight-share{font-size:11px;color:#526873;margin:5px 0 10px;}
-.spotlight-takeaway{font-size:12px;line-height:1.45;color:#15313D;margin:0;}
-#chart-afl-hexbins{min-height:0;}
-#chart-crowd-waterfall,#chart-venue-rank{min-height:0;}
-.chart-card h3{max-width:1040px;}
-.card-reveal{opacity:0;transform:translateY(13px);transition:opacity .48s ease,transform .48s ease;}
-.card-reveal.is-visible{opacity:1;transform:none;}
-@media(max-width:900px){.nav-key{display:none}.nav-inner{gap:12px}.story-nav a{font-size:11px}.venue-explorer{grid-template-columns:1fr}.stadium-inspector{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}.stadium-inspector .spotlight-overline,.stadium-inspector h4,.stadium-inspector .spotlight-sub,.stadium-inspector .spotlight-takeaway{grid-column:1/-1}.spotlight-primary{margin:4px 0}.spotlight-metrics{margin:4px 0}.spotlight-track,.spotlight-share{grid-column:1/-1}.spotlight-track{margin-top:4px;}}
-@media(max-width:630px){.wrap{width:calc(100% - 22px)}.nav-inner{gap:8px}.story-nav a{font-size:10px;padding-inline:0}.nav-track{display:none}.chart-card{padding:15px 11px}.stadium-inspector{display:block;padding:15px}.chapter h2{font-size:36px}.chart-card h3{font-size:26px}}
-@media(prefers-reduced-motion:reduce){.card-reveal{opacity:1;transform:none;transition:none}.spotlight-track>div,.nav-track span{transition:none}}
-.chapter-bridge{margin:15px 0 0;padding:10px 0 0;border-top:1px dashed #CDDDD6;color:#526873;font-size:13px}.chapter-bridge span{font-size:10px;letter-spacing:.12em;font-weight:800;color:#087B73;margin-right:8px}</style>
+:root{--ink:#122e3a;--muted:#54707a;--dark:#102d38;--teal:#087b73;--coral:#d96c4a;--paper:#f5f7f3;--white:#fff;--pale:#e9f3ef;--line:#d6e1dc;--gold:#e1b16b;--max:1240px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;color:var(--ink);background:var(--paper);font:400 16px/1.5 'Barlow',Arial,sans-serif;text-rendering:optimizeLegibility}
+h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{font-family:'Barlow Condensed',Impact,sans-serif}a{color:inherit}.wrap{width:min(var(--max),calc(100% - 52px));margin-inline:auto}button,select{font:inherit}button{cursor:pointer}
+.site-top{height:5px;background:linear-gradient(90deg,var(--teal) 0 62%,var(--coral) 62% 100%)}
+.masthead{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px}.brand{font:800 21px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.08em}.brand span{color:var(--teal)}.course{font-size:10px;font-weight:800;letter-spacing:.14em;text-align:right;color:var(--muted)}
+.story-nav{position:sticky;top:0;z-index:30;background:rgba(246,249,245,.96);backdrop-filter:blur(15px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.nav-inner{display:flex;align-items:center;gap:clamp(12px,2.6vw,37px);min-height:46px}.nav-key{font-size:10px;letter-spacing:.18em;font-weight:800;color:var(--teal)}.story-nav a{font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;padding:13px 0 10px;border-bottom:3px solid transparent;color:#4f6770}.story-nav a:hover,.story-nav a[aria-current=location]{color:var(--ink);border-bottom-color:var(--teal)}.nav-track{margin-left:auto;flex:1;max-width:120px;background:#d5e3dc;height:3px;border-radius:3px;overflow:hidden}.nav-track span{display:block;width:0;height:100%;background:var(--coral)}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--dark);color:#fff;min-height:290px;padding:35px clamp(25px,5vw,60px) 31px;margin-top:12px;border-radius:10px}.hero-copy{position:relative;z-index:2;max-width:1040px}.hero-kicker{font-size:11px;color:#89d5c8;letter-spacing:.2em;font-weight:800;text-transform:uppercase;margin-bottom:15px}.hero h1{font-size:clamp(60px,7.4vw,105px);letter-spacing:-.025em;text-transform:uppercase;line-height:.83;font-weight:800;max-width:900px;margin:0 0 17px}.hero h1 em{font-style:normal;color:#82cbbc}.hero-lede{font-size:clamp(15px,1.8vw,19px);line-height:1.48;max-width:720px;color:#d3e0e2;margin:0 0 23px}.hero-bottom{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;font-weight:700;font-size:12px;color:#b9d5d4}.hero-scroll{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;border-bottom:1px solid #79b2ac;padding:8px 0}.hero-scroll:hover{color:#84d6c9}.hero-scroll svg{width:17px;height:17px}.hero-disc{position:absolute;z-index:0;width:420px;height:420px;right:-115px;top:-130px;border:75px solid rgba(117,200,186,.24);border-radius:50%}.hero-ring{position:absolute;width:275px;height:275px;right:35px;bottom:-180px;border:1px solid rgba(255,255,255,.25);border-radius:50%}.hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(120deg,transparent 0 33px,rgba(255,255,255,.019) 34px 35px);pointer-events:none}
+.story-intro{display:grid;grid-template-columns:240px 1fr;gap:35px;margin:0;padding:25px 5px 21px;border-bottom:1px solid var(--line)}.story-intro .eyebrow{margin:0;color:var(--teal);font-weight:800;font-size:11px;letter-spacing:.15em;text-transform:uppercase}.story-intro h2{font:800 27px/1.03 'Barlow Condensed';margin:0}.story-intro p:last-child{font-size:14px;line-height:1.65;color:var(--muted);margin:0;max-width:800px}
+.chapter{padding:29px 0 34px;scroll-margin-top:58px}.chapter+.chapter{border-top:1px solid var(--line)}.chapter-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.42fr);gap:26px;align-items:end;margin-bottom:18px;padding:0 2px}.chapter-number{font:800 13px/1 'Barlow Condensed';letter-spacing:.15em;color:var(--teal);display:block;margin-bottom:9px}.chapter h2{font-size:clamp(35px,4.5vw,58px);line-height:.96;text-transform:uppercase;font-weight:800;margin:0;max-width:860px}.chapter-heading>p{font-size:14px;color:var(--muted);margin:0;line-height:1.5}.chapter-pulse{display:flex;align-items:center;gap:14px;margin-top:10px;font-size:11px;font-weight:800;letter-spacing:.09em;color:#70858a;text-transform:uppercase}.chapter-pulse::before{content:'';width:35px;height:3px;background:var(--coral)}
+/* Story chapters are differentiated with subtle chapter colour, rather than 14 repeated white boxes */
+.chapter[data-chapter='access']{background:linear-gradient(90deg,rgba(225,238,232,.47),rgba(225,238,232,0));border-radius:10px;padding-inline:15px}
+.chapter[data-chapter='viewing']{background:linear-gradient(90deg,rgba(255,245,236,.38),rgba(255,245,236,0));border-radius:10px;padding-inline:15px}
+.chart-card{display:block;position:relative;margin:0 0 12px;padding:clamp(18px,2.5vw,29px);border:1px solid var(--line);background:var(--white);border-radius:8px;min-width:0}.chart-card:hover{border-color:#b9d1c8}.figure-heading{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(200px,.75fr);gap:18px 42px;align-items:end;margin-bottom:11px}.figure-headline{min-width:0}.figure-description{margin:0;color:var(--muted);font-size:14px;line-height:1.55;align-self:end}.chart-kicker{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin:0 0 6px}.chart-card h3{font-size:clamp(26px,2.95vw,37px);line-height:1.08;font-weight:800;margin:0}.figure-index{color:#9eb4ac;font:800 54px/1 'Barlow Condensed';letter-spacing:-.06em;position:absolute;top:5px;right:21px;opacity:.13;pointer-events:none}.chart-frame{width:100%;min-height:0;min-width:0;overflow:visible}.chart-frame .vega-embed{width:100%;max-width:100%}.chart-frame svg{display:block;max-width:100%;height:auto}.chart-frame canvas{max-width:100%}.chart-map{min-height:320px}.chart-card.feature-figure{padding-top:0;overflow:hidden;border-color:#c9dad3}.feature-figure .figure-heading{background:var(--dark);color:#fff;margin:0 calc(-1 * clamp(18px,2.5vw,29px)) 16px;padding:19px clamp(18px,2.5vw,29px);border-radius:7px 7px 0 0}.feature-figure .chart-kicker{color:#91d3c8}.feature-figure .figure-description{color:#d2e0e1}.feature-figure .figure-index{display:none}
+.chart-insight{background:#f0f7f3;border-left:3px solid var(--teal);padding:12px 15px;margin:15px 0 0;font-size:14px;line-height:1.54}.chart-insight strong{color:var(--ink)}.chart-footnote{margin:10px 0 0;color:#5e7580;font-size:11.5px;line-height:1.5}.chart-footnote a{color:#066c67;text-decoration-thickness:1px;text-underline-offset:3px}.context-note{padding:11px 15px;margin:10px 0 15px;border-left:3px solid var(--coral);background:#fff7ed;color:#4f6269;font-size:13px}.chapter-bridge{display:flex;align-items:center;gap:15px;margin:15px 0 8px;padding:10px 2px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.chapter-bridge span{color:var(--teal);font-size:10px;letter-spacing:.14em;font-weight:800;white-space:nowrap}.conclusion{font-size:16px;background:#e8f3ec;border-left:5px solid var(--teal);margin-top:19px;padding:18px 22px}
+.chart-key{display:flex;justify-content:flex-end;gap:18px;margin:2px 0 8px;font-size:12px;color:var(--muted);font-weight:700}.chart-key span{display:inline-flex;align-items:center;gap:7px}.swatch{display:inline-block;width:11px;height:11px;border-radius:99px}.swatch-nrl{background:var(--coral)}.swatch-afl{background:var(--teal)}
+.map-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.map-summary div{border-top:2px solid #87bdb2;background:#eff6f2;padding:10px 14px;display:flex;flex-direction:column;gap:4px}.map-summary strong{font:800 23px/1 'Barlow Condensed';color:var(--ink)}.map-summary span{font-size:11px;color:var(--muted)}
+.venue-explorer{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(235px,.72fr);gap:14px;align-items:stretch}.venue-explorer>.chart-frame{min-height:370px}.stadium-inspector{display:flex;flex-direction:column;padding:19px 17px;background:linear-gradient(155deg,#eaf3ee,#f8fbf8);border:1px solid var(--line);border-radius:6px}.spotlight-overline{color:var(--teal);font-size:10px;font-weight:800;letter-spacing:.14em}.stadium-inspector h4{font:800 clamp(23px,3vw,35px)/1.07 'Barlow Condensed';margin:10px 0 4px}.spotlight-sub{color:var(--muted);font-size:12px;line-height:1.4;min-height:37px}.spotlight-primary{color:var(--teal);font:800 clamp(31px,4vw,52px)/1 'Barlow Condensed';margin:10px 0}.spotlight-primary span{display:block;font:600 11px/1.35 'Barlow';color:var(--muted);margin-top:6px}.spotlight-metrics{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.spotlight-metrics div{border-top:1px solid #c3d8cf;padding-top:8px}.spotlight-metrics strong{display:block;font:800 24px/1 'Barlow Condensed'}.spotlight-metrics span{font-size:10px;color:var(--muted)}.spotlight-track{height:8px;border-radius:9px;overflow:hidden;background:#d2e3dc;margin-top:auto}.spotlight-track>div{height:100%;background:var(--teal);width:0;transition:width .3s}.spotlight-share{font-size:11px;color:var(--muted);margin:7px 0 12px}.spotlight-takeaway{font-size:12px;line-height:1.48;color:var(--ink);margin:0}
+.vega-bindings{padding:9px 11px;margin:5px 0 9px;background:#eff6f2;border-radius:5px;display:flex;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--ink);font-weight:700}.vega-bind{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.vega-bind select{font:600 12px/1.4 'Barlow';color:var(--ink);padding:7px 10px;border:1px solid #b8d0c5;border-radius:5px;max-width:100%;background:#fff}.vega-bind select:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+/* A genuine analytical comparison: changing geography changes aggregation, not just marker opacity */
+.geo-view-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:7px 0 10px;border-bottom:1px solid var(--line)}.geo-view-tools p{font-size:12px;color:var(--muted);margin:0}.geo-tabs{display:inline-flex;gap:4px;padding:4px;background:#eaf2ee;border-radius:8px}.geo-tabs button{font-weight:800;font-size:12px;border:0;padding:9px 14px;border-radius:6px;background:transparent;color:var(--muted)}.geo-tabs button[aria-pressed=true]{background:var(--dark);color:#fff;box-shadow:0 2px 5px rgba(0,0,0,.10)}.geo-tabs button:focus-visible{outline:3px solid var(--coral);outline-offset:2px}.geo-detail{display:grid;grid-template-columns:minmax(200px,.75fr) minmax(0,1.3fr);gap:15px;align-items:center;padding:12px 16px;background:#eaf3ef;border:1px solid #d4e5dc;border-radius:6px;margin-top:6px}.geo-detail h4{font:800 22px/1.1 'Barlow Condensed';margin:0 0 3px}.geo-detail p{font-size:12px;color:var(--muted);margin:0}.geo-detail .geo-number{font:800 29px/1.1 'Barlow Condensed';color:var(--teal)}.geo-detail .geo-number span{font:500 11px 'Barlow';color:var(--muted);display:block}
+/* Long tail venue key is readable without hovering on tiny treemap squares */
+.venue-keys{padding:12px 0 2px;border-top:1px solid var(--line);margin-top:10px}.venue-keys>strong{display:block;font-size:12px;margin-bottom:8px}.venue-key-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 14px}.venue-key-grid span{font-size:11px;line-height:1.35;color:#4f6670;padding-left:8px;border-left:2px solid #a8c7ba;overflow-wrap:anywhere}
+#chart-afl-hexbins{min-height:360px}#chart-state-sankey{min-height:0}#chart-venue-lorenz{min-height:0}#chart-acma-waffle{margin:0 auto;max-width:1050px}
+.end-matter{display:grid;grid-template-columns:1fr 260px;gap:22px;align-items:center;padding:28px;background:var(--dark);border-radius:8px;color:#fff;margin:18px 0 35px}.end-matter .end-eyebrow{font-size:11px;font-weight:800;letter-spacing:.18em;color:#90cdc5;margin:0 0 7px}.end-matter h2{font:800 clamp(28px,3vw,43px)/1 'Barlow Condensed';text-transform:uppercase;margin:0 0 9px}.end-matter p{font-size:14px;color:#d0e0e2;line-height:1.5;margin:0}.end-matter a{font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;text-align:center;color:var(--dark);background:#95ddcf;text-decoration:none;border-radius:6px;padding:12px 14px}.end-matter a:hover{background:#fff}
+footer{background:var(--dark);color:#fff}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:22px 0}.footer-inner h2{font:800 25px/1 'Barlow Condensed';text-transform:uppercase;margin:0 0 6px}.footer-inner p{font-size:11px;color:#afc6c9;margin:0;max-width:780px}.footer-meta{font-size:11px;text-align:right;color:#b4caca}.footer-meta strong{color:#fff}
+.viz-label,.linked-panel,.venue-topline,.map-inset{display:none!important}
+/* Scroll effects only activate when JS confirms IntersectionObserver, so content cannot disappear in older browsers */
+.motion-ready .chart-card[data-reveal]{opacity:1;transform:none;transition:border-color .35s ease,box-shadow .35s ease}.motion-ready .chart-card.is-visible{border-color:#c4d6cd;box-shadow:0 3px 16px rgba(8,123,115,.045)}
+@media(max-width:1050px){.figure-heading{grid-template-columns:1fr;gap:7px}.figure-description{max-width:990px}.venue-explorer{grid-template-columns:minmax(0,1fr) minmax(220px,.64fr)}.venue-key-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:790px){.wrap{width:calc(100% - 24px)}.hero{padding:30px 25px;min-height:0}.hero h1{font-size:clamp(47px,8.5vw,75px)}.hero-disc{opacity:.45}.story-intro{grid-template-columns:1fr;gap:8px}.chapter-heading{grid-template-columns:1fr;gap:7px}.chapter{padding:23px 0}.chapter-heading p{max-width:700px}.venue-explorer{grid-template-columns:1fr}.stadium-inspector{display:grid;grid-template-columns:1fr 1fr;gap:3px 18px}.stadium-inspector .spotlight-overline,.stadium-inspector h4,.stadium-inspector .spotlight-sub,.stadium-inspector .spotlight-takeaway,.stadium-inspector .spotlight-track,.stadium-inspector .spotlight-share{grid-column:1/-1}.spotlight-primary{margin:5px 0}.spotlight-metrics{margin:5px 0}.spotlight-track{margin:5px 0}.nav-key,.nav-track{display:none}.nav-inner{gap:clamp(8px,2vw,20px);overflow-x:auto;scrollbar-width:none}.story-nav a{font-size:11px}.geo-detail{grid-template-columns:1fr;gap:8px}.venue-key-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.hero{padding:30px 19px;min-height:0}.hero h1{font-size:clamp(40px,10vw,52px);letter-spacing:-.04em;overflow-wrap:break-word}.hero-lede{font-size:15px}.chapter h2{font-size:40px}.chart-card{padding:17px 12px}.feature-figure .figure-heading{margin-inline:-12px;padding:16px 12px}.chart-card h3{font-size:27px}.chart-map{min-height:245px}.map-summary{grid-template-columns:1fr}.venue-key-grid{grid-template-columns:1fr 1fr}.end-matter{grid-template-columns:1fr;padding:20px}.course{font-size:9px}.brand{font-size:18px}.footer-inner{display:block}.footer-meta{text-align:left;margin-top:12px}.geo-tabs{width:100%;display:flex}.geo-tabs button{flex:1;padding:9px 6px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.motion-ready .chart-card[data-reveal]{opacity:1;transform:none;transition:none}.spotlight-track>div{transition:none}}
+</style>
 </head>
 <body>
-<div aria-hidden="true" class="top-rule"></div>
-<header class="masthead wrap">
-<div class="brand">Australian <span>Sport / Data</span></div>
-<div class="course">Monash University<br/>FIT3179 · DV2 · 2026</div>
-</header><nav aria-label="Jump between chapters" class="story-nav"><div class="nav-inner wrap"><span class="nav-key">THE STORY</span><a data-section="audiences" href="#audiences">01 Audience</a><a data-section="geography" href="#geography">02 Access &amp; place</a><a data-section="streaming" href="#streaming">03 How we watch</a><a data-section="attendance" href="#attendance">04 Match day</a><span aria-hidden="true" class="nav-track"><span id="read-progress"></span></span></div></nav>
+<div aria-hidden="true" class="site-top"></div>
+<header class="masthead wrap"><a aria-label="Back to beginning" class="brand" href="#top" style="text-decoration:none">SPORT / <span>ON SCREEN</span></a><div class="course">FIT3179 · DATA VISUALISATION 2<br/>MONASH UNIVERSITY · 2026</div></header><nav aria-label="Jump between chapters" class="story-nav"><div class="nav-inner wrap"><span class="nav-key">THE STORY</span><a data-section="audiences" href="#audiences">01 Audience</a><a data-section="geography" href="#geography">02 Access &amp; place</a><a data-section="streaming" href="#streaming">03 How we watch</a><a data-section="attendance" href="#attendance">04 Match day</a><span aria-hidden="true" class="nav-track"><span id="read-progress"></span></span></div></nav>
 <main class="wrap">
-<section aria-labelledby="page-title" class="hero">
-<div>
-<p class="eyebrow">A data story about sport and screens</p>
-<h1 id="page-title">How Australia <span>Watches</span> Sport.</h1>
-<p class="lede">Exploring who watches Australia's major sporting codes, how broadcasts reach fans, and what happens when supporters head to the stadium.</p>
-<div aria-label="Topics covered" class="tags"><a class="tag" href="#audiences">Audiences</a><a class="tag" href="#geography">Geography</a><a class="tag" href="#streaming">Viewing habits</a><a class="tag" href="#attendance">Attendance</a></div>
-</div>
-</section>
-<section aria-labelledby="intro-title" class="story-intro">
-<p class="eyebrow">Introduction</p>
-<h2 id="intro-title">The sporting audience, from screen to stadium.</h2>
-<p>Start with who watches sport. See why broadcasting access varies by state; then explore changing viewing habits. Finally, follow crowds from individual stadiums to geographic clusters and across seasons. Each chart answers a new question.</p>
-</section>
-<section aria-labelledby="audiences-title" class="chapter" id="audiences">
-<div class="chapter-heading">
-<div><span class="chapter-number">01 / AUDIENCES</span><h2 id="audiences-title">What are Australians watching?</h2></div>
-<p>Begin with AFL and NRL: compare the scale and composition of their television audiences.</p>
-</div>
-<div class="chart-card">
-<p class="chart-kicker">Figure 1 / Television audience reach · AFL vs NRL</p>
-<h3>AFL reaches more television viewers than NRL</h3>
-<p class="chart-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover for the estimates; the colours remain consistent across the audience charts.</p>
+<section aria-labelledby="page-title" class="hero" id="top"><div class="hero-copy"><p class="hero-kicker">Australian sport • The data edition</p><h1>Beyond<br/><em>the scoreboard.</em></h1><p class="hero-lede">Who tunes in? What changes with your postcode? And what can stadium crowds tell us that TV ratings cannot? Follow fourteen evidence-led views from screens to stands.</p><div class="hero-bottom"><a class="hero-scroll" href="#audiences">EXPLORE THE STORY <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 4v14m-6-6 6 6 6-6"></path></svg></a><span>ROY MORGAN · ACMA · FOX FOOTY · AFL TABLES</span></div></div><div aria-hidden="true" class="hero-disc"></div><div aria-hidden="true" class="hero-ring"></div></section>
+<section aria-labelledby="intro-title" class="story-intro"><div><p class="eyebrow">A guide to the evidence</p><h2 id="intro-title">Four lenses.<br/>Different measures.</h2></div><p>The same person can watch both AFL and NRL, use several video platforms and attend multiple games. These are <strong>different units</strong>: audience reach, weekly platform use, exclusive-live broadcast windows and match entries. Each section asks a distinct question, without mixing the totals.</p></section>
+<section aria-labelledby="audiences-title" class="chapter" data-chapter="audience" id="audiences">
+<div class="chapter-heading"><div><span class="chapter-number">01 / WHO WATCHES</span><h2 id="audiences-title">Who follows the biggest codes?</h2><div class="chapter-pulse">Reach, not match ratings</div></div><p>Compare television reach, then look beyond the headline total to see differences across age groups and gender.</p></div>
+<div class="chart-card feature-figure" data-figure="1" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 1 / Television audience reach · AFL vs NRL</p><h3>AFL reaches more television viewers than NRL</h3></div><p class="figure-description">Estimated Australian TV audiences, aged 14+, from July 2025 to June 2026. Hover for the estimates; the colours remain consistent across the audience charts.</p></div>
+
+
+
 <div aria-label="Bar chart showing approximately 9.31 million AFL television viewers and 7.6 million NRL television viewers in Australia from July 2025 to June 2026." class="chart-frame" id="chart-audience" role="img">
 </div>
 <p class="chart-insight"><strong>Key finding:</strong> AFL's estimated TV audience was around 1.7 million people larger than NRL's. These are people who watched at least occasionally, not average viewers of a single match.</p>
 <p class="chart-footnote">Source: Roy Morgan Single Source, July 2025–June 2026 (n=59,959; Australians aged 14+). <a href="https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026" rel="noopener noreferrer" target="_blank">AFL report (15 Sep 2026)</a> · <a href="https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026" rel="noopener noreferrer" target="_blank">NRL report (18 Sep 2026)</a>. NRL viewers are rounded to one decimal million in the source.</p>
-</div>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 2 / Audience growth by age · Advanced heatmap</p>
-<h3>Older age groups led TV audience growth in 2024</h3>
-<p class="chart-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster growth. Hover to compare both years’ estimated viewer counts.</p>
+<span aria-hidden="true" class="figure-index">01</span></div>
+<div class="chart-card" data-figure="2" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 2 / Audience growth by age · Advanced heatmap</p><h3>Older age groups led TV audience growth in 2024</h3></div><p class="figure-description">Percentage growth in Australians aged 14+ who watched AFL or NRL television coverage in 2024 compared with 2023, grouped by age. Darker cells indicate faster growth. Hover to compare both years’ estimated viewer counts.</p></div>
+
+
+
 <div aria-label="Heatmap of percentage growth in television audience reach from 2023 to 2024 for AFL and NRL across four age groups. AFL viewers aged 65+ grew 6.5%; NRL viewers aged 65+ grew 6.6%." class="chart-frame" id="chart-age-growth" role="img">
 </div>
 <p class="chart-insight"><strong>Key finding:</strong> The 65+ audience grew fastest for both codes (AFL +6.5%; NRL +6.6%). The slowest growth was among AFL viewers aged 50–64 (+1.0%) and NRL viewers under 35 (+1.9%).</p>
 <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" rel="noopener noreferrer" target="_blank">Roy Morgan, AFL vs NRL television audiences, 2023–2024</a> (published 18 March 2025), age chart on page 2 of the <a href="https://roymorgan-cms-prod.s3.ap-southeast-2.amazonaws.com/wp-content/uploads/2025/03/18033653/9842-AFL-vs-NRL-2023-24.pdf" rel="noopener noreferrer" target="_blank">original report</a>. Surveys: Jan–Dec 2023 (n=64,994) and Jan–Dec 2024 (n=64,823); Australians aged 14+. Growth rates are those reported by Roy Morgan. This is a <strong>different period</strong> from Figure 1 (July 2025–June 2026).</p>
-</div>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 3 / Gender and television audience reach · Advanced dumbbell</p>
-<h3>AFL has a larger audience advantage among women</h3>
-<p class="chart-description">Each horizontal connection compares AFL and NRL audience reach for one gender in one year (2023 or 2024). The distance between dots represents AFL's audience advantage. Figures are annual audience estimates, not average viewers per match.</p>
+<span aria-hidden="true" class="figure-index">02</span></div>
+<div class="chart-card" data-figure="3" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 3 / Gender and television audience reach · Advanced dumbbell</p><h3>AFL has a larger audience advantage among women</h3></div><p class="figure-description">Each horizontal connection compares AFL and NRL audience reach for one gender in one year (2023 or 2024). The distance between dots represents AFL's audience advantage. Figures are annual audience estimates, not average viewers per match.</p></div>
+
+
+
 <div aria-label="Chart legend" class="chart-key"><span><i class="swatch swatch-nrl"></i>NRL</span><span><i class="swatch swatch-afl"></i>AFL</span></div>
 <div aria-label="Dumbbell chart of AFL and NRL television audiences in 2023 and 2024 for Australian men and women aged 14+. AFL leads for both genders, with a larger gap among women." class="chart-frame" id="chart-gender-dumbbell" role="img">
 </div>
 <p class="chart-insight"><strong>Key finding:</strong> In 2024, AFL reached about 1.02 million more women than NRL, compared with about 0.76 million more men. Both sports' estimates increased from 2023 to 2024.</p>
 <p class="chart-footnote">Source: <a href="https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24" rel="noopener noreferrer" target="_blank">Roy Morgan Single Source, AFL vs NRL television viewers by gender, 2023–2024</a> (18 March 2025; chart on page 1). Base: Australians aged 14+. Each sport's estimates include people who watch either occasionally or regularly; some individuals may watch both sports. Distances are differences between overlapping audience populations, not exclusive supporters.</p>
-</div>
+<span aria-hidden="true" class="figure-index">03</span></div>
 </section>
-<section aria-labelledby="geography-title" class="chapter" id="geography">
-<div class="chapter-heading">
-<div><span class="chapter-number">02 / GEOGRAPHY</span><h2 id="geography-title">Where sport moves across the country.</h2></div>
-<p>From TV access to physical venues: compare location-specific broadcast rights with where fans enter stadium gates.</p>
-</div>
-<div class="chart-card">
-<p class="chart-kicker">Figure 4 / Broadcasting access · Advanced choropleth</p>
-<h3>Where did live Saturday AFL shift behind a subscription?</h3>
-<p class="chart-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover over a state to inspect its coverage window.</p>
+<section aria-labelledby="geography-title" class="chapter" data-chapter="access" id="geography">
+<div class="chapter-heading"><div><span class="chapter-number">02 / ACCESS &amp; PLACE</span><h2 id="geography-title">Does location change the experience?</h2><div class="chapter-pulse">Rights ≠ reach</div></div><p>Broadcast rights vary geographically. So do stadium locations — but crowd entries tell a different story from broadcast access.</p></div>
+<div class="chart-card feature-figure" data-figure="4" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 4 / Broadcasting access · Advanced choropleth</p><h3>Where did live Saturday AFL shift behind a subscription?</h3></div><p class="figure-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover over a state to inspect its coverage window.</p></div>
+
+
+
 <div aria-label="Map of Australian states and territories showing 2025 exclusive live Saturday AFL coverage: Victoria, Tasmania and Northern Territory 25 weeks; New South Wales, Queensland and ACT 11 weeks; South Australia and Western Australia nine weeks." class="chart-frame chart-map" id="chart-super-saturday" role="img">
 </div>
 <div aria-label="Coverage comparison" class="map-summary">
@@ -303,99 +96,93 @@ html { scroll-padding-top:66px; }
 </div>
 <p class="chart-insight"><strong>Key finding:</strong> Victoria, Tasmania and the NT had nearly three times as many weeks of exclusively live Saturday coverage on Fox Footy as SA and WA (25 versus 9). Broadcasting restrictions varied substantially by location.</p>
 <p class="chart-footnote"><strong>What this measures:</strong> weeks in the 2025 broadcast arrangement (including Opening Round), <em>not</em> audience size, matches watched, or the total number of games available on free-to-air. Some locally relevant Saturday matches aired later on Seven/7plus. Source: <a href="https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025" rel="noopener noreferrer" target="_blank">Foxtel Group, Super Saturday LIVE (18 Nov 2024)</a>. Boundaries: simplified GeoJSON adapted from <a href="https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson" rel="noopener noreferrer" target="_blank">Rowan Hogan's Australian states dataset</a> (cartographic representation, not official survey boundaries).</p>
-</div>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 5 / AFL stadium crowds · Interactive proportional symbols</p>
-<h3>Crowd size tells only half the stadium story</h3>
-<p class="chart-description">Explore where AFL matches were attended in 2025. <strong>Circle area = annual entries, not average match crowd.</strong> Choose any of the 18 venues to reveal its season profile; this also makes overlapping Melbourne stadiums accessible.</p>
+<span aria-hidden="true" class="figure-index">04</span></div>
+<div class="chart-card" data-figure="5" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 5 / AFL stadium crowds · Interactive proportional symbols</p><h3>Crowd size tells only half the stadium story</h3></div><p class="figure-description">Explore where AFL matches were attended in 2025. <strong>Circle area = annual entries, not average match crowd.</strong> Choose any of the 18 venues to reveal its season profile; this also makes overlapping Melbourne stadiums accessible.</p></div>
+
+
+
 <div class="venue-explorer"><div aria-label="Proportional symbol map showing AFL total crowds across 18 Australian stadiums in 2025, led by the Melbourne Cricket Ground with 3,120,416 attendances." class="chart-frame chart-map" id="chart-stadium-crowds" role="img">
 </div><aside aria-label="Selected venue facts" aria-live="polite" class="stadium-inspector">
 <div class="spotlight-overline">01 / INVESTIGATE A VENUE</div><h4 id="spotlight-name">All AFL venues</h4>
 <p class="spotlight-sub" id="spotlight-location">Select a ground in the map’s dropdown to inspect it.</p>
-<div class="spotlight-primary" id="spotlight-crowd">8.26<span>million entries nationally</span></div>
+<div class="spotlight-primary" id="spotlight-crowd">8.26m</div><p class="spotlight-crowd-caption" style="font-size:11px;color:#526873;margin:-5px 0 6px">2025 crowd entries (not unique spectators)</p>
 <div class="spotlight-metrics"><div><strong id="spotlight-matches">—</strong><span>Matches hosted</span></div><div><strong id="spotlight-average">—</strong><span>Average per game</span></div></div>
 <div class="spotlight-track"><div id="spotlight-bar"></div></div><p class="spotlight-share" id="spotlight-share">Entries include repeat visits across matches.</p>
 <p class="spotlight-takeaway" id="spotlight-takeaway">Large national circles can reflect more fixtures. The ranking comparison in Figure 12 separates match volume from per-game crowd strength.</p>
 </aside></div>
 <p class="chart-insight"><strong>Look closer:</strong> Annual attendance combines how often a stadium hosts matches and how many people attend each one. Use the venue locator to investigate a ground, then compare the competing rankings in Figure 12.</p>
 <p class="chart-footnote">Data source: <a href="https://afltables.com/afl/crowds/2025.html" rel="noopener noreferrer" target="_blank">AFL Tables, Attendances 2025 → By Venue</a>. Stadium location points are approximate; the state boundary map is the simplified GeoJSON previously used in Figure 4. Venues are not adjusted for population or the number of scheduled matches.</p>
-</div>
-<p class="chapter-bridge"><span>UP NEXT</span> Now shift from where broadcasts and fixtures are available to how Australians use different video platforms.</p></section><section aria-labelledby="streaming-title" class="chapter" id="streaming">
-<div class="chapter-heading">
-<div><span class="chapter-number">03 / VIEWING HABITS</span><h2 id="streaming-title">The changing television landscape.</h2></div>
-<p>A second lens on sport broadcasting: how Australians use paid streaming, catch-up TV and short-form video generally. These measures are not sports-only.</p>
-</div>
+<span aria-hidden="true" class="figure-index">05</span></div>
+<p class="chapter-bridge"><span>UP NEXT</span> Now shift from where broadcasts and fixtures are available to how Australians use different video platforms.</p></section><section aria-labelledby="streaming-title" class="chapter" data-chapter="viewing" id="streaming">
+<div class="chapter-heading"><div><span class="chapter-number">03 / MEDIA HABITS</span><h2 id="streaming-title">How are viewing habits changing?</h2><div class="chapter-pulse">All-video market context</div></div><p>Video viewing has fragmented across paid streaming, free-to-air and catch-up. These ACMA results cover all video, not just sport.</p></div>
 <p class="context-note"><strong>Important distinction:</strong> The ACMA charts below describe <em>all video viewing by Australian adults</em>, not sport-specific television audiences. Different media categories can overlap: one person can use several services.</p>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 6 / Streaming, broadcast and short-form video · Advanced slope chart</p>
-<h3>Broadcast TV recovered in 2025; paid streaming held steady</h3>
-<p class="chart-description">Compare all four media types in the ACMA 2024 and 2025 adult surveys. The y-axis shows the share of Australians who used each type of video service during the previous seven days, not time spent watching.</p>
+<div class="chart-card feature-figure" data-figure="6" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 6 / Streaming, broadcast and short-form video · Advanced slope chart</p><h3>Broadcast TV recovered in 2025; paid streaming held steady</h3></div><p class="figure-description">Compare all four media types in the ACMA 2024 and 2025 adult surveys. The y-axis shows the share of Australians who used each type of video service during the previous seven days, not time spent watching.</p></div>
+
+
+
 <div aria-label="Broadcast TV recovered in 2025; paid streaming held steady" class="chart-frame" id="chart-acma-slope" role="group"></div>
 <p class="chart-insight"><strong>Key finding:</strong> Traditional free-to-air television rose from 46% to 52% (+6 percentage points), while paid streaming remained at 68% and short-form video fell from 59% to 52% (−7 points).</p>
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA, How we watch and listen to content (March 2026)</a>, executive summary. Base: Australian adults, past seven days. Media types overlap; percentage-point changes are not audience counts.</p>
-</div>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 7 / Four-panel comparative unit chart · Advanced small multiples</p>
-<h3>Four different ways Australians watched video in 2025</h3>
-<p class="chart-description">Four aligned 100-cell grids share the same scale. Each filled square represents one percentage point of Australian adults who used that video type in the previous seven days. Categories overlap; do not add them together.</p>
+<span aria-hidden="true" class="figure-index">06</span></div>
+<div class="chart-card" data-figure="7" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 7 / Four-panel comparative unit chart · Advanced small multiples</p><h3>Four different ways Australians watched video in 2025</h3></div><p class="figure-description">Four aligned 100-cell grids share the same scale. Each filled square represents one percentage point of Australian adults who used that video type in the previous seven days. Categories overlap; do not add them together.</p></div>
+
+
+
 <div aria-label="More than two-thirds used paid video streaming" class="chart-frame" id="chart-acma-waffle" role="group"></div>
 <p class="chart-insight"><strong>Key finding: </strong>Paid streaming reached 68% of adults, compared with 52% for broadcast TV and short-form video and 44% for catch-up TV. These are separate measures, not shares of one total.</p>
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA media consumption survey, 2025 results (published March 2026)</a>. All video viewing, not sports-specific; 100 squares are a visual encoding of the published percentage, not raw respondent records.</p>
-</div>
+<span aria-hidden="true" class="figure-index">07</span></div>
 <p class="chapter-bridge"><span>UP NEXT</span> Viewing figures describe screens. The final chapter follows what happens when audiences turn into match-day crowd entries.</p></section>
-<section aria-labelledby="attendance-title" class="chapter" id="attendance">
-<div class="chapter-heading">
-<div><span class="chapter-number">04 / ATTENDANCE</span><h2 id="attendance-title">What changes when fans go to games?</h2></div>
-<p>Individual grounds become geographic clusters, then match-day totals. Follow the path from where crowds gather to why annual figures change.</p>
-</div><div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 8 / Crowd concentration · Advanced hexagonal bin map</p>
-<h3>Where do match-day crowds form geographic clusters?</h3>
-<p class="chart-description">The national symbol map showed individual grounds. This <strong>different map idiom</strong> combines nearby venues into nine equal-area 175 km-radius hexagons. Colour and short labels show total 2025 entries per geographic bin. <strong>Hover or select</strong> a hexagon to investigate the group.</p>
-<div aria-label="Nearby venues combine into nine attendance clusters" class="chart-frame" id="chart-afl-hexbins" role="group"></div>
-<p class="chart-insight"><strong>Insight:</strong> A Melbourne-area cell groups three nearby stadiums with 4.76 million recorded entries; the Perth cell combines 1.07 million. Clusters reveal where the calendar concentrates match-day visits, without suggesting the attendees live in those places.</p>
-<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 attendances by venue</a>. Calculated from the same 18 stadium records as Figure 5; all bins together total 8,257,027 crowd entries. Equal-area binning in Australian Albers projection; converted back to geographic coordinates for display. Bin boundaries are analytical, not administrative.</p>
-</div>
+<section aria-labelledby="attendance-title" class="chapter" data-chapter="attendance" id="attendance">
+<div class="chapter-heading"><div><span class="chapter-number">04 / MATCH DAY</span><h2 id="attendance-title">What happens when fans turn up?</h2><div class="chapter-pulse">One entry per match visit</div></div><p>Change the unit of analysis: venue clusters, average crowds, season movement and concentration reveal more than a top-stadium ranking.</p></div><div class="chart-card feature-figure" data-figure="8" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 8 / Crowd concentration · Advanced hexagonal bin map</p><h3>The same crowds. Two very different maps.</h3></div><p class="figure-description">Switch from the nine equal-area venue clusters to a schematic state tile map. Both use the same 8,257,027 attendances, but reveal different geographic patterns. Click any coloured tile to inspect its total.</p></div>
+
+
+
+<div class="geo-view-tools"><div aria-label="Choose geographic aggregation" class="geo-tabs" role="group"><button aria-pressed="true" id="hex-nearby" type="button">Nearby venue clusters</button><button aria-pressed="false" id="hex-state" type="button">State tile map</button></div><p id="geo-view-note">Equal-area venue clusters; nine bins combine 18 stadiums.</p></div><div aria-label="Nearby venues combine into nine attendance clusters" class="chart-frame" id="chart-afl-hexbins" role="group"></div><div aria-live="polite" class="geo-detail" role="status"><div><h4 id="geo-place">Explore a region</h4><p id="geo-area">Click a map cell to identify its venues</p></div><div><div class="geo-number" id="geo-total">8.26m <span>total 2025 AFL attendances nationally</span></div><p id="geo-explainer">Switch aggregation to reveal how geographic framing changes the picture.</p></div></div>
+<p class="chart-insight"><strong>Why this matters:</strong> Close stadiums can merge into one high-attendance hexagon; state totals answer a broader question. Different geographic grouping changes the pattern without changing the underlying crowds.</p>
+<p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 attendances by venue</a>. Calculated from the same 18 stadium records as Figure 5; all bins together total 8,257,027 crowd entries. Equal-area binning in Australian Albers projection; converted back to geographic coordinates for display. Bin boundaries are analytical, not administrative. Alternate view: 8 equal-size state/territory hex tiles calculated from the same 18 AFL venue totals; the tile layout is schematic, not to geographic scale.</p>
+<span aria-hidden="true" class="figure-index">08</span></div>
 <p class="context-note"><strong>Counting rule:</strong> Each attendance is one entry to a match. A person attending twice is counted twice. We use AFL Tables for all the venue and season figures so totals are internally consistent.</p>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 9 / Match-day intensity · Advanced season heatmap</p>
-<h3>Finals typically draw larger crowds per match</h3>
-<p class="chart-description">Each cell shows <strong>average crowd per game</strong>, not season total. Comparing per-match averages makes the 9–11 finals games more comparable with the much larger home-and-away schedule. The 2020–21 pandemic affected attendance.</p>
+<div class="chart-card" data-figure="9" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 9 / Match-day intensity · Advanced season heatmap</p><h3>Finals typically draw larger crowds per match</h3></div><p class="figure-description">Each cell shows <strong>average crowd per game</strong>, not season total. Comparing per-match averages makes the 9–11 finals games more comparable with the much larger home-and-away schedule. The 2020–21 pandemic affected attendance.</p></div>
+
+
+
 <div aria-label="Finals typically draw larger crowds per match" class="chart-frame" id="chart-attendance-heatmap" role="group"></div>
 <p class="chart-insight"><strong>Key finding:</strong> In 2026, finals averaged approximately 68,751 spectators per game versus 37,551 for home-and-away games. COVID-related disruption in 2020–21 is visible in both phases.</p>
 <p class="chart-footnote">Source: <a href="https://www.afltables.com/afl/crowds/summary.html">AFL Tables, attendances by season (2015–2026)</a>. Figures are recorded match entries divided by the number of games with attendance data; finals and home-and-away values are separate.</p>
-</div>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 10 / Explaining a year-on-year change · Advanced waterfall</p>
-<h3>Finals softened—but did not erase—the 2025 crowd decline</h3>
-<p class="chart-description">Follow the two-step bridge from 2024 to 2025. Orange shows the home-and-away shortfall; teal shows additional finals entries; the final dark bar is the net difference. The dashed connectors preserve the running change.</p>
+<span aria-hidden="true" class="figure-index">09</span></div>
+<div class="chart-card feature-figure" data-figure="10" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 10 / Explaining a year-on-year change · Advanced waterfall</p><h3>Finals softened—but did not erase—the 2025 crowd decline</h3></div><p class="figure-description">Follow the two-step bridge from 2024 to 2025. Orange shows the home-and-away shortfall; teal shows additional finals entries; the final dark bar is the net difference. The dashed connectors preserve the running change.</p></div>
+
+
+
 <div aria-label="How did 2025 finish 29,744 attendances below 2024?" class="chart-frame" id="chart-crowd-waterfall" role="group"></div>
 <p class="chart-insight"><strong>Insight:</strong> The 67,417-entry finals increase offset <strong>69%</strong> of the 97,161-entry home-and-away decline. The season still finished 29,744 attendances below 2024.</p>
 <p class="chart-footnote">Source: <a href="https://www.afltables.com/afl/crowds/summary.html">AFL Tables, season totals for 2024 and 2025</a>. All figures are event entries rather than unique people. The net difference uses identical scope and source for both seasons.</p>
-</div>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 11 / A complete attendance whole · Advanced treemap</p>
-<h3>Four grounds account for most AFL crowd entries</h3>
-<p class="chart-description">Every one of the 18 AFL venues is included: the tile areas sum to <strong>100% of 2025 entries</strong>. Large venues carry names and percentages; smaller tiles retain a hover tooltip. This is a complete whole, not a selective top-venues chart.</p>
-<div aria-label="The MCG accounted for nearly 38% of 2025 AFL crowds" class="chart-frame" id="chart-venue-treemap" role="group"></div>
+<span aria-hidden="true" class="figure-index">10</span></div>
+<div class="chart-card" data-figure="11" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 11 / A complete attendance whole · Advanced treemap</p><h3>Four grounds account for most AFL crowd entries</h3></div><p class="figure-description">Every one of the 18 AFL venues is included: the tile areas sum to <strong>100% of 2025 entries</strong>. Large venues carry names and percentages; smaller tiles retain a hover tooltip. This is a complete whole, not a selective top-venues chart.</p></div>
+
+
+
+<div aria-label="The MCG accounted for nearly 38% of 2025 AFL crowds" class="chart-frame" id="chart-venue-treemap" role="group"></div><div aria-label="Venue reference list" class="venue-keys"><strong>All 18 venues are represented · smaller tiles remain hoverable</strong><div class="venue-key-grid"><span>Melbourne Cricket Ground · 3,120,416</span><span>Docklands · 1,340,134</span><span>Adelaide Oval · 1,223,306</span><span>Perth Stadium · 1,060,590</span><span>Sydney Cricket Ground · 377,046</span><span>Gabba · 373,211</span><span>Kardinia Park · 301,084</span><span>Carrara · 150,339</span><span>Sydney Showground · 119,927</span><span>York Park · 55,209</span><span>Manuka Oval · 32,992</span><span>Marrara Oval · 22,130</span><span>Barossa Park · 19,345</span><span>Bellerive Oval · 18,571</span><span>Norwood Oval · 18,477</span><span>Hands Oval · 12,715</span><span>Traeger Park · 6,721</span><span>Eureka Stadium · 4,814</span></div></div>
 <p class="chart-insight"><strong>Insight:</strong> The four busiest venues—the MCG, Marvel Stadium, Adelaide Oval and Optus Stadium—account for <strong>81.7%</strong> of AFL match entries, leaving 18.3% spread across 14 other grounds. This concentration sets up the inequality curve in Figure 14.</p>
 <p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html" rel="noopener noreferrer" target="_blank">AFL Tables, 2025 attendance by venue</a>. Full 18-venue total = 8,257,027 (including finals). Hover for exact values; very small tiles are intentionally too small to label.</p>
-</div>
-<div class="chart-card" style="margin-top:24px">
-<p class="chart-kicker">Figure 12 / The role of match volume · Advanced rank-shift diagram</p>
-<h3>More fixtures can change the stadium leaderboard</h3>
-<p class="chart-description">Trace each of the eight most-attended venues from <strong>total crowd entries</strong> (left) to its rank for <strong>average crowd per game</strong> (right). Rankings are calculated across all 18 venues, and only the same eight venues are compared here. Marvel and Optus are highlighted because their order changes most.</p>
+<span aria-hidden="true" class="figure-index">11</span></div>
+<div class="chart-card" data-figure="12" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 12 / The role of match volume · Advanced rank-shift diagram</p><h3>More fixtures can change the stadium leaderboard</h3></div><p class="figure-description">Selecting one of the top eight stadiums in Figure 5 highlights its rank here. Trace each of the eight most-attended venues from <strong>total crowd entries</strong> (left) to its rank for <strong>average crowd per game</strong> (right). Rankings are calculated across all 18 venues, and only the same eight venues are compared here. Marvel and Optus are highlighted because their order changes most.</p></div>
+
+
+
 <div aria-label="Marvel ranks second for total crowds but fifth per game" class="chart-frame" id="chart-venue-rank" role="group"></div>
 <p class="chart-insight"><strong>Key finding:</strong> Marvel Stadium drops from 2nd in total entries to 5th by average attendance per game. Optus Stadium rises from 4th to 2nd. A stadium hosting many matches can rank highly for total crowds without having the highest average crowd.</p>
 <p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html" rel="noopener noreferrer" target="_blank">AFL Tables, 2025 crowds by venue</a>. Average crowd = total entries divided by games hosted. Lines show ranking changes rather than trends over time.</p>
-</div>
-<div class="chart-card chart-card-added"><p class="chart-kicker">Figure 13 / State-to-match-phase flows · Advanced Sankey diagram</p><h3>Match-day visits are concentrated in Victoria—and the regular season</h3><p class="chart-description">Hover over a flow to trace match attendances from the state hosting a game to its competition phase. Ribbon thickness represents crowd entries, not stadium capacity or unique individuals.</p><div aria-label="Sankey showing 2025 AFL attendances flowing from eight Australian states and territories to the home-and-away and finals match phases." class="chart-frame" id="chart-state-sankey" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>Victoria accounts for 57.7% of recorded 2025 crowd entries. Most entries were from home-and-away matches (92.7% nationally); finals made up the remainder.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendances by venue, including home-and-away and finals. Every one of the 8,257,027 entries is allocated exactly once. State refers to stadium location, not supporter residence.</p></div><div class="chart-card chart-card-added"><p class="chart-kicker">Figure 14 / Crowd inequality · Advanced Lorenz concentration curve</p><h3>How unequal are AFL stadium crowds, really?</h3><p class="chart-description">The teal curve accumulates stadium crowds from the smallest to the largest of 18 venues. The dashed diagonal is the equal-distribution reference. The farther the curve bends below it, the more crowded the leading venues become.</p><div aria-label="Lorenz curve of the cumulative share of 2025 AFL attendances among all 18 venues ordered from smallest to largest." class="chart-frame" id="chart-venue-lorenz" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>The three busiest grounds alone captured 68.8% of recorded 2025 crowd entries. The venue-concentration Gini coefficient is 0.72; the zero-to-one measure is descriptive, not a ranking of stadium quality.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendance by venue, all 18 venues included. Each venue appears once. Curve and Gini calculated from exact season totals, including finals.</p></div><div class="chart-insight conclusion"><strong>What the story shows:</strong> Reach measures potential viewers; geography shapes both live broadcast access and the location of fixtures; streaming and free TV attract overlapping populations; stadium entries depend on crowd size <em>and</em> how many games are scheduled. The resulting concentration and year-on-year changes are more informative than simply naming the largest venue.</div>
+<span aria-hidden="true" class="figure-index">12</span></div>
+<div class="chart-card chart-card-added feature-figure" data-figure="13" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 13 / State-to-match-phase flows · Advanced Sankey diagram</p><h3>Match-day visits are concentrated in Victoria—and the regular season</h3></div><p class="figure-description">Hover over a flow to trace match attendances from the state hosting a game to its competition phase. Ribbon thickness represents crowd entries, not stadium capacity or unique individuals.</p></div><div aria-label="Sankey showing 2025 AFL attendances flowing from eight Australian states and territories to the home-and-away and finals match phases." class="chart-frame" id="chart-state-sankey" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>Victoria accounts for 57.7% of recorded 2025 crowd entries. Most entries were from home-and-away matches (92.7% nationally); finals made up the remainder.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendances by venue, including home-and-away and finals. Every one of the 8,257,027 entries is allocated exactly once. State refers to stadium location, not supporter residence.</p><span aria-hidden="true" class="figure-index">13</span></div><div class="chart-card chart-card-added" data-figure="14" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 14 / Crowd inequality · Advanced Lorenz concentration curve</p><h3>How unequal are AFL stadium crowds, really?</h3></div><p class="figure-description">The teal curve accumulates stadium crowds from the smallest to the largest of 18 venues. The dashed diagonal is the equal-distribution reference. The farther the curve bends below it, the more crowded the leading venues become.</p></div><div aria-label="Lorenz curve of the cumulative share of 2025 AFL attendances among all 18 venues ordered from smallest to largest." class="chart-frame" id="chart-venue-lorenz" role="group"></div><p class="chart-insight"><strong>Key finding: </strong>The three busiest grounds alone captured 68.8% of recorded 2025 crowd entries. The venue-concentration Gini coefficient is 0.72; the zero-to-one measure is descriptive, not a ranking of stadium quality.</p><p class="chart-footnote">Source: AFL Tables, 2025 attendance by venue, all 18 venues included. Each venue appears once. Curve and Gini calculated from exact season totals, including finals.</p><span aria-hidden="true" class="figure-index">14</span></div>
 </section>
-</main>
+<section aria-label="Conclusion and review" class="end-matter"><div><p class="end-eyebrow">The final whistle / What the evidence says</p><h2>Viewing, access and attendance aren't the same contest.</h2><p>National TV reach, general video-platform use and stadium crowd entries measure different behaviours. Rights vary by postcode, fixtures influence the biggest annual crowds, and the per-game leaderboard looks different from the total-attendance leaderboard.</p></div><a href="#audiences">REVISIT THE AUDIENCE STORY ↑</a></section></main>
 <footer>
 <div class="footer-inner wrap">
 <div>
 <h2>Australian Sports Broadcasting</h2>
-<p>Sources: Roy Morgan (television reach), Foxtel Group (broadcast rights), ACMA (general video viewing) and AFL Tables (match attendance). Methodology and source links accompany each figure.</p>
+<p>Data: Roy Morgan · Foxtel Group · Australian Communications and Media Authority · AFL Tables. Exact source links and measurement notes accompany each visualisation.</p>
 </div>
 <div class="footer-meta"><strong>Ryan Mohan Li</strong><br/>FIT3179 Data Visualisation 2<br/>October 2026</div>
 </div>
@@ -407,6 +194,15 @@ html { scroll-padding-top:66px; }
 <script>
   function showVegaChart(id, file) {
     vegaEmbed('#' + id, 'charts/' + file, {actions:false, renderer:'svg'})
+      .then(function(result){
+        if(id==='chart-venue-rank'){
+          window.rankView=result.view;
+          if(window.venueSelection && window.venueSelection !== 'All venues'){
+            const selected=window.venueSelection;
+            result.view.signal('chosenVenue',(window.topRankVenues||[]).includes(selected)?selected:'All venues').runAsync();
+          }
+        }
+      })
       .catch(function(error) {
         console.error('Chart failed: '+id, error);
         var element = document.getElementById(id);
@@ -419,7 +215,7 @@ html { scroll-padding-top:66px; }
   showVegaChart("chart-super-saturday", "afl_super_saturday_choropleth_2025.json");
   showVegaChart("chart-acma-slope", "acma_media_slope_2024_2025.json");
   showVegaChart("chart-acma-waffle", "acma_media_waffle_2025.json");
-  showVegaChart("chart-afl-hexbins", "afl_hexbin_crowds_2025.json");
+  // Figure 8 is loaded by the geographic comparison controller below.
   showVegaChart("chart-attendance-heatmap", "afl_attendance_heatmap_2015_2026.json");
   showVegaChart("chart-crowd-waterfall", "afl_crowd_waterfall_2024_2025.json");
   showVegaChart("chart-venue-treemap", "afl_venue_treemap_2025.json");
@@ -427,44 +223,97 @@ html { scroll-padding-top:66px; }
   showVegaChart("chart-state-sankey", "afl_state_phase_sankey_2025.json");
   showVegaChart("chart-venue-lorenz", "afl_venue_concentration_lorenz_2025.json");
 
-</script><script>
+</script>
+<script>
 (function(){
+  'use strict';
+  const pretty=n=>new Intl.NumberFormat('en-AU').format(n);window.topRankVenues=["Melbourne Cricket Ground (MCG)", "Docklands (Marvel Stadium)", "Adelaide Oval", "Perth Stadium (Optus Stadium)", "Sydney Cricket Ground (SCG)", "Gabba", "Kardinia Park (GMHBA Stadium)", "Carrara (People First Stadium)"];
+  const total=8257027;
+  const regionDetail={bins:{"2,-14": {"name": "Venue cluster · 1.1m", "subtitle": "Hands Oval,  Perth Stadium (Optus Stadium)", "attendance": 1073305, "venues": 2}, "2,-5": {"name": "Venue cluster · 22k", "subtitle": "Marrara Oval (TIO Stadium)", "attendance": 22130, "venues": 1}, "6,-10": {"name": "Venue cluster · 7k", "subtitle": "Traeger Park", "attendance": 6721, "venues": 1}, "9,-14": {"name": "Venue cluster · 1.3m", "subtitle": "Adelaide Oval,  Barossa Park,  Norwood Oval", "attendance": 1261128, "venues": 3}, "11,-16": {"name": "Venue cluster · 5k", "subtitle": "Eureka Stadium (Mars Stadium)", "attendance": 4814, "venues": 1}, "12,-16": {"name": "Venue cluster · 4.8m", "subtitle": "Docklands (Marvel Stadium),  Kardinia Park (GMHBA Stadium),  Melbourne Cricket Ground (MCG)", "attendance": 4761634, "venues": 3}, "13,-18": {"name": "Venue cluster · 74k", "subtitle": "Bellerive Oval,  York Park (UTAS Stadium)", "attendance": 73780, "venues": 2}, "13,-15": {"name": "Venue cluster · 530k", "subtitle": "Manuka Oval,  Sydney Cricket Ground (SCG),  Sydney Showground (ENGIE Stadium)", "attendance": 529965, "venues": 3}, "13,-12": {"name": "Venue cluster · 524k", "subtitle": "Carrara (People First Stadium),  Gabba", "attendance": 523550, "venues": 2}},states:{"SA": {"name": "South Australia", "subtitle": "3 venues across 33 matches", "attendance": 1261128, "venues": 3}, "TAS": {"name": "Tasmania", "subtitle": "2 venues across 6 matches", "attendance": 73780, "venues": 2}, "QLD": {"name": "Queensland", "subtitle": "2 venues across 21 matches", "attendance": 523550, "venues": 2}, "VIC": {"name": "Victoria", "subtitle": "4 venues across 105 matches", "attendance": 4766448, "venues": 4}, "WA": {"name": "Western Australia", "subtitle": "2 venues across 25 matches", "attendance": 1073305, "venues": 2}, "ACT": {"name": "Australian Capital Territory", "subtitle": "1 venues across 3 matches", "attendance": 32992, "venues": 1}, "NT": {"name": "Northern Territory", "subtitle": "2 venues across 3 matches", "attendance": 28851, "venues": 2}, "NSW": {"name": "New South Wales", "subtitle": "2 venues across 20 matches", "attendance": 496973, "venues": 2}}};
+  const geoTarget=document.getElementById('chart-afl-hexbins');
+  const regionTitle=document.getElementById('geo-place');
+  const regionSubtitle=document.getElementById('geo-area');
+  const regionTotal=document.getElementById('geo-total');
+  const regionExplainer=document.getElementById('geo-explainer');
+  const geoNote=document.getElementById('geo-view-note');
+  const nearBtn=document.getElementById('hex-nearby');
+  const stateBtn=document.getElementById('hex-state');
+  let viewMode='bins';let geoGeneration=0;let activeGeoView=null;
+  function showSelection(key){
+    const item=regionDetail[viewMode][key];
+    if(!item){
+      regionTitle.textContent='Explore a region';regionSubtitle.textContent='Click a coloured '+(viewMode==='bins'?'hexagon':'state tile')+' to see its totals';
+      regionTotal.textContent='8.26m';regionExplainer.textContent='All 18 stadiums · 100% of recorded 2025 AFL crowd entries';return;
+    }
+    regionTitle.textContent=item.name;regionSubtitle.textContent=item.subtitle;
+    regionTotal.textContent=pretty(item.attendance)+' entries';
+    regionExplainer.textContent=item.venues+' venue'+(item.venues===1?'':'s')+' · '+(100*item.attendance/total).toFixed(1)+'% of national total';
+  }
+  async function setGeoMode(mode){
+    viewMode=mode;const gen=++geoGeneration;
+    nearBtn.setAttribute('aria-pressed',String(mode==='bins'));stateBtn.setAttribute('aria-pressed',String(mode==='states'));
+    geoNote.textContent=mode==='bins'?'Nine equal-area venue clusters · group nearby stadiums':'Eight state and territory tiles · equal sizes, not geographic area';
+    showSelection('');geoTarget.textContent='';
+    const spec=mode==='bins'?'charts/afl_hexbin_crowds_2025.json':'charts/afl_state_hex_tiles_2025.json';
+    try{
+      if(activeGeoView){activeGeoView.finalize();activeGeoView=null;}
+      const out=await vegaEmbed(geoTarget,spec,{actions:false,renderer:'svg'});
+      if(gen!==geoGeneration){out.view.finalize();return;}
+      activeGeoView=out.view;out.view.addSignalListener(mode==='bins'?'selectedBin':'stateFocus',(_,value)=>showSelection(value));
+      scaleSvgs(geoTarget);
+    }catch(err){if(gen===geoGeneration){geoTarget.textContent='Map unavailable: '+(err.message||err);console.error('Map',err)}}
+  }
+  nearBtn.addEventListener('click',()=>setGeoMode('bins'));
+  stateBtn.addEventListener('click',()=>setGeoMode('states'));
+  // Permit the user to switch the actual unit of geography instead of just dimming a colour.
+  setGeoMode('bins');
+  // The single venue finder directly addresses overlapping city markers.
   const panel={name:document.getElementById('spotlight-name'),location:document.getElementById('spotlight-location'),crowd:document.getElementById('spotlight-crowd'),matches:document.getElementById('spotlight-matches'),average:document.getElementById('spotlight-average'),bar:document.getElementById('spotlight-bar'),share:document.getElementById('spotlight-share'),takeaway:document.getElementById('spotlight-takeaway')};
-  const pretty=n=>new Intl.NumberFormat('en-AU').format(n);
-  fetch('data/afl_venue_attendance_2025.csv').then(r=>{if(!r.ok)throw new Error('Venue data unavailable');return r.text()}).then(csv=>{
-    // Dataset has no embedded commas outside the quoted URL-less venue names; fields are simple CSV.
-    const lines=csv.trim().split(/\r?\n/).map(line=>line.replace(/\r/g,''));
-    const headings=lines[0].split(',');const rows=lines.slice(1).map(line=>Object.fromEntries(line.split(',').map((v,i)=>[headings[i],v])));
-    const byName=new Map(rows.map(x=>[x.venue,x]));
-    const fullTotal=rows.reduce((sum,r)=>sum+Number(r.total_attendance),0);
+  fetch('data/afl_venue_attendance_2025.csv').then(r=>{if(!r.ok)throw Error('Venue data unavailable');return r.text()}).then(csv=>{
+    const data=vega.read(csv,{type:'csv'});const byName=new Map(data.map(x=>[x.venue,x]));
     function update(name){
       const v=byName.get(name);
-      if(!v){panel.name.textContent='All AFL venues';panel.location.textContent='National stadium map · 2025 season';panel.crowd.innerHTML='8.26<span>million crowd entries nationally</span>';panel.matches.textContent=pretty(rows.reduce((a,r)=>a+Number(r.total_games),0));panel.average.textContent='—';panel.bar.style.width='100%';panel.share.textContent='All 18 venues · full attendance total';panel.takeaway.textContent='Choose a venue to compare its crowd total with how frequently it hosted matches.';return;}
-      const n=Number(v.total_attendance),share=n/fullTotal;
+      window.venueSelection=name;
+      if(window.rankView){
+        const focus=(window.topRankVenues||[]).includes(name)?name:'All venues';
+        window.rankView.signal('chosenVenue',focus).runAsync();
+      }
+      if(!v){panel.name.textContent='All AFL venues';panel.location.textContent='National stadium map · 2025 season';panel.crowd.textContent='8.26m';panel.matches.textContent=pretty(data.reduce((a,r)=>a+Number(r.total_games),0));panel.average.textContent='—';panel.bar.style.width='100%';panel.share.textContent='All 18 venues · national total';panel.takeaway.textContent='Locate any stadium, then compare its average crowd with its annual total.';return;}
+      const n=Number(v.total_attendance),share=n/total;
       panel.name.textContent=v.venue;panel.location.textContent=v.city+' · '+v.state;
-      panel.crowd.innerHTML=(n/1000000).toFixed(2)+'m<span>2025 match entries</span>';
-      panel.matches.textContent=pretty(Number(v.total_games));panel.average.textContent=pretty(Number(v.average_attendance));
-      panel.bar.style.width=(share*100).toFixed(2)+'%';panel.share.textContent=(share*100).toFixed(1)+'% of all 2025 crowd entries';
-      panel.takeaway.textContent=Number(v.total_games)>=20?'This venue hosted many fixtures; compare average attendance per game in Figure 12.':'Fewer hosted matches help explain why the annual circle is smaller. Compare per-game crowd size as well as total entries.';
+      panel.crowd.textContent=(n/1e6).toFixed(2)+'m';panel.matches.textContent=pretty(Number(v.total_games));panel.average.textContent=pretty(Number(v.average_attendance));
+      panel.bar.style.width=(share*100).toFixed(2)+'%';panel.share.textContent=(share*100).toFixed(1)+'% of 2025 AFL match entries';
+      panel.takeaway.textContent=Number(v.total_games)>=20?'Many fixtures contribute to this stadium’s annual total. Figure 12 tests what changes on a per-match basis.':'Fewer fixtures explain part of its smaller annual footprint. Compare average attendance per match in Figure 12.';
     }
     update('All venues');
     vegaEmbed('#chart-stadium-crowds','charts/afl_venue_proportional_symbols_2025.json',{actions:false,renderer:'svg'}).then(result=>{
-      result.view.addSignalListener('venueFocus',(_,value)=>update(value));
-      update(result.view.signal('venueFocus'));
-    }).catch(err=>{const el=document.getElementById('chart-stadium-crowds');el.textContent='Unable to display map: '+(err.message||err);});
-  }).catch(err=>{document.getElementById('spotlight-name').textContent='Data could not be loaded';console.error(err)});
-  const chapters=[...document.querySelectorAll('section.chapter')];const links=[...document.querySelectorAll('.story-nav a[data-section]')];
-  const updateProgress=()=>{const root=document.documentElement;const range=Math.max(1,root.scrollHeight-innerHeight);const p=Math.min(100,Math.max(0,100*scrollY/range));document.getElementById('read-progress').style.width=p+'%';};
-  window.addEventListener('scroll',updateProgress,{passive:true});window.addEventListener('resize',updateProgress,{passive:true});updateProgress();
+      result.view.addSignalListener('venueFocus',(_,name)=>update(name));update(result.view.signal('venueFocus'));scaleSvgs(document.getElementById('chart-stadium-crowds'));
+    }).catch(err=>{document.getElementById('chart-stadium-crowds').textContent='Venue map could not load: '+(err.message||err)});
+  }).catch(err=>{panel.name.textContent='Venue data unavailable';console.error(err)});
+  // Resize only fixed-size Vega charts, preserving labels and alignment via SVG viewBox.
+  function scaleSvgs(container){
+    if(!container)return;
+    const svg=container.querySelector('svg');if(!svg)return;
+    const w=parseFloat(svg.getAttribute('width')),h=parseFloat(svg.getAttribute('height'));
+    if(w>0&&h>0){if(!svg.hasAttribute('viewBox'))svg.setAttribute('viewBox',`0 0 ${w} ${h}`);svg.style.width='100%';svg.style.height='auto';svg.style.maxWidth=w+'px';}
+  }
+  // Resize after Vega Embed completes; the chart remains accessible and only ONE fetch/render occurs.
+  document.querySelectorAll('.chart-frame').forEach(el=>{
+    if(!('MutationObserver' in window))return;
+    const o=new MutationObserver(()=>{if(el.querySelector('svg')){scaleSvgs(el);o.disconnect()}});
+    o.observe(el,{childList:true,subtree:true});
+  });
+  const chapters=[...document.querySelectorAll('section.chapter')],nav=[...document.querySelectorAll('.story-nav a[data-section]')];
+  function progress(){const limit=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);const pct=Math.min(100,Math.max(0,window.scrollY/limit*100));const bar=document.getElementById('read-progress');if(bar)bar.style.width=pct+'%'}
+  window.addEventListener('scroll',progress,{passive:true});window.addEventListener('resize',progress,{passive:true});progress();
   if('IntersectionObserver' in window){
-    const secObserver=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting){links.forEach(a=>{if(a.dataset.section===e.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});}}},{rootMargin:'-15% 0px -68% 0px'});
-    chapters.forEach(c=>secObserver.observe(c));
+    const sectionWatch=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)nav.forEach(a=>{if(a.dataset.section===e.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')})}),{rootMargin:'-16% 0px -65% 0px'});
+    chapters.forEach(c=>sectionWatch.observe(c));
     if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
-      const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');reveal.unobserve(e.target)}}),{rootMargin:'0px 0px -36px 0px',threshold:0.06});
-      document.querySelectorAll('.chart-card').forEach(el=>{el.classList.add('card-reveal');reveal.observe(el)});
+      const cards=[...document.querySelectorAll('.chart-card[data-reveal]')];const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');reveal.unobserve(e.target)}}),{rootMargin:'0px 0px 40px 0px',threshold:.02});
+      document.documentElement.classList.add('motion-ready');cards.forEach(c=>reveal.observe(c));
     }
   }
 })();
-</script>
-</body>
+</script></body>
 </html>

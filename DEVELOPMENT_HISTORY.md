@@ -22,3 +22,5 @@ Suggested commit message: `Refine visual design and add Sankey and Lorenz analys
 - Figure 11: consistent sequential fill and high-contrast venue labels on all major tiles.
 - Figure 12: compact native Vega eight-row slopegraph with direct endpoint labels.
 - Sticky section navigation, reading progress and accessible reduced-motion scroll reveal; source definitions and all 14 figures retained.
+
+- 2026-10-26: Rebuilt the 14-figure dashboard into an editorial scrollytelling layout. Added a genuinely different aggregation switch to Figure 8 (equal-area venue-cluster hexbin vs equal-size state tile map), meaningful region details, accessible venue directory under Figure 11, unified the visual hierarchy and colours, and polished viewport-aware chart scaling and source readability. Preserved all original published statistical data.

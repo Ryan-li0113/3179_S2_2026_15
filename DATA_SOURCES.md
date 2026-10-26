@@ -72,3 +72,7 @@ Author: Ryan Li · University assignment · October 2026.
 - Figure 10 uses the unchanged 2024→2025 AFL Tables changes; `data/afl_waterfall_bridge_2024_2025.csv` explicitly stores cumulative start and end values.
 - Figure 12 uses the unchanged top-eight comparison, reshaped into `data/afl_rank_slope_compact_2025.csv`; ranks are computed among all 18 venues.
 - Figure 5 inspector derives match count, mean crowd and national share directly from existing `data/afl_venue_attendance_2025.csv`; no separate second map or extra figure count.
+
+
+### Figure 8 alternative state tile map (editorial redesign)
+This is a schematic, equal-size hexagonal state/territory tile map derived entirely from the same AFL Tables 2025 By Venue 18-stadium data used in Figure 5. It is an alternative geographic aggregation, not an additional counted figure. State totals sum to 8,257,027 entries. The schematic map is explicitly NOT to geographic scale. Visualisation: charts/afl_state_hex_tiles_2025.json; computed dataset: data/afl_state_hex_tiles_2025.csv.
