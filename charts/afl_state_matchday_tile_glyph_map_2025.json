@@ -1,0 +1,351 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Interactive equal-size geographic tile grid of Australian host state or territory AFL crowds. Tiles display average attendance per match, number of fixtures and total 2025 entries. Click a tile to filter the venue cluster map, treemap and ranking chart; schematic location, not land area.",
+  "width": 1000,
+  "height": 560,
+  "padding": 2,
+  "background": null,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "signals": [
+    {
+      "name": "chosenState",
+      "value": "ALL",
+      "on": [
+        {
+          "events": "@stateTile:click",
+          "update": "chosenState===datum.state ? 'ALL' : datum.state"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "states",
+      "url": "data/afl_state_matchday_tiles_2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "x": "number",
+          "y": "number",
+          "cx": "number",
+          "total_attendance": "number",
+          "avg_per_match": "number",
+          "matches": "number",
+          "venues": "number",
+          "home_away": "number",
+          "finals": "number",
+          "bar_width": "number"
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "name": "stateTile",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "width": {
+            "value": 174
+          },
+          "height": {
+            "value": 111
+          },
+          "cornerRadius": {
+            "value": 9
+          },
+          "strokeWidth": {
+            "value": 1.6
+          },
+          "cursor": {
+            "value": "pointer"
+          },
+          "tooltip": {
+            "signal": "datum.state_name+' · '+format(datum.total_attendance,',')+' entries · '+format(datum.avg_per_match,',')+' per match · '+datum.matches+' matches'"
+          }
+        },
+        "update": {
+          "fill": {
+            "signal": "chosenState === datum.state ? '#D6F2EA' : (chosenState === 'ALL' ? '#F3F8F6' : '#F0F3F2')"
+          },
+          "stroke": {
+            "signal": "chosenState === datum.state ? '#087B73' : '#C5D8D2'"
+          },
+          "opacity": {
+            "signal": "chosenState !== 'ALL' && chosenState!==datum.state ? 0.68 : 1"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "stateHeader",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+13"
+          },
+          "y": {
+            "signal": "datum.y+22"
+          },
+          "text": {
+            "field": "state"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#16333F"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "name": "stateAverage",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+161"
+          },
+          "y": {
+            "signal": "datum.y+21"
+          },
+          "align": {
+            "value": "right"
+          },
+          "text": {
+            "field": "avg_label"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 18
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#087B73"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "name": "stateAverageTitle",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+13"
+          },
+          "y": {
+            "signal": "datum.y+40"
+          },
+          "text": {
+            "value": "AVERAGE / MATCH"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 9.5
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#667D79"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "rect",
+      "name": "barTrack",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+13"
+          },
+          "y": {
+            "signal": "datum.y+50"
+          },
+          "width": {
+            "value": 146
+          },
+          "height": {
+            "value": 9
+          },
+          "cornerRadius": {
+            "value": 4
+          },
+          "fill": {
+            "value": "#DDE7E3"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "rect",
+      "name": "barFill",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+13"
+          },
+          "y": {
+            "signal": "datum.y+50"
+          },
+          "width": {
+            "field": "bar_width"
+          },
+          "height": {
+            "value": 9
+          },
+          "cornerRadius": {
+            "value": 4
+          },
+          "fill": {
+            "value": "#087B73"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "name": "stateGames",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+13"
+          },
+          "y": {
+            "signal": "datum.y+83"
+          },
+          "text": {
+            "signal": "datum.matches+' games'"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#345361"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "name": "stateTotal",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+162"
+          },
+          "y": {
+            "signal": "datum.y+83"
+          },
+          "align": {
+            "value": "right"
+          },
+          "text": {
+            "field": "total_label"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#345361"
+          }
+        }
+      },
+      "interactive": false
+    },
+    {
+      "type": "text",
+      "name": "stateName",
+      "from": {
+        "data": "states"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.x+13"
+          },
+          "y": {
+            "signal": "datum.y+101"
+          },
+          "text": {
+            "field": "state_name"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fill": {
+            "value": "#687E79"
+          }
+        }
+      },
+      "interactive": false
+    }
+  ]
+}

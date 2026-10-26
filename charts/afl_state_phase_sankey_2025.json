@@ -141,6 +141,11 @@
           "fillOpacity": {
             "value": 0.9
           }
+        },
+        "update": {
+          "fillOpacity": {
+            "signal": "stateSelected==='ALL'||datum.state===stateSelected?0.50:0.055"
+          }
         }
       }
     },
@@ -168,6 +173,11 @@
           },
           "tooltip": {
             "signal": "datum.node + ': ' + format(datum.attendance, ',') + ' attendances'"
+          }
+        },
+        "update": {
+          "opacity": {
+            "signal": "stateSelected==='ALL'||datum.kind!=='state'||datum.node===stateSelected?1:0.20"
           }
         }
       }
@@ -236,6 +246,12 @@
           }
         }
       }
+    }
+  ],
+  "signals": [
+    {
+      "name": "stateSelected",
+      "value": "ALL"
     }
   ]
 }

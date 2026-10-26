@@ -1,72 +1,38 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Compact slopegraph, top 8 venues by total crowds compared to ranks by average attendance across all 18 AFL venues. One row per rank; coloured focal lines highlight Marvel and Optus.",
-  "width": 920,
-  "height": 341,
+  "description": "Linked ranked slopegraph. Each line traces a venue between its ranking by season-wide crowd entries and ranking by average crowd per match. State selection recomputes rankings among the venues hosting matches in that state or territory.",
+  "width": 1000,
+  "height": 390,
   "padding": 0,
   "background": null,
-  "autosize": {
-    "type": "fit",
-    "contains": "padding"
-  },
   "data": [
     {
       "name": "ranks",
-      "url": "data/afl_rank_slope_compact_2025.csv",
+      "url": "data/afl_venue_rank_shift_interactive_2025.csv",
       "format": {
         "type": "csv",
         "parse": {
           "left_rank": "number",
           "right_rank": "number",
-          "avg_crowd": "number",
-          "total": "number",
-          "games": "number",
-          "shift": "number"
+          "total_attendance": "number",
+          "average_attendance": "number"
         }
       }
-    },
-    {
-      "name": "guides",
-      "values": [
-        {
-          "rank": 1
-        },
-        {
-          "rank": 2
-        },
-        {
-          "rank": 3
-        },
-        {
-          "rank": 4
-        },
-        {
-          "rank": 5
-        },
-        {
-          "rank": 6
-        },
-        {
-          "rank": 7
-        },
-        {
-          "rank": 8
-        }
-      ]
     }
   ],
   "scales": [
     {
-      "name": "ranky",
+      "name": "rankY",
       "type": "linear",
       "domain": [
-        1,
-        8
+        0.3,
+        8.7
       ],
       "range": [
-        65,
-        309
-      ]
+        72,
+        360
+      ],
+      "zero": false
     }
   ],
   "marks": [
@@ -75,223 +41,13 @@
       "encode": {
         "enter": {
           "x": {
-            "value": 12
+            "value": 337
           },
           "y": {
-            "value": 28
+            "value": 26
           },
           "text": {
-            "value": "RANK BY TOTAL ENTRIES"
-          },
-          "font": {
-            "value": "Barlow"
-          },
-          "fontSize": {
-            "value": 12
-          },
-          "fontWeight": {
-            "value": "bold"
-          },
-          "fill": {
-            "value": "#526873"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "enter": {
-          "x": {
-            "value": 722
-          },
-          "y": {
-            "value": 28
-          },
-          "text": {
-            "value": "RANK BY AVERAGE / GAME"
-          },
-          "font": {
-            "value": "Barlow"
-          },
-          "fontSize": {
-            "value": 12
-          },
-          "fontWeight": {
-            "value": "bold"
-          },
-          "fill": {
-            "value": "#526873"
-          }
-        }
-      }
-    },
-    {
-      "type": "rule",
-      "from": {
-        "data": "guides"
-      },
-      "encode": {
-        "enter": {
-          "x": {
-            "value": 220
-          },
-          "x2": {
-            "value": 690
-          },
-          "y": {
-            "scale": "ranky",
-            "field": "rank"
-          },
-          "stroke": {
-            "value": "#EDF1EE"
-          },
-          "strokeWidth": {
-            "value": 1
-          }
-        }
-      }
-    },
-    {
-      "type": "rule",
-      "from": {
-        "data": "ranks"
-      },
-      "encode": {
-        "enter": {
-          "x": {
-            "value": 230
-          },
-          "x2": {
-            "value": 685
-          },
-          "y": {
-            "scale": "ranky",
-            "field": "left_rank"
-          },
-          "y2": {
-            "scale": "ranky",
-            "field": "right_rank"
-          },
-          "stroke": {
-            "field": "col"
-          },
-          "strokeWidth": {
-            "signal": "datum.shift == 0 ? 2.2 : 3.7"
-          },
-          "tooltip": {
-            "signal": "datum.short+': rank '+datum.left_rank+' for total entries; rank '+datum.right_rank+' for crowd per match ('+ format(datum.avg_crowd,',')+')"
-          }
-        },
-        "update": {
-          "opacity": {
-            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
-          },
-          "stroke": {
-            "signal": "datum.venue === chosenVenue ? '#087B73' : datum.col"
-          },
-          "strokeWidth": {
-            "signal": "datum.venue === chosenVenue ? 5 : (datum.shift==0 ? 2.2 : 3.7)"
-          }
-        }
-      }
-    },
-    {
-      "type": "symbol",
-      "from": {
-        "data": "ranks"
-      },
-      "encode": {
-        "enter": {
-          "x": {
-            "value": 230
-          },
-          "y": {
-            "scale": "ranky",
-            "field": "left_rank"
-          },
-          "size": {
-            "value": 80
-          },
-          "fill": {
-            "field": "col"
-          },
-          "stroke": {
-            "value": "#FFF"
-          },
-          "strokeWidth": {
-            "value": 1.5
-          }
-        },
-        "update": {
-          "opacity": {
-            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
-          },
-          "fill": {
-            "signal": "datum.venue === chosenVenue ? '#087B73' : datum.col"
-          }
-        }
-      }
-    },
-    {
-      "type": "symbol",
-      "from": {
-        "data": "ranks"
-      },
-      "encode": {
-        "enter": {
-          "x": {
-            "value": 685
-          },
-          "y": {
-            "scale": "ranky",
-            "field": "right_rank"
-          },
-          "size": {
-            "value": 80
-          },
-          "fill": {
-            "field": "col"
-          },
-          "stroke": {
-            "value": "#FFF"
-          },
-          "strokeWidth": {
-            "value": 1.5
-          }
-        },
-        "update": {
-          "opacity": {
-            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
-          },
-          "fill": {
-            "signal": "datum.venue === chosenVenue ? '#087B73' : datum.col"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": {
-        "data": "ranks"
-      },
-      "encode": {
-        "enter": {
-          "x": {
-            "value": 211
-          },
-          "y": {
-            "scale": "ranky",
-            "field": "left_rank"
-          },
-          "align": {
-            "value": "right"
-          },
-          "baseline": {
-            "value": "middle"
-          },
-          "text": {
-            "field": "label_left"
+            "value": "TOTAL CROWD ENTRIES"
           },
           "font": {
             "value": "Barlow"
@@ -300,32 +56,207 @@
             "value": 13
           },
           "fontWeight": {
-            "signal": "datum.shift == 0 ? 'normal':'bold'"
+            "value": "bold"
           },
           "fill": {
             "value": "#15313D"
-          }
-        },
-        "update": {
-          "opacity": {
-            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
+          },
+          "align": {
+            "value": "right"
           }
         }
       }
     },
     {
       "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 816
+          },
+          "y": {
+            "value": 26
+          },
+          "text": {
+            "value": "AVG CROWD PER GAME"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#15313D"
+          },
+          "align": {
+            "value": "left"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "name": "rankGuide",
       "from": {
         "data": "ranks"
       },
       "encode": {
         "enter": {
           "x": {
-            "value": 703
+            "value": 350
+          },
+          "x2": {
+            "value": 805
           },
           "y": {
-            "scale": "ranky",
+            "scale": "rankY",
+            "field": "left_rank"
+          },
+          "y2": {
+            "scale": "rankY",
             "field": "right_rank"
+          },
+          "strokeWidth": {
+            "value": 2.7
+          },
+          "stroke": {
+            "signal": "datum.venue==='Docklands (Marvel Stadium)'?'#D66B44':'#87ABA4'"
+          },
+          "tooltip": {
+            "signal": "datum.venue+' · total rank '+datum.left_rank+' · per-game rank '+datum.right_rank+' · '+format(datum.total_attendance,',')+' entries · '+format(datum.average_attendance,',')+' avg/game'"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "name": "rankLeft",
+      "from": {
+        "data": "ranks"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 350
+          },
+          "y": {
+            "scale": "rankY",
+            "field": "left_rank"
+          },
+          "size": {
+            "value": 145
+          },
+          "fill": {
+            "value": "#087B73"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1.2
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "name": "rankRight",
+      "from": {
+        "data": "ranks"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 805
+          },
+          "y": {
+            "scale": "rankY",
+            "field": "right_rank"
+          },
+          "size": {
+            "value": 145
+          },
+          "fill": {
+            "value": "#087B73"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1.2
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "rankVenue",
+      "from": {
+        "data": "ranks"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 335
+          },
+          "y": {
+            "scale": "rankY",
+            "field": "left_rank"
+          },
+          "text": {
+            "field": "short_name"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 14
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "#15313D"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "rankNumber",
+      "from": {
+        "data": "ranks"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "value": 831
+          },
+          "y": {
+            "scale": "rankY",
+            "field": "right_rank"
+          },
+          "text": {
+            "signal": "'#'+datum.right_rank"
+          },
+          "font": {
+            "value": "Barlow"
+          },
+          "fontSize": {
+            "value": 15
+          },
+          "fontWeight": {
+            "value": "bold"
           },
           "align": {
             "value": "left"
@@ -333,34 +264,11 @@
           "baseline": {
             "value": "middle"
           },
-          "text": {
-            "field": "label_right"
-          },
-          "font": {
-            "value": "Barlow"
-          },
-          "fontSize": {
-            "value": 12
-          },
-          "fontWeight": {
-            "signal": "datum.shift == 0 ? 'normal':'bold'"
-          },
           "fill": {
             "value": "#15313D"
           }
-        },
-        "update": {
-          "opacity": {
-            "signal": "chosenVenue === 'All venues' || datum.venue === chosenVenue ? 1 : 0.17"
-          }
         }
       }
-    }
-  ],
-  "signals": [
-    {
-      "name": "chosenVenue",
-      "value": "All venues"
     }
   ]
 }

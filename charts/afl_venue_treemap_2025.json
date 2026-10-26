@@ -85,7 +85,7 @@
             "field": "share_pct",
             "type": "quantitative",
             "format": ".2f",
-            "title": "Share of all venue crowds (%)"
+            "title": "Share within selected geography (%)"
           },
           {
             "field": "games",
