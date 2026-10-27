@@ -207,6 +207,14 @@ body{font-size:17.5px;line-height:1.55}
   .story-nav a{font-size:12.5px}
 }
 
+
+/* Treemap labels: reliable accessible overlays, no obstruction to Vega-Lite hover targets. */
+#chart-venue-treemap { position: relative; }
+#chart-venue-treemap .treemap-label-overlay { position:absolute; inset:0; z-index:2; pointer-events:none; overflow:hidden; }
+#chart-venue-treemap .treemap-tile-label { position:absolute; transform:translate(-50%,-50%); text-align:center; pointer-events:none; font-family:'Barlow',Arial,sans-serif; line-height:1.2; text-shadow:none; }
+#chart-venue-treemap .treemap-tile-label .treemap-name { font-weight:800; line-height:1.13; overflow-wrap:normal; display:block; }
+#chart-venue-treemap .treemap-tile-label .treemap-share { display:block; margin-top:4px; font-weight:700; }
+@media(max-width:700px) {#chart-venue-treemap .treemap-tile-label .treemap-name { font-size:12px; } #chart-venue-treemap .treemap-tile-label .treemap-share { font-size:11px; }}
 </style>
 </head>
 <body>
@@ -316,9 +324,86 @@ body{font-size:17.5px;line-height:1.55}
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 <script>
+  // Labels belong to every sufficiently large treemap tile, not just the MCG.
+  // Vega-Lite still renders all 18 rectangles and provides their tooltips.
+  async function labelTreemap() {
+    const frame = document.getElementById('chart-venue-treemap');
+    if (!frame) return;
+    let records;
+    try {
+      const response = await fetch('data/afl_venue_treemap_2025.csv');
+      if (!response.ok) throw Error('Treemap labels: dataset unavailable');
+      records = vega.read(await response.text(), {type:'csv'});
+    } catch (error) {
+      console.warn('Could not load optional treemap labels', error);
+      return;
+    }
+    const shortNames = {
+      'Melbourne Cricket Ground (MCG)': 'MCG',
+      'Docklands (Marvel Stadium)': 'Marvel Stadium',
+      'Perth Stadium (Optus Stadium)': 'Optus Stadium',
+      'Sydney Cricket Ground (SCG)': 'SCG',
+      'Kardinia Park (GMHBA Stadium)': 'GMHBA Stadium',
+      'Carrara (People First Stadium)': 'People First',
+      'Sydney Showground (ENGIE Stadium)': 'ENGIE Stadium'
+    };
+    const overlay = document.createElement('div');
+    overlay.className = 'treemap-label-overlay';
+    overlay.setAttribute('aria-hidden', 'true'); // tooltip and text list carry accessible data
+    frame.querySelector('.treemap-label-overlay')?.remove();
+    frame.appendChild(overlay);
+    function paint() {
+      const svg = frame.querySelector('svg');
+      if (!svg || !svg.isConnected) return;
+      const plot = svg.querySelector('g.mark-rect') || svg;
+      const rect = plot.getBoundingClientRect();
+      const origin = frame.getBoundingClientRect();
+      if (rect.width < 10 || rect.height < 10) return;
+      overlay.replaceChildren();
+      for (const r of records) {
+        const share = Number(r.share_pct);
+        const width = rect.width * (Number(r.x1)-Number(r.x0)) / 1000;
+        const height = rect.height * (Number(r.y1)-Number(r.y0)) / 800;
+        // A tiny tile cannot hold legible text; retain Vega's hover and the 18-venue list.
+        if (share < 1.25 || width < 78 || height < 42) continue;
+        const x = rect.left-origin.left + rect.width*(Number(r.x0)+Number(r.x1))/2000;
+        const y = rect.top-origin.top + rect.height*(Number(r.y0)+Number(r.y1))/1600;
+        const item = document.createElement('span');
+        item.className = 'treemap-tile-label';
+        item.style.left = x+'px';
+        item.style.top = y+'px';
+        item.style.width = Math.max(40,width-10)+'px';
+        item.style.color = r.venue === 'Melbourne Cricket Ground (MCG)' ? '#FFFFFF' : '#103441';
+        const label = document.createElement('span');
+        label.className = 'treemap-name';
+        label.textContent = shortNames[r.venue] || r.venue;
+        label.style.fontSize = (width < 135 ? 12 : width < 205 ? 14 : 17)+'px';
+        const percentage = document.createElement('span');
+        percentage.className = 'treemap-share';
+        percentage.textContent = share.toFixed(1)+'%';
+        percentage.style.fontSize = (width < 135 ? 11 : 14)+'px';
+        item.append(label, percentage);
+        overlay.appendChild(item);
+      }
+    }
+    paint();
+    let scheduled = false;
+    function update() {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => {scheduled=false;paint();});
+    }
+    window.addEventListener('resize', update, {passive:true});
+    if ('ResizeObserver' in window) {
+      const svg = frame.querySelector('svg');
+      if (svg) new ResizeObserver(update).observe(svg);
+    }
+  }
+
   function showVegaChart(id, file) {
     vegaEmbed('#' + id, 'charts/' + file, {actions:false, renderer:'svg'})
       .then(function(result){
+        if(id==='chart-venue-treemap') labelTreemap();
         if(id==='chart-venue-rank'){
           window.rankView=result.view;
           if(window.venueSelection && window.venueSelection !== 'All venues'){
