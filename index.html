@@ -10,7 +10,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Barlow:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
-:root{--ink:#122e3a;--muted:#54707a;--dark:#102d38;--teal:#087b73;--coral:#d96c4a;--paper:#f5f7f3;--white:#fff;--pale:#e9f3ef;--line:#d6e1dc;--gold:#e1b16b;--max:1240px}
+:root{--ink:#122e3a;--muted:#54707a;--dark:#102d38;--teal:#087b73;--coral:#d96c4a;--paper:#f5f7f3;--white:#fff;--pale:#e9f3ef;--line:#d6e1dc;--gold:#e1b16b;--max:1380px}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}body{margin:0;color:var(--ink);background:var(--paper);font:400 16px/1.5 'Barlow',Arial,sans-serif;text-rendering:optimizeLegibility}
 h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{font-family:'Barlow Condensed',Impact,sans-serif}a{color:inherit}.wrap{width:min(var(--max),calc(100% - 52px));margin-inline:auto}button,select{font:inherit}button{cursor:pointer}
 .site-top{height:5px;background:linear-gradient(90deg,var(--teal) 0 62%,var(--coral) 62% 100%)}
@@ -73,6 +73,40 @@ footer{background:var(--dark);color:#fff}.footer-inner{display:flex;justify-cont
 [data-figure='13'] .chart-frame{min-height:355px}
 @media(max-width:900px){.marquee-layout{grid-template-columns:minmax(0,1fr)}.marquee-panel{gap:9px}.marquee-city-options{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:640px){.marquee-city-options{grid-template-columns:1fr 1fr}.linked-audience-tools{align-items:flex-start;flex-direction:column}.broadcast-key .city-current{margin-left:0;width:100%}.marquee-map-shell .chart-map{min-height:295px}}
+
+/* Interpretive notes use the real empty map/unit-chart margins.
+   They never overlay plotted data on a small laptop: the layout stacks at 1120px. */
+.story-chart-stage{position:relative;min-width:0;isolation:isolate}
+.story-chart-stage>.chart-frame{width:100%}
+.story-chart-stage--access{min-height:370px}
+.story-chart-stage--crowds{min-height:360px}
+.story-lens{
+  position:absolute;z-index:2;width:min(24%,278px);padding:15px 15px 14px;
+  border-left:3px solid var(--teal);background:rgba(239,247,243,.98);
+  border-radius:0 6px 6px 0;box-shadow:0 4px 17px rgba(17,49,49,.045);
+}
+.story-lens-kicker{font:800 10px/1.35 'Barlow',Arial,sans-serif;text-transform:uppercase;letter-spacing:.14em;color:#087b73;margin:0 0 7px}
+.story-lens h4{font:800 clamp(18px,1.8vw,23px)/1.04 'Barlow Condensed',Impact,sans-serif;color:var(--ink);margin:0 0 9px}
+.story-lens p{font:400 13px/1.55 'Barlow',Arial,sans-serif;color:#49616a;margin:0}
+.story-lens .story-lens-next{margin-top:11px;padding-top:10px;border-top:1px solid #c9e1d7;color:#176b66;font-size:11.5px;font-weight:700}
+.story-lens--access{right:1.25%;top:19%}
+.story-lens--viewing{right:1.25%;top:10%;border-left-color:#2e6584;background:#eff5f6}
+.story-lens--viewing .story-lens-kicker,.story-lens--viewing .story-lens-next{color:#275e79}
+.story-lens--crowds{left:1%;top:21%;width:min(23%,250px);border-left-color:#d96c4a;background:#fff9f2}
+.story-lens--crowds .story-lens-kicker,.story-lens--crowds .story-lens-next{color:#a45132}
+.story-lens--crowds .story-lens-next{border-top-color:#edd6c9}
+@media(max-width:1120px){
+  .story-chart-stage{min-height:0}
+  .story-lens{position:relative;inset:auto;width:auto;max-width:none;margin:5px 0 12px;padding:13px 16px;box-shadow:none}
+  .story-lens h4{font-size:21px;line-height:1.08}
+  .story-lens p{max-width:70ch}
+  .story-lens .story-lens-next{margin-top:7px;padding-top:7px}
+}
+@media(max-width:640px){
+  .story-lens{padding:12px 14px}
+  .story-lens h4{font-size:20px}
+  .story-lens p{font-size:12.5px}
+}
 </style>
 </head>
 <body>
@@ -106,7 +140,10 @@ footer{background:var(--dark);color:#fff}.footer-inner{display:flex;justify-cont
 <section aria-labelledby="geography-title" class="chapter" data-chapter="access" id="geography">
 <div class="chapter-heading"><div><span class="chapter-number">02 / ACCESS &amp; PLACE</span><h2 id="geography-title">Does location change the experience?</h2><div class="chapter-pulse">Rights ≠ reach</div></div><p>See how broadcast access varies across Australia, where major sporting events originate, how many people watch, and which services carry them.</p></div>
 <div class="chart-card feature-figure" data-figure="4" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 4 / Broadcasting access · Advanced choropleth</p><h3>Where did live Saturday AFL shift behind a subscription?</h3></div><p class="figure-description">This choropleth shows the number of weeks in the 2025 AFL season when Fox Footy (via Kayo or Foxtel) had the exclusive live Saturday coverage window in each state and territory. Darker regions represent longer windows. Hover over a state to inspect its coverage window.</p></div>
+<div class="story-chart-stage story-chart-stage--access">
 <div aria-label="Map of Australian states and territories showing 2025 exclusive live Saturday AFL coverage: Victoria, Tasmania and Northern Territory 25 weeks; New South Wales, Queensland and ACT 11 weeks; South Australia and Western Australia nine weeks." class="chart-frame chart-map" id="chart-super-saturday" role="img">
+</div>
+<aside class="story-lens story-lens--access" aria-label="Interpretation: One league. Different paths to watching live."><div class="story-lens-kicker">The bigger issue</div><h4>One league. Different paths to watching live.</h4><p>Broadcast rights can change the way someone follows the same sport simply because they live in a different state. This is a difference in access, not evidence that one state has more passionate AFL fans.</p><p class="story-lens-next">Next: where Australia’s major sporting broadcasts originate.</p></aside>
 </div>
 <div aria-label="Coverage comparison" class="map-summary">
 <div><strong>25 weeks</strong><span>Victoria · Tasmania · Northern Territory</span></div>
@@ -128,14 +165,20 @@ footer{background:var(--dark);color:#fff}.footer-inner{display:flex;justify-cont
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA, How we watch and listen to content (March 2026)</a>, executive summary. Base: Australian adults, past seven days. Media types overlap; percentage-point changes are not audience counts.</p>
 <span aria-hidden="true" class="figure-index">06</span></div>
 <div class="chart-card" data-figure="7" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 7 / Four-panel comparative unit chart · Advanced small multiples</p><h3>Four different ways Australians watched video in 2025</h3></div><p class="figure-description">Four aligned 100-cell grids share the same scale. Each filled square represents one percentage point of Australian adults who used that video type in the previous seven days. Categories overlap; do not add them together.</p></div>
+<div class="story-chart-stage story-chart-stage--viewing">
 <div aria-label="More than two-thirds used paid video streaming" class="chart-frame" id="chart-acma-waffle" role="group"></div>
+<aside class="story-lens story-lens--viewing" aria-label="Interpretation: Television and streaming can grow together."><div class="story-lens-kicker">Reading between the percentages</div><h4>Television and streaming can grow together.</h4><p>Broadcast TV recovered in 2025 even as paid streaming stayed widely used. That challenges a simple story of streaming replacing television: for marquee sport, both a scheduled broadcast and a streaming service can matter.</p><p class="story-lens-next">Remember Figure 13: the mix of available platforms changes by event.</p></aside>
+</div>
 <p class="chart-insight"><strong>Key finding: </strong>Paid streaming reached 68% of adults, compared with 52% for broadcast TV and short-form video and 44% for catch-up TV. These are separate measures, not shares of one total.</p>
 <p class="chart-footnote">Source: <a href="https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf">ACMA media consumption survey, 2025 results (published March 2026)</a>. All video viewing, not sports-specific; 100 squares are a visual encoding of the published percentage, not raw respondent records.</p>
 <span aria-hidden="true" class="figure-index">07</span></div>
 <p class="chapter-bridge"><span>UP NEXT</span> Viewing figures describe screens. The final chapter follows what happens when audiences turn into match-day crowd entries.</p></section>
 <section aria-labelledby="attendance-title" class="chapter" data-chapter="attendance" id="attendance">
 <div class="chapter-heading"><div><span class="chapter-number">04 / MATCH DAY</span><h2 id="attendance-title">The stadium experience.</h2><div class="chapter-pulse">One entry per match visit</div></div><p>A separate view of Australian sport: AFL match-day crowds, geographic concentration, changing attendance per match and venue rankings.</p></div><div class="chart-card feature-figure" data-figure="8" data-reveal="true"><div class="figure-heading"><div class="figure-headline"><p class="chart-kicker">Figure 8 / Crowd concentration · Advanced hexagonal bin map</p><h3>The same crowds. Two very different maps.</h3></div><p class="figure-description">Switch from the nine equal-area venue clusters to a schematic state tile map. Both use the same 8,257,027 attendances, but reveal different geographic patterns. Click any coloured tile to inspect its total.</p></div>
-<div class="geo-view-tools"><div aria-label="Choose geographic aggregation" class="geo-tabs" role="group"><button aria-pressed="true" id="hex-nearby" type="button">Nearby venue clusters</button><button aria-pressed="false" id="hex-state" type="button">State tile map</button></div><p id="geo-view-note">Equal-area venue clusters; nine bins combine 18 stadiums.</p></div><div aria-label="Nearby venues combine into nine attendance clusters" class="chart-frame" id="chart-afl-hexbins" role="group"></div><div aria-live="polite" class="geo-detail" role="status"><div><h4 id="geo-place">Explore a region</h4><p id="geo-area">Click a map cell to identify its venues</p></div><div><div class="geo-number" id="geo-total">8.26m <span>total 2025 AFL attendances nationally</span></div><p id="geo-explainer">Switch aggregation to reveal how geographic framing changes the picture.</p></div></div>
+<div class="geo-view-tools"><div aria-label="Choose geographic aggregation" class="geo-tabs" role="group"><button aria-pressed="true" id="hex-nearby" type="button">Nearby venue clusters</button><button aria-pressed="false" id="hex-state" type="button">State tile map</button></div><p id="geo-view-note">Equal-area venue clusters; nine bins combine 18 stadiums.</p></div><div class="story-chart-stage story-chart-stage--crowds">
+<div aria-label="Nearby venues combine into nine attendance clusters" class="chart-frame" id="chart-afl-hexbins" role="group"></div>
+<aside class="story-lens story-lens--crowds" aria-label="Interpretation: Where the match happens is not where every fan lives."><div class="story-lens-kicker">An important distinction</div><h4>Where the match happens is not where every fan lives.</h4><p>Large clusters reflect where fixtures are staged and how many times spectators enter a ground. They cannot tell us where television viewers or individual AFL supporters live.</p><p class="story-lens-next">Next: compare average crowd per game, not just accumulated entries.</p></aside>
+</div><div aria-live="polite" class="geo-detail" role="status"><div><h4 id="geo-place">Explore a region</h4><p id="geo-area">Click a map cell to identify its venues</p></div><div><div class="geo-number" id="geo-total">8.26m <span>total 2025 AFL attendances nationally</span></div><p id="geo-explainer">Switch aggregation to reveal how geographic framing changes the picture.</p></div></div>
 <p class="chart-insight"><strong>Why this matters:</strong> Close stadiums can merge into one high-attendance hexagon; state totals answer a broader question. Different geographic grouping changes the pattern without changing the underlying crowds.</p>
 <p class="chart-footnote">Source: <a href="https://afltables.com/afl/crowds/2025.html">AFL Tables, 2025 attendances by venue</a>. Calculated from all 18 stadium records in AFL Tables; all bins together total 8,257,027 crowd entries. Equal-area binning in Australian Albers projection; converted back to geographic coordinates for display. Bin boundaries are analytical, not administrative. Alternate view: 8 equal-size state/territory hex tiles calculated from the same 18 AFL venue totals; the tile layout is schematic, not to geographic scale.</p>
 <span aria-hidden="true" class="figure-index">08</span></div>
