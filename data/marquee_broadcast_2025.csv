@@ -1,0 +1,7 @@
+event,sport,city,longitude,latitude,reach_m,average_m,ratio_pct,broadcast_scope,source_url,color,average_label,reach_label
+NRL Grand Final,NRL,Sydney,151.063,-33.848,6.409,4.46,69.6,Nine / 9Now,https://www.nineforbrands.com.au/media-release/nrl-reigns-supreme-in-record-breaking-season/,#D66B44,4.46m,6.41m
+AFL Grand Final,AFL,Melbourne,144.983,-37.82,6.1,4.08,66.9,Seven / 7plus,https://sevenwestmedia.com.au/wp-content/uploads/2025/09/Sevens-AFL-Grand-Final-coverage-breaks-records.pdf,#087B73,4.08m,6.10m
+Australian Open men’s final,Tennis,Melbourne,144.978,-37.822,4.166,2.001,48.0,Nine / 9Now,https://www.adnews.com.au/news/4-million-tune-into-australian-open-final,#4265B6,2.00m,4.17m
+Melbourne Cup race,Horse racing,Melbourne,144.912,-37.79,2.316,2.079,89.8,Nine / 9Now,https://www.nineforbrands.com.au/media-release/historic-melbourne-cup-delivers-soaring-ratings-for-nine/,#9B692E,2.08m,2.32m
+Bathurst 1000 race,Supercars,Bathurst,149.558,-33.45,4.315,1.544,35.8,Seven / 7plus (excludes Foxtel),https://www.supercars.com/news/supercars-news-2025-broadcast-digital-online-streaming-numbers-repco-bathurst-1000-record-announcement,#7956AD,1.54m,4.32m
+Australian F1 Grand Prix,Formula 1,Melbourne,144.97,-37.848,1.72,1.06,61.6,Network 10 / 10 Play,https://www.paramountanz.com.au/news/network-10s-coverage-of-the-formula-1-louis-vuitton-australian-grand-prix-2025-reaches-3-6-million/,#C6424E,1.06m,1.72m
