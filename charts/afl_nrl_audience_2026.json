@@ -101,7 +101,14 @@
             "type": "nominal",
             "title": "Survey period"
           }
-        ]
+        ],
+        "opacity": {
+          "condition": {
+            "test": "sportFocus === 'All' || datum.sport === sportFocus",
+            "value": 1
+          },
+          "value": 0.23
+        }
       }
     },
     {
@@ -119,6 +126,13 @@
         "text": {
           "field": "audience_label",
           "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "sportFocus === 'All' || datum.sport === sportFocus",
+            "value": 1
+          },
+          "value": 0.23
         }
       }
     }
@@ -145,5 +159,11 @@
       "titleColor": "#15313D"
     }
   },
-  "background": null
+  "background": null,
+  "params": [
+    {
+      "name": "sportFocus",
+      "value": "All"
+    }
+  ]
 }

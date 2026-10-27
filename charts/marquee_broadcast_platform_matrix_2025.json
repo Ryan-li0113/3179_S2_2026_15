@@ -1,0 +1,158 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Event/platform 2025 rights-availability matrix. Filled cells indicate a broadcaster or service airing live coverage of the named event; they do NOT signify equivalent schedules, exclusivity or total rights for the league.",
+  "data": {
+    "url": "data/marquee_platform_matrix_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "available": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "cityFocus",
+      "value": "All"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "cityFocus === 'All' || datum.city === cityFocus"
+    }
+  ],
+  "width": "container",
+  "height": 335,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "encoding": {
+    "x": {
+      "field": "platform",
+      "type": "ordinal",
+      "sort": [
+        "Seven",
+        "7plus",
+        "Nine",
+        "9Now",
+        "Ten",
+        "10 Play",
+        "Foxtel/Kayo",
+        "Stan Sport"
+      ],
+      "axis": {
+        "title": null,
+        "labelAngle": -32,
+        "labelColor": "#304B56",
+        "labelFontSize": 12,
+        "labelLimit": 90
+      }
+    },
+    "y": {
+      "field": "sport",
+      "type": "ordinal",
+      "sort": [
+        "AFL",
+        "NRL",
+        "Tennis",
+        "Formula 1",
+        "Horse racing",
+        "Supercars"
+      ],
+      "axis": {
+        "title": null,
+        "labelFontSize": 13,
+        "labelColor": "#163845",
+        "labelPadding": 12
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 5,
+        "stroke": "#fff",
+        "strokeWidth": 4
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "datum.available === 1",
+            "field": "sport",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "AFL",
+                "NRL",
+                "Tennis",
+                "Formula 1",
+                "Horse racing",
+                "Supercars"
+              ],
+              "range": [
+                "#087B73",
+                "#D66B44",
+                "#4265B6",
+                "#C6424E",
+                "#9B692E",
+                "#7956AD"
+              ]
+            },
+            "legend": null
+          },
+          "value": "#EEF2F0"
+        },
+        "tooltip": [
+          {
+            "field": "sport",
+            "title": "Sport"
+          },
+          {
+            "field": "event",
+            "title": "Event"
+          },
+          {
+            "field": "platform",
+            "title": "Platform"
+          },
+          {
+            "field": "availability_text",
+            "title": "Status"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "Barlow",
+        "fontSize": 19,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "condition": {
+            "test": "datum.available === 1",
+            "value": "✓"
+          },
+          "value": ""
+        },
+        "color": {
+          "value": "white"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow"
+    }
+  }
+}

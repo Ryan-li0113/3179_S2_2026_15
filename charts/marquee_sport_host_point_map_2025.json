@@ -1,0 +1,141 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "2025 Australian marquee televised sporting events, mapped to host cities. Point locations are categorical and encode number of selected events with a count label, not television audiences. Sources provided for each event in accompanying CSV.",
+  "width": "container",
+  "height": 370,
+  "projection": {
+    "type": "mercator"
+  },
+  "params": [
+    {
+      "name": "cityFocus",
+      "value": "All"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_states_simplified.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#EAF2EE",
+        "stroke": "#9EB8B2",
+        "strokeWidth": 1.2
+      }
+    },
+    {
+      "data": {
+        "url": "data/marquee_host_cities_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "events": "number"
+          }
+        }
+      },
+      "mark": {
+        "type": "circle",
+        "size": 740,
+        "stroke": "white",
+        "strokeWidth": 3,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "color": {
+          "condition": {
+            "test": "cityFocus === 'All' || datum.city === cityFocus",
+            "value": "#163845"
+          },
+          "value": "#B9C9C6"
+        },
+        "tooltip": [
+          {
+            "field": "city",
+            "type": "nominal",
+            "title": "Host city"
+          },
+          {
+            "field": "events",
+            "type": "quantitative",
+            "title": "Events in comparison"
+          },
+          {
+            "field": "event_names",
+            "type": "nominal",
+            "title": "Events"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/marquee_host_cities_2025.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "events": "number"
+          }
+        }
+      },
+      "mark": {
+        "type": "text",
+        "font": "Barlow",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "color": "white",
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "events",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "city",
+            "title": "Host city"
+          },
+          {
+            "field": "event_names",
+            "title": "Events"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "background": null,
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow"
+    }
+  }
+}

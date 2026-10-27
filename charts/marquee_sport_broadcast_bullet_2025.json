@@ -1,0 +1,221 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "2025 event broadcast comparison of cumulative National Total TV reach versus National Total TV average audience. All quantities in millions; source reports use event/provider coverage scopes documented separately. No sum across events is valid.",
+  "data": {
+    "url": "data/marquee_broadcast_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "reach_m": "number",
+        "average_m": "number",
+        "ratio_pct": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "cityFocus",
+      "value": "All"
+    }
+  ],
+  "transform": [
+    {
+      "filter": "cityFocus === 'All' || datum.city === cityFocus"
+    }
+  ],
+  "width": "container",
+  "height": 356,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
+  "encoding": {
+    "y": {
+      "field": "event",
+      "type": "nominal",
+      "sort": [
+        "NRL Grand Final",
+        "AFL Grand Final",
+        "Australian Open men’s final",
+        "Melbourne Cup race",
+        "Bathurst 1000 race",
+        "Australian F1 Grand Prix"
+      ],
+      "axis": {
+        "title": null,
+        "labelColor": "#17343F",
+        "labelFontSize": 13,
+        "labelLimit": 230,
+        "labelPadding": 12,
+        "domain": false,
+        "ticks": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4,
+        "color": "#DCE6E3",
+        "size": 29
+      },
+      "encoding": {
+        "x": {
+          "field": "reach_m",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              7
+            ]
+          },
+          "axis": {
+            "title": "National television audience (millions)",
+            "format": ".1f",
+            "grid": true,
+            "gridColor": "#E3EBE8",
+            "titlePadding": 16,
+            "titleColor": "#526873"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "event",
+            "title": "2025 marquee broadcast"
+          },
+          {
+            "field": "broadcast_scope",
+            "title": "Coverage scope"
+          },
+          {
+            "field": "reach_m",
+            "type": "quantitative",
+            "title": "Total TV reach (m)",
+            "format": ".3f"
+          },
+          {
+            "field": "average_m",
+            "type": "quantitative",
+            "title": "Average audience (m)",
+            "format": ".3f"
+          },
+          {
+            "field": "ratio_pct",
+            "type": "quantitative",
+            "title": "Avg ÷ reach (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4,
+        "size": 18
+      },
+      "encoding": {
+        "x": {
+          "field": "average_m",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              7
+            ]
+          }
+        },
+        "color": {
+          "field": "sport",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "AFL",
+              "NRL",
+              "Tennis",
+              "Formula 1",
+              "Horse racing",
+              "Supercars"
+            ],
+            "range": [
+              "#087B73",
+              "#D66B44",
+              "#4265B6",
+              "#C6424E",
+              "#9B692E",
+              "#7956AD"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 7,
+        "baseline": "middle",
+        "font": "Barlow",
+        "fontWeight": "bold",
+        "fontSize": 12,
+        "color": "#344F58"
+      },
+      "encoding": {
+        "x": {
+          "field": "reach_m",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              7
+            ]
+          }
+        },
+        "text": {
+          "field": "reach_label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -7,
+        "baseline": "middle",
+        "font": "Barlow",
+        "fontWeight": "bold",
+        "fontSize": 11,
+        "color": "white"
+      },
+      "encoding": {
+        "x": {
+          "field": "average_m",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              7
+            ]
+          }
+        },
+        "text": {
+          "field": "average_label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": null,
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Barlow",
+      "titleFont": "Barlow"
+    }
+  }
+}

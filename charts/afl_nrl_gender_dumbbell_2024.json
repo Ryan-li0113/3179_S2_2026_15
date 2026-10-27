@@ -14,7 +14,7 @@
     }
   },
   "width": "container",
-  "height": 272,
+  "height": 313,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -177,7 +177,14 @@
             "format": ".3f",
             "title": "TV audience (m)"
           }
-        ]
+        ],
+        "opacity": {
+          "condition": {
+            "test": "sportFocus === 'All' || sportFocus === 'NRL'",
+            "value": 1
+          },
+          "value": 0.18
+        }
       }
     },
     {
@@ -219,7 +226,14 @@
             "format": ".3f",
             "title": "TV audience (m)"
           }
-        ]
+        ],
+        "opacity": {
+          "condition": {
+            "test": "sportFocus === 'All' || sportFocus === 'AFL'",
+            "value": 1
+          },
+          "value": 0.18
+        }
       }
     },
     {
@@ -271,6 +285,13 @@
         "text": {
           "field": "nrl_label",
           "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "sportFocus === 'All' || sportFocus === 'NRL'",
+            "value": 1
+          },
+          "value": 0.18
         }
       }
     },
@@ -300,6 +321,13 @@
         "text": {
           "field": "afl_label",
           "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "test": "sportFocus === 'All' || sportFocus === 'AFL'",
+            "value": 1
+          },
+          "value": 0.18
         }
       }
     }
@@ -324,5 +352,11 @@
     }
   },
   "transform": [],
-  "background": null
+  "background": null,
+  "params": [
+    {
+      "name": "sportFocus",
+      "value": "All"
+    }
+  ]
 }

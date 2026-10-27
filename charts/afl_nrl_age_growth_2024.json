@@ -13,7 +13,7 @@
     }
   },
   "width": "container",
-  "height": 185,
+  "height": 222,
   "autosize": {
     "type": "fit",
     "contains": "padding"
@@ -75,29 +75,17 @@
       },
       "encoding": {
         "color": {
-          "field": "growth_pct",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              0,
-              7
-            ],
-            "range": [
-              "#E2F1EC",
-              "#087B73"
-            ]
-          },
-          "legend": {
-            "title": "Growth in viewers (%)",
-            "orient": "bottom",
-            "direction": "horizontal",
-            "gradientLength": 230,
-            "format": ".0f",
-            "titleColor": "#526873",
-            "labelColor": "#526873",
-            "titleFontSize": 12,
-            "labelFontSize": 11
-          }
+          "condition": [
+            {
+              "test": "sportFocus !== 'All' && datum.sport !== sportFocus",
+              "value": "#DDE5E2"
+            },
+            {
+              "test": "datum.sport === 'NRL'",
+              "value": "#D66B44"
+            }
+          ],
+          "value": "#087B73"
         },
         "tooltip": [
           {
@@ -128,7 +116,22 @@
             "format": ".1f",
             "title": "Growth (%)"
           }
-        ]
+        ],
+        "opacity": {
+          "field": "growth_pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              7
+            ],
+            "range": [
+              0.44,
+              1
+            ]
+          },
+          "legend": null
+        }
       }
     },
     {
@@ -147,10 +150,17 @@
         },
         "color": {
           "condition": {
-            "test": "datum.growth_pct >= 4.0",
-            "value": "#ffffff"
+            "test": "datum.growth_pct >= 3.8 && (sportFocus === 'All' || datum.sport === sportFocus)",
+            "value": "#FFFFFF"
           },
           "value": "#15313D"
+        },
+        "opacity": {
+          "condition": {
+            "test": "sportFocus === 'All' || datum.sport === sportFocus",
+            "value": 1
+          },
+          "value": 0.47
         }
       }
     }
@@ -174,5 +184,11 @@
       "titleColor": "#15313D"
     }
   },
-  "background": null
+  "background": null,
+  "params": [
+    {
+      "name": "sportFocus",
+      "value": "All"
+    }
+  ]
 }
