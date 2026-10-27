@@ -1,84 +1,63 @@
-# FIT3179 DV2 — Data sources and transformations
+# FIT3179 DV2 — Data sources and visualisation methods
 
-Author: Ryan Li · University assignment · October 2026.
+**Author:** Ryan Mohan Li · Updated 27 October 2026
 
-## Figures 1–3 — AFL and NRL audience reach
-- Roy Morgan AFL (Sep 2026): https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026
-- Roy Morgan NRL (Sep 2026): https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026
-- Roy Morgan 2023–24 age and gender: https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24
-- The 2025–26 national reach and 2023–24 age/gender samples are different periods. Viewers may watch both leagues.
+## Interpretation rules
 
-## Figure 4 — Exclusive-live AFL by state (choropleth)
-- Foxtel Group, 2025 Super Saturday LIVE: https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025
-- VIC / TAS / NT: 25 weeks; NSW / QLD / ACT: 11; SA / WA: 9. These are specific broadcast arrangement windows, NOT viewership.
-- Simplified cartographic state outlines: https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson
+- **TV audience reach:** people who watched at any point during the specified coverage window. **Average TV audience:** average viewers watching at a point in time; not the same denominator or measure. Figures from separate providers or survey samples are not simply additive.
+- **Match/carnival attendance:** counts of entry events, not unique supporters. An event running for three weeks cannot be compared to a single race-day gate count as though durations were the same.
+- **Media habits:** ACMA percentages concern all types of video viewing by Australian adults, not sports viewing alone. Media use categories overlap.
+- **Broadcast availability:** an event's live broadcaster/channel is not a claim of equal programming hours or exclusive coverage for an entire league.
 
-## Figure 5 — Schematic tile-glyph map of crowd intensity by host state (NEW)
-- AFL Tables, attendance by venue, 2025: https://www.afltables.com/afl/crowds/2025.html
-- `data/afl_state_matchday_tiles_2025.csv`: grouped all 18 venue records by the state/territory **hosting the match**, not fan residence. State average per game is SUM(entries) / SUM(matches); 8 state totals sum to 8,257,027 entries. Bars share a fixed 0–65,000 average-per-game scale.
-- `charts/afl_state_matchday_tile_glyph_map_2025.json` is a **schematic rectangular tile-grid map with embedded bar glyphs**, not a land-area choropleth or proportional stadium symbol map. Equal tile area prevents Victoria's larger total distorting state geography. Clicking a state crossfilters Figures 8, 11, 12, and 14 and highlights Figure 13.
-- Figure 5's previous stadium point map and Melbourne inset are no longer displayed; their old files may remain archived in `charts/`.
+## Figures 1–3: AFL and NRL television audiences
 
-## Figure 6 — Australian viewing category changes (slope)
-- ACMA, How we watch and listen to content, executive summary (March 2026): https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf
-- 2024 → 2025, past-seven-day use among adults: paid streaming 68% → 68%; FTA broadcast 46% → 52%; short video 59% → 52%; FTA catch-up 44% → 44%.
-- This is ALL video, NOT AFL- or NRL-specific. Media users can overlap across categories. Changes measured in percentage points.
+- Figure 1 (national 2025–26 TV audience): Roy Morgan, [AFL Sep 2026](https://www.roymorgan.com/findings/10329-afl-supporter-ladder-september-2026) and [NRL Sep 2026](https://www.roymorgan.com/findings/10334-nrl-supporters-june-2026).
+- Figures 2 and 3 (2023–24 age and gender breakdowns): Roy Morgan, [AFL vs NRL television audiences 2023–24](https://www.roymorgan.com/findings/9842-afl-vs-nrl-2023-24).
+- 2023–24 age/gender data and July 2025–June 2026 national reach are separate samples; they must not be conflated.
+- Sport selection in Figure 1 or 2 **focuses** the same sport across Figures 1–3 without inventing an age-by-gender cross-tabulation.
+- AFL uses **teal `#087B73`**, NRL **coral `#D66B44`** throughout these figures. In Figure 2, opacity encodes growth magnitude within each sport colour.
 
-## Figure 7 — Four-panel comparative 100-cell unit charts
-- Derived deterministically from published ACMA 2025 percentages above, each of 100 squares is one percentage point, not a survey respondent.
-- All four media categories are visible together in a common two-column scale. Pale cells show the population not using that particular medium; do not sum overlapping media categories.
+## Figure 4: Geographical AFL broadcast access
 
-## Figure 8 — AFL venue attendance hexagonal bin map
-- AFL Tables 2025 18 venues, same source as Figure 5.
-- Venue longitude/latitude projected to Australian Albers EPSG:3577, binned at radius 175 km, attendance summed per bin, and geometries reprojected to EPSG:4326.
-- Nine equal-area spatial bins total 8,257,027 entries in the national view; each venue assigned to one bin. Selecting a state in Figure 5 recalculates each bin from only that state’s venues. For bins crossing ACT/NSW, only the relevant stadiums are counted. Boundaries are analytical, not state boundaries.
+- Source: [Foxtel Group Super Saturday LIVE announcement](https://foxtelgroup.com.au/newsroom/super-saturday-live-to-change-the-game-for-fox-footy-on-kayo-sports-in-2025). VIC/TAS/NT 25 weeks; NSW/QLD/ACT 11; SA/WA 9. These represent announced exclusive-live Saturday windows, **not viewer counts**.
+- Map geometry: [Rowan Hogan Australian state GeoJSON](https://github.com/rowanhogan/australian-states/blob/master/states.min.geojson), locally simplified.
 
-## Figure 9 — Home-and-away versus finals intensity (2015–26)
-- AFL Tables season totals and match counts: https://www.afltables.com/afl/crowds/summary.html
-- The color scale encodes AVERAGE attendance per match for each season/phase; seasonal totals have differing number of games. 2020–21 COVID impacts matter.
+## Figures 5, 10, 13: 2025 multi-sport marquee broadcasts
 
-## Figure 10 — 2024 to 2025 crowd waterfall
-- AFL Tables annual totals: 2024 8,286,771; 2025 8,257,027 event entries.
-- Home-and-away change −97,161, finals change +67,417 = net −29,744 entries. The horizontal bars are DELTAS, not raw annual totals.
+- **Figure 5:** categorised point-location map with three *host city* markers: Melbourne (four selected events), Sydney (NRL Grand Final), and Bathurst (Bathurst 1000). Not a map of viewer origins or venue-attendance totals.
+- **Figure 10:** layered bullet marks show the **2025 national total TV reach** (light background) and **average TV audience** (sport-coloured foreground), in millions, for six event broadcasts. **Bathurst uses Seven's reported reach and audience only; F1 uses Network 10 only**, rather than mixed-provider totals. Figures are comparisons with source-specific caveats and should not be added.
+- **Figure 13:** binary matrix of availability of selected live 2025 broadcasts on named linear / free-streaming / subscription services. Channels and streaming platforms are shown separately; a filled tile does not mean identical rights across an entire season.
 
-## Figure 11 — Complete 2025 stadium treemap
-- In the national view, AFL Tables all 18 stadiums total 8,257,027 entries (100%; no missing Other category).
-- Selecting a host state filters the venues and recomputes all rectangles and percentages to total 100% **within the selected state**, not nationally. MCG national share is 37.8%, while the Victorian share is 65.5%. Entries are not unique spectators.
+| Event | Sport colour | Total TV reach | Average TV audience | Reporting scope / source |
+|---|---|---:|---:|---|
+| AFL Grand Final 2025 | Teal `#087B73` | 6.100m | 4.080m | [Seven / 7plus](https://sevenwestmedia.com.au/wp-content/uploads/2025/09/Sevens-AFL-Grand-Final-coverage-breaks-records.pdf) |
+| NRL Grand Final 2025 | Coral `#D66B44` | 6.409m | 4.460m | [Nine / 9Now](https://www.nineforbrands.com.au/media-release/nrl-reigns-supreme-in-record-breaking-season/) (initial 2025 release; later updates may differ) |
+| Australian Open men's final 2025 | Blue `#4265B6` | 4.166m | 2.001m | [Nine / 9Now](https://www.adnews.com.au/news/4-million-tune-into-australian-open-final) |
+| Melbourne Cup race 2025 | Bronze `#9B692E` | 2.316m | 2.079m | [Nine / 9Now](https://www.nineforbrands.com.au/media-release/historic-melbourne-cup-delivers-soaring-ratings-for-nine/) |
+| Bathurst 1000 race 2025 | Purple `#7956AD` | 4.315m | 1.544m | [Seven only; excludes Foxtel platforms](https://www.supercars.com/news/supercars-news-2025-broadcast-digital-online-streaming-numbers-repco-bathurst-1000-record-announcement) |
+| Australian F1 Grand Prix race 2025 | Red `#C6424E` | 1.720m | 1.060m | [Network 10 only; excludes subscription coverage](https://www.paramountanz.com.au/news/network-10s-coverage-of-the-formula-1-louis-vuitton-australian-grand-prix-2025-reaches-3-6-million/) and [Network 10 half-year statement](https://www.paramountanz.com.au/news/10-is-up-across-streaming-comedy-news-and-sport-in-the-first-half-of-2025/) |
 
-## Figure 12 — Rank by total versus average per match
-- AFL Tables 2025 venue data. In the national view, the eight busiest venues are compared by total crowd entries and average game crowd. Marvel is second by total and fifth by average among those eight.
-- In a selected state, ranks are **recomputed among only the stadiums in that state**; the scope label and text update automatically. The national statistic should never be quoted as a state-only statistic.
+Platform sources: [AO on Nine, 9Now and Stan Sport](https://www.nineforbrands.com.au/media-release/australian-open-2025-exclusive-on-nine/); [Bathurst on Seven, 7plus, Foxtel and Kayo](https://www.supercars.com/news/how-to-watch-supercars-2025-bathurst-1000-tv-times-broadcast-streaming-superview-race-start); broadcaster race-reach reports as linked above. AFL and NRL grand finals have different live rights from ordinary regular-season matches.
 
-## Code and attribution
-- Chart specifications: Vega-Lite and Vega v5 in `charts/`; the tile-glyph map, spatial hexbin, Sankey and rank slopegraph use Vega, while other charts use Vega-Lite. Derived CSV/GeoJSON datasets are in `data/`. Dynamic linked interactions are implemented in `interaction.js` and preserve the on-disk JSON specifications.
-- AI was used to assist with HTML/CSS, Vega-Lite, editorial editing and documentation; verify final charts and disclose usage in the Moodle report.
+The locally stored CSV tables are `data/marquee_broadcast_2025.csv`, `data/marquee_host_cities_2025.csv`, `data/marquee_platform_matrix_2025.csv`.
 
+## Figures 6–7: All-video viewing market context
 
-## Figures 13–14: Additional advanced analytical idioms
+- Source: [ACMA, How we watch and listen to content](https://www.acma.gov.au/sites/default/files/2026-03/How%20we%20watch%20and%20listen%20to%20content%20-%20Executive%20summary%20and%20key%20findings.pdf) (March 2026).
+- 2024→2025: paid streaming 68%→68%; broadcast FTA 46%→52%; short-form video 59%→52%; FTA catch-up 44%→44%. Units = percentage of adults using in past seven days; changes in percentage **points**.
+- Figure 7 four 100-unit grids use published percentages, with one square = one percentage point, **not one respondent**. Categories overlap.
 
-- **Figure 13 / Sankey:** All 18 venue rows from AFL Tables 2025 are summed by the venue's state/territory and by home-and-away versus finals entries. `data/afl_state_phase_sankey_nodes_2025.csv` and `data/afl_state_phase_sankey_links_2025.csv` supply the computed nodes and proportionally scaled ribbons; source: https://afltables.com/afl/crowds/2025.html. Every recorded entry is allocated exactly once, totalling 8,257,027. State = where match was hosted, not viewer origin.
-- **Figure 14 / Lorenz:** Calculated from the exact same 18 venue season attendance totals. `data/afl_venue_concentration_2025.csv` contains cumulative venues and cumulative attendance share, ordered lowest to highest. Shows concentration against a hypothetical 45-degree equality line, not a population-adjusted figure. Source: https://afltables.com/afl/crowds/2025.html.
-- **Figure 7 redesign:** Four faceted 100-cell unit charts replace the one-at-a-time category selector. ACMA published 2025 use is 68% paid streaming, 52% broadcast FTA TV, 52% short-form online video, 44% catch-up FTA TV. Each tile = 1 percentage point. Categories overlap and therefore must not be added.
+## Figures 8–9, 11–12, 14: AFL stadium attendance analytics
 
-## Visual design system, 26 October 2026 revision
+- Source: [AFL Tables, 2025 By Venue](https://afltables.com/afl/crowds/2025.html), [season crowd summary](https://afltables.com/afl/crowds/summary.html).
+- Figure 8: all 18 venue attendance records are assigned to nine geographic bins; venue entries total 8,257,027. A secondary schematic state tile view uses the same entries, not an independent dataset.
+- Figure 9: AFL home-and-away/finals average game attendance, 2015–26. Different years' numbers of matches vary; COVID-era years are exceptional.
+- Figure 11: complete whole treemap of all 18 venues, total 8,257,027 entries; MCG 3,120,416 (37.8%). Never present a partial set as the entire whole.
+- Figure 12: eight large venues compared by rank using total attendance versus average per match. Rank positions are computed amongst all 18 venues.
+- Figure 14: Lorenz curve of cumulative attendance by stadium, sorted small to large, with equal-distribution reference. It does **not** imply per-capita state prevalence.
 
-- AFL audience is consistently **teal `#087B73`**; NRL is **coral `#D66B44`** across the audience comparison charts.
-- Quantitative geographic and attendance patterns use a consistent sequential teal scheme, with light-to-dark for small-to-large.
-- Four ACMA video categories use a separate categorical palette that is exactly matched between Figures 6 and 7: paid streaming blue `#2B5E86`, broadcast FTA amber `#A27B3D`, short-form violet `#7B6A9A`, catch-up green-grey `#6B9588`. These categories overlap and are not portions of a single whole.
-- Positive/negative waterfall uses teal and muted ochre; rank-shift highlights Marvel in ochre. The two Sankey match phases are coloured teal and steel blue. These section-local semantic roles are distinct from AFL versus NRL sport identification.
-- The only persistent filter is an analytical **host-state selection** made by directly clicking the Figure 5 tile map (or Figure 4). This is shared across Figures 8, 11, 12, 13 and 14; the effect is a real data recalc for Figures 8, 11, 12 and 14, not simply opacity changes. Figure 13 dims nonselected state ribbons without changing absolute national flow widths.
-- The on-screen grey JSON/CSV source panels are removed, while dated data sources and measurement caveats stay directly under the figures.
+## Technical compliance
 
-### Editorial design corrections (October 2026)
-- Figure 8 uses the original nine 2025 equal-area AFL attendance bins from `data/afl_hexbin_2025.geojson`, with path coordinates preprojected into `data/afl_hexbin_map_paths_2025.csv` in Australian Albers (EPSG:3577). Map labels are approximate. No new audience or venue claims were introduced.
-- Figure 10 uses the unchanged 2024→2025 AFL Tables changes; `data/afl_waterfall_bridge_2024_2025.csv` explicitly stores cumulative start and end values.
-- Figure 12 uses the unchanged top-eight comparison, reshaped into `data/afl_rank_slope_compact_2025.csv`; ranks are computed among all 18 venues.
-- The retired Figure 5 stadium finder was replaced with a state-level tile-glyph map; average-per-match values are calculated from `data/afl_venue_attendance_2025.csv`.
+All 14 on-page figures are built with **Vega-Lite v5 or Vega v5**, using readable JSON files under `charts/` and local data under `data/`. In the new version **Figures 8 and 12 use Vega v5** and the remaining 12 on-page figures use **Vega-Lite v5**. Both libraries are explicitly permitted by the FIT3179 Data Visualisation 2 assessment specification. HTML and CSS are used only for webpage presentation and interface controls. The site includes three distinct map idioms: Figure 4 choropleth, Figure 5 categorical host-location point map, Figure 8 geographic hexagon bin map.
 
-
-### October 2026 linked geographic analysis revision
-- Figure 5 is a **different map idiom** from Figures 4 and 8: a rectangular state tile-grid with quantitative bar glyphs for average crowd per match. It takes the place of the proportional symbol stadium map, which is no longer called by `index.html`.
-- Figure 8 now shows only the nine venue clusters (hexbin map); the earlier hexagonal state-tile toggle is retired. The retired JSON/CSV may remain in the repository but are not displayed.
-- Selecting a host state via a Figure 5 tile (or clicking a state on Figure 4) runs a true connected filter: Figure 8 totals, Figure 11 treemap shares, Figure 12 ranks and Figure 14 concentration curve are recalculated from matching venue rows. Figure 13 highlights the matching ribbons but keeps nationally scaled widths so comparisons remain valid. Every connected text insight and Figure 11 venue reference list is also state-aware.
-- `interaction.js` implements client-side linking. There is exactly one geographic filter state; no redundant figure-specific dropdowns.
-- The site still has **three distinct mapping idioms**: choropleth (4), schematic state tile/glyph map (5), and equal-area spatial hexagonal bin map (8).
+AI assistance was used for code generation, visual design and editing; review the Moodle disclosure instructions and validate the live deployment and data sources independently before submission.
